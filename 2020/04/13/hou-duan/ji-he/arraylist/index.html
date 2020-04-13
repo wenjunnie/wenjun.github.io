@@ -1004,9 +1004,7 @@
      */</span>
     <span class="token keyword">public</span> Iterator<span class="token operator">&lt;</span>E<span class="token operator">></span> <span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Itr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-</code></pre>
+    <span class="token punctuation">}</span></code></pre>
 <h3 id="ArrayList源码分析"><a href="#ArrayList源码分析" class="headerlink" title="ArrayList源码分析"></a><font face="楷体" id="1" id="5">ArrayList源码分析</font></h3><h4 id="System-arraycopy-和Arrays-copyOf-方法"><a href="#System-arraycopy-和Arrays-copyOf-方法" class="headerlink" title="System.arraycopy()和Arrays.copyOf()方法"></a>System.arraycopy()和Arrays.copyOf()方法</h4><p>　　通过上面源码我们发现这两个实现数组复制的方法被广泛使用而且很多地方都特别巧妙。比如下面<font color="red">add(int index, E element)</font>方法就很巧妙的用到了<font color="red">arraycopy()方法</font>让数组自己复制自己实现让index开始之后的所有成员后移一个位置:</p>
 <pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
      * 在此列表中的指定位置插入指定的元素。 
@@ -1076,34 +1074,32 @@
      <span class="token keyword">if</span> <span class="token punctuation">(</span>minCapacity <span class="token operator">-</span> elementData<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
          <span class="token comment" spellcheck="true">//调用grow方法进行扩容，调用此方法代表已经开始扩容了</span>
          <span class="token function">grow</span><span class="token punctuation">(</span>minCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">}</span>
-</code></pre>
+ <span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"> <span class="token comment" spellcheck="true">/**
+  * ArrayList扩容的核心方法。
+  */</span>
+ <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">grow</span><span class="token punctuation">(</span><span class="token keyword">int</span> minCapacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//elementData为保存ArrayList数据的数组</span>
+    <span class="token comment" spellcheck="true">///elementData.length求数组长度elementData.size是求数组中的元素个数</span>
+     <span class="token comment" spellcheck="true">// oldCapacity为旧容量，newCapacity为新容量</span>
+     <span class="token keyword">int</span> oldCapacity <span class="token operator">=</span> elementData<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">//将oldCapacity 右移一位，其效果相当于oldCapacity /2，</span>
+     <span class="token comment" spellcheck="true">//我们知道位运算的速度远远快于整除运算，整句运算式的结果就是将新容量更新为旧容量的1.5倍，</span>
+     <span class="token keyword">int</span> newCapacity <span class="token operator">=</span> oldCapacity <span class="token operator">+</span> <span class="token punctuation">(</span>oldCapacity <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">//然后检查新容量是否大于最小需要容量，若还是小于最小需要容量，那么就把最小需要容量当作数组的新容量，</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>newCapacity <span class="token operator">-</span> minCapacity <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+         newCapacity <span class="token operator">=</span> minCapacity<span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">//再检查新容量是否超出了ArrayList所定义的最大容量，</span>
+     <span class="token comment" spellcheck="true">//若超出了，则调用hugeCapacity()来比较minCapacity和 MAX_ARRAY_SIZE，</span>
+     <span class="token comment" spellcheck="true">//如果minCapacity大于MAX_ARRAY_SIZE，则新容量则为Interger.MAX_VALUE，否则，新容量大小则为 MAX_ARRAY_SIZE。</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>newCapacity <span class="token operator">-</span> MAX_ARRAY_SIZE <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+         newCapacity <span class="token operator">=</span> <span class="token function">hugeCapacity</span><span class="token punctuation">(</span>minCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">// minCapacity is usually close to size, so this is a win:</span>
+     elementData <span class="token operator">=</span> Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span> newCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>    </code></pre>
+<p>　　扩容机制代码已经做了详细的解释。另外值得注意的是大家很容易忽略的一个运算符：<strong>移位运算符</strong><br>　　<strong>简介</strong>：移位运算符就是在二进制的基础上对数字进行平移。按照平移的方向和填充数字的规则分为三种:<font color="red">&lt;&lt;(左移)</font>、<font color="red">&gt;&gt;(带符号右移)</font>和<font color="red">&gt;&gt;&gt;(无符号右移)</font>。<br>　　<strong>作用</strong>：<strong>对于大数据的2进制运算,位移运算符比那些普通运算符的运算要快很多,因为程序仅仅移动一下而已,不去计算,这样提高了效率,节省了资源</strong><br>　　比如这里：int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);<br>右移一位相当于除2，右移n位相当于除以 2 的 n 次方。这里 oldCapacity 明显右移了1位所以相当于oldCapacity /2。</p>
 </li>
 </ol>
-<pre><code>```java
-    /**
-     * ArrayList扩容的核心方法。
-     */
-    private void grow(int minCapacity) {
-       //elementData为保存ArrayList数据的数组
-       ///elementData.length求数组长度elementData.size是求数组中的元素个数
-        // oldCapacity为旧容量，newCapacity为新容量
-        int oldCapacity = elementData.length;
-        //将oldCapacity 右移一位，其效果相当于oldCapacity /2，
-        //我们知道位运算的速度远远快于整除运算，整句运算式的结果就是将新容量更新为旧容量的1.5倍，
-        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
-        //然后检查新容量是否大于最小需要容量，若还是小于最小需要容量，那么就把最小需要容量当作数组的新容量，
-        if (newCapacity - minCapacity &lt; 0)
-            newCapacity = minCapacity;
-        //再检查新容量是否超出了ArrayList所定义的最大容量，
-        //若超出了，则调用hugeCapacity()来比较minCapacity和 MAX_ARRAY_SIZE，
-        //如果minCapacity大于MAX_ARRAY_SIZE，则新容量则为Interger.MAX_VALUE，否则，新容量大小则为 MAX_ARRAY_SIZE。
-        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
-            newCapacity = hugeCapacity(minCapacity);
-        // minCapacity is usually close to size, so this is a win:
-        elementData = Arrays.copyOf(elementData, newCapacity);
-    }
-</code></pre><p>　　扩容机制代码已经做了详细的解释。另外值得注意的是大家很容易忽略的一个运算符：<strong>移位运算符</strong><br>　　<strong>简介</strong>：移位运算符就是在二进制的基础上对数字进行平移。按照平移的方向和填充数字的规则分为三种:<font color="red">&lt;&lt;(左移)</font>、<font color="red">&gt;&gt;(带符号右移)</font>和<font color="red">&gt;&gt;&gt;(无符号右移)</font>。<br>　　<strong>作用</strong>：<strong>对于大数据的2进制运算,位移运算符比那些普通运算符的运算要快很多,因为程序仅仅移动一下而已,不去计算,这样提高了效率,节省了资源</strong><br>　　比如这里：int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);<br>右移一位相当于除2，右移n位相当于除以 2 的 n 次方。这里 oldCapacity 明显右移了1位所以相当于oldCapacity /2。</p>
 <p><strong>另外需要注意的是：</strong></p>
 <ol>
 <li><p>java 中的<strong>length 属性</strong>是针对数组说的,比如说你声明了一个数组,想知道这个数组的长度则用到了 length 这个属性.</p>
