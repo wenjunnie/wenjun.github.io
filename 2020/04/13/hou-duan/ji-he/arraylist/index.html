@@ -477,7 +477,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.1k
+                    5k
                 </div>
                 
 
@@ -503,10 +503,10 @@
 <p>   它继承于 <strong>AbstractList</strong>，实现了 <strong>List</strong>, <strong>RandomAccess</strong>, <strong>Cloneable</strong>, <strong>java.io.Serializable</strong> 这些接口。</p>
 <p>   在我们学数据结构的时候就知道了线性表的顺序存储，插入删除元素的时间复杂度为<strong>O（n）</strong>,求表长以及增加元素，取第 i 个元素的时间复杂度为<strong>O（1）</strong>。</p>
 <p>　  ArrayList 继承了AbstractList，实现了List。它是一个数组队列，提供了相关的添加、删除、修改、遍历等功能。</p>
-<p>　　ArrayList 实现了<strong>RandomAccess 接口</strong>， RandomAccess 是一个标志接口，表明实现这个这个接口的 List 集合是支持<strong>快速随机访问</strong>的。在 ArrayList 中，我们即可以通过元素的序号快速获取元素对象，这就是快速随机访问。</p>
-<p>　　ArrayList 实现了<strong>Cloneable 接口</strong>，即覆盖了函数 clone()，<strong>能被克隆</strong>。</p>
+<p>　　ArrayList 实现了<strong>RandomAccess 接口</strong>， <strong>RandomAccess</strong> 是一个标志接口，表明实现这个这个接口的 List 集合是支持<strong>快速随机访问</strong>的。在 ArrayList 中，我们即可以通过元素的序号快速获取元素对象，这就是快速随机访问。</p>
+<p>　　ArrayList 实现了<strong>Cloneable 接口</strong>，即覆盖了函数<code>clone()</code>，<strong>能被克隆</strong>。</p>
 <p>　　ArrayList 实现<strong>java.io.Serializable 接口</strong>，这意味着ArrayList<strong>支持序列化</strong>，<strong>能通过序列化去传输</strong>。</p>
-<p>　　和 Vector 不同，<strong>ArrayList 中的操作不是线程安全的</strong>！所以，建议在单线程中才使用 ArrayList，而在多线程中可以选择 Vector 或者  CopyOnWriteArrayList。</p>
+<p>　　和 Vector 不同，<strong>ArrayList 中的操作不是线程安全的</strong>！所以，建议在单线程中才使用 ArrayList，而在多线程中可以选择<strong>Vector</strong>或者<strong>CopyOnWriteArrayList</strong>。</p>
 <h3 id="ArrayList核心源码"><a href="#ArrayList核心源码" class="headerlink" title="ArrayList核心源码"></a>ArrayList核心源码</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> java<span class="token punctuation">.</span>util<span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>function<span class="token punctuation">.</span>Consumer<span class="token punctuation">;</span>
@@ -1021,7 +1021,7 @@
         elementData<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> element<span class="token punctuation">;</span>
         size<span class="token operator">++</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
-<p>又如toArray()方法中用到了copyOf()方法</p>
+<p>又如<code>toArray()</code>方法中用到了<code>copyOf()</code>方法</p>
 <pre class=" language-java"><code class="language-java">
     <span class="token comment" spellcheck="true">/**
      *以正确的顺序（从第一个到最后一个元素）返回一个包含此列表中所有元素的数组。 
@@ -1032,11 +1032,11 @@
     <span class="token comment" spellcheck="true">//elementData：要复制的数组；size：要复制的长度</span>
         <span class="token keyword">return</span> Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
-<h5 id="两者联系与区别"><a href="#两者联系与区别" class="headerlink" title="两者联系与区别"></a>两者联系与区别</h5><p><strong>联系：</strong><br>看两者源代码可以发现<code>copyOf()</code>内部调用了<code>System.arraycopy()</code>方法<br><strong>区别：</strong></p>
+<h5 id="两者联系与区别"><a href="#两者联系与区别" class="headerlink" title="两者联系与区别"></a>两者联系与区别</h5><p><strong>联系：</strong><br>看两者源代码可以发现<code>copyOf()</code>内部调用了<code>System.arraycopy()</code>方法。<br><strong>区别：</strong></p>
 <ol>
-<li><p>arraycopy()需要目标数组，将原数组拷贝到你自己定义的数组里，而且可以选择拷贝的起点和长度以及放入新数组中的位置</p>
+<li><p><strong>arraycopy()</strong>需要目标数组，将原数组拷贝到你自己定义的数组里，而且可以选择拷贝的起点和长度以及放入新数组中的位置。</p>
 </li>
-<li><p>copyOf()是系统自动在内部新建一个数组，并返回该数组。</p>
+<li><p><strong>copyOf()</strong>是系统自动在内部新建一个数组，并返回该数组。</p>
 <h4 id="ArrayList-核心扩容技术"><a href="#ArrayList-核心扩容技术" class="headerlink" title="ArrayList 核心扩容技术"></a>ArrayList 核心扩容技术</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//下面是ArrayList的扩容机制</span>
 <span class="token comment" spellcheck="true">//ArrayList的扩容机制提高了性能，如果每次只扩充一个，</span>
 <span class="token comment" spellcheck="true">//那么频繁的插入会导致频繁的拷贝，降低性能，而ArrayList的扩容机制避免了这种情况。</span>
@@ -1102,11 +1102,11 @@
 </ol>
 <p><strong>另外需要注意的是：</strong></p>
 <ol>
-<li><p>java 中的<strong>length 属性</strong>是针对数组说的,比如说你声明了一个数组,想知道这个数组的长度则用到了 length 这个属性.</p>
+<li><p>java 中的<strong>length属性</strong>是针对数组说的,比如说你声明了一个数组,想知道这个数组的长度则用到了 length 这个属性。</p>
 </li>
-<li><p>java 中的<strong>length()方法</strong>是针对字  符串String说的,如果想看这个字符串的长度则用到 length()这个方法.</p>
+<li><p>java 中的<strong>length()方法</strong>是针对字  符串String说的,如果想看这个字符串的长度则用到 length()这个方法。</p>
 </li>
-<li><p>.java 中的<strong>size()方法</strong>是针对泛型集合说的,如果想看这个泛型有多少个元素,就调用此方法来查看!</p>
+<li><p>java 中的<strong>size()方法</strong>是针对泛型集合说的,如果想看这个泛型有多少个元素,就调用此方法来查看！</p>
 </li>
 </ol>
 <h4 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h4><pre class=" language-java"><code class="language-java">    <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">Itr</span> <span class="token keyword">implements</span> <span class="token class-name">Iterator</span><span class="token operator">&lt;</span>E<span class="token operator">></span>  
@@ -1114,8 +1114,7 @@
     <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">SubList</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractList</span><span class="token operator">&lt;</span>E<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">RandomAccess</span>  
     <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">ArrayListSpliterator</span><span class="token operator">&lt;</span>E<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Spliterator</span><span class="token operator">&lt;</span>E<span class="token operator">></span>  </code></pre>
 <p>　　ArrayList有四个内部类，其中的<strong>Itr是实现了Iterator接口</strong>，同时重写了里面的<strong>hasNext()</strong>， <strong>next()</strong>， <strong>remove()</strong> 等方法；其中的<strong>ListItr</strong> 继承 <strong>Itr</strong>，实现了<strong>ListIterator接口</strong>，同时重写了<strong>hasPrevious()</strong>， <strong>nextIndex()</strong>， <strong>previousIndex()</strong>， <strong>previous()</strong>， <strong>set(E e)</strong>， <strong>add(E e)</strong> 等方法，所以这也可以看出了 <strong>Iterator和ListIterator的区别:</strong> ListIterator在Iterator的基础上增加了添加对象，修改对象，逆向遍历等方法，这些是Iterator不能实现的。</p>
-<h3 id="ArrayList经典Demo"><a href="#ArrayList经典Demo" class="headerlink" title=" ArrayList经典Demo"></a><font face="楷体" id="6"> ArrayList经典Demo</font></h3><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> list<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+<h3 id="ArrayList经典Demo"><a href="#ArrayList经典Demo" class="headerlink" title=" ArrayList经典Demo"></a><font face="楷体" id="6"> ArrayList经典Demo</font></h3><pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
 <span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Iterator<span class="token punctuation">;</span>
 
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ArrayListDemo</span> <span class="token punctuation">{</span>
@@ -1427,30 +1426,33 @@ ArrayList is empty<span class="token operator">:</span> <span class="token boole
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/13/hou-duan/ji-he/arraylist/">
+                <a href="/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="ArrayList">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="ArrayList扩容机制">
                         
-                        <span class="card-title">ArrayList</span>
+                        <span class="card-title">ArrayList扩容机制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ArrayList简介　　ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用ensureCapacity操作来增加 ArrayList 实例的容量。这可以
+                            ArrayList扩容机制一 先从 ArrayList 的构造函数说起ArrayList有三种方式来初始化，构造方法源码如下：
+   /**
+     * 默认初始容量大小
+     */
+    private static final 
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-13
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-14
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1463,7 +1465,6 @@ ArrayList is empty<span class="token operator">:</span> <span class="token boole
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
