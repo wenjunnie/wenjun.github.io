@@ -539,7 +539,7 @@
 <p><img src="https://s1.ax1x.com/2020/04/15/Jp7OZ8.png" alt="双向循环链表"></p>
 <h2 id="ArrayList-与-Vector-区别呢？为什么要用ArrayList取代Vector呢？"><a href="#ArrayList-与-Vector-区别呢？为什么要用ArrayList取代Vector呢？" class="headerlink" title="ArrayList 与 Vector 区别呢？为什么要用ArrayList取代Vector呢？"></a>ArrayList 与 Vector 区别呢？为什么要用ArrayList取代Vector呢？</h2><p><code>Vector</code>类的所有方法都是同步的。可以由两个线程安全地访问一个Vector对象，但是一个线程访问Vector的话代码要在同步操作上耗费大量的时间。</p>
 <p><code>ArrayList</code>不是同步的，所以在不需要保证线程安全时建议使用ArrayList。</p>
-<h2 id="说一说-ArrayList-的扩容机制吧"><a href="#说一说-ArrayList-的扩容机制吧" class="headerlink" title="说一说 ArrayList 的扩容机制吧"></a>说一说 ArrayList 的扩容机制吧</h2><p>详见笔主的这篇文章:<a href="https://wenjunnie.github.io/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi" target="_blank" rel="noopener">通过源码一步一步分析ArrayList 扩容机制</a></p>
+<h2 id="说一说-ArrayList-的扩容机制吧"><a href="#说一说-ArrayList-的扩容机制吧" class="headerlink" title="说一说 ArrayList 的扩容机制吧"></a>说一说 ArrayList 的扩容机制吧</h2><p>详见笔主的这篇文章：<a href="https://wenjunnie.github.io/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi" target="_blank" rel="noopener">通过源码一步一步分析ArrayList 扩容机制</a></p>
 <h2 id="HashMap-和-HashTable-的区别"><a href="#HashMap-和-HashTable-的区别" class="headerlink" title="HashMap 和 HashTable 的区别"></a>HashMap 和 HashTable 的区别</h2><ol>
 <li><strong>线程是否安全：</strong> HashMap 是非线程安全的，HashTable 是线程安全的；HashTable 内部的方法基本都经过<code>synchronized</code> 修饰。（如果你要保证线程安全的话就使用 ConcurrentHashMap 吧！）；</li>
 <li><strong>效率：</strong> 因为线程安全的问题，HashMap 要比 HashTable 效率高一点。另外，HashTable 基本被淘汰，不要在代码中使用它；</li>
@@ -601,7 +601,7 @@
 <td align="center">HashSet使用成员对象来计算hashCode值，对于两个对象来说hashCode可能相同，所以<code>equals()</code>方法用来判断对象的相等性，</td>
 </tr>
 </tbody></table>
-<h2 id="HashSet如何检查重复"><a href="#HashSet如何检查重复" class="headerlink" title="HashSet如何检查重复"></a>HashSet如何检查重复</h2><p>当你把对象加入<code>HashSet</code>时，HashSet会先计算对象的<code>hashCode</code>值来判断对象加入的位置，同时也会与其他加入的对象的hashCode值作比较，如果没有相符的hashCode，HashSet会假设对象没有重复出现。但是如果发现有相同hashCode值的对象，这时会调用<code>equals()</code>方法来检查hashCode相等的对象是否真的相同。如果两者相同，HashSet就不会让加入操作成功。（摘自《Head fist java》第二版）</p>
+<h2 id="HashSet如何检查重复？"><a href="#HashSet如何检查重复？" class="headerlink" title="HashSet如何检查重复？"></a>HashSet如何检查重复？</h2><p>当你把对象加入<code>HashSet</code>时，HashSet会先计算对象的<code>hashCode</code>值来判断对象加入的位置，同时也会与其他加入的对象的hashCode值作比较，如果没有相符的hashCode，HashSet会假设对象没有重复出现。但是如果发现有相同hashCode值的对象，这时会调用<code>equals()</code>方法来检查hashCode相等的对象是否真的相同。如果两者相同，HashSet就不会让加入操作成功。（摘自《Head fist java》第二版）</p>
 <p><strong>hashCode()与equals()的相关规定：</strong></p>
 <ol>
 <li>如果两个对象相等，则hashCode一定也是相同的。</li>
@@ -697,7 +697,7 @@
 <p>Segment 实现了 ReentrantLock，所以 Segment 是一种可重入锁，扮演锁的角色。HashEntry 用于存储键值对数据。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Segment</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">ReentrantLock</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
 <span class="token punctuation">}</span></code></pre>
-<p>一个 ConcurrentHashMap 里包含一个 Segment 数组。Segment 的结构和HashMap类似，是一种数组和链表结构，一个 Segment 包含一个 HashEntry 数组，每个 HashEntry 是一个链表结构的元素，每个 Segment 守护着一个 HashEntry 数组里的元素，当对 HashEntry 数组的数据进行修改时，必须首先获得对应的 Segment的锁。</p>
+<p>一个 ConcurrentHashMap 里包含一个 Segment 数组。Segment 的结构和 HashMap 类似，是一种<strong>数组和链表</strong>结构，一个 Segment 包含一个 HashEntry 数组，每个 HashEntry 是一个链表结构的元素，每个 Segment 守护着一个 HashEntry 数组里的元素，当对 HashEntry 数组的数据进行修改时，必须首先获得对应的 Segment的锁。</p>
 <h3 id="JDK1-8-（上面有示意图）"><a href="#JDK1-8-（上面有示意图）" class="headerlink" title="JDK1.8 （上面有示意图）"></a>JDK1.8 （上面有示意图）</h3><p>ConcurrentHashMap取消了Segment分段锁，采用 <strong>CAS</strong> 和 <strong>synchronized</strong> 来保证并发安全。数据结构跟HashMap1.8的结构类似，<strong>数组+链表/红黑树</strong>。Java 8在链表长度超过一定阈值（8）时将链表（寻址时间复杂度为O(N)）转换为红黑树（寻址时间复杂度为O(log(N))）</p>
 <p>*<em>synchronized *</em>只锁定当前链表或红黑二叉树的首节点，这样只要hash不冲突，就不会产生并发，效率又提升N倍。</p>
 <h2 id="comparable-和-Comparator的区别"><a href="#comparable-和-Comparator的区别" class="headerlink" title="comparable 和 Comparator的区别"></a>comparable 和 Comparator的区别</h2><ul>
@@ -814,7 +814,7 @@ Collections<span class="token punctuation">.</span><span class="token function">
 <h4 id="2-Set"><a href="#2-Set" class="headerlink" title="2. Set"></a>2. Set</h4><ul>
 <li><strong>HashSet（无序，唯一）：</strong> 基于 HashMap 实现的，底层采用 HashMap 来保存元素</li>
 <li><strong>LinkedHashSet：</strong> LinkedHashSet 继承于 HashSet，并且其内部是通过 LinkedHashMap 来实现的。有点类似于我们之前说的LinkedHashMap 其内部是基于 HashMap 实现一样，不过还是有一点点区别的</li>
-<li><strong>TreeSet（有序，唯一）：</strong> 红黑树(自平衡的排序二叉树)</li>
+<li><strong>TreeSet（有序，唯一）：</strong> 红黑树（自平衡的排序二叉树）</li>
 </ul>
 <h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><ul>
 <li><strong>HashMap：</strong> JDK1.8之前HashMap由数组+链表组成的，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。JDK1.8以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间</li>
@@ -1059,32 +1059,32 @@ Collections<span class="token punctuation">.</span><span class="token function">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/15/hou-duan/ji-he/java-ji-he-kuang-jia-chang-jian-mian-shi-ti/">
+                <a href="/2020/04/16/hou-duan/bing-fa/java-bing-fa-rong-qi-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Java集合框架常见面试题">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Java并发容器总结">
                         
-                        <span class="card-title">Java集合框架常见面试题</span>
+                        <span class="card-title">Java并发容器总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            剖析面试最常见问题之Java集合框架说说List,Set,Map三者的区别？
-List(对付顺序的好帮手)：List接口存储一组不唯一（可以有多个元素引用相同的对象），有序的对象。
-Set(注重独一无二的性质)： 不允许重复的集合。不会有多
+                            一 JDK 提供的并发容器总结JDK 提供的这些容器大部分在 java.util.concurrent 包中。
+
+ConcurrentHashMap： 线程安全的 HashMap。
+CopyOnWriteArrayList： 线程安全的 L
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-15
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1097,7 +1097,6 @@ Set(注重独一无二的性质)： 不允许重复的集合。不会有多
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1105,8 +1104,8 @@ Set(注重独一无二的性质)： 不允许重复的集合。不会有多
                         <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E9%9B%86%E5%90%88/">
-                        <span class="chip bg-color">集合</span>
+                    <a href="/tags/%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">并发</span>
                     </a>
                     
                 </div>

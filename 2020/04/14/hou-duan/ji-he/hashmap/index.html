@@ -523,7 +523,7 @@
 <span class="token punctuation">}</span></code></pre>
 <p>相比于 JDK1.8 的 hash 方法 ，JDK 1.7 的 hash 方法的性能会稍差一点点，因为毕竟扰动了 4 次。</p>
 <p>所谓 <strong>“拉链法”</strong> 就是：将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/jdk1.8%E4%B9%8B%E5%89%8D%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png" alt="jdk1.8之前的内部结构"></p>
+<p><img src="https://s1.ax1x.com/2020/04/15/J9jQDs.png" alt="jdk1.8之前的内部结构"></p>
 <h3 id="JDK1-8之后"><a href="#JDK1-8之后" class="headerlink" title="JDK1.8之后"></a>JDK1.8之后</h3><p>相比于之前的版本，jdk1.8在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。</p>
 <p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-8-22/67233764.jpg" alt="JDK1.8之后的HashMap底层数据结构"></p>
 <p><strong>类的属性：</strong></p>
@@ -562,7 +562,7 @@
 <p>给定的默认容量为 16，负载因子为 0.75。Map 在使用过程中不断的往里面存放数据，当数量达到了 16 * 0.75 = 12 就需要将当前 16 的容量进行扩容，而扩容这个过程涉及到 rehash、复制数据等操作，所以非常消耗性能。</p>
 </li>
 <li><p><strong>threshold</strong></p>
-<p><strong>threshold = capacity * loadFactor</strong>，<strong>当Size &gt;= threshold</strong>的时候，那么就要考虑对数组扩增了，也就是说，这个的意思就是 <strong>衡量数组是否需要扩增的一个标准</strong>。</p>
+<p><strong>threshold = capacity * loadFactor</strong>，<strong>当 Size &gt;= threshold *<em>的时候，那么就要考虑对数组扩增了，也就是说，这个的意思就是 *</em>衡量数组是否需要扩增的一个标准</strong>。</p>
 </li>
 </ul>
 <p><strong>Node节点类源码:</strong></p>
@@ -681,8 +681,8 @@
 <li>①如果定位到的数组位置没有元素就直接插入。</li>
 <li>②如果定位到的数组位置有元素就和要插入的key比较，如果key相同就直接覆盖，如果key不相同，就判断p是否是一个树节点，如果是就调用<code>e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value)</code>将元素添加进入。如果不是就遍历链表插入(插入的是链表尾部)。</li>
 </ul>
-<p>ps:下图有一个小问题，来自 <a href="https://github.com/Snailclimb/JavaGuide/issues/608" target="_blank" rel="noopener">issue#608</a>指出：直接覆盖之后应该就会 return，不会有后续操作。参考 JDK8 HashMap.java 658 行。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/put%E6%96%B9%E6%B3%95.png" alt="put方法"></p>
+<p>ps: 下图有一个小问题，来自 <a href="https://github.com/Snailclimb/JavaGuide/issues/608" target="_blank" rel="noopener">issue#608</a>指出：直接覆盖之后应该就会 return，不会有后续操作。参考 JDK8 HashMap.java 658 行。</p>
+<p><img src="https://s1.ax1x.com/2020/04/16/JiIBxs.md.png" alt="put方法"></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> V <span class="token function">put</span><span class="token punctuation">(</span>K key<span class="token punctuation">,</span> V value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">putVal</span><span class="token punctuation">(</span><span class="token function">hash</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
