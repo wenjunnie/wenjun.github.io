@@ -5,16 +5,45 @@
   <subtitle>Wenjun&#39;s Blog</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://wenjunnie.github.io/"/>
-  <updated>2020-04-14T08:37:00.148Z</updated>
-  <id>https://wenjunnie.github.io/</id>
+  <link href="https://www.niewenjun.com/"/>
+  <updated>2020-04-15T02:40:59.994Z</updated>
+  <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java集合框架常见面试题</title>
+    <link href="https://www.niewenjun.com/2020/04/15/hou-duan/ji-he/java-ji-he-kuang-jia-chang-jian-mian-shi-ti/"/>
+    <id>https://www.niewenjun.com/2020/04/15/hou-duan/ji-he/java-ji-he-kuang-jia-chang-jian-mian-shi-ti/</id>
+    <published>2020-04-15T02:39:00.000Z</published>
+    <updated>2020-04-15T02:40:59.994Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;剖析面试最常见问题之Java集合框架&quot;&gt;&lt;a href=&quot;#剖析面试最常见问题之Java集合框架&quot; class=&quot;headerlink&quot; title=&quot;剖析面试最常见问题之Java集合框架&quot;&gt;&lt;/a&gt;剖析面试最常见问题之Java集合框架&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
+    
+  </entry>
+  
+  <entry>
     <title>LRU算法</title>
-    <link href="https://wenjunnie.github.io/2020/04/14/hou-duan/suan-fa/lru-suan-fa/"/>
-    <id>https://wenjunnie.github.io/2020/04/14/hou-duan/suan-fa/lru-suan-fa/</id>
+    <link href="https://www.niewenjun.com/2020/04/14/suan-fa/lru-suan-fa/"/>
+    <id>https://www.niewenjun.com/2020/04/14/suan-fa/lru-suan-fa/</id>
     <published>2020-04-14T08:36:00.000Z</published>
     <updated>2020-04-14T08:37:00.148Z</updated>
     
@@ -31,19 +60,19 @@
     </summary>
     
     
-      <category term="算法" scheme="https://wenjunnie.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://www.niewenjun.com/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="Java" scheme="https://wenjunnie.github.io/tags/Java/"/>
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
     
-      <category term="算法" scheme="https://wenjunnie.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://www.niewenjun.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>HashMap</title>
-    <link href="https://wenjunnie.github.io/2020/04/14/hou-duan/ji-he/hashmap/"/>
-    <id>https://wenjunnie.github.io/2020/04/14/hou-duan/ji-he/hashmap/</id>
+    <link href="https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/hashmap/"/>
+    <id>https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/hashmap/</id>
     <published>2020-04-14T06:15:00.000Z</published>
     <updated>2020-04-14T08:32:01.305Z</updated>
     
@@ -60,19 +89,19 @@
     </summary>
     
     
-      <category term="后端" scheme="https://wenjunnie.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
     
     
-      <category term="Java" scheme="https://wenjunnie.github.io/tags/Java/"/>
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
     
-      <category term="集合" scheme="https://wenjunnie.github.io/tags/%E9%9B%86%E5%90%88/"/>
+      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
     
   </entry>
   
   <entry>
     <title>LinkedList</title>
-    <link href="https://wenjunnie.github.io/2020/04/14/hou-duan/ji-he/linkedlist/"/>
-    <id>https://wenjunnie.github.io/2020/04/14/hou-duan/ji-he/linkedlist/</id>
+    <link href="https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/linkedlist/"/>
+    <id>https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/linkedlist/</id>
     <published>2020-04-14T03:15:00.000Z</published>
     <updated>2020-04-14T05:48:10.463Z</updated>
     
@@ -89,19 +118,19 @@
     </summary>
     
     
-      <category term="后端" scheme="https://wenjunnie.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
     
     
-      <category term="Java" scheme="https://wenjunnie.github.io/tags/Java/"/>
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
     
-      <category term="集合" scheme="https://wenjunnie.github.io/tags/%E9%9B%86%E5%90%88/"/>
+      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
     
   </entry>
   
   <entry>
     <title>ArrayList扩容机制</title>
-    <link href="https://wenjunnie.github.io/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi/"/>
-    <id>https://wenjunnie.github.io/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi/</id>
+    <link href="https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi/"/>
+    <id>https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi/</id>
     <published>2020-04-13T16:15:00.000Z</published>
     <updated>2020-04-13T16:27:01.156Z</updated>
     
@@ -118,19 +147,19 @@
     </summary>
     
     
-      <category term="后端" scheme="https://wenjunnie.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
     
     
-      <category term="Java" scheme="https://wenjunnie.github.io/tags/Java/"/>
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
     
-      <category term="集合" scheme="https://wenjunnie.github.io/tags/%E9%9B%86%E5%90%88/"/>
+      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
     
   </entry>
   
   <entry>
     <title>ArrayList</title>
-    <link href="https://wenjunnie.github.io/2020/04/13/hou-duan/ji-he/arraylist/"/>
-    <id>https://wenjunnie.github.io/2020/04/13/hou-duan/ji-he/arraylist/</id>
+    <link href="https://www.niewenjun.com/2020/04/13/hou-duan/ji-he/arraylist/"/>
+    <id>https://www.niewenjun.com/2020/04/13/hou-duan/ji-he/arraylist/</id>
     <published>2020-04-13T04:15:00.000Z</published>
     <updated>2020-04-13T16:48:33.891Z</updated>
     
@@ -147,19 +176,19 @@
     </summary>
     
     
-      <category term="后端" scheme="https://wenjunnie.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
     
     
-      <category term="Java" scheme="https://wenjunnie.github.io/tags/Java/"/>
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
     
-      <category term="集合" scheme="https://wenjunnie.github.io/tags/%E9%9B%86%E5%90%88/"/>
+      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
     
   </entry>
   
   <entry>
     <title>Hexo博客主题之hexo-theme-matery的介绍</title>
-    <link href="https://wenjunnie.github.io/2020/04/12/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/"/>
-    <id>https://wenjunnie.github.io/2020/04/12/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/</id>
+    <link href="https://www.niewenjun.com/2020/04/12/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/"/>
+    <id>https://www.niewenjun.com/2020/04/12/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/</id>
     <published>2020-04-12T15:34:00.000Z</published>
     <updated>2020-04-12T15:28:03.740Z</updated>
     
@@ -176,17 +205,17 @@
     </summary>
     
     
-      <category term="前端" scheme="https://wenjunnie.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://www.niewenjun.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="Hexo" scheme="https://wenjunnie.github.io/tags/Hexo/"/>
+      <category term="Hexo" scheme="https://www.niewenjun.com/tags/Hexo/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://wenjunnie.github.io/2020/04/12/hello-world/"/>
-    <id>https://wenjunnie.github.io/2020/04/12/hello-world/</id>
+    <link href="https://www.niewenjun.com/2020/04/12/hello-world/"/>
+    <id>https://www.niewenjun.com/2020/04/12/hello-world/</id>
     <published>2020-04-12T10:05:15.392Z</published>
     <updated>2020-04-12T15:14:44.220Z</updated>
     
@@ -204,7 +233,7 @@
     
     
     
-      <category term="Hexo" scheme="https://wenjunnie.github.io/tags/Hexo/"/>
+      <category term="Hexo" scheme="https://www.niewenjun.com/tags/Hexo/"/>
     
   </entry>
   
