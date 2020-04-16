@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java并发容器总结, Wenjun">
+    <meta name="keywords" content="如何设计一个RPC框架, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Java并发容器总结 | Wenjun</title>
+    <title>如何设计一个RPC框架 | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java并发容器总结</h1>
+                    <h1 class="description center-align post-title">如何设计一个RPC框架</h1>
                 </div>
             </div>
         </div>
@@ -439,12 +439,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+                                <span class="chip bg-color">微服务</span>
                             </a>
                         
-                            <a href="/tags/%E5%B9%B6%E5%8F%91/">
-                                <span class="chip bg-color">并发</span>
+                            <a href="/tags/RPC/">
+                                <span class="chip bg-color">RPC</span>
                             </a>
                         
                     </div>
@@ -455,8 +455,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
-                                后端
+                            <a href="/categories/%E6%A1%86%E6%9E%B6/" class="post-category">
+                                框架
                             </a>
                         
                     </div>
@@ -477,14 +477,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    4 分
                 </div>
                 
 
@@ -499,118 +499,57 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一-JDK-提供的并发容器总结"><a href="#一-JDK-提供的并发容器总结" class="headerlink" title="一 JDK 提供的并发容器总结"></a>一 JDK 提供的并发容器总结</h2><p>JDK 提供的这些容器大部分在 <code>java.util.concurrent</code> 包中。</p>
+                <h2 id="如何设计一个RPC框架？"><a href="#如何设计一个RPC框架？" class="headerlink" title="如何设计一个RPC框架？"></a>如何设计一个RPC框架？</h2><p>如何设计一个RPC框架可以说是面试时的常客了，下面我就简要谈谈自己的看法。</p>
+<h3 id="什么是RPC？"><a href="#什么是RPC？" class="headerlink" title="什么是RPC？"></a>什么是RPC？</h3><p>RPC（Remote Procedure  Call）——远程过程调用，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。比如两个不同的服务 A、B  部署在两台不同的机器上，那么服务 A 如果想要调用服务 B 中的某个方法该怎么办呢？使用 HTTP请求当然可以，但是可能会比较慢而且一些优化做的并不好。 RPC 的出现就是为了解决这个问题。</p>
+<h3 id="RPC架构"><a href="#RPC架构" class="headerlink" title="RPC架构"></a>RPC架构</h3><p>一个完整的RPC架构里面包含了四个核心的组件，分别是<strong>Client</strong>、<strong>Client Stub</strong>、<strong>Server</strong>以及<strong>Server Stub</strong>，这个Stub可以理解为存根。</p>
 <ul>
-<li><strong>ConcurrentHashMap：</strong> 线程安全的 HashMap。</li>
-<li><strong>CopyOnWriteArrayList：</strong> 线程安全的 List，在读多写少的场合性能非常好，远远好于 Vector。</li>
-<li><strong>ConcurrentLinkedQueue：</strong> 高效的并发队列，使用链表实现。可以看做一个线程安全的 LinkedList，这是一个非阻塞队列。</li>
-<li><strong>BlockingQueue：</strong> 这是一个接口，JDK 内部通过链表、数组等方式实现了这个接口。表示阻塞队列，非常适合用于作为数据共享的通道。</li>
-<li><strong>ConcurrentSkipListMap：</strong> 跳表的实现。这是一个 Map，使用跳表的数据结构进行快速查找。</li>
+<li>客户端（Client）：服务的调用方。</li>
+<li>客户端存根（Client Stub）：存放服务端的地址消息，再将客户端的请求参数打包成网络消息，然后通过网络远程发送给服务方。</li>
+<li>服务端（Server）：真正的服务提供者。</li>
+<li>服务端存根（Server Stub）：接收客户端发送过来的消息，将消息解包，并调用本地的方法。</li>
 </ul>
-<h2 id="二-ConcurrentHashMap"><a href="#二-ConcurrentHashMap" class="headerlink" title="二 ConcurrentHashMap"></a>二 ConcurrentHashMap</h2><p>我们知道 HashMap 不是线程安全的，在并发场景下如果要保证一种可行的方式是使用 <code>Collections.synchronizedMap()</code> 方法来包装我们的 HashMap。但这是通过使用一个全局的锁来同步不同线程间的并发访问，因此会带来不可忽视的性能问题。</p>
-<p>所以就有了 HashMap 的线程安全版本—— ConcurrentHashMap 的诞生。在 ConcurrentHashMap 中，无论是读操作还是写操作都能保证很高的性能：在进行读操作时(几乎)不需要加锁，而在写操作时通过锁分段技术只对所操作的段加锁而不影响客户端对其它段的访问。</p>
-<p>关于 ConcurrentHashMap 相关问题，我在 <a href="https://www.niewenjun.com/2020/04/15/hou-duan/ji-he/java-ji-he-kuang-jia-chang-jian-mian-shi-ti"Java集合框架常见面试题"">Java 集合框架常见面试题</a> 这篇文章中已经提到过。</p>
-<h2 id="三-CopyOnWriteArrayList"><a href="#三-CopyOnWriteArrayList" class="headerlink" title="三 CopyOnWriteArrayList"></a>三 CopyOnWriteArrayList</h2><h3 id="3-1-CopyOnWriteArrayList-简介"><a href="#3-1-CopyOnWriteArrayList-简介" class="headerlink" title="3.1 CopyOnWriteArrayList 简介"></a>3.1 CopyOnWriteArrayList 简介</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CopyOnWriteArrayList</span><span class="token operator">&lt;</span>E<span class="token operator">></span>
-<span class="token keyword">extends</span> <span class="token class-name">Object</span>
-<span class="token keyword">implements</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>E<span class="token operator">></span><span class="token punctuation">,</span> RandomAccess<span class="token punctuation">,</span> Cloneable<span class="token punctuation">,</span> Serializable</code></pre>
-<p>在很多应用场景中，读操作可能会远远大于写操作。由于读操作根本不会修改原有的数据，因此对于每次读取都进行加锁其实是一种资源浪费。我们应该允许多个线程同时访问 List 的内部数据，毕竟读取操作是安全的。</p>
-<p>这和我们之前在多线程章节讲过 <code>ReentrantReadWriteLock</code> 读写锁的思想非常类似，也就是读读共享、写写互斥、读写互斥、写读互斥。JDK 中提供了 <code>CopyOnWriteArrayList</code> 类比相比于在读写锁的思想又更进一步。为了将读取的性能发挥到极致，<code>CopyOnWriteArrayList</code> 读取是完全不用加锁的，并且更厉害的是：写入也不会阻塞读取操作。只有写入和写入之间需要进行同步等待。这样一来，读操作的性能就会大幅度提升。<strong>那它是怎么做的呢？</strong></p>
-<h3 id="3-2-CopyOnWriteArrayList-是如何做到的？"><a href="#3-2-CopyOnWriteArrayList-是如何做到的？" class="headerlink" title="3.2 CopyOnWriteArrayList 是如何做到的？"></a>3.2 CopyOnWriteArrayList 是如何做到的？</h3><p><code>CopyOnWriteArrayList</code> 类的所有可变操作（add，set 等等）都是通过创建底层数组的新副本来实现的。当 List 需要被修改的时候，我并不修改原有内容，而是对原有数据进行一次复制，将修改的内容写入副本。写完之后，再将修改完的副本替换原来的数据，这样就可以保证写操作不会影响读操作了。</p>
-<p>从 <code>CopyOnWriteArrayList</code> 的名字就能看出<code>CopyOnWriteArrayList</code> 是满足<code>CopyOnWrite</code> 的 ArrayList，所谓<code>CopyOnWrite</code> 也就是说：在计算机，如果你想要对一块内存进行修改时，我们不在原有内存块中进行写操作，而是将内存拷贝一份，在新的内存中进行写操作，写完之后呢，就将指向原来内存指针指向新的内存，原来的内存就可以被回收掉了。</p>
-<h3 id="3-3-CopyOnWriteArrayList-读取和写入源码简单分析"><a href="#3-3-CopyOnWriteArrayList-读取和写入源码简单分析" class="headerlink" title="3.3 CopyOnWriteArrayList 读取和写入源码简单分析"></a>3.3 CopyOnWriteArrayList 读取和写入源码简单分析</h3><h4 id="3-3-1-CopyOnWriteArrayList-读取操作的实现"><a href="#3-3-1-CopyOnWriteArrayList-读取操作的实现" class="headerlink" title="3.3.1 CopyOnWriteArrayList 读取操作的实现"></a>3.3.1 CopyOnWriteArrayList 读取操作的实现</h4><p>读取操作没有任何同步控制和锁操作，理由就是内部数组 array 不会发生修改，只会被另外一个 array 替换，因此可以保证数据安全。</p>
-<pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/** The array, accessed only via getArray/setArray. */</span>
-    <span class="token keyword">private</span> <span class="token keyword">transient</span> <span class="token keyword">volatile</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> E <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token function">getArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token annotation punctuation">@SuppressWarnings</span><span class="token punctuation">(</span><span class="token string">"unchecked"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> E <span class="token function">get</span><span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>E<span class="token punctuation">)</span> a<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">final</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> array<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span></code></pre>
-<h4 id="3-3-2-CopyOnWriteArrayList-写入操作的实现"><a href="#3-3-2-CopyOnWriteArrayList-写入操作的实现" class="headerlink" title="3.3.2 CopyOnWriteArrayList 写入操作的实现"></a>3.3.2 CopyOnWriteArrayList 写入操作的实现</h4><p>CopyOnWriteArrayList 写入操作 <code>add()</code> 方法在添加集合的时候加了锁，保证了同步，避免了多线程写的时候会 copy 出多个副本出来。</p>
-<pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * Appends the specified element to the end of this list.
-     *
-     * @param e element to be appended to this list
-     * @return {@code true} (as specified by {@link Collection#add})
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">final</span> ReentrantLock lock <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>lock<span class="token punctuation">;</span>
-        lock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//加锁</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            Object<span class="token punctuation">[</span><span class="token punctuation">]</span> elements <span class="token operator">=</span> <span class="token function">getArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> len <span class="token operator">=</span> elements<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-            Object<span class="token punctuation">[</span><span class="token punctuation">]</span> newElements <span class="token operator">=</span> Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elements<span class="token punctuation">,</span> len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//拷贝新数组</span>
-            newElements<span class="token punctuation">[</span>len<span class="token punctuation">]</span> <span class="token operator">=</span> e<span class="token punctuation">;</span>
-            <span class="token function">setArray</span><span class="token punctuation">(</span>newElements<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
-            lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//释放锁</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span></code></pre>
-<h2 id="四-ConcurrentLinkedQueue"><a href="#四-ConcurrentLinkedQueue" class="headerlink" title="四 ConcurrentLinkedQueue"></a>四 ConcurrentLinkedQueue</h2><p>Java 提供的线程安全的 Queue 可以分为<strong>阻塞队列</strong>和<strong>非阻塞队列</strong>，其中阻塞队列的典型例子是 <strong>BlockingQueue</strong>，非阻塞队列的典型例子是 <strong>ConcurrentLinkedQueue</strong>，在实际应用中要根据实际需要选用阻塞队列或者非阻塞队列。 <strong>阻塞队列可以通过加锁来实现，非阻塞队列可以通过 CAS 操作实现。</strong></p>
-<p>从名字可以看出，<code>ConcurrentLinkedQueue</code>这个队列使用链表作为其数据结构。ConcurrentLinkedQueue 应该算是在高并发环境中性能最好的队列了。它之所有能有很好的性能，是因为其内部复杂的实现。</p>
-<p>ConcurrentLinkedQueue 内部代码我们就不分析了，大家知道 ConcurrentLinkedQueue 主要使用 <strong>CAS</strong> 非阻塞算法来实现线程安全就好了。</p>
-<p>ConcurrentLinkedQueue 适合在对性能要求相对较高，同时对队列的读写存在多个线程同时进行的场景，即如果对队列加锁的成本较高则适合使用无锁的 ConcurrentLinkedQueue 来替代。</p>
-<h2 id="五-BlockingQueue"><a href="#五-BlockingQueue" class="headerlink" title="五 BlockingQueue"></a>五 BlockingQueue</h2><h3 id="5-1-BlockingQueue-简单介绍"><a href="#5-1-BlockingQueue-简单介绍" class="headerlink" title="5.1 BlockingQueue 简单介绍"></a>5.1 BlockingQueue 简单介绍</h3><p>上面我们己经提到了 ConcurrentLinkedQueue 作为高性能的非阻塞队列。下面我们要讲到的是阻塞队列——BlockingQueue。阻塞队列（BlockingQueue）被广泛使用在“生产者-消费者”问题中，其原因是 BlockingQueue 提供了可阻塞的插入和移除的方法。当队列容器已满，生产者线程会被阻塞，直到队列未满；当队列容器为空时，消费者线程会被阻塞，直至队列非空时为止。</p>
-<p>BlockingQueue 是一个接口，继承自 Queue，所以其实现类也可以作为 Queue 的实现来使用，而 Queue 又继承自 Collection 接口。下面是 BlockingQueue 的相关实现类：</p>
-<p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/51622268.jpg" alt="BlockingQueue 的实现类"></p>
-<blockquote>
-<p><strong>下面主要介绍一下：ArrayBlockingQueue、LinkedBlockingQueue、PriorityBlockingQueue，这三个 BlockingQueue 的实现类。</strong></p>
-</blockquote>
-<h3 id="5-2-ArrayBlockingQueue"><a href="#5-2-ArrayBlockingQueue" class="headerlink" title="5.2 ArrayBlockingQueue"></a>5.2 ArrayBlockingQueue</h3><p><strong>ArrayBlockingQueue</strong> 是 BlockingQueue 接口的有界队列实现类，底层采用<strong>数组</strong>来实现。ArrayBlockingQueue 一旦创建，容量不能改变。其并发控制采用可重入锁来控制，不管是插入操作还是读取操作，都需要获取到锁才能进行操作。当队列容量满时，尝试将元素放入队列将导致操作阻塞；尝试从一个空队列中取一个元素也会同样阻塞。</p>
-<p>ArrayBlockingQueue 默认情况下不能保证线程访问队列的公平性，所谓公平性是指严格按照线程等待的绝对时间顺序，即最先等待的线程能够最先访问到 ArrayBlockingQueue。而非公平性则是指访问 ArrayBlockingQueue 的顺序不是遵守严格的时间顺序，有可能存在，当 ArrayBlockingQueue 可以被访问时，长时间阻塞的线程依然无法访问到 ArrayBlockingQueue。如果保证公平性，通常会降低吞吐量。如果需要获得公平性的 ArrayBlockingQueue，可采用如下代码：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> ArrayBlockingQueue<span class="token operator">&lt;</span>Integer<span class="token operator">></span> blockingQueue <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayBlockingQueue</span><span class="token operator">&lt;</span>Integer<span class="token operator">></span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h3 id="5-3-LinkedBlockingQueue"><a href="#5-3-LinkedBlockingQueue" class="headerlink" title="5.3 LinkedBlockingQueue"></a>5.3 LinkedBlockingQueue</h3><p><strong>LinkedBlockingQueue</strong> 底层基于<strong>单向链表</strong>实现的阻塞队列，可以当做无界队列也可以当做有界队列来使用，同样满足 FIFO 的特性，与 ArrayBlockingQueue 相比起来具有更高的吞吐量，为了防止 LinkedBlockingQueue 容量迅速增，损耗大量内存。通常在创建 LinkedBlockingQueue 对象时，会指定其大小，如果未指定，容量等于 Integer.MAX_VALUE。</p>
-<p><strong>相关构造方法:</strong></p>
-<pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     *某种意义上的无界队列
-     * Creates a {@code LinkedBlockingQueue} with a capacity of
-     * {@link Integer#MAX_VALUE}.
-     */</span>
-    <span class="token keyword">public</span> <span class="token function">LinkedBlockingQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">(</span>Integer<span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">/**
-     *有界队列
-     * Creates a {@code LinkedBlockingQueue} with the given (fixed) capacity.
-     *
-     * @param capacity the capacity of this queue
-     * @throws IllegalArgumentException if {@code capacity} is not greater
-     *         than zero
-     */</span>
-    <span class="token keyword">public</span> <span class="token function">LinkedBlockingQueue</span><span class="token punctuation">(</span><span class="token keyword">int</span> capacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>capacity <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>capacity <span class="token operator">=</span> capacity<span class="token punctuation">;</span>
-        last <span class="token operator">=</span> head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span>E<span class="token operator">></span><span class="token punctuation">(</span>null<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span></code></pre>
-<h3 id="5-4-PriorityBlockingQueue"><a href="#5-4-PriorityBlockingQueue" class="headerlink" title="5.4 PriorityBlockingQueue"></a>5.4 PriorityBlockingQueue</h3><p><strong>PriorityBlockingQueue</strong> 是一个支持优先级的无界阻塞队列。默认情况下元素采用自然顺序进行排序，也可以通过自定义类实现 <code>compareTo()</code> 方法来指定元素排序规则，或者初始化时通过构造器参数 <code>Comparator</code> 来指定排序规则。</p>
-<p>PriorityBlockingQueue 并发控制采用的是 <strong>ReentrantLock</strong>，队列为无界队列（ArrayBlockingQueue 是有界队列，LinkedBlockingQueue 也可以通过在构造函数中传入 capacity 指定队列最大的容量，但是 PriorityBlockingQueue 只能指定初始的队列大小，后面插入元素的时候，<strong>如果空间不够的话会自动扩容</strong>）。</p>
-<p>简单地说，它就是 PriorityQueue 的线程安全版本。不可以插入 null 值，同时，插入队列的对象必须是可比较大小的（comparable），否则报 <strong>ClassCastException</strong> 异常。它的插入操作 put 方法不会 block，因为它是无界队列（take 方法在队列为空的时候会阻塞）。</p>
-<p><strong>推荐文章：</strong></p>
-<p><a href="https://javadoop.com/post/java-concurrent-queue" target="_blank" rel="noopener" title="https://javadoop.com/post/java-concurrent-queue">《解读 Java 并发队列 BlockingQueue》</a></p>
-<h2 id="六-ConcurrentSkipListMap"><a href="#六-ConcurrentSkipListMap" class="headerlink" title="六 ConcurrentSkipListMap"></a>六 ConcurrentSkipListMap</h2><p>下面这部分内容参考了极客时间专栏<a href="https://time.geekbang.org/column/intro/126?code=zl3GYeAsRI4rEJIBNu5B/km7LSZsPDlGWQEpAYw5Vu0=&utm_term=SPoster" target="_blank" rel="noopener" title="《数据结构与算法之美》">《数据结构与算法之美》</a>以及《实战 Java 高并发程序设计》。</p>
-<p><strong>为了引出 ConcurrentSkipListMap，先带着大家简单理解一下跳表。</strong></p>
-<p>对于一个单链表，即使链表是有序的，如果我们想要在其中查找某个数据，也只能从头到尾遍历链表，这样效率自然就会很低，跳表就不一样了。跳表是一种可以用来快速查找的数据结构，有点类似于平衡树。它们都可以对元素进行快速的查找。但一个重要的区别是：对平衡树的插入和删除往往很可能导致平衡树进行一次全局的调整。而对跳表的插入和删除只需要对整个数据结构的局部进行操作即可。这样带来的好处是：在高并发的情况下，你会需要一个全局锁来保证整个平衡树的线程安全。而对于跳表，你只需要部分锁即可。这样，在高并发环境下，你就可以拥有更好的性能。而就查询的性能而言，跳表的时间复杂度也是 <strong>O(logn)</strong> 所以在并发数据结构中，JDK 使用跳表来实现一个 Map。</p>
-<p>跳表的本质是同时维护了多个链表，并且链表是分层的。</p>
-<p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/93666217.jpg" alt="2级索引跳表"></p>
-<p>最低层的链表维护了跳表内所有的元素，每上面一层链表都是下面一层的子集。</p>
-<p>跳表内的所有链表的元素都是排序的。查找时，可以从顶级链表开始找。一旦发现被查找的元素大于当前链表中的取值，就会转入下一层链表继续找。这也就是说在查找过程中，搜索是跳跃式的。如上图所示，在跳表中查找元素 18。</p>
-<p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-12-9/32005738.jpg" alt="在跳表中查找元素18"></p>
-<p>查找 18 的时候原来需要遍历 18 次，现在只需要 7 次即可。针对链表长度比较大的时候，构建索引查找效率的提升就会非常明显。</p>
-<p>从上面很容易看出，<strong>跳表是一种利用空间换时间的算法。</strong></p>
-<blockquote>
-<p>Redis中 <strong>zset（sorted set）</strong>就使用到了跳表这种数据结构。</p>
-</blockquote>
-<p>使用跳表实现 Map 和使用哈希算法实现 Map 的另外一个不同之处是：哈希并不会保存元素的顺序，而跳表内所有的元素都是排序的。因此在对跳表进行遍历时，你会得到一个有序的结果。所以，如果你的应用需要有序性，那么跳表就是你不二的选择。JDK 中实现这一数据结构的类是 ConcurrentSkipListMap。</p>
-<h2 id="七-参考"><a href="#七-参考" class="headerlink" title="七 参考"></a>七 参考</h2><ul>
-<li>《实战 Java 高并发程序设计》</li>
-<li><a href="https://javadoop.com/post/java-concurrent-queue" target="_blank" rel="noopener">https://javadoop.com/post/java-concurrent-queue</a></li>
-<li><a href="https://juejin.im/post/5aeebd02518825672f19c546" target="_blank" rel="noopener">https://juejin.im/post/5aeebd02518825672f19c546</a></li>
+<h3 id="RPC调用过程"><a href="#RPC调用过程" class="headerlink" title="RPC调用过程"></a><strong>RPC调用过程</strong></h3><p><img src="https://s1.ax1x.com/2020/04/16/JFconS.jpg" alt="RPC调用过程时序图"></p>
+<ul>
+<li>服务消费方（client）调用以本地调用方式调用服务；</li>
+<li>client stub接收到调用后负责将方法、参数等组装成能够进行网络传输的消息体；</li>
+<li>client stub找到服务地址，并将消息发送到服务端；</li>
+<li>server stub收到消息后进行解码；</li>
+<li>server stub根据解码结果调用本地的服务；</li>
+<li>本地服务执行并将结果返回给server stub；</li>
+<li>server stub将返回结果打包成消息并发送至消费方；</li>
+<li>client stub接收到消息，并进行解码；</li>
+<li>服务消费方得到最终结果。</li>
+</ul>
+<p>下面再贴一个网上的时序图：</p>
+<p><img src="https://s1.ax1x.com/2020/04/16/JFc5X8.png" alt="RPC调用过程时序图"></p>
+<h3 id="RPC框架涉及技术"><a href="#RPC框架涉及技术" class="headerlink" title="RPC框架涉及技术"></a>RPC框架涉及技术</h3><p><strong>建立通信</strong></p>
+<p>​        首先，要解决通讯的问题，主要是通过在客户端和服务器之间建立TCP连接，远程过程调用的所有交换的数据都在这个连接里传输。当前很多RPC框架都直接基于Netty这一IO通信框架，推荐使用Netty 作为底层通信框架。</p>
+<p><strong>网络传输</strong></p>
+<p>​        数据传输采用什么协议（二进制数据格式组织）？</p>
+<p>​        数据该如何序列化和反序列化？(kryo/protobuf/protostuff/hessian/fastjson/…)</p>
+<p><strong>服务寻址</strong></p>
+<ul>
+<li>服务注册：服务提供者启动后主动把服务注册到服务中心，注册中心（如ZooKeeper、Eureka）存储了该服务的IP、端口、调用方式（协议、序列化方式）等信息。</li>
+<li>服务发现：服务消费者第一次调用服务时，会通过注册中心找到相应的服务提供方地址列表，并缓存到本地，以供后续使用。当消费者再次调用服务时，不会再去请求注册中心，而是直接通过负载均衡算法从IP列表中取一个服务提供者的服务器调用服务。</li>
+</ul>
+<p><strong>服务调用</strong></p>
+<p>​        服务消费者进行本地调用（通过动态代理）之后得到了返回值。实际上是在 Proxy 中封装了一系列的过程，包括序列化、请求服务提供者、反序列化等。</p>
+<h3 id="实现高可用RPC框架需要考虑到的问题"><a href="#实现高可用RPC框架需要考虑到的问题" class="headerlink" title="实现高可用RPC框架需要考虑到的问题"></a>实现高可用RPC框架需要考虑到的问题</h3><ul>
+<li>既然系统采用分布式架构，那一个服务势必会有多个实例，要解决如何获取实例的问题？</li>
+<li>如何选择实例呢？就要考虑负载均衡。</li>
+<li>如果每次都去注册中心查询列表，效率很低，那么就要加缓存。</li>
+<li>客户端总不能每次调用完都等着服务端返回数据，所以就要支持异步调用。</li>
+<li>服务端的接口修改了，老的接口还有人在用，这就需要版本控制。</li>
+<li>服务端总不能每次接到请求都马上启动一个线程去处理，于是就需要线程池。</li>
+<li>容器支持，如 Kubernetes 、Docker 等。</li>
+</ul>
+<h3 id="简易的回答思路"><a href="#简易的回答思路" class="headerlink" title="简易的回答思路"></a>简易的回答思路</h3><ul>
+<li>上来你的服务就得去注册中心注册吧，你是不是得有个注册中心，保留各个服务的信息，可以用 Zookeeper 来做，对吧。</li>
+<li>然后你的消费者需要去注册中心拿对应的服务信息吧，对吧，而且每个服务可能会存在于多台机器上。</li>
+<li>接着你就该发起一次请求了，咋发起？当然是基于动态代理了，你面向接口获取到一个动态代理，这个动态代理就是接口在本地的一个代理，然后这个代理会找到服务对应的机器地址。</li>
+<li>然后找哪个机器发送请求？那肯定得有个负载均衡算法了，比如最简单的可以随机轮询是不是。</li>
+<li>接着找到一台机器，就可以跟它发送请求了，第一个问题咋发送？你可以说用 Netty 了，NIO 方式；第二个问题发送啥格式数据？你可以说用 hessian 序列化协议了，或者是别的，对吧。然后请求过去了。</li>
+<li>服务器那边一样的，需要针对你自己的服务生成一个动态代理，监听某个网络端口了，然后代理你本地的服务代码。接收到请求的时候，就调用对应的服务代码，对吧。</li>
 </ul>
 
             </div>
@@ -637,7 +576,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-bing-fa-rong-qi-zong-jie/">https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-bing-fa-rong-qi-zong-jie/</a>
+                    <a href="https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/">https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -675,12 +614,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+                                    <span class="chip bg-color">微服务</span>
                                 </a>
                             
-                                <a href="/tags/%E5%B9%B6%E5%8F%91/">
-                                    <span class="chip bg-color">并发</span>
+                                <a href="/tags/RPC/">
+                                    <span class="chip bg-color">RPC</span>
                                 </a>
                             
                         </div>
@@ -848,9 +787,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/">
                     <div class="card-image">
@@ -869,9 +809,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -884,6 +824,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -906,26 +847,27 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/15/hou-duan/ji-he/java-ji-he-kuang-jia-chang-jian-mian-shi-ti/">
+                <a href="/2020/04/16/hou-duan/bing-fa/java-bing-fa-rong-qi-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Java集合框架常见面试题">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Java并发容器总结">
                         
-                        <span class="card-title">Java集合框架常见面试题</span>
+                        <span class="card-title">Java并发容器总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            剖析面试最常见问题之Java集合框架说说List,Set,Map三者的区别？
-List(对付顺序的好帮手)：List接口存储一组不唯一（可以有多个元素引用相同的对象），有序的对象。
-Set(注重独一无二的性质)： 不允许重复的集合。不会有多
+                            一 JDK 提供的并发容器总结JDK 提供的这些容器大部分在 java.util.concurrent 包中。
+
+ConcurrentHashMap： 线程安全的 HashMap。
+CopyOnWriteArrayList： 线程安全的 L
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
                             </span>
                         <span class="publish-author">
                             
@@ -946,8 +888,8 @@ Set(注重独一无二的性质)： 不允许重复的集合。不会有多
                         <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E9%9B%86%E5%90%88/">
-                        <span class="chip bg-color">集合</span>
+                    <a href="/tags/%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">并发</span>
                     </a>
                     
                 </div>

@@ -6,17 +6,46 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-15T17:15:10.344Z</updated>
+  <updated>2020-04-16T03:54:39.812Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何设计一个RPC框架</title>
+    <link href="https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/"/>
+    <id>https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/</id>
+    <published>2020-04-16T04:36:00.000Z</published>
+    <updated>2020-04-16T03:54:39.812Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;如何设计一个RPC框架？&quot;&gt;&lt;a href=&quot;#如何设计一个RPC框架？&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="框架" scheme="https://www.niewenjun.com/categories/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+      <category term="微服务" scheme="https://www.niewenjun.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+      <category term="RPC" scheme="https://www.niewenjun.com/tags/RPC/"/>
+    
+  </entry>
   
   <entry>
     <title>Java并发容器总结</title>
     <link href="https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-bing-fa-rong-qi-zong-jie/"/>
     <id>https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-bing-fa-rong-qi-zong-jie/</id>
     <published>2020-04-15T16:31:00.000Z</published>
-    <updated>2020-04-15T17:15:10.344Z</updated>
+    <updated>2020-04-16T02:35:33.985Z</updated>
     
     <summary type="html">
     
