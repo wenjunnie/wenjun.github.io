@@ -500,7 +500,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="一-使用线程池的好处"><a href="#一-使用线程池的好处" class="headerlink" title="一 使用线程池的好处"></a>一 使用线程池的好处</h2><blockquote>
-<p><strong>池化技术相比大家已经屡见不鲜了，线程池、数据库连接池、Http 连接池等等都是对这个思想的应用。池化技术的思想主要是为了减少每次获取资源的消耗，提高对资源的利用率。</strong></p>
+<p><strong>池化技术相比大家已经屡见不鲜了，线程池、数据库连接池、Http 连接池等都是对这个思想的应用。池化技术的思想主要是为了减少每次获取资源的消耗，提高对资源的利用率。</strong></p>
 </blockquote>
 <p><strong>线程池</strong>提供了一种限制和管理资源（包括执行一个任务）。每个<strong>线程池</strong>还维护一些基本统计信息，例如已完成任务的数量。</p>
 <p>这里借用《Java 并发编程的艺术》提到的来说一下<strong>使用线程池的好处</strong>：</p>
@@ -574,16 +574,16 @@
 <li><strong><code>maximumPoolSize</code> ：</strong> 当队列中存放的任务达到队列容量的时候，当前可以同时运行的线程数量变为最大线程数。</li>
 <li><strong><code>workQueue</code>：</strong> 当新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，新任务就会被存放在队列中。</li>
 </ul>
-<p><strong><code>ThreadPoolExecutor</code></strong>其他常见参数:</p>
+<p><strong><code>ThreadPoolExecutor</code></strong>其他常见参数：</p>
 <ol>
 <li><strong><code>keepAliveTime</code>：</strong>当线程池中的线程数量大于 <code>corePoolSize</code> 的时候，如果这时没有新的任务提交，核心线程外的线程不会立即销毁，而是会等待，直到等待的时间超过了 <code>keepAliveTime</code>才会被回收销毁；</li>
 <li><strong><code>unit</code>：</strong>  <code>keepAliveTime</code> 参数的时间单位。</li>
 <li><strong><code>threadFactory</code>：</strong> Executor 创建新线程的时候会用到。</li>
 <li><strong><code>handler</code>：</strong> 饱和策略。关于饱和策略下面单独介绍一下。</li>
 </ol>
-<p>下面这张图可以加深你对线程池中各个参数的相互关系的理解（图片来源：《Java 性能调优实战》）：</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%90%84%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB.jpg" alt="线程池各个参数的关系"></p>
-<p><strong><code>ThreadPoolExecutor</code> 饱和策略定义:</strong></p>
+<p>下面这张图可以加深你对线程池中各个参数的相互关系的理解（图片来源：《 Java 性能调优实战》）：</p>
+<p><img src="https://s1.ax1x.com/2020/04/16/JkHFYV.md.jpg" alt="线程池各个参数的关系"></p>
+<p><strong><code>ThreadPoolExecutor</code> 饱和策略定义：</strong></p>
 <p>如果当前同时运行的线程数量达到最大线程数量并且队列也已经被放满了任务时，<code>ThreadPoolTaskExecutor</code> 定义一些策略：</p>
 <ul>
 <li><strong><code>ThreadPoolExecutor.AbortPolicy</code>：</strong>抛出 <code>RejectedExecutionException</code>来拒绝新任务的处理。</li>
@@ -600,7 +600,7 @@
 <blockquote>
 <p><strong>使用线程池的好处是减少在创建和销毁线程上所消耗的时间以及系统资源开销，解决资源不足的问题。如果不使用线程池，有可能会造成系统创建大量同类线程而导致消耗完内存或者“过度切换”的问题。</strong></p>
 </blockquote>
-<p><strong>另外《阿里巴巴 Java 开发手册》中强制线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 构造函数的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险</strong></p>
+<p><strong>另外《阿里巴巴 Java 开发手册》中强制线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 构造函数的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。</strong></p>
 <blockquote>
 <p>Executors 返回线程池对象的弊端如下：</p>
 <ul>
@@ -763,7 +763,7 @@ pool<span class="token operator">-</span><span class="token number">1</span><spa
             <span class="token function">reject</span><span class="token punctuation">(</span>command<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span></code></pre>
 <p>通过下图可以更好的对上面这 3 步做一个展示，下图是我为了省事直接从网上找到，原地址不明。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/%E5%9B%BE%E8%A7%A3%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.png" alt="图解线程池实现原理"></p>
+<p><img src="https://s1.ax1x.com/2020/04/16/JkHiF0.png" alt="图解线程池实现原理"></p>
 <p><strong><code>addWorker()</code> 这个方法主要用来创建新的工作线程，如果返回true说明创建和启动工作线程成功，否则的话返回的就是false。</strong></p>
 <pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">// 全局锁，并发操作必备</span>
     <span class="token keyword">private</span> <span class="token keyword">final</span> ReentrantLock mainLock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1011,14 +1011,14 @@ Wed Nov <span class="token number">13</span> <span class="token number">13</span
 <ol>
 <li>如果当前运行的线程数小于 <strong>corePoolSize</strong>， 如果再来新任务的话，就创建新的线程来执行任务；</li>
 <li>当前运行的线程数等于 <strong>corePoolSize</strong> 后， 如果再来新任务的话，会将任务加入 <code>LinkedBlockingQueue</code>；</li>
-<li>线程池中的线程执行完 手头的任务后，会在循环中反复从 <code>LinkedBlockingQueue</code> 中获取任务来执行；</li>
+<li>线程池中的线程执行完手头的任务后，会在循环中反复从 <code>LinkedBlockingQueue</code> 中获取任务来执行；</li>
 </ol>
 <h4 id="5-1-3-为什么不推荐使用FixedThreadPool？"><a href="#5-1-3-为什么不推荐使用FixedThreadPool？" class="headerlink" title="5.1.3 为什么不推荐使用FixedThreadPool？"></a>5.1.3 为什么不推荐使用<code>FixedThreadPool</code>？</h4><p><strong><code>FixedThreadPool</code> 使用无界队列 <code>LinkedBlockingQueue</code>（队列的容量为 Intger.MAX_VALUE）作为线程池的工作队列会对线程池带来如下影响 ：</strong></p>
 <ol>
 <li>当线程池中的线程数达到 <code>corePoolSize</code> 后，新任务将在无界队列中等待，因此线程池中的线程数不会超过 <code>corePoolSize</code>；</li>
-<li>由于使用无界队列时 <code>maximumPoolSize</code> 将是一个无效参数，因为不可能存在任务队列满的情况。所以，通过创建 <code>FixedThreadPool</code>的源码可以看出创建的 <code>FixedThreadPool</code> 的 <code>corePoolSize</code> 和 <code>maximumPoolSize</code> 被设置为同一个值。</li>
+<li>由于使用无界队列时 <code>maximumPoolSize</code> 将是一个无效参数，因为不可能存在任务队列满的情况。所以，通过创建 <code>FixedThreadPool</code>的源码可以看出创建的 <code>FixedThreadPool</code> 的 <code>corePoolSize</code> 和 <code>maximumPoolSize</code> 被设置为同一个值；</li>
 <li>由于 1 和 2，使用无界队列时 <code>keepAliveTime</code> 将是一个无效参数；</li>
-<li>运行中的 <code>FixedThreadPool</code>（未执行 <code>shutdown()</code>或 <code>shutdownNow()</code>）不会拒绝任务，在任务比较多的时候会导致 OOM（内存溢出）。</li>
+<li>运行中的 <code>FixedThreadPool</code>（未执行 <code>shutdown()</code>或 <code>shutdownNow()</code>）不会拒绝任务，在任务比较多的时候会导致 OOM（内存溢出）；</li>
 </ol>
 <h3 id="5-2-SingleThreadExecutor-详解"><a href="#5-2-SingleThreadExecutor-详解" class="headerlink" title="5.2 SingleThreadExecutor 详解"></a>5.2 SingleThreadExecutor 详解</h3><h4 id="5-2-1-介绍"><a href="#5-2-1-介绍" class="headerlink" title="5.2.1 介绍"></a>5.2.1 介绍</h4><p><code>SingleThreadExecutor</code> 是只有一个线程的线程池。下面看看<strong>SingleThreadExecutor 的实现：</strong></p>
 <pre class=" language-java"><code class="language-java">   <span class="token comment" spellcheck="true">/**
@@ -1045,7 +1045,7 @@ Wed Nov <span class="token number">13</span> <span class="token number">13</span
 <li>当前线程池中有一个运行的线程后，将任务加入 <code>LinkedBlockingQueue</code>；</li>
 <li>线程执行完当前的任务后，会在循环中反复从<code>LinkedBlockingQueue</code> 中获取任务来执行；</li>
 </ol>
-<h4 id="5-2-3-为什么不推荐使用SingleThreadExecutor？"><a href="#5-2-3-为什么不推荐使用SingleThreadExecutor？" class="headerlink" title="5.2.3 为什么不推荐使用SingleThreadExecutor？"></a>5.2.3 为什么不推荐使用<code>SingleThreadExecutor</code>？</h4><p><code>SingleThreadExecutor</code> 使用无界队列 <code>LinkedBlockingQueue</code> 作为线程池的工作队列（队列的容量为 Intger.MAX_VALUE）。<code>SingleThreadExecutor</code> 使用无界队列作为线程池的工作队列会对线程池带来的影响与 <code>FixedThreadPool</code> 相同。说简单点就是可能会导致 OOM，</p>
+<h4 id="5-2-3-为什么不推荐使用SingleThreadExecutor？"><a href="#5-2-3-为什么不推荐使用SingleThreadExecutor？" class="headerlink" title="5.2.3 为什么不推荐使用SingleThreadExecutor？"></a>5.2.3 为什么不推荐使用<code>SingleThreadExecutor</code>？</h4><p><code>SingleThreadExecutor</code> 使用无界队列 <code>LinkedBlockingQueue</code> 作为线程池的工作队列（队列的容量为 Intger.MAX_VALUE）。<code>SingleThreadExecutor</code> 使用无界队列作为线程池的工作队列会对线程池带来的影响与 <code>FixedThreadPool</code> 相同。说简单点就是可能会导致 OOM。</p>
 <h3 id="5-3-CachedThreadPool-详解"><a href="#5-3-CachedThreadPool-详解" class="headerlink" title="5.3 CachedThreadPool 详解"></a>5.3 CachedThreadPool 详解</h3><h4 id="5-3-1-介绍"><a href="#5-3-1-介绍" class="headerlink" title="5.3.1 介绍"></a>5.3.1 介绍</h4><p><code>CachedThreadPool</code> 是一个会根据需要创建新线程的线程池。下面通过源码来看看 <code>CachedThreadPool</code> 的实现：</p>
 <pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
      * 创建一个线程池，根据需要创建新线程，但会在先前构建的线程可用时重用它。
@@ -1066,7 +1066,7 @@ Wed Nov <span class="token number">13</span> <span class="token number">13</span
 <p><strong>上图说明：</strong></p>
 <ol>
 <li>首先执行 <code>SynchronousQueue.offer(Runnable task)</code> 提交任务到任务队列。如果当前 <code>maximumPool</code> 中有空闲线程正在执行 <code>SynchronousQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS)</code>，那么主线程执行 offer 操作与空闲线程执行的 <code>poll</code> 操作配对成功，主线程把任务交给空闲线程执行，<code>execute()</code>方法执行完成，否则执行下面的步骤 2；</li>
-<li>当初始 <code>maximumPool</code> 为空，或者 <code>maximumPool</code> 中没有空闲线程时，将没有线程执行 <code>SynchronousQueue.poll(keepAliveTime,TimeUnit.NANOSECONDS)</code>。这种情况下，步骤 1 将失败，此时 <code>CachedThreadPool</code> 会创建新线程执行任务，<code>execute()</code> 方法执行完成；</li>
+<li>当初始 <code>maximumPool</code> 为空，或者 <code>maximumPool</code> 中没有空闲线程时，将没有线程执行 <code>SynchronousQueue.poll(keepAliveTime,TimeUnit.NANOSECONDS)</code>。这种情况下，步骤 1 将失败，此时 <code>CachedThreadPool</code> 会创建新线程执行任务，<code>execute()</code> 方法执行完成。</li>
 </ol>
 <h4 id="5-3-3-为什么不推荐使用CachedThreadPool？"><a href="#5-3-3-为什么不推荐使用CachedThreadPool？" class="headerlink" title="5.3.3 为什么不推荐使用CachedThreadPool？"></a>5.3.3 为什么不推荐使用<code>CachedThreadPool</code>？</h4><p><code>CachedThreadPool</code>允许创建的线程数量为 Integer.MAX_VALUE ，可能会创建大量线程，从而导致 OOM。</p>
 <h2 id="六-ScheduledThreadPoolExecutor-详解"><a href="#六-ScheduledThreadPoolExecutor-详解" class="headerlink" title="六 ScheduledThreadPoolExecutor 详解"></a>六 ScheduledThreadPoolExecutor 详解</h2><p><strong><code>ScheduledThreadPoolExecutor</code> 主要用来在给定的延迟后运行任务，或者定期执行任务。</strong> 这个在实际项目中基本不会被用到，所以对这部分大家只需要简单了解一下它的思想。关于如何在 Spring Boot 中 实现定时任务，可以查看这篇文章<a href="https://github.com/Snailclimb/springboot-guide/blob/master/docs/advanced/SpringBoot-ScheduleTasks.md" target="_blank" rel="noopener">《5 分钟搞懂如何在 Spring Boot 中 Schedule Tasks》</a>。</p>
@@ -1382,9 +1382,9 @@ Wed Nov <span class="token number">13</span> <span class="token number">13</span
                     <div class="summary block-with-text">
                         
                             一 使用线程池的好处
-池化技术相比大家已经屡见不鲜了，线程池、数据库连接池、Http 连接池等等都是对这个思想的应用。池化技术的思想主要是为了减少每次获取资源的消耗，提高对资源的利用率。
+池化技术相比大家已经屡见不鲜了，线程池、数据库连接池、Http 连接池等都是对这个思想的应用。池化技术的思想主要是为了减少每次获取资源的消耗，提高对资源的利用率。
 
-线程池提供了一种限制和管理资源（包括执行一个任务）
+线程池提供了一种限制和管理资源（包括执行一个任务）。
                         
                     </div>
                     <div class="publish-info">
