@@ -6,17 +6,46 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-16T03:54:39.812Z</updated>
+  <updated>2020-04-16T08:15:28.496Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java线程池学习总结</title>
+    <link href="https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-xian-cheng-chi-xue-xi-zong-jie/"/>
+    <id>https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-xian-cheng-chi-xue-xi-zong-jie/</id>
+    <published>2020-04-16T07:31:00.000Z</published>
+    <updated>2020-04-16T08:15:28.496Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;一-使用线程池的好处&quot;&gt;&lt;a href=&quot;#一-使用线程池的好处&quot; class=&quot;headerlink&quot; title=&quot;一 使用线程池的好处&quot;&gt;&lt;/a&gt;一
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>如何设计一个RPC框架</title>
     <link href="https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/"/>
     <id>https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/</id>
     <published>2020-04-16T04:36:00.000Z</published>
-    <updated>2020-04-16T03:54:39.812Z</updated>
+    <updated>2020-04-16T04:06:48.782Z</updated>
     
     <summary type="html">
     
