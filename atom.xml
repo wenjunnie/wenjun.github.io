@@ -6,10 +6,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-16T08:45:26.836Z</updated>
+  <updated>2020-04-16T09:20:42.059Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>乐观锁与悲观锁</title>
+    <link href="https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/le-guan-suo-yu-bei-guan-suo/"/>
+    <id>https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/le-guan-suo-yu-bei-guan-suo/</id>
+    <published>2020-04-16T09:03:00.000Z</published>
+    <updated>2020-04-16T09:20:42.059Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;何谓乐观锁与悲观锁&quot;&gt;&lt;a href=&quot;#何谓乐观锁与悲观锁&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Java线程池学习总结</title>
