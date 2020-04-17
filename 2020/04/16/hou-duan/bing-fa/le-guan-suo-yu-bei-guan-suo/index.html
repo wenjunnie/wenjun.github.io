@@ -517,13 +517,13 @@
 <li>操作员 B 完成了操作，也将版本号加一（ version=2 ）试图向数据库提交数据（ balance=$80 ），但此时比对数据库记录版本时发现，操作员 B 提交的数据版本号为 2 ，数据库记录当前版本也为 2 ，不满足 “ 提交版本必须大于记录当前版本才能执行更新 “ 的乐观锁策略，因此，操作员 B 的提交被驳回。</li>
 </ol>
 <p>这样，就避免了操作员 B 用基于 version=1 的旧数据修改的结果覆盖操作员 A 的操作结果的可能。</p>
-<h4 id="2-CAS算法"><a href="#2-CAS算法" class="headerlink" title="2. CAS算法"></a>2. CAS算法</h4><p>即<strong>compare and swap（比较与交换）</strong>，是一种有名的<strong>无锁算法</strong>。无锁编程，即不使用锁的情况下实现多线程之间的变量同步，也就是在没有线程被阻塞的情况下实现变量的同步，所以也叫非阻塞同步（Non-blocking Synchronization）。<strong>CAS 算法</strong>涉及到三个操作数：</p>
+<h4 id="2-CAS算法"><a href="#2-CAS算法" class="headerlink" title="2. CAS算法"></a>2. CAS算法</h4><p>即 <strong>Compare and Swap（比较与交换）</strong>，是一种有名的<strong>无锁算法</strong>。无锁编程，即不使用锁的情况下实现多线程之间的变量同步，也就是在没有线程被阻塞的情况下实现变量的同步，所以也叫非阻塞同步（Non-blocking Synchronization）。<strong>CAS 算法</strong>涉及到三个操作数：</p>
 <ul>
 <li>需要读写的内存值 V </li>
 <li>进行比较的值 A </li>
 <li>拟写入的新值 B</li>
 </ul>
-<p>当且仅当 V 的值等于 A 时，CAS 通过原子方式用新值 B 来更新 V 的值，否则不会执行任何操作（比较和替换是一个原子操作）。一般情况下是一个<strong>自旋操作</strong>，即<strong>不断的重试（默认重试10次，每次重试时间依据先前线程决定）</strong>。</p>
+<p>当且仅当 V 的值等于 A 时，CAS 通过原子方式用新值 B 来更新 V 的值，否则不会执行任何操作（比较和替换是一个原子操作）。一般情况下是一个<strong>自旋操作</strong>，即<strong>不断的重试（默认重试 10 次，每次重试时间依据先前线程决定）</strong>。</p>
 <p>关于自旋锁，大家可以看一下这篇文章，非常不错：<a href="https://blog.csdn.net/qq_34337272/article/details/81252853" target="_blank" rel="noopener">《<br>面试必备之深入理解自旋锁》</a></p>
 <h3 id="乐观锁的缺点"><a href="#乐观锁的缺点" class="headerlink" title="乐观锁的缺点"></a>乐观锁的缺点</h3><blockquote>
 <p> ABA 问题是乐观锁一个常见的问题。</p>

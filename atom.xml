@@ -6,17 +6,49 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-17T09:56:03.176Z</updated>
+  <updated>2020-04-17T14:40:49.262Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AQS总结</title>
+    <link href="https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/aqs-zong-jie/"/>
+    <id>https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/aqs-zong-jie/</id>
+    <published>2020-04-17T14:26:00.000Z</published>
+    <updated>2020-04-17T14:40:49.262Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;常见问题：AQS 原理？CountDownLatch 和 CyclicBarrier 了解吗，两者的区别是什么？用过 Semaphore 吗？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;1-AQS-简单介绍&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Atomic原子类总结</title>
     <link href="https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/atomic-yuan-zi-lei-zong-jie/"/>
     <id>https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/atomic-yuan-zi-lei-zong-jie/</id>
     <published>2020-04-17T09:48:00.000Z</published>
-    <updated>2020-04-17T09:56:03.176Z</updated>
+    <updated>2020-04-17T14:30:52.803Z</updated>
     
     <summary type="html">
     
@@ -45,7 +77,7 @@
     <link href="https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/synchronized/"/>
     <id>https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/synchronized/</id>
     <published>2020-04-17T03:03:00.000Z</published>
-    <updated>2020-04-17T09:21:21.817Z</updated>
+    <updated>2020-04-17T14:17:06.204Z</updated>
     
     <summary type="html">
     
@@ -53,7 +85,7 @@
       
         
         
-          &lt;p&gt;&lt;img src=&quot;https://s1.ax1x.com/2020/04/17/JVzVrq.md.png&quot; alt=&quot;Synchronized 关键字使用、底层原理、JDK1.6 之后的底层优化以及和 ReentrantLock 的对比&quot;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img src=&quot;https://s1.ax1x.com/2020/04/17/JVzVrq.png&quot; alt=&quot;Synchronized 关键字使用、底层原理、JDK1.6 之后的底层优化以及和 ReentrantLock 的对比&quot;&gt;&lt;/p&gt;
 &lt;h3
         
       
@@ -75,7 +107,7 @@
     <link href="https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/le-guan-suo-yu-bei-guan-suo/"/>
     <id>https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/le-guan-suo-yu-bei-guan-suo/</id>
     <published>2020-04-16T09:03:00.000Z</published>
-    <updated>2020-04-16T09:20:42.059Z</updated>
+    <updated>2020-04-17T14:11:02.686Z</updated>
     
     <summary type="html">
     

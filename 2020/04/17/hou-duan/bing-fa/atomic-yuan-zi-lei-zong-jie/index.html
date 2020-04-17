@@ -502,7 +502,7 @@
                 <h3 id="1-Atomic-原子类介绍"><a href="#1-Atomic-原子类介绍" class="headerlink" title="1 Atomic 原子类介绍"></a>1 Atomic 原子类介绍</h3><p><strong>Atomic</strong> 翻译成中文是原子的意思。在化学上，我们知道原子是构成一般物质的最小单位，在化学反应中是不可分割的。在我们这里 <strong>Atomic</strong> 是指一个操作是不可中断的。即使是在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程干扰。</p>
 <p>所以，所谓原子类说简单点就是具有原子/原子操作特征的类。</p>
 <p>并发包 <code>java.util.concurrent</code> 的原子类都存放在 <code>java.util.concurrent.atomic</code> 下，如下图所示。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/JUC%E5%8E%9F%E5%AD%90%E7%B1%BB%E6%A6%82%E8%A7%88.png" alt="JUC原子类概览"></p>
+<p><img src="https://s1.ax1x.com/2020/04/17/JZ53CV.png" alt="JUC 原子类概览"></p>
 <p>根据操作的数据类型，可以将 JUC 包中的原子类分为 4 类。</p>
 <p><strong>基本类型</strong> </p>
 <p>使用原子的方式更新基本类型</p>
@@ -1193,30 +1193,32 @@ currentValue<span class="token operator">=</span><span class="token boolean">tru
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/17/hou-duan/bing-fa/atomic-yuan-zi-lei-zong-jie/">
+                <a href="/2020/04/17/hou-duan/bing-fa/aqs-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Atomic原子类总结">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="AQS总结">
                         
-                        <span class="card-title">Atomic原子类总结</span>
+                        <span class="card-title">AQS总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1 Atomic 原子类介绍Atomic 翻译成中文是原子的意思。在化学上，我们知道原子是构成一般物质的最小单位，在化学反应中是不可分割的。在我们这里 Atomic 是指一个操作是不可中断的。即使是在多个线程一起执行的时候，一个操作一旦开始
+                            
+常见问题：AQS 原理？CountDownLatch 和 CyclicBarrier 了解吗，两者的区别是什么？用过 Semaphore 吗？
+
+1 AQS 简单介绍AQS 的全称为（AbstractQueuedSynchronizer）
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-17
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1229,7 +1231,6 @@ currentValue<span class="token operator">=</span><span class="token boolean">tru
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
