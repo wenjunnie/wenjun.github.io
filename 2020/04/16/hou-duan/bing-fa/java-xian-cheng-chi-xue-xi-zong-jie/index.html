@@ -514,8 +514,8 @@
 <p>补充：this 逃逸是指在构造函数返回之前其他线程就持有该对象的引用，调用尚未构造完全的对象的方法可能引发令人疑惑的错误。</p>
 </blockquote>
 <p>Executor 框架不仅包括了线程池的管理，还提供了线程工厂、队列以及拒绝策略等，Executor 框架让并发编程变得更加简单。</p>
-<h3 id="2-2-Executor-框架结构-主要由三大部分组成"><a href="#2-2-Executor-框架结构-主要由三大部分组成" class="headerlink" title="2.2 Executor 框架结构(主要由三大部分组成)"></a>2.2 Executor 框架结构(主要由三大部分组成)</h3><h4 id="1-任务-Runnable-Callable"><a href="#1-任务-Runnable-Callable" class="headerlink" title="1) 任务(Runnable /Callable)"></a>1) 任务(<code>Runnable</code> /<code>Callable</code>)</h4><p>执行任务需要实现的 <strong><code>Runnable</code> 接口</strong> 或 <strong><code>Callable</code>接口</strong>。<strong><code>Runnable</code> 接口</strong>或 <strong><code>Callable</code> 接口</strong> 实现类都可以被 <strong><code>ThreadPoolExecutor</code></strong> 或 <strong><code>ScheduledThreadPoolExecutor</code></strong> 执行。</p>
-<h4 id="2-任务的执行-Executor"><a href="#2-任务的执行-Executor" class="headerlink" title="2) 任务的执行(Executor)"></a>2) 任务的执行(<code>Executor</code>)</h4><p>如下图所示，包括任务执行机制的核心接口 <strong><code>Executor</code></strong> ，以及继承自 <strong><code>Executor</code></strong> 接口的 <strong><code>ExecutorService</code> 接口。<code>ThreadPoolExecutor</code></strong> 和 <strong><code>ScheduledThreadPoolExecutor</code></strong> 这两个关键类实现了 <strong><code>ExecutorService</code></strong> 接口。</p>
+<h3 id="2-2-Executor-框架结构（主要由三大部分组成）"><a href="#2-2-Executor-框架结构（主要由三大部分组成）" class="headerlink" title="2.2 Executor 框架结构（主要由三大部分组成）"></a>2.2 Executor 框架结构（主要由三大部分组成）</h3><h4 id="1-任务（Runnable-Callable）"><a href="#1-任务（Runnable-Callable）" class="headerlink" title="1) 任务（Runnable /Callable）"></a>1) 任务（<code>Runnable</code> /<code>Callable</code>）</h4><p>执行任务需要实现的 <strong><code>Runnable</code> 接口</strong> 或 <strong><code>Callable</code>接口</strong>。<strong><code>Runnable</code> 接口</strong>或 <strong><code>Callable</code> 接口</strong> 实现类都可以被 <strong><code>ThreadPoolExecutor</code></strong> 或 <strong><code>ScheduledThreadPoolExecutor</code></strong> 执行。</p>
+<h4 id="2-任务的执行（Executor）"><a href="#2-任务的执行（Executor）" class="headerlink" title="2) 任务的执行（Executor）"></a>2) 任务的执行（<code>Executor</code>）</h4><p>如下图所示，包括任务执行机制的核心接口 <strong><code>Executor</code></strong> ，以及继承自 <strong><code>Executor</code></strong> 接口的 <strong><code>ExecutorService</code> 接口。<code>ThreadPoolExecutor</code></strong> 和 <strong><code>ScheduledThreadPoolExecutor</code></strong> 这两个关键类实现了 <strong><code>ExecutorService</code></strong> 接口。</p>
 <p><strong>这里提了很多底层的类关系，但是，实际上我们需要更多关注的是 <code>ThreadPoolExecutor</code> 这个类，这个类在我们实际使用线程池的过程中，使用频率还是非常高的。</strong></p>
 <blockquote>
 <p><strong>注意：</strong> 通过查看 <code>ScheduledThreadPoolExecutor</code> 源代码我们发现 <code>ScheduledThreadPoolExecutor</code> 实际上是继承了 <code>ThreadPoolExecutor</code> 并实现了 <code>ScheduledExecutorService</code> ，而 <code>ScheduledExecutorService</code> 又实现了 <code>ExecutorService</code>，正如我们下面给出的类关系图显示的一样。</p>
@@ -523,13 +523,13 @@
 <p><strong><code>ThreadPoolExecutor</code> 类描述:</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//AbstractExecutorService实现了ExecutorService接口</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadPoolExecutor</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractExecutorService</span></code></pre>
-<p><strong><code>ScheduledThreadPoolExecutor</code> 类描述:</strong></p>
+<p><strong><code>ScheduledThreadPoolExecutor</code> 类描述：</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//ScheduledExecutorService实现了ExecutorService接口</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ScheduledThreadPoolExecutor</span>
         <span class="token keyword">extends</span> <span class="token class-name">ThreadPoolExecutor</span>
         <span class="token keyword">implements</span> <span class="token class-name">ScheduledExecutorService</span></code></pre>
 <p><img src="https://s1.ax1x.com/2020/04/16/JkJShQ.jpg" alt="任务的执行相关接口"></p>
-<h4 id="3-异步计算的结果-Future"><a href="#3-异步计算的结果-Future" class="headerlink" title="3) 异步计算的结果(Future)"></a>3) 异步计算的结果(<code>Future</code>)</h4><p><strong><code>Future</code></strong> 接口以及 <strong><code>Future</code></strong> 接口的实现类 <strong><code>FutureTask</code></strong> 类都可以代表异步计算的结果。</p>
+<h4 id="3-异步计算的结果（Future）"><a href="#3-异步计算的结果（Future）" class="headerlink" title="3) 异步计算的结果（Future）"></a>3) 异步计算的结果（<code>Future</code>）</h4><p><strong><code>Future</code></strong> 接口以及 <strong><code>Future</code></strong> 接口的实现类 <strong><code>FutureTask</code></strong> 类都可以代表异步计算的结果。</p>
 <p>当我们把 <strong><code>Runnable</code>接口</strong> 或 <strong><code>Callable</code> 接口</strong> 的实现类提交给 <strong><code>ThreadPoolExecutor</code></strong> 或 <strong><code>ScheduledThreadPoolExecutor</code></strong> 执行。（调用 <strong><code>submit()</code></strong> 方法时会返回一个 <strong><code>FutureTask</code></strong> 对象）</p>
 <h3 id="2-3-Executor-框架的使用示意图"><a href="#2-3-Executor-框架的使用示意图" class="headerlink" title="2.3 Executor 框架的使用示意图"></a>2.3 Executor 框架的使用示意图</h3><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC01LTMwLzg0ODIzMzMwLmpwZw?x-oss-process=image/format,png" alt="Executor 框架的使用示意图"></p>
 <ol>
@@ -538,7 +538,7 @@
 <li><strong>如果执行 <code>ExecutorService.submit(…)</code>，<code>ExecutorService</code> 将返回一个实现<code>Future</code>接口的对象</strong>（我们刚刚也提到过了执行 <code>execute()</code>方法和 <code>submit()</code>方法的区别，<code>submit()</code>会返回一个 <code>FutureTask</code> 对象）。由于 FutureTask 实现了 <code>Runnable</code>，我们也可以创建 <code>FutureTask</code>，然后直接交给 <code>ExecutorService</code> 执行。</li>
 <li><strong>最后，主线程可以执行 <code>FutureTask.get()</code>方法来等待任务执行完成。主线程也可以执行 <code>FutureTask.cancel(boolean mayInterruptIfRunning)</code>来取消此任务的执行。</strong></li>
 </ol>
-<h2 id="三-重要-ThreadPoolExecutor-类简单介绍"><a href="#三-重要-ThreadPoolExecutor-类简单介绍" class="headerlink" title="三 (重要)ThreadPoolExecutor 类简单介绍"></a>三 (重要)ThreadPoolExecutor 类简单介绍</h2><p><strong>线程池实现类 <code>ThreadPoolExecutor</code> 是 <code>Executor</code> 框架最核心的类。</strong></p>
+<h2 id="三-ThreadPoolExecutor-类简单介绍（重要）"><a href="#三-ThreadPoolExecutor-类简单介绍（重要）" class="headerlink" title="三 ThreadPoolExecutor 类简单介绍（重要）"></a>三 ThreadPoolExecutor 类简单介绍（重要）</h2><p><strong>线程池实现类 <code>ThreadPoolExecutor</code> 是 <code>Executor</code> 框架最核心的类。</strong></p>
 <h3 id="3-1-ThreadPoolExecutor-类分析"><a href="#3-1-ThreadPoolExecutor-类分析" class="headerlink" title="3.1 ThreadPoolExecutor 类分析"></a>3.1 ThreadPoolExecutor 类分析</h3><p><code>ThreadPoolExecutor</code> 类中提供的四个构造方法。我们来看最长的那个，其余三个都是在这个构造方法的基础上产生（其他几个构造方法说白点都是给定某些默认参数的构造方法，比如默认制定拒绝策略是什么），这里就不贴代码讲了，比较简单。</p>
 <pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
      * 用给定的初始参数创建一个新的ThreadPoolExecutor。
@@ -614,9 +614,9 @@
 <li><strong>SingleThreadExecutor</strong></li>
 <li><strong>CachedThreadPool</strong></li>
 </ul>
-<p>对应 Executors 工具类中的方法如图所示：<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzEzMjk2OTAxLmpwZw?x-oss-process=image/format,png" alt="通过Executor 框架的工具类Executors来实现"></p>
-<h2 id="四-重要-ThreadPoolExecutor-使用示例"><a href="#四-重要-ThreadPoolExecutor-使用示例" class="headerlink" title="四 (重要)ThreadPoolExecutor 使用示例"></a>四 (重要)ThreadPoolExecutor 使用示例</h2><p>我们上面讲解了 <code>Executor</code>框架以及 <code>ThreadPoolExecutor</code> 类，下面让我们实战一下，来通过写一个 <code>ThreadPoolExecutor</code> 的小 Demo 来回顾上面的内容。</p>
-<h3 id="4-1-示例代码-Runnable-ThreadPoolExecutor"><a href="#4-1-示例代码-Runnable-ThreadPoolExecutor" class="headerlink" title="4.1 示例代码:Runnable+ThreadPoolExecutor"></a>4.1 示例代码:<code>Runnable</code>+<code>ThreadPoolExecutor</code></h3><p>首先创建一个 <code>Runnable</code> 接口的实现类（当然也可以是 <code>Callable</code> 接口，我们上面也说了两者的区别。）</p>
+<p>对应 Executors 工具类中的方法如图所示：<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzEzMjk2OTAxLmpwZw?x-oss-process=image/format,png" alt="Executor 框架的工具类"></p>
+<h2 id="四-ThreadPoolExecutor-使用示例（重要）"><a href="#四-ThreadPoolExecutor-使用示例（重要）" class="headerlink" title="四 ThreadPoolExecutor 使用示例（重要）"></a>四 ThreadPoolExecutor 使用示例（重要）</h2><p>我们上面讲解了 <code>Executor</code>框架以及 <code>ThreadPoolExecutor</code> 类，下面让我们实战一下，来通过写一个 <code>ThreadPoolExecutor</code> 的小 Demo 来回顾上面的内容。</p>
+<h3 id="4-1-示例代码：Runnable-ThreadPoolExecutor"><a href="#4-1-示例代码：Runnable-ThreadPoolExecutor" class="headerlink" title="4.1 示例代码：Runnable+ThreadPoolExecutor"></a>4.1 示例代码：<code>Runnable</code>+<code>ThreadPoolExecutor</code></h3><p>首先创建一个 <code>Runnable</code> 接口的实现类（当然也可以是 <code>Callable</code> 接口，我们上面也说了两者的区别。）</p>
 <p><code>MyRunnable.java</code></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Date<span class="token punctuation">;</span>
 
@@ -891,10 +891,10 @@ pool<span class="token operator">-</span><span class="token number">1</span><spa
     V <span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h4 id="4-3-2-execute-vs-submit"><a href="#4-3-2-execute-vs-submit" class="headerlink" title="4.3.2 execute() vs submit()"></a>4.3.2 <code>execute()</code> vs <code>submit()</code></h4><ol>
-<li><strong><code>execute()</code>方法用于提交不需要返回值的任务，所以无法判断任务是否被线程池执行成功与否；</strong></li>
-<li><strong><code>submit()</code>方法用于提交需要返回值的任务。线程池会返回一个 <code>Future</code> 类型的对象，通过这个 <code>Future</code> 对象可以判断任务是否执行成功</strong>，并且可以通过 <code>Future</code> 的 <code>get()</code>方法来获取返回值，<code>get()</code>方法会阻塞当前线程直到任务完成，而使用 <code>get(long timeout, TimeUnit unit)</code>方法则会阻塞当前线程一段时间后立即返回，这时候有可能任务没有执行完。</li>
+<li><strong><code>execute()</code> 方法用于提交不需要返回值的任务，所以无法判断任务是否被线程池执行成功与否；</strong></li>
+<li><strong><code>submit()</code>方法用于提交需要返回值的任务。线程池会返回一个 <code>Future</code> 类型的对象，通过这个 <code>Future</code> 对象可以判断任务是否执行成功</strong>，并且可以通过 <code>Future</code> 的 <code>get()</code> 方法来获取返回值，<code>get()</code> 方法会阻塞当前线程直到任务完成，而使用 <code>get(long timeout, TimeUnit unit)</code> 方法则会阻塞当前线程一段时间后立即返回，这时候有可能任务没有执行完。</li>
 </ol>
-<p>我们以<strong><code>AbstractExecutorService</code></strong>接口中的一个 <code>submit()</code> 方法为例子来看看源代码：</p>
+<p>我们以 <strong>AbstractExecutorService</strong> 接口中的一个 <code>submit()</code> 方法为例子来看看源代码：</p>
 <pre class=" language-java"><code class="language-java">    <span class="token keyword">public</span> Future<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> <span class="token function">submit</span><span class="token punctuation">(</span>Runnable task<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>task <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         RunnableFuture<span class="token operator">&lt;</span>Void<span class="token operator">></span> ftask <span class="token operator">=</span> <span class="token function">newTaskFor</span><span class="token punctuation">(</span>task<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -917,7 +917,7 @@ pool<span class="token operator">-</span><span class="token number">1</span><spa
 <li><strong><code>isShutDown()</code></strong> 当调用 <code>shutdown()</code> 方法后返回为 true。</li>
 <li><strong><code>isTerminated()</code></strong> 当调用 <code>shutdown()</code> 方法后，并且所有提交的任务完成后返回为 true。</li>
 </ul>
-<h3 id="4-4-加餐-Callable-ThreadPoolExecutor示例代码"><a href="#4-4-加餐-Callable-ThreadPoolExecutor示例代码" class="headerlink" title="4.4 加餐:Callable+ThreadPoolExecutor示例代码"></a>4.4 加餐:<code>Callable</code>+<code>ThreadPoolExecutor</code>示例代码</h3><p><code>MyCallable.java</code></p>
+<h3 id="4-4-加餐：Callable-ThreadPoolExecutor示例代码"><a href="#4-4-加餐：Callable-ThreadPoolExecutor示例代码" class="headerlink" title="4.4 加餐：Callable+ThreadPoolExecutor示例代码"></a>4.4 加餐：<code>Callable</code>+<code>ThreadPoolExecutor</code>示例代码</h3><p><code>MyCallable.java</code></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>Callable<span class="token punctuation">;</span>
 
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyCallable</span> <span class="token keyword">implements</span> <span class="token class-name">Callable</span><span class="token operator">&lt;</span>String<span class="token operator">></span> <span class="token punctuation">{</span>

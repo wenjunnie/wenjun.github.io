@@ -499,11 +499,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
+                <p><img src="https://s1.ax1x.com/2020/04/18/Jmw9zt.png" alt="AQS 原理以及 AQS 同步组件总结"></p>
+<blockquote>
 <p>常见问题：AQS 原理？CountDownLatch 和 CyclicBarrier 了解吗，两者的区别是什么？用过 Semaphore 吗？</p>
 </blockquote>
 <h3 id="1-AQS-简单介绍"><a href="#1-AQS-简单介绍" class="headerlink" title="1 AQS 简单介绍"></a>1 AQS 简单介绍</h3><p>AQS 的全称为（AbstractQueuedSynchronizer），这个类在 java.util.concurrent.locks 包下面。</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/Java%20%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%A4%87%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93/AQS.png" alt="AQS 概览"></p>
+<p><img src="https://s1.ax1x.com/2020/04/17/JZHTBD.png" alt="AQS 概览"></p>
 <p>AQS 是一个用来构建锁和同步器的框架，使用 AQS 能简单且高效地构造出应用广泛的大量的同步器，比如我们提到的 <strong>ReentrantLock</strong>，<strong>Semaphore</strong>，其他的诸如 <strong>ReentrantReadWriteLock</strong>，<strong>SynchronousQueue</strong>，<strong>FutureTask（jdk 1.7）</strong>等等皆是基于 AQS 的。当然，我们自己也能利用 AQS 非常轻松容易地构造出符合我们自己需求的同步器。</p>
 <h3 id="2-AQS-原理"><a href="#2-AQS-原理" class="headerlink" title="2 AQS 原理"></a>2 AQS 原理</h3><blockquote>
 <p>在面试中被问到并发知识的时候，大多都会被问到“请你说一下自己对于 AQS 原理的理解”。下面给大家一个示例供大家参考，面试不是背题，大家一定要加入自己的思想，即使加入不了自己的思想也要保证自己能够通俗的讲出来而不是背出来。</p>
@@ -514,7 +515,7 @@
 <p>CLH（Craig, Landin, and Hagersten）队列是一个虚拟的双向队列（虚拟的双向队列即不存在队列实例，仅存在结点之间的关联关系）。AQS 是将每条请求共享资源的线程封装成一个 CLH 锁队列的一个结点（Node）来实现锁的分配。</p>
 </blockquote>
 <p>看个 AQS（AbstractQueuedSynchronizer）原理图：</p>
-<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/Java%20%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%A4%87%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93/CLH.png" alt="AQS 原理图"></p>
+<p><img src="https://s1.ax1x.com/2020/04/17/JZH7He.md.png" alt="AQS 原理图"></p>
 <p>AQS 使用一个 int 成员变量来表示同步状态，通过内置的 FIFO 队列来完成获取资源线程的排队工作。AQS 使用 <strong>CAS</strong> 对该同步状态进行原子操作实现对其值的修改。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">int</span> state<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//共享变量，使用volatile修饰保证线程可见性</span></code></pre>
 <p>状态信息通过 protected 类型的 <code>getState</code>，<code>setState</code>，<code>compareAndSetState</code> 进行操作。</p>
@@ -627,10 +628,10 @@
 <span class="token punctuation">}</span></code></pre>
 <p>总结：公平锁和非公平锁只有两处不同：</p>
 <ol>
-<li>非公平锁在调用 lock 后，首先就会调用 CAS 进行一次抢锁，如果这个时候恰巧锁没有被占用，那么直接就获取到锁返回了。</li>
-<li>非公平锁在 CAS 失败后，和公平锁一样都会进入到 <code>tryAcquire()</code> 方法，在 <code>tryAcquire()</code> 方法中，如果发现锁这个时候被释放了（<strong>state == 0</strong>），非公平锁会直接 CAS 抢锁，但是公平锁会判断等待队列是否有线程处于等待状态，如果有则不去抢锁，乖乖排到后面。</li>
+<li>非公平锁在调用 <code>lock()</code> 后，首先就会调用 <strong>CAS</strong> 进行一次抢锁，如果这个时候恰巧锁没有被占用，那么直接就获取到锁返回了。</li>
+<li>非公平锁在 <strong>CAS</strong> 失败后，和公平锁一样都会进入到 <code>tryAcquire()</code> 方法，在 <code>tryAcquire()</code> 方法中，如果发现锁这个时候被释放了（<strong>state == 0</strong>），非公平锁会直接 CAS 抢锁，但是公平锁会判断等待队列是否有线程处于等待状态，如果有则不去抢锁，乖乖排到后面。</li>
 </ol>
-<p>公平锁和非公平锁就这两点区别，如果这两次 CAS 都不成功，那么后面非公平锁和公平锁是一样的，都要进入到阻塞队列等待唤醒。</p>
+<p>公平锁和非公平锁就这两点区别，如果这两次 <strong>CAS</strong> 都不成功，那么后面非公平锁和公平锁是一样的，都要进入到阻塞队列等待唤醒。</p>
 <p>相对来说，非公平锁会有更好的性能，因为它的吞吐量比较大。当然，非公平锁让获取锁的时间变得更加不确定，可能会导致在阻塞队列中的线程长期处于饥饿状态。</p>
 <p><strong>2) Share</strong>（共享）</p>
 <p>多个线程可同时执行，如 Semaphore/CountDownLatch。Semaphore、CountDownLatCh、 CyclicBarrier、ReadWriteLock 我们都会在后面讲到。</p>
@@ -1250,33 +1251,30 @@ threadnum<span class="token operator">:</span>7is finish
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/17/hou-duan/bing-fa/aqs-zong-jie/">
+                <a href="/2020/04/18/hou-duan/bing-fa/java-bing-fa-ji-chu-chang-jian-mian-shi-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="AQS总结">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Java并发基础常见面试题">
                         
-                        <span class="card-title">AQS总结</span>
+                        <span class="card-title">Java并发基础常见面试题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-常见问题：AQS 原理？CountDownLatch 和 CyclicBarrier 了解吗，两者的区别是什么？用过 Semaphore 吗？
-
-1 AQS 简单介绍AQS 的全称为（AbstractQueuedSynchronizer）
+                            Java 并发基础常见面试题总结1. 什么是线程和进程？1.1. 何为进程？进程是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。
+在 Java 中，当我们启动 main
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-18
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1289,7 +1287,6 @@ threadnum<span class="token operator">:</span>7is finish
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
