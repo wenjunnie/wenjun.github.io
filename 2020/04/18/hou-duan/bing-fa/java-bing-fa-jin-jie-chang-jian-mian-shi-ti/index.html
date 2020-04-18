@@ -700,7 +700,7 @@ ThreadLocal<span class="token punctuation">.</span>ThreadLocalMap inheritableThr
  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span></code></pre>
 <p>比如我们在同一个线程中声明了两个 <code>ThreadLocal</code> 对象的话，会使用 <code>Thread</code> 内部仅有的那个 <code>ThreadLocalMap</code> 存放数据的，<code>ThreadLocalMap</code> 的 key 就是 <code>ThreadLocal</code> 对象，value 就是 <code>ThreadLocal</code> 对象调用 <code>set</code> 方法设置的值。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/7432604-ad2ff581127ba8cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/806" alt="ThreadLocal 数据结构"></p>
+<p><img src="https://s1.ax1x.com/2020/04/18/JmBJ2R.jpg" alt="ThreadLocal 数据结构"></p>
 <p><code>ThreadLocalMap</code> 是 <code>ThreadLocal</code> 的静态内部类。</p>
 <p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/ThreadLocal%E5%86%85%E9%83%A8%E7%B1%BB.png" alt="ThreadLocal 内部类"></p>
 <h3 id="3-4-ThreadLocal-内存泄露问题"><a href="#3-4-ThreadLocal-内存泄露问题" class="headerlink" title="3.4. ThreadLocal 内存泄露问题"></a>3.4. ThreadLocal 内存泄露问题</h3><p><code>ThreadLocalMap</code> 中使用的 key 为 <code>ThreadLocal</code> 的<strong>弱引用</strong>，而 value 是<strong>强引用</strong>。所以，如果 <code>ThreadLocal</code> 没有被外部强引用的情况下，在垃圾回收的时候，key 会被清理掉，而 value 不会被清理掉。这样一来，<code>ThreadLocalMap</code> 中就会出现 key 为 null 的 Entry 。假如我们不做任何措施的话，value 永远无法被 GC 回收，这个时候就可能会产生内存泄露。ThreadLocalMap 实现中已经考虑了这种情况，在调用 <code>set()</code>、<code>get()</code>、<code>remove()</code> 方法的时候，会清理掉 key 为 null 的记录。使用完 <code>ThreadLocal</code> 方法后最好手动调用 <code>remove()</code> 方法。</p>
