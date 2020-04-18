@@ -608,7 +608,7 @@
 <li><strong><code>CachedThreadPool</code> 和 <code>ScheduledThreadPool</code>：</strong> 允许创建的线程数量为 Integer.MAX_VALUE ，可能会创建大量线程，从而导致 OOM。</li>
 </ul>
 </blockquote>
-<p><strong>方式一：通过<code>ThreadPoolExecutor</code>构造函数实现（推荐）</strong><br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzE3ODU4MjMwLmpwZw?x-oss-process=image/format,png" alt="通过构造方法实现"><br><strong>方式二：通过 <code>Executor</code> 框架的工具类 <code>Executors</code> 来实现</strong><br>我们可以创建三种类型的 ThreadPoolExecutor ：</p>
+<p><strong>方式一：通过 <code>ThreadPoolExecutor</code> 构造函数实现（推荐）</strong><br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL215LWJsb2ctdG8tdXNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS8xOC00LTE2LzE3ODU4MjMwLmpwZw?x-oss-process=image/format,png" alt="ThreadPoolExecutor 构造方法"><br><strong>方式二：通过 <code>Executor</code> 框架的工具类 <code>Executors</code> 来实现</strong><br>我们可以创建三种类型的 ThreadPoolExecutor ：</p>
 <ul>
 <li><strong>FixedThreadPool</strong></li>
 <li><strong>SingleThreadExecutor</strong></li>
