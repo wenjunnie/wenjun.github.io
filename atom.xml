@@ -6,10 +6,40 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-19T09:31:54.677Z</updated>
+  <updated>2020-04-19T16:09:09.282Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一文带你认识类</title>
+    <link href="https://www.niewenjun.com/2020/04/20/hou-duan/jvm/yi-wen-dai-ni-ren-shi-lei/"/>
+    <id>https://www.niewenjun.com/2020/04/20/hou-duan/jvm/yi-wen-dai-ni-ren-shi-lei/</id>
+    <published>2020-04-19T16:31:00.000Z</published>
+    <updated>2020-04-19T16:09:09.282Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一文带你认识类&quot;&gt;&lt;a href=&quot;#一文带你认识类&quot; class=&quot;headerlink&quot; title=&quot;一文带你认识类&quot;&gt;&lt;/a&gt;一文带你认识类&lt;/h1&gt;&lt;p&gt;本文将从类文件结构、类的生命周期、类加载器三个部分带你认识 Java 类。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="JVM" scheme="https://www.niewenjun.com/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>JVM参数指南</title>
@@ -46,7 +76,7 @@
     <link href="https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/"/>
     <id>https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/</id>
     <published>2020-04-19T09:11:00.000Z</published>
-    <updated>2020-04-19T09:10:43.587Z</updated>
+    <updated>2020-04-19T09:38:13.223Z</updated>
     
     <summary type="html">
     
@@ -310,7 +340,7 @@
     <link href="https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/"/>
     <id>https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/</id>
     <published>2020-04-16T04:36:00.000Z</published>
-    <updated>2020-04-16T04:06:48.782Z</updated>
+    <updated>2020-04-19T16:10:57.068Z</updated>
     
     <summary type="html">
     
@@ -318,7 +348,7 @@
       
         
         
-          &lt;h2 id=&quot;如何设计一个RPC框架？&quot;&gt;&lt;a href=&quot;#如何设计一个RPC框架？&quot; class=&quot;headerlink&quot;
+          &lt;h2 id=&quot;如何设计一个-RPC-框架？&quot;&gt;&lt;a href=&quot;#如何设计一个-RPC-框架？&quot; class=&quot;headerlink&quot; title=&quot;如何设计一个 RPC 框架？&quot;&gt;&lt;/a&gt;如何设计一个 RPC 框架？&lt;/h2&gt;&lt;p&gt;如何设计一个 RPC
         
       
     
@@ -558,31 +588,6 @@
     
     
       <category term="前端" scheme="https://www.niewenjun.com/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="Hexo" scheme="https://www.niewenjun.com/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://www.niewenjun.com/2020/04/12/hello-world/"/>
-    <id>https://www.niewenjun.com/2020/04/12/hello-world/</id>
-    <published>2020-04-12T10:05:15.392Z</published>
-    <updated>2020-04-12T15:14:44.220Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
-        
-      
-    
-    </summary>
-    
     
     
       <category term="Hexo" scheme="https://www.niewenjun.com/tags/Hexo/"/>
