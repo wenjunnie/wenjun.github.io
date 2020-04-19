@@ -6,10 +6,40 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-19T09:10:43.587Z</updated>
+  <updated>2020-04-19T09:31:54.677Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JVM参数指南</title>
+    <link href="https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-can-shu-zhi-nan/"/>
+    <id>https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-can-shu-zhi-nan/</id>
+    <published>2020-04-19T09:25:00.000Z</published>
+    <updated>2020-04-19T09:31:54.677Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1.概述&quot;&gt;&lt;/a&gt;1.概述&lt;/h2&gt;&lt;p&gt;在本篇文章中，你将掌握最常用的 JVM 参数配置。&lt;/p&gt;
+&lt;h2 id=&quot;2-堆内存相关&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="JVM" scheme="https://www.niewenjun.com/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>JVM垃圾回收</title>
