@@ -6,17 +6,46 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-18T09:33:59.849Z</updated>
+  <updated>2020-04-19T03:51:21.957Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Java 并发进阶常见面试题</title>
+    <title>Java内存区域详解</title>
+    <link href="https://www.niewenjun.com/2020/04/19/hou-duan/jvm/java-nei-cun-qu-yu-xiang-jie/"/>
+    <id>https://www.niewenjun.com/2020/04/19/hou-duan/jvm/java-nei-cun-qu-yu-xiang-jie/</id>
+    <published>2020-04-19T03:31:00.000Z</published>
+    <updated>2020-04-19T03:51:21.957Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Java-内存区域详解&quot;&gt;&lt;a href=&quot;#Java-内存区域详解&quot; class=&quot;headerlink&quot; title=&quot;Java 内存区域详解&quot;&gt;&lt;/a&gt;Java 内存区域详解&lt;/h1&gt;&lt;p&gt;如果没有特殊说明，都是针对的是 HotSpot
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="JVM" scheme="https://www.niewenjun.com/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java并发进阶常见面试题</title>
     <link href="https://www.niewenjun.com/2020/04/18/hou-duan/bing-fa/java-bing-fa-jin-jie-chang-jian-mian-shi-ti/"/>
     <id>https://www.niewenjun.com/2020/04/18/hou-duan/bing-fa/java-bing-fa-jin-jie-chang-jian-mian-shi-ti/</id>
     <published>2020-04-18T09:00:00.000Z</published>
-    <updated>2020-04-18T09:33:59.849Z</updated>
+    <updated>2020-04-18T14:37:22.934Z</updated>
     
     <summary type="html">
     
@@ -45,7 +74,7 @@
     <link href="https://www.niewenjun.com/2020/04/18/hou-duan/bing-fa/java-bing-fa-ji-chu-chang-jian-mian-shi-ti/"/>
     <id>https://www.niewenjun.com/2020/04/18/hou-duan/bing-fa/java-bing-fa-ji-chu-chang-jian-mian-shi-ti/</id>
     <published>2020-04-17T16:12:00.000Z</published>
-    <updated>2020-04-18T09:22:03.112Z</updated>
+    <updated>2020-04-19T03:07:43.238Z</updated>
     
     <summary type="html">
     

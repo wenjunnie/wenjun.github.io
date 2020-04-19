@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -525,7 +525,7 @@
 <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> main <span class="token comment" spellcheck="true">//main 线程,程序入口</span></code></pre>
 <p>从上面的输出内容可以看出：<strong>一个 Java 程序的运行是 main 线程和多个其他线程同时运行</strong>。</p>
 <h2 id="2-请简要描述线程与进程的关系，区别及优缺点？"><a href="#2-请简要描述线程与进程的关系，区别及优缺点？" class="headerlink" title="2. 请简要描述线程与进程的关系，区别及优缺点？"></a>2. 请简要描述线程与进程的关系，区别及优缺点？</h2><h4 id="从-JVM-角度说进程和线程之间的关系"><a href="#从-JVM-角度说进程和线程之间的关系" class="headerlink" title="从 JVM 角度说进程和线程之间的关系"></a><strong>从 JVM 角度说进程和线程之间的关系</strong></h4><h3 id="2-1-图解进程和线程的关系"><a href="#2-1-图解进程和线程的关系" class="headerlink" title="2.1. 图解进程和线程的关系"></a>2.1. 图解进程和线程的关系</h3><p>下图是 Java 内存区域，通过下图我们从 JVM 的角度来说一下线程和进程之间的关系。如果你对 Java 内存区域 (运行时数据区) 这部分知识不太了解的话可以阅读一下这篇文章：<a href="https://github.com/Snailclimb/JavaGuide/blob/3965c02cc0f294b0bd3580df4868d5e396959e2e/Java%E7%9B%B8%E5%85%B3/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%8A%8AJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AE%B2%E7%9A%84%E6%9C%80%E6%B8%85%E6%A5%9A%E7%9A%84%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0.md" target="_blank" rel="noopener" title="《可能是把 Java 内存区域讲的最清楚的一篇文章》">《可能是把 Java 内存区域讲的最清楚的一篇文章》</a></p>
-<p><img src="https://s1.ax1x.com/2020/04/18/JmDtYQ.png" alt="Java 内存区域"></p>
+<p><img src="https://s1.ax1x.com/2020/04/19/JuYRyT.png" alt="Java 内存区域"></p>
 <p>从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的<strong>堆</strong>和<strong>方法区（JDK 1.8 之后的元空间）</strong>资源，但是每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong> 和 <strong>本地方法栈</strong>。</p>
 <p><strong>总结：</strong> <strong>线程是进程划分成的更小的运行单位。</strong>线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。线程执行开销小，但不利于资源的管理和保护；而进程正相反。</p>
 <p>下面是该知识点的扩展内容！</p>
@@ -911,9 +911,9 @@ Process finished with exit code <span class="token number">0</span></code></pre>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java 并发进阶常见面试题">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Java并发进阶常见面试题">
                         
-                        <span class="card-title">Java 并发进阶常见面试题</span>
+                        <span class="card-title">Java并发进阶常见面试题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java 并发进阶常见面试题, Wenjun">
+    <meta name="keywords" content="Java并发进阶常见面试题, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Java 并发进阶常见面试题 | Wenjun</title>
+    <title>Java并发进阶常见面试题 | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java 并发进阶常见面试题</h1>
+                    <h1 class="description center-align post-title">Java并发进阶常见面试题</h1>
                 </div>
             </div>
         </div>
@@ -728,9 +728,9 @@ ThreadLocal<span class="token punctuation">.</span>ThreadLocalMap inheritableThr
 <li><strong>提高响应速度</strong>。当任务到达时，任务可以不需要的等到线程创建就能立即执行。</li>
 <li><strong>提高线程的可管理性</strong>。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
 </ul>
-<h3 id="4-2-实现-Runnable-接口和-Callable-接口的区别"><a href="#4-2-实现-Runnable-接口和-Callable-接口的区别" class="headerlink" title="4.2. 实现 Runnable 接口和 Callable 接口的区别"></a>4.2. 实现 Runnable 接口和 Callable 接口的区别</h3><p><strong><code>Runnable</code></strong> 自Java 1.0 以来一直存在，但 <strong><code>Callable</code></strong> 仅在Java 1.5 中引入，目的就是为了来处理 <strong><code>Runnable</code></strong> 不支持的用例。<strong><code>Runnable</code> 接口</strong>不会返回结果或抛出检查异常，但是<strong><code>Callable</code> 接口</strong>可以。所以，如果任务不需要返回结果或抛出异常推荐使用 <strong><code>Runnable</code> 接口</strong>，这样代码看起来会更加简洁。</p>
-<p>工具类 <code>Executors</code> 可以实现 <code>Runnable</code> 对象和 <code>Callable</code> 对象之间的相互转换。（<code>Executors.callable(Runnable task)</code>）或 <code>Executors.callable(Runnable task, Object resule)</code>）。</p>
-<p><strong>Runnable.java</strong></p>
+<h3 id="4-2-实现-Runnable-接口和-Callable-接口的区别"><a href="#4-2-实现-Runnable-接口和-Callable-接口的区别" class="headerlink" title="4.2. 实现 Runnable 接口和 Callable 接口的区别"></a>4.2. 实现 Runnable 接口和 Callable 接口的区别</h3><p><strong><code>Runnable</code></strong> 自Java 1.0 以来一直存在，但 <strong><code>Callable</code></strong> 仅在Java 1.5 中引入，目的就是为了来处理 <strong><code>Runnable</code></strong> 不支持的用例。<strong><code>Runnable</code> 接口</strong>不会返回结果或抛出检查异常，但是 <strong><code>Callable</code> 接口</strong>可以。所以，如果任务不需要返回结果或抛出异常推荐使用 <strong><code>Runnable</code> 接口</strong>，这样代码看起来会更加简洁。</p>
+<p>工具类 <code>Executors</code> 可以实现 <code>Runnable</code> 对象和 <code>Callable</code> 对象之间的相互转换。（<code>Executors.callable(Runnable task)</code> 或 <code>Executors.callable(Runnable task, Object resule)</code>）。</p>
+<p><code>Runnable.java</code></p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@FunctionalInterface</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Runnable</span> <span class="token punctuation">{</span>
    <span class="token comment" spellcheck="true">/**
@@ -738,7 +738,7 @@ ThreadLocal<span class="token punctuation">.</span>ThreadLocalMap inheritableThr
     */</span>
     <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p><strong>Callable.java</strong></p>
+<p><code>Callable.java</code></p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@FunctionalInterface</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Callable</span><span class="token operator">&lt;</span>V<span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">/**
@@ -1368,30 +1368,30 @@ pool<span class="token operator">-</span><span class="token number">1</span><spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/18/hou-duan/bing-fa/java-bing-fa-jin-jie-chang-jian-mian-shi-ti/">
+                <a href="/2020/04/19/hou-duan/jvm/java-nei-cun-qu-yu-xiang-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java 并发进阶常见面试题">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Java内存区域详解">
                         
-                        <span class="card-title">Java 并发进阶常见面试题</span>
+                        <span class="card-title">Java内存区域详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Java 并发进阶常见面试题总结1. synchronized 关键字1.1. 说一说自己对于 synchronized 关键字的了解synchronized 关键字解决的是多个线程之间访问资源的同步性，synchronized 关键字可以
+                            Java 内存区域详解如果没有特殊说明，都是针对的是 HotSpot 虚拟机。
+一 概述对于 Java 程序员来说，在虚拟机自动内存管理机制下，不再需要像 C/C++程序开发程序员这样为每一个 new 操作去写对应的 delete/free
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-18
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-19
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1404,7 +1404,6 @@ pool<span class="token operator">-</span><span class="token number">1</span><spa
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1412,8 +1411,8 @@ pool<span class="token operator">-</span><span class="token number">1</span><spa
                         <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E5%B9%B6%E5%8F%91/">
-                        <span class="chip bg-color">并发</span>
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
                     </a>
                     
                 </div>
