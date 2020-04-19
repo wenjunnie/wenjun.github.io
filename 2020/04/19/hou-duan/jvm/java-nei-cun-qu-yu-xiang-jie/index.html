@@ -500,7 +500,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Java-内存区域详解"><a href="#Java-内存区域详解" class="headerlink" title="Java 内存区域详解"></a>Java 内存区域详解</h1><p>如果没有特殊说明，都是针对的是 HotSpot 虚拟机。</p>
-<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h2><p>对于 Java 程序员来说，在虚拟机自动内存管理机制下，不再需要像 C/C++程序开发程序员这样为每一个 new 操作去写对应的 delete/free 操作，不容易出现内存泄漏和内存溢出问题。正是因为 Java 程序员把内存控制权利交给 Java 虚拟机，一旦出现内存泄漏和溢出方面的问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将会是一个非常艰巨的任务。</p>
+<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h2><p>对于 Java 程序员来说，在虚拟机自动内存管理机制下，不再需要像 C/C++ 程序开发程序员这样为每一个 new 操作去写对应的 delete/free 操作，不容易出现内存泄漏和内存溢出问题。正是因为 Java 程序员把内存控制权利交给 Java 虚拟机，一旦出现内存泄漏和溢出方面的问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将会是一个非常艰巨的任务。</p>
 <h2 id="二-运行时数据区域"><a href="#二-运行时数据区域" class="headerlink" title="二 运行时数据区域"></a>二 运行时数据区域</h2><p>Java 虚拟机在执行 Java 程序的过程中会把它管理的内存划分成若干个不同的数据区域。JDK 1.8 和之前的版本略有不同，下面会介绍到。</p>
 <p><strong>JDK 1.8 之前：</strong></p>
 <p><img src="https://s1.ax1x.com/2020/04/19/JuYRyT.png" alt="Java 内存区域（1.8之前）"></p>
@@ -527,7 +527,7 @@
 </ol>
 <p><strong>注意：程序计数器是唯一一个不会出现 OutOfMemoryError 的内存区域，它的生命周期随着线程的创建而创建，随着线程的结束而死亡。</strong></p>
 <h3 id="2-2-Java-虚拟机栈"><a href="#2-2-Java-虚拟机栈" class="headerlink" title="2.2 Java 虚拟机栈"></a>2.2 Java 虚拟机栈</h3><p><strong>与程序计数器一样，Java 虚拟机栈也是线程私有的，它的生命周期和线程相同，描述的是 Java 方法执行的内存模型，每次方法调用的数据都是通过栈传递的。</strong></p>
-<p><strong>Java 内存可以粗糙的区分为堆内存（Heap）和栈内存 (Stack)，其中栈就是现在说的虚拟机栈，或者说是虚拟机栈中局部变量表部分。</strong> （实际上，Java 虚拟机栈是由一个个栈帧组成，而每个栈帧中都拥有：局部变量表、操作数栈、动态链接、方法出口等信息。）</p>
+<p><strong>Java 内存可以粗糙的区分为堆内存（Heap）和栈内存 (Stack)，其中栈就是现在说的虚拟机栈，或者说是虚拟机栈中局部变量表部分。</strong>（实际上，Java 虚拟机栈是由一个个栈帧组成，而每个栈帧中都拥有：局部变量表、操作数栈、动态链接、方法出口等信息。）</p>
 <p><strong>局部变量表主要存放了编译器可知的各种数据类型</strong>（boolean、byte、char、short、int、float、long、double）、<strong>对象引用</strong>（reference 类型，它不同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）。</p>
 <p><strong>Java 虚拟机栈会出现两种错误：StackOverFlowError 和 OutOfMemoryError 。</strong></p>
 <ul>
@@ -557,7 +557,7 @@
 <p>本地方法被执行的时候，在本地方法栈也会创建一个栈帧，用于存放该本地方法的局部变量表、操作数栈、动态链接、方法出口等信息。</p>
 <p>方法执行完毕后相应的栈帧也会出栈并释放内存空间，也会出现 StackOverFlowError 和 OutOfMemoryError 两种错误。</p>
 <h3 id="2-4-堆"><a href="#2-4-堆" class="headerlink" title="2.4 堆"></a>2.4 堆</h3><p>Java 虚拟机所管理的内存中最大的一块，Java 堆是所有线程共享的一块内存区域，在虚拟机启动时创建。<strong>此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例以及数组都在这里分配内存。</strong></p>
-<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作 <strong>GC 堆（Garbage Collected Heap）</strong>。从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代，再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
+<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作 <strong>GC 堆（Garbage Collected Heap）</strong>。从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：<strong>新生代和老年代</strong>，再细致一点有：<strong>Eden 空间、From Survivor、To Survivor 空间</strong>等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
 <p>在 JDK 1.7 版本及 JDK 1.7 版本之前，堆内存被通常被分为下面三部分：</p>
 <ol>
 <li>新生代内存(Young Generation)</li>
@@ -1013,31 +1013,31 @@ i4<span class="token operator">=</span>i5<span class="token operator">+</span>i6
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/19/hou-duan/jvm/java-nei-cun-qu-yu-xiang-jie/">
+                <a href="/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Java内存区域详解">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="JVM垃圾回收">
                         
-                        <span class="card-title">Java内存区域详解</span>
+                        <span class="card-title">JVM垃圾回收</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Java 内存区域详解如果没有特殊说明，都是针对的是 HotSpot 虚拟机。
-一 概述对于 Java 程序员来说，在虚拟机自动内存管理机制下，不再需要像 C/C++程序开发程序员这样为每一个 new 操作去写对应的 delete/free
+                            JVM 垃圾回收本文导火索
+当需要排查各种内存溢出问题、当垃圾收集成为系统达到更高并发的瓶颈时，我们就需要对这些“自动化”的技术实施必要的监控和调节。
+1  揭开 JVM 内存分配与回收的神秘面纱Java 的自动内存管理主要是针对对象内存的
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-19
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-19
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1050,7 +1050,6 @@ i4<span class="token operator">=</span>i5<span class="token operator">+</span>i6
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     

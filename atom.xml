@@ -6,17 +6,46 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-19T03:51:21.957Z</updated>
+  <updated>2020-04-19T09:10:43.587Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JVM垃圾回收</title>
+    <link href="https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/"/>
+    <id>https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/</id>
+    <published>2020-04-19T09:11:00.000Z</published>
+    <updated>2020-04-19T09:10:43.587Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;JVM-垃圾回收&quot;&gt;&lt;a href=&quot;#JVM-垃圾回收&quot; class=&quot;headerlink&quot; title=&quot;JVM 垃圾回收&quot;&gt;&lt;/a&gt;JVM 垃圾回收&lt;/h1&gt;&lt;h3 id=&quot;本文导火索&quot;&gt;&lt;a href=&quot;#本文导火索&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="JVM" scheme="https://www.niewenjun.com/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>Java内存区域详解</title>
     <link href="https://www.niewenjun.com/2020/04/19/hou-duan/jvm/java-nei-cun-qu-yu-xiang-jie/"/>
     <id>https://www.niewenjun.com/2020/04/19/hou-duan/jvm/java-nei-cun-qu-yu-xiang-jie/</id>
     <published>2020-04-19T03:31:00.000Z</published>
-    <updated>2020-04-19T03:51:21.957Z</updated>
+    <updated>2020-04-19T07:48:01.736Z</updated>
     
     <summary type="html">
     
@@ -74,7 +103,7 @@
     <link href="https://www.niewenjun.com/2020/04/18/hou-duan/bing-fa/java-bing-fa-ji-chu-chang-jian-mian-shi-ti/"/>
     <id>https://www.niewenjun.com/2020/04/18/hou-duan/bing-fa/java-bing-fa-ji-chu-chang-jian-mian-shi-ti/</id>
     <published>2020-04-17T16:12:00.000Z</published>
-    <updated>2020-04-19T03:07:43.238Z</updated>
+    <updated>2020-04-19T08:22:54.046Z</updated>
     
     <summary type="html">
     
