@@ -6,10 +6,64 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-20T07:38:39.819Z</updated>
+  <updated>2020-04-21T16:34:04.068Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL索引总结</title>
+    <link href="https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-suo-yin-zong-jie/"/>
+    <id>https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-suo-yin-zong-jie/</id>
+    <published>2020-04-21T15:56:00.000Z</published>
+    <updated>2020-04-21T16:34:04.068Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;MySQL-索引总结&quot;&gt;&lt;a href=&quot;#MySQL-索引总结&quot; class=&quot;headerlink&quot; title=&quot;MySQL 索引总结&quot;&gt;&lt;/a&gt;MySQL 索引总结&lt;/h2&gt;&lt;h3 id=&quot;什么是索引？&quot;&gt;&lt;a href=&quot;#什么是索引？&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="https://www.niewenjun.com/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL常见问题总结</title>
+    <link href="https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-chang-jian-wen-ti-zong-jie/"/>
+    <id>https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-chang-jian-wen-ti-zong-jie/</id>
+    <published>2020-04-21T13:56:00.000Z</published>
+    <updated>2020-04-21T16:35:00.873Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;MySQL-常见问题总结&quot;&gt;&lt;a href=&quot;#MySQL-常见问题总结&quot; class=&quot;headerlink&quot; title=&quot;MySQL 常见问题总结&quot;&gt;&lt;/a&gt;MySQL 常见问题总结&lt;/h2&gt;&lt;h3 id=&quot;什么是-MySQL-？&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="https://www.niewenjun.com/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>大白话带你认识JVM</title>
@@ -105,7 +159,7 @@
     <link href="https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/"/>
     <id>https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/</id>
     <published>2020-04-19T09:11:00.000Z</published>
-    <updated>2020-04-19T09:38:13.223Z</updated>
+    <updated>2020-04-20T09:16:28.746Z</updated>
     
     <summary type="html">
     
@@ -523,64 +577,6 @@
         
         
           &lt;h2 id=&quot;LinkedList简介&quot;&gt;&lt;a href=&quot;#LinkedList简介&quot; class=&quot;headerlink&quot; title=&quot;LinkedList简介&quot;&gt;&lt;/a&gt;&lt;font face=&quot;楷体&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ArrayList扩容机制</title>
-    <link href="https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi/"/>
-    <id>https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/arraylist-kuo-rong-ji-zhi/</id>
-    <published>2020-04-13T16:15:00.000Z</published>
-    <updated>2020-04-13T16:27:01.156Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;ArrayList扩容机制&quot;&gt;&lt;a href=&quot;#ArrayList扩容机制&quot; class=&quot;headerlink&quot; title=&quot;ArrayList扩容机制&quot;&gt;&lt;/a&gt;ArrayList扩容机制&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ArrayList</title>
-    <link href="https://www.niewenjun.com/2020/04/13/hou-duan/ji-he/arraylist/"/>
-    <id>https://www.niewenjun.com/2020/04/13/hou-duan/ji-he/arraylist/</id>
-    <published>2020-04-13T04:15:00.000Z</published>
-    <updated>2020-04-13T16:48:33.891Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;ArrayList简介&quot;&gt;&lt;a href=&quot;#ArrayList简介&quot; class=&quot;headerlink&quot; title=&quot;ArrayList简介&quot;&gt;&lt;/a&gt;ArrayList简介&lt;/h3&gt;&lt;p&gt;　　ArrayList 的底层是数组队列，相当于动态数组。与
         
       
     

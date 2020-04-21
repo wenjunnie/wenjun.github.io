@@ -1,0 +1,1346 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MySQL索引总结, Wenjun">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>MySQL索引总结 | Wenjun</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Wenjun</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Wenjun</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wenjunnie" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wenjunnie" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MySQL索引总结</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    .toc-fixed .toc-link::before{
+        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                数据库
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-04-21
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    19 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="MySQL-索引总结"><a href="#MySQL-索引总结" class="headerlink" title="MySQL 索引总结"></a>MySQL 索引总结</h2><h3 id="什么是索引？"><a href="#什么是索引？" class="headerlink" title="什么是索引？"></a>什么是索引？</h3><p><strong>索引是一种用于快速查询和检索数据的数据结构。常见的索引结构有：B 树、B+ 树和 Hash 。</strong></p>
+<p>索引的作用就相当于目录的作用。打个比方：我们在查字典的时候，如果没有目录，那我们就只能一页一页的去找我们需要查的那个字，速度很慢。如果有目录了，我们只需要先去目录里查找字的位置，然后直接翻到那一页就行了。</p>
+<h3 id="为什么要使用索引？"><a href="#为什么要使用索引？" class="headerlink" title="为什么要使用索引？"></a>为什么要使用索引？</h3><ul>
+<li>通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。</li>
+<li>可以大大加快数据的检索速度（大大减少的检索的数据量）,  这也是创建索引的最主要的原因。 </li>
+<li>帮助服务器避免排序和临时表。</li>
+<li>将随机 IO 变为顺序 IO 。</li>
+<li>可以加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义。</li>
+</ul>
+<h3 id="索引这么多优点，为什么不对表中的每一个列创建一个索引呢？"><a href="#索引这么多优点，为什么不对表中的每一个列创建一个索引呢？" class="headerlink" title="索引这么多优点，为什么不对表中的每一个列创建一个索引呢？"></a>索引这么多优点，为什么不对表中的每一个列创建一个索引呢？</h3><ul>
+<li><p><strong>创建索引和维护索引需要耗费许多时间：</strong>当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，会降低 SQL 执行效率。</p>
+</li>
+<li><p><strong>占用物理存储空间：</strong>除了数据表占数据空间之外，每一个索引还要占一定的物理空间，如果要建立聚簇索引，那么需要的空间就会更大。 </p>
+</li>
+<li><p>创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加。 </p>
+</li>
+</ul>
+<h3 id="使用索引的注意事项？"><a href="#使用索引的注意事项？" class="headerlink" title="使用索引的注意事项？"></a>使用索引的注意事项？</h3><ol>
+<li>在经常需要搜索的列上，可以加快搜索的速度。</li>
+<li>在经常使用在WHERE子句中的列上面创建索引，加快条件的判断速度。 </li>
+<li>在经常需要排序的列上创建索引，因为索引已经排序，这样查询可以利用索引的排序，加快排序查询时间。</li>
+<li>对于中到大型表索引都是非常有效的，但是特大型表的话维护开销会很大，不适合建索引。</li>
+<li>在经常用在连接的列上，这些列主要是一些外键，可以加快连接的速度。</li>
+<li>避免 where 子句中对字段施加函数，这会造成无法命中索引。</li>
+<li>在使用 InnoDB 时使用与业务无关的自增主键作为主键，即使用逻辑主键，而不要使用业务主键。</li>
+<li>将打算加索引的列设置为 NOT NULL ，否则将导致引擎放弃使用索引而进行全表扫描。</li>
+<li>删除长期未使用的索引，不用的索引的存在会造成不必要的性能损耗。MySQL 5.7 可以通过查询 sys 库的 <code>chema_unused_indexes</code> 视图来查询哪些索引从未被使用。</li>
+<li>在使用 limit offset 查询缓慢时，可以借助索引来提高性能。</li>
+</ol>
+<h3 id="MySQL-索引主要使用的两种数据结构"><a href="#MySQL-索引主要使用的两种数据结构" class="headerlink" title="MySQL 索引主要使用的两种数据结构"></a>MySQL 索引主要使用的两种数据结构</h3><p><strong>哈希索引</strong></p>
+<p>对于哈希索引来说，底层的数据结构就是哈希表，因此在绝大多数需求为单条记录查询的时候，可以选择哈希索引，查询性能最快；其余大部分场景，建议选择 B+Tree 索引。</p>
+<p><strong>B+Tree 索引</strong></p>
+<p><img src="https://s1.ax1x.com/2020/04/21/JJ7lrD.png" alt="B+Tree 索引"></p>
+<h3 id="B-树和-B-树的区别"><a href="#B-树和-B-树的区别" class="headerlink" title="B 树和 B+ 树的区别"></a>B 树和 B+ 树的区别</h3><ul>
+<li>B 树的<strong>所有节点既存放键（key）也存放数据（data）</strong>，而 <strong>B+ 树只有叶子节点存放 key 和 data</strong>，其他的节点只存放 key 。</li>
+<li>B 树的叶子节点都是独立的，B+ 树的叶子节点有一条引用链指向与它相邻的叶子节点，因此 B+ 树更适合做<strong>范围查找</strong>。</li>
+<li>B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了，而 <strong>B+ 树的检索效率就很稳定了</strong>，任何查找都是从根节点到叶子节点的过程，叶子节点的顺序检索很明显。</li>
+</ul>
+<h3 id="Hash-索引和-B-树索引优劣分析"><a href="#Hash-索引和-B-树索引优劣分析" class="headerlink" title="Hash 索引和 B+ 树索引优劣分析"></a>Hash 索引和 B+ 树索引优劣分析</h3><p><strong>Hash 索引定位快</strong></p>
+<p>Hash 索引指的就是 Hash 表，最大的优点就是能够在很短的时间内，根据 Hash 函数定位到数据所在的位置，这是 B+ 树所不能比的。</p>
+<p><strong>Hash 冲突问题</strong></p>
+<p>知道 HashMap 或 HashTable 的同学，相信都知道它们最大的缺点就是 Hash 冲突了。不过对于数据库来说这还不算最大的缺点。</p>
+<p><strong>Hash 索引不支持顺序和范围查询（ Hash 索引不支持顺序和范围查询是它最大的缺点）</strong></p>
+<p>试想一种情况：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> tb1 <span class="token keyword">WHERE</span> id <span class="token operator">&lt;</span> <span class="token number">500</span><span class="token punctuation">;</span></code></pre>
+<p>B+ 树是有序的，在这种范围查询中，优势非常大，直接遍历比 500 小的叶子节点就够了。而 Hash 索引是根据 Hash 算法来定位的，难不成还要把 1 - 499 的数据，每个都进行一次 Hash 计算来定位吗？这就是 Hash 索引最大的缺点了。 </p>
+<h3 id="MyISAM-和-InnoDB-实现-B-Tree-索引方式的区别"><a href="#MyISAM-和-InnoDB-实现-B-Tree-索引方式的区别" class="headerlink" title="MyISAM 和 InnoDB 实现 B+Tree 索引方式的区别"></a>MyISAM 和 InnoDB 实现 B+Tree 索引方式的区别</h3><p><strong>MyISAM</strong></p>
+<p>B+Tree 叶节点的 data 域存放的是数据记录的地址。在索引检索的时候，首先按照 B+Tree 搜索算法搜索索引，如果指定的 Key 存在，则取出其 data 域的值，然后以 data 域的值为地址读取相应的数据记录。这被称为“<strong>非聚簇索引</strong>”。</p>
+<p><strong>InnoDB</strong></p>
+<p>其数据文件本身就是索引文件。相比 MyISAM ，索引文件和数据文件是分离的，其表数据文件本身就是按 B+Tree 组织的一个索引结构，树的叶节点 data 域保存了完整的数据记录。这个索引的 key 是数据表的主键，因此 InnoDB 表数据文件本身就是主索引。这被称为“<strong>聚簇索引</strong>（或聚集索引）”。而其余的索引都作为辅助索引，辅助索引的 data 域存储相应记录主键的值而不是地址，这也是和 MyISAM 不同的地方。<strong>在根据主索引搜索时，直接找到 key 所在的节点即可取出数据；在根据辅助索引查找时，则需要先取出主键的值，再走一遍主索引。因此，在设计表的时候，不建议使用过长的字段作为主键，也不建议使用非单调的字段作为主键，这样会造成主索引频繁分裂。</strong>PS：整理自《 Java 工程师修炼之道》</p>
+<h3 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h3><h4 id="主键索引（Primary-Key）"><a href="#主键索引（Primary-Key）" class="headerlink" title="主键索引（Primary Key）"></a>主键索引（Primary Key）</h4><ul>
+<li><p>数据表的主键列使用的就是主键索引。</p>
+</li>
+<li><p>一张数据表有且只能有一个主键，并且主键不能为 null ，不能重复。</p>
+</li>
+<li><p>在 MySQL 的 InnoDB 的表中，当没有显示的指定表的主键时，InnoDB 会自动先检查表中是否有唯一索引的字段，如果有，则选择该字段为默认的主键，否则 InnoDB 将会自动创建一个 6 Byte 的自增主键。</p>
+</li>
+</ul>
+<h4 id="二级索引（辅助索引）"><a href="#二级索引（辅助索引）" class="headerlink" title="二级索引（辅助索引）"></a>二级索引（辅助索引）</h4><p><strong>二级索引又称为辅助索引，是因为二级索引的叶子节点存储的数据是主键。也就是说，通过二级索引，可以定位主键的位置。</strong></p>
+<p><img src="https://s1.ax1x.com/2020/04/21/JYp0y9.png" alt="二级索引"></p>
+<p>唯一索引，普通索引，前缀索引等索引属于二级索引。</p>
+<p><strong>PS：不懂的同学可以暂存疑，慢慢往下看，后面会有答案的，也可以自行搜索。</strong></p>
+<ol>
+<li><strong>唯一索引（Unique Key）：</strong>唯一索引也是一种约束。<strong>唯一索引的属性列不能出现重复的数据，但是允许数据为 <code>NULL</code> ，一张表允许创建多个唯一索引。</strong>建立唯一索引的目的大部分时候都是为了该属性列的数据的唯一性，而不是为了查询效率。</li>
+<li><strong>普通索引（Index）：普通索引的唯一作用就是为了快速查询数据，一张表允许创建多个普通索引，并允许数据重复和 <code>NULL</code> 。</strong></li>
+<li><strong>前缀索引（Prefix）：</strong>前缀索引只适用于字符串类型的数据。前缀索引是对文本的前几个字符创建索引，相比普通索引建立的数据更小，因为只取前几个字符。</li>
+<li><strong>全文索引（FullText）：</strong>全文索引主要是为了检索大文本数据中的关键字的信息，是目前搜索引擎数据库使用的一种技术。MySQL 5.6 之前只有 MYISAM 引擎支持全文索引，5.6之后 InnoDB 也支持了全文索引。 </li>
+</ol>
+<h4 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h4><p><strong>聚集索引即索引结构和数据一起存放的索引。主键索引属于聚集索引。</strong></p>
+<p>在 Mysql 中，InnoDB 引擎的表的 <code>.ibd</code> 文件就包含了该表的索引和数据，对于 InnoDB 引擎表来说，该表的索引（ B+ 树）的每个非叶子节点存储索引，叶子节点存储索引和索引对应的数据。</p>
+<p><strong>聚集索引的优点：</strong></p>
+<p>聚集索引的<strong>查询速度非常的快</strong>，因为整个 B+ 树本身就是一颗多叉平衡树，叶子节点也都是有序的，定位到索引的节点，就相当于定位到了数据，避免了<strong>回表</strong>的操作。</p>
+<p><strong>聚集索引的缺点：</strong></p>
+<ol>
+<li><strong>依赖于有序的数据：</strong>因为 B+ 树是多路平衡树，如果索引的数据不是有序的，那么就需要在插入时排序，如果数据是整型还好，否则类似于字符串或 UUID 这种又长又难比较的数据，插入或查找的速度肯定比较慢。</li>
+<li><strong>更新代价大：</strong>如果对索引列的数据被修改时，那么对应的索引也将会被修改，何况聚集索引的叶子节点还存放着数据，修改代价肯定是较大的，所以对于主键索引来说，主键一般都是不可被修改的。</li>
+</ol>
+<h4 id="非聚集索引"><a href="#非聚集索引" class="headerlink" title="非聚集索引"></a>非聚集索引</h4><p><strong>非聚集索引即索引结构和数据分开存放的索引。</strong></p>
+<p><strong>二级索引属于非聚集索引。</strong></p>
+<p><img src="https://s1.ax1x.com/2020/04/21/JJzAld.png" alt="MySQL 索引文件截图"></p>
+<blockquote>
+<p>MYISAM 引擎的表的 <strong><code>.MYI</code></strong> 文件包含了表的索引，该表的索引（B+ 树）的每个非叶子节点存储索引，叶子节点存储索引和索引对应数据的指针，指向 <strong><code>.MYD</code></strong> 文件的数据。</p>
+<p><strong>非聚集索引的叶子节点并不一定存放数据的指针，因为二级索引的叶子节点就存放的是主键，根据主键再回表查数据。</strong></p>
+</blockquote>
+<p><strong>非聚集索引的优点：</strong></p>
+<p><strong>更新代价比聚集索引要小</strong> 。非聚集索引的更新代价就没有聚集索引那么大了，非聚集索引的叶子节点是不存放数据的。</p>
+<p><strong>非聚集索引的缺点：</strong></p>
+<ol>
+<li>跟聚集索引一样，非聚集索引也依赖于有序的数据。</li>
+<li><strong>可能会二次查询（回表）。</strong>这应该是非聚集索引最大的缺点了。当查到索引对应的指针或主键后，可能还需要根据指针或主键再到数据文件或表中查询。</li>
+</ol>
+<p><img src="https://s1.ax1x.com/2020/04/21/JJzLAf.png" alt="聚集索引和非聚集索引"></p>
+<h4 id="非聚集索引一定回表查询吗（覆盖索引）？"><a href="#非聚集索引一定回表查询吗（覆盖索引）？" class="headerlink" title="非聚集索引一定回表查询吗（覆盖索引）？"></a>非聚集索引一定回表查询吗（覆盖索引）？</h4><p><strong>非聚集索引不一定回表查询。</strong></p>
+<blockquote>
+<p>试想一种情况，用户准备使用SQL查询用户名，而用户名字段正好建立了索引。</p>
+</blockquote>
+<pre class=" language-sql"><code class="language-sql"> <span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> username<span class="token operator">=</span><span class="token string">'guang19'</span><span class="token punctuation">;</span></code></pre>
+<blockquote>
+<p>那么这个索引的 key 本身就是 name ，查到对应的 name 直接返回就行了，无需回表查询。</p>
+</blockquote>
+<p><strong>即使是 MYISAM 也是这样，虽然 MYISAM 的主键索引确实需要回表，因为它的主键索引的叶子节点存放的是指针。但是如果 SQL 查的就是主键呢？</strong></p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> id <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span></code></pre>
+<p>主键索引本身的 key 就是主键，查到返回就行了。这种情况就称之为覆盖索引了。</p>
+<h4 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h4><p>如果一个索引包含（或者说覆盖）所有需要查询的字段的值，我们就称之为“覆盖索引”。我们知道在 InnoDB 存储引擎中，如果不是主键索引，叶子节点存储的是<strong>主键+列值</strong>。最终还是要“回表”，也就是要通过主键再查找一次，这样就会比较慢。<strong>覆盖索引即需要查询的字段正好是索引的字段，那么直接根据该索引，就可以查到数据了，而无需回表查询。</strong></p>
+<p><img src="https://s1.ax1x.com/2020/04/21/JYpVdP.png" alt="覆盖索引"></p>
+<blockquote>
+<p>如主键索引，如果一条 SQL 需要查询主键，那么正好根据主键索引就可以查到主键。</p>
+<p>再如普通索引，如果一条 SQL 需要查询 name ，name 字段正好有索引，那么直接根据这个索引就可以查到数据，也无需回表。</p>
+</blockquote>
+<p>现在我创建了索引（username, age），我们执行下面的 SQL 语句：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> username <span class="token punctuation">,</span> age <span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> username <span class="token operator">=</span> <span class="token string">'Java'</span> <span class="token operator">and</span> age <span class="token operator">=</span> <span class="token number">22</span><span class="token punctuation">;</span></code></pre>
+<p>在查询数据的时候，要查询出的列在叶子节点都存在！所以，就不用回表。</p>
+<h3 id="选择索引和编写利用这些索引的查询的-3-个原则"><a href="#选择索引和编写利用这些索引的查询的-3-个原则" class="headerlink" title="选择索引和编写利用这些索引的查询的 3 个原则"></a>选择索引和编写利用这些索引的查询的 3 个原则</h3><ol>
+<li>单行访问是很慢的。特别是在机械硬盘存储中（ SSD 的随机 I/O 要快很多，不过这一点仍然成立）。如果服务器从存储中读取一个数据块只是为了获取其中一行，那么就浪费了很多工作。最好读取的块中能包含尽可能多所需要的行。使用索引可以创建位置索引，用以提升效率。</li>
+<li>按顺序访问范围数据是很快的，这有两个原因。第一，顺序 I/O 不需要多次磁盘寻道，所以比随机 I/O 要快很多（特别是对机械硬盘）。第二，如果服务器能够按需要顺序读取数据，那么就不再需要额外的排序操作，并且 <strong>GROUP BY</strong> 查询也无须再做排序和将行按组进行聚合计算了。</li>
+<li>覆盖索引查询是很快的。如果一个索引包含了查询需要的所有列，那么存储引擎就不需要再回表查找行。这避免了大量的单行访问，而上面的第 1 点已经写明单行访问是很慢的。</li>
+</ol>
+<h3 id="索引创建原则"><a href="#索引创建原则" class="headerlink" title="索引创建原则"></a>索引创建原则</h3><h4 id="单列索引"><a href="#单列索引" class="headerlink" title="单列索引"></a>单列索引</h4><p>单列索引即由一列属性组成的索引。</p>
+<h4 id="联合索引（多列索引）"><a href="#联合索引（多列索引）" class="headerlink" title="联合索引（多列索引）"></a>联合索引（多列索引）</h4><p>联合索引即由多列属性组成索引。</p>
+<h4 id="最左前缀原则"><a href="#最左前缀原则" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h4><p>假设创建的联合索引由三个字段组成：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> <span class="token keyword">table</span> <span class="token keyword">ADD</span> <span class="token keyword">INDEX</span> index_name <span class="token punctuation">(</span>num<span class="token punctuation">,</span>name<span class="token punctuation">,</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>那么当查询的条件为：<code>num / (num AND name) / (num AND name AND age)</code> 时，索引才生效。所以在创建联合索引时，尽量把查询最频繁的那个字段作为最左（第一个）字段。查询的时候也尽量以这个字段为第一条件。</p>
+<blockquote>
+<p>但可能由于版本原因（我的 MySQL 版本为 8.0.x )或<strong>索引下推</strong>的缘故，我创建的联合索引，相当于在联合索引的每个字段上都创建了相同的索引。</p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2020/04/21/JY949U.png" alt="联合索引"></p>
+<p>无论是否符合<strong>最左前缀原则</strong>，每个字段的索引都生效：</p>
+<p><img src="https://s1.ax1x.com/2020/04/21/JYC4at.png" alt="联合索引生效"></p>
+<h3 id="索引创建注意点"><a href="#索引创建注意点" class="headerlink" title="索引创建注意点"></a>索引创建注意点</h3><h4 id="最左前缀原则-1"><a href="#最左前缀原则-1" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h4><p>虽然有时不遵守最左前缀原则，索引也会生效。但是我们仍应遵守最左前缀原则，以免版本更迭带来的麻烦。</p>
+<h4 id="选择合适的字段"><a href="#选择合适的字段" class="headerlink" title="选择合适的字段"></a>选择合适的字段</h4><h5 id="1-不为-NULL-的字段"><a href="#1-不为-NULL-的字段" class="headerlink" title="1.不为 NULL 的字段"></a><strong>1.不为 NULL 的字段</strong></h5><p>索引字段的数据应该尽量不为 NULL ，因为对于数据为 NULL 的字段，数据库较难优化。如果字段频繁被查询，但又避免不了为 NULL ，建议使用 0, 1, true, false 这样语义较为清晰的短值或短字符作为替代。</p>
+<h5 id="2-被频繁查询的字段"><a href="#2-被频繁查询的字段" class="headerlink" title="2.被频繁查询的字段"></a>2.被频繁查询的字段</h5><p>我们创建索引的字段应该是查询操作非常频繁的字段。</p>
+<h5 id="3-被作为条件查询的字段"><a href="#3-被作为条件查询的字段" class="headerlink" title="3.被作为条件查询的字段"></a>3.被作为条件查询的字段</h5><p>被作为 WHERE 条件查询的字段，应该被考虑建立索引。</p>
+<h5 id="4-被经常频繁用于连接的字段"><a href="#4-被经常频繁用于连接的字段" class="headerlink" title="4.被经常频繁用于连接的字段"></a>4.被经常频繁用于连接的字段</h5><p>经常用于连接的字段可能是一些外键列，对于外键列并不一定要建立外键，只是说该列涉及到表与表的关系。对于频繁被连接查询的字段，可以考虑建立索引，提高多表连接查询的效率。</p>
+<h4 id="不合适创建索引的字段"><a href="#不合适创建索引的字段" class="headerlink" title="不合适创建索引的字段"></a>不合适创建索引的字段</h4><h5 id="1-被频繁更新的字段应该慎重建立索引"><a href="#1-被频繁更新的字段应该慎重建立索引" class="headerlink" title="1.被频繁更新的字段应该慎重建立索引"></a>1.被频繁更新的字段应该慎重建立索引</h5><p>虽然索引能带来查询上的效率，但是维护索引的成本也是不小的。如果一个字段不被经常查询，反而被经常修改，那么就更不应该在这种字段上建立索引了。</p>
+<h5 id="2-不被经常查询的字段没有必要建立索引"><a href="#2-不被经常查询的字段没有必要建立索引" class="headerlink" title="2.不被经常查询的字段没有必要建立索引"></a>2.不被经常查询的字段没有必要建立索引</h5><h5 id="3-尽可能的考虑建立联合索引而不是单列索引"><a href="#3-尽可能的考虑建立联合索引而不是单列索引" class="headerlink" title="3.尽可能的考虑建立联合索引而不是单列索引"></a>3.尽可能的考虑建立联合索引而不是单列索引</h5><p>因为索引是需要占用磁盘空间的，可以简单理解为每个索引都对应着一颗 B+ 树。如果一个表的字段过多，索引过多，那么当这个表的数据达到一个体量后，索引占用的空间也是很多的，且修改索引时，耗费的时间也是较多的。如果是联合索引，多个字段在一个索引上，那么将会节约很大磁盘空间，且修改数据的操作效率也会提升。</p>
+<h5 id="4-注意避免冗余索引"><a href="#4-注意避免冗余索引" class="headerlink" title="4.注意避免冗余索引"></a>4.注意避免冗余索引</h5><p>冗余索引指的是索引的功能相同，能够命中就肯定能命中 ，那么就是冗余索引。如（ name, city ）和（name ）这两个索引就是冗余索引，能够命中后者的查询肯定是能够命中前者的。在大多数情况下，都应该尽量扩展已有的索引而不是创建新索引。</p>
+<blockquote>
+<p>MySQL 5.7 版本后，可以通过查询 sys 库的 <code>schema_redundant_indexes</code> 表来查看冗余索引。  </p>
+</blockquote>
+<h5 id="5-考虑在字符串类型的字段上使用前缀索引代替普通索引"><a href="#5-考虑在字符串类型的字段上使用前缀索引代替普通索引" class="headerlink" title="5.考虑在字符串类型的字段上使用前缀索引代替普通索引"></a>5.考虑在字符串类型的字段上使用前缀索引代替普通索引</h5><p>前缀索引仅限于字符串类型，较普通索引会占用更小的空间，所以可以考虑使用前缀索引带替普通索引。</p>
+<h3 id="使用索引一定能提高查询性能吗？"><a href="#使用索引一定能提高查询性能吗？" class="headerlink" title="使用索引一定能提高查询性能吗？"></a>使用索引一定能提高查询性能吗？</h3><p>大多数情况下，索引查询都是比全表扫描要快的。但是如果数据库的数据量不大，那么使用索引也不一定能够带来很大提升。</p>
+<h3 id="为什么索引能提高查询速度？"><a href="#为什么索引能提高查询速度？" class="headerlink" title="为什么索引能提高查询速度？"></a>为什么索引能提高查询速度？</h3><blockquote>
+<p>以下内容整理自：<br>地址：<a href="https://juejin.im/post/5b55b842f265da0f9e589e79" target="_blank" rel="noopener">数据库两大神器【索引和锁】</a><br>作者 ：Java3y</p>
+</blockquote>
+<h4 id="先从-MySQL-的基本存储结构说起"><a href="#先从-MySQL-的基本存储结构说起" class="headerlink" title="先从 MySQL 的基本存储结构说起"></a>先从 MySQL 的基本存储结构说起</h4><p>MySQL 的基本存储结构是<strong>页</strong>（记录都存在页里边）：</p>
+<p><img src="https://s1.ax1x.com/2020/04/22/JYkdSK.png" alt="MySQL 的基本存储结构"></p>
+<p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-10-2/82053134.jpg" alt=""></p>
+<ul>
+<li><strong>各个数据页可以组成一个双向链表。</strong></li>
+<li><strong>每个数据页中的记录又可以组成一个单向链表。</strong><ul>
+<li>每个数据页都会为存储在它里边儿的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录。</li>
+<li>以其他列（非主键）作为搜索条件：只能从最小记录开始依次遍历单链表中的每条记录。</li>
+</ul>
+</li>
+</ul>
+<p>所以说，如果我们写 <code>select * from user where indexName = &#39;xxx&#39;;</code> 这样没有进行任何优化的 SQL 语句，默认会这样做：</p>
+<ol>
+<li><strong>定位到记录所在的页：需要遍历双向链表，找到所在的页。</strong></li>
+<li><strong>从所在的页内中查找相应的记录：由于不是根据主键查询，只能遍历所在页的单链表了。</strong></li>
+</ol>
+<p>很明显，在数据量很大的情况下这样查找会很慢！这样的时间复杂度为 O（n）。</p>
+<h4 id="使用索引之后"><a href="#使用索引之后" class="headerlink" title="使用索引之后"></a>使用索引之后</h4><p>索引做了些什么可以让我们查询加快速度呢？其实就是将无序的数据变成有序（相对）：</p>
+<p><img src="https://s1.ax1x.com/2020/04/22/JYA8c8.png" alt="MySQL 索引"></p>
+<p>要找到 id 为 8 的记录简要步骤：</p>
+<p><img src="https://s1.ax1x.com/2020/04/22/JYAsjU.png" alt="寻找步骤示例"></p>
+<p>很明显的是：没有用索引我们是需要遍历双向链表来定位对应的页，现在通过 <strong>“目录”</strong> 就可以很快地定位到对应的页上了！（二分查找，时间复杂度近似为 O(logn) ）</p>
+<p>其实底层结构就是 B+ 树，B+ 树作为树的一种实现，能够让我们很快地查找出对应的记录。</p>
+<h3 id="关于索引其他重要的内容补充"><a href="#关于索引其他重要的内容补充" class="headerlink" title="关于索引其他重要的内容补充"></a>关于索引其他重要的内容补充</h3><blockquote>
+<p>以下内容整理自：《 Java 工程师修炼之道》</p>
+</blockquote>
+<h4 id="最左前缀原则-2"><a href="#最左前缀原则-2" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h4><p>MySQL中的索引可以以一定顺序引用多列，这种索引叫作联合索引。如 User 表的 name 和 city 加联合索引就是（name, city），而最左前缀原则指的是，如果查询的时候查询条件精确匹配索引的左边连续一列或几列，则此列就可以被用到。如下：        </p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> name<span class="token operator">=</span>xx <span class="token operator">and</span> city<span class="token operator">=</span>xx <span class="token punctuation">;</span> ／／可以命中索引
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> name<span class="token operator">=</span>xx <span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 可以命中索引</span>
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> city<span class="token operator">=</span>xx <span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 无法命中索引            </span></code></pre>
+<p>这里需要注意的是，查询的时候如果两个条件都用上了，但是顺序不同，如 <code>city= xx and name ＝xx</code>，那么现在的查询引擎会自动优化为匹配联合索引的顺序，这样是能够命中索引的。</p>
+<p>由于最左前缀原则，在创建联合索引时，索引字段的顺序需要考虑字段值去重之后的个数，较多的放前面。ORDER BY 子句也遵循此规则。</p>
+<h4 id="注意避免冗余索引"><a href="#注意避免冗余索引" class="headerlink" title="注意避免冗余索引"></a>注意避免冗余索引</h4><p>冗余索引指的是索引的功能相同，能够命中就肯定能命中 ，那么就是冗余索引。如（ name, city ）和（name ）这两个索引就是冗余索引，能够命中后者的查询肯定是能够命中前者的。在大多数情况下，都应该尽量扩展已有的索引而不是创建新索引。</p>
+<blockquote>
+<p>MySQL 5.7 版本后，可以通过查询 sys 库的 <code>schema_redundant_indexes</code> 表来查看冗余索引。             </p>
+</blockquote>
+<h3 id="MySQL-如何为表字段添加索引？"><a href="#MySQL-如何为表字段添加索引？" class="headerlink" title="MySQL 如何为表字段添加索引？"></a>MySQL 如何为表字段添加索引？</h3><p>1.添加 PRIMARY KEY（主键索引）</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> <span class="token punctuation">`</span>table_name<span class="token punctuation">`</span> <span class="token keyword">ADD</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span> <span class="token punctuation">`</span><span class="token keyword">column</span><span class="token punctuation">`</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span></code></pre>
+<p>2.添加 UNIQUE（唯一索引） </p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> <span class="token punctuation">`</span>table_name<span class="token punctuation">`</span> <span class="token keyword">ADD</span> <span class="token keyword">UNIQUE</span> <span class="token punctuation">(</span> <span class="token punctuation">`</span><span class="token keyword">column</span><span class="token punctuation">`</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span></code></pre>
+<p>3.添加 INDEX（普通索引）</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> <span class="token punctuation">`</span>table_name<span class="token punctuation">`</span> <span class="token keyword">ADD</span> <span class="token keyword">INDEX</span> index_name <span class="token punctuation">(</span> <span class="token punctuation">`</span><span class="token keyword">column</span><span class="token punctuation">`</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>4.添加 FULLTEXT（全文索引）</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> <span class="token punctuation">`</span>table_name<span class="token punctuation">`</span> <span class="token keyword">ADD</span> FULLTEXT <span class="token punctuation">(</span> <span class="token punctuation">`</span><span class="token keyword">column</span><span class="token punctuation">`</span><span class="token punctuation">)</span> <span class="token punctuation">;</span></code></pre>
+<p>5.添加多列索引</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> <span class="token punctuation">`</span>table_name<span class="token punctuation">`</span> <span class="token keyword">ADD</span> <span class="token keyword">INDEX</span> index_name <span class="token punctuation">(</span> <span class="token punctuation">`</span>column1<span class="token punctuation">`</span><span class="token punctuation">,</span> <span class="token punctuation">`</span>column2<span class="token punctuation">`</span><span class="token punctuation">,</span> <span class="token punctuation">`</span>column3<span class="token punctuation">`</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>《Java工程师修炼之道》</li>
+<li>《MySQL高性能书籍_第3版》</li>
+<li><a href="https://juejin.im/post/5b55b842f265da0f9e589e79" target="_blank" rel="noopener">https://juejin.im/post/5b55b842f265da0f9e589e79</a></li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com" rel="external nofollow noreferrer">wenjun</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-suo-yin-zong-jie/">https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-suo-yin-zong-jie/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.niewenjun.com" target="_blank">wenjun</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/04/21/shu-ju-ku/mysql-suo-yin-zong-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="MySQL索引总结">
+                        
+                        <span class="card-title">MySQL索引总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MySQL 索引总结什么是索引？索引是一种用于快速查询和检索数据的数据结构。常见的索引结构有：B 树、B+ 树和 Hash 。
+索引的作用就相当于目录的作用。打个比方：我们在查字典的时候，如果没有目录，那我们就只能一页一页的去找我们需要查的
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/21/shu-ju-ku/mysql-chang-jian-wen-ti-zong-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="MySQL常见问题总结">
+                        
+                        <span class="card-title">MySQL常见问题总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MySQL 常见问题总结什么是 MySQL ？MySQL 是一种关系型数据库，在 Java 企业级开发中非常常用，因为 MySQL 是开源免费的，并且方便扩展。阿里巴巴数据库系统也大量用到了 MySQL ，因此它的稳定性是有保障的。MySQ
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.niewenjun.com" target="_blank"></a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "4";
+                    var startDate = "12";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wenjunnie" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1287018840@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1287018840" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1287018840" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

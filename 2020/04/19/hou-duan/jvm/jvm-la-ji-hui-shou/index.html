@@ -722,7 +722,7 @@ if (total > desired_survivor_size) break;
 <p><strong>如何找到 GC Roots ？</strong>通过采用一个 <strong>OopMap</strong> 的数据结构来记录系统中存活的 <strong>GC Roots</strong> ，在类加载完成的时候，虚拟机就把对象内什么偏移量上是什么类型的数据计算出来保存在 <strong>OopMap</strong> ，通过解释 <strong>OopMap</strong> 就可以找到堆中的对象，这些对象就是 <strong>GC Roots</strong> 。而不需要一个一个的去判断某个内存位置的值是不是引用。这种方式也叫<strong>准确式 GC</strong> 。</p>
 </blockquote>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>《深入理解 Java 虚拟机：JVM 高级特性与最佳实践（第二版》</li>
+<li>《深入理解 Java 虚拟机：JVM 高级特性与最佳实践（第二版）》</li>
 <li><a href="https://my.oschina.net/hosee/blog/644618" target="_blank" rel="noopener">https://my.oschina.net/hosee/blog/644618</a></li>
 <li><a href="https://docs.oracle.com/javase/specs/jvms/se8/html/index.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/specs/jvms/se8/html/index.html</a></li>
 </ul>
