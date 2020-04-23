@@ -6,10 +6,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-21T16:34:04.068Z</updated>
+  <updated>2020-04-23T08:56:07.805Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis基础</title>
+    <link href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/"/>
+    <id>https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/</id>
+    <published>2020-04-22T03:56:00.000Z</published>
+    <updated>2020-04-23T08:56:07.805Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Redis-基础&quot;&gt;&lt;a href=&quot;#Redis-基础&quot; class=&quot;headerlink&quot; title=&quot;Redis 基础&quot;&gt;&lt;/a&gt;Redis 基础&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Redis&lt;/strong&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL索引总结</title>
@@ -548,35 +577,6 @@
         
         
           &lt;h2 id=&quot;HashMap-简介&quot;&gt;&lt;a href=&quot;#HashMap-简介&quot; class=&quot;headerlink&quot; title=&quot;HashMap 简介&quot;&gt;&lt;/a&gt;HashMap 简介&lt;/h2&gt;&lt;p&gt;HashMap
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LinkedList</title>
-    <link href="https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/linkedlist/"/>
-    <id>https://www.niewenjun.com/2020/04/14/hou-duan/ji-he/linkedlist/</id>
-    <published>2020-04-14T03:15:00.000Z</published>
-    <updated>2020-04-14T05:48:10.463Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;LinkedList简介&quot;&gt;&lt;a href=&quot;#LinkedList简介&quot; class=&quot;headerlink&quot; title=&quot;LinkedList简介&quot;&gt;&lt;/a&gt;&lt;font face=&quot;楷体&quot;
         
       
     
