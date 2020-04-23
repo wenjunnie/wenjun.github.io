@@ -503,7 +503,7 @@
 <h3 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h3><blockquote>
 <p>一个大腹便便，穿着格子衬衣的中年男子，拿着一个满是划痕的 Mac 向你走来，看着快秃顶的头发，心想着肯定是尼玛顶级架构师吧！但是我们腹有诗书气自华，虚都不虚。</p>
 </blockquote>
-<p> ![](<a href="https://s1.ax1x.com/2020/04/23/JdyFeA.png" target="_blank" rel="noopener">https://s1.ax1x.com/2020/04/23/JdyFeA.png</a></p>
+<p> <img src="https://s1.ax1x.com/2020/04/23/JdyFeA.png" alt=""></p>
 <h3 id="小伙子您好，看你简历上写了你项目里面用到了-Redis-，你们为啥用-Redis-？"><a href="#小伙子您好，看你简历上写了你项目里面用到了-Redis-，你们为啥用-Redis-？" class="headerlink" title="小伙子您好，看你简历上写了你项目里面用到了 Redis ，你们为啥用 Redis ？"></a>小伙子您好，看你简历上写了你项目里面用到了 Redis ，你们为啥用 Redis ？</h3><p>心里忍不住暗骂，这叫啥问题，大家不都是用的这个嘛，但是你不能说出来。</p>
 <p>认真回答道：<strong>帅气迷人的面试官您好</strong>，因为传统的关系型数据库如 MySQL 已经不能适用所有的场景了，比如秒杀的库存扣减，APP 首页的访问流量高峰等等，都很容易把数据库打崩，所以引入了缓存中间件，目前市面上比较常用的缓存中间件有 <strong>Redis</strong> 和 <strong>Memcached</strong> 。不过综和考虑了他们的优缺点，最后选择了 Redis 。</p>
 <p><strong>至于更细节的对比朋友们记得查阅 Redis 和 Memcached 的区别，比如两者的优缺点对比和各自的场景，后续我有时间也会写出来。</strong></p>
@@ -785,30 +785,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/22/shu-ju-ku/redis-ji-chu/">
+                <a href="/2020/04/23/shu-ju-ku/redis-shu-ju-jie-gou-di-ceng-yuan-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Redis基础">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Redis数据结构底层原理">
                         
-                        <span class="card-title">Redis基础</span>
+                        <span class="card-title">Redis数据结构底层原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis 基础Redis 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 Redis 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（请允许我使用一下夸张的修辞手法
+                            Redis 数据结构底层原理简单动态字符串（SDS）Redis 是用 C 语言写的，但是 C 语言处理字符串和数组的成本是很高的，下面我分别说几个例子。
+
+极其容易造成缓冲区溢出问题。比如用 strcat() ，在用这个函数之前必须要先给目
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -821,7 +822,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
