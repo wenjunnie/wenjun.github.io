@@ -6,10 +6,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-24T08:00:29.881Z</updated>
+  <updated>2020-04-24T11:39:20.642Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis集群、持久化、LRU</title>
+    <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/"/>
+    <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/</id>
+    <published>2020-04-24T10:54:00.000Z</published>
+    <updated>2020-04-24T11:39:20.642Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Redis-集群、哨兵、持久化、LRU&quot;&gt;&lt;a href=&quot;#Redis-集群、哨兵、持久化、LRU&quot; class=&quot;headerlink&quot; title=&quot;Redis 集群、哨兵、持久化、LRU&quot;&gt;&lt;/a&gt;Redis 集群、哨兵、持久化、LRU&lt;/h2&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>布隆过滤器（Bloom Filter）</title>
@@ -45,7 +74,7 @@
     <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/"/>
     <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/</id>
     <published>2020-04-24T03:54:00.000Z</published>
-    <updated>2020-04-24T08:09:05.144Z</updated>
+    <updated>2020-04-24T08:25:07.752Z</updated>
     
     <summary type="html">
     
@@ -560,35 +589,6 @@
       <category term="微服务" scheme="https://www.niewenjun.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
       <category term="RPC" scheme="https://www.niewenjun.com/tags/RPC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java并发容器总结</title>
-    <link href="https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-bing-fa-rong-qi-zong-jie/"/>
-    <id>https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-bing-fa-rong-qi-zong-jie/</id>
-    <published>2020-04-15T16:31:00.000Z</published>
-    <updated>2020-04-16T02:35:33.985Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;一-JDK-提供的并发容器总结&quot;&gt;&lt;a href=&quot;#一-JDK-提供的并发容器总结&quot; class=&quot;headerlink&quot; title=&quot;一 JDK 提供的并发容器总结&quot;&gt;&lt;/a&gt;一 JDK 提供的并发容器总结&lt;/h2&gt;&lt;p&gt;JDK 提供的这些容器大部分在
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   
