@@ -6,10 +6,68 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-23T12:40:05.480Z</updated>
+  <updated>2020-04-24T08:00:29.881Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>布隆过滤器（Bloom Filter）</title>
+    <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/"/>
+    <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/</id>
+    <published>2020-04-24T08:00:00.000Z</published>
+    <updated>2020-04-24T08:00:29.881Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;避免缓存穿透的利器之-Bloom-Filter&quot;&gt;&lt;a href=&quot;#避免缓存穿透的利器之-Bloom-Filter&quot; class=&quot;headerlink&quot; title=&quot;避免缓存穿透的利器之 Bloom Filter&quot;&gt;&lt;/a&gt;避免缓存穿透的利器之 Bloom
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis缓存雪崩、穿透、击穿</title>
+    <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/"/>
+    <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/</id>
+    <published>2020-04-24T03:54:00.000Z</published>
+    <updated>2020-04-24T08:09:05.144Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Redis-缓存雪崩、穿透、击穿&quot;&gt;&lt;a href=&quot;#Redis-缓存雪崩、穿透、击穿&quot; class=&quot;headerlink&quot; title=&quot;Redis 缓存雪崩、穿透、击穿&quot;&gt;&lt;/a&gt;Redis 缓存雪崩、穿透、击穿&lt;/h2&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis数据结构底层原理</title>
@@ -45,7 +103,7 @@
     <link href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/"/>
     <id>https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/</id>
     <published>2020-04-22T03:56:00.000Z</published>
-    <updated>2020-04-23T09:57:17.340Z</updated>
+    <updated>2020-04-24T08:06:15.380Z</updated>
     
     <summary type="html">
     
@@ -531,64 +589,6 @@
       <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
     
       <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java集合框架常见面试题</title>
-    <link href="https://www.niewenjun.com/2020/04/15/hou-duan/ji-he/java-ji-he-kuang-jia-chang-jian-mian-shi-ti/"/>
-    <id>https://www.niewenjun.com/2020/04/15/hou-duan/ji-he/java-ji-he-kuang-jia-chang-jian-mian-shi-ti/</id>
-    <published>2020-04-15T02:39:00.000Z</published>
-    <updated>2020-04-15T17:19:07.142Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;剖析面试最常见问题之Java集合框架&quot;&gt;&lt;a href=&quot;#剖析面试最常见问题之Java集合框架&quot; class=&quot;headerlink&quot; title=&quot;剖析面试最常见问题之Java集合框架&quot;&gt;&lt;/a&gt;剖析面试最常见问题之Java集合框架&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="集合" scheme="https://www.niewenjun.com/tags/%E9%9B%86%E5%90%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LRU算法</title>
-    <link href="https://www.niewenjun.com/2020/04/14/suan-fa/lru-suan-fa/"/>
-    <id>https://www.niewenjun.com/2020/04/14/suan-fa/lru-suan-fa/</id>
-    <published>2020-04-14T08:36:00.000Z</published>
-    <updated>2020-04-14T08:37:00.148Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;LRU算法&quot;&gt;&lt;a href=&quot;#LRU算法&quot; class=&quot;headerlink&quot; title=&quot;LRU算法&quot;&gt;&lt;/a&gt;LRU算法&lt;/h2&gt;&lt;h3 id=&quot;LinkedHashMap实现LRU&quot;&gt;&lt;a href=&quot;#LinkedHashMap实现LRU&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://www.niewenjun.com/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="算法" scheme="https://www.niewenjun.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis基础, Wenjun">
+    <meta name="keywords" content="Redis缓存雪崩、穿透、击穿, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Redis基础 | Wenjun</title>
+    <title>Redis缓存雪崩、穿透、击穿 | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Redis基础</h1>
+                    <h1 class="description center-align post-title">Redis缓存雪崩、穿透、击穿</h1>
                 </div>
             </div>
         </div>
@@ -468,7 +468,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-22
+                    2020-04-24
                 </div>
                 
 
@@ -477,7 +477,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.2k
+                    3.4k
                 </div>
                 
 
@@ -499,56 +499,60 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Redis-基础"><a href="#Redis-基础" class="headerlink" title="Redis 基础"></a>Redis 基础</h2><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis</strong> 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（<strong>请允许我使用一下夸张的修辞手法</strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写《吊打面试官》系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚铩羽而归，疯狂收割大厂 offer ！</p>
+                <h2 id="Redis-缓存雪崩、穿透、击穿"><a href="#Redis-缓存雪崩、穿透、击穿" class="headerlink" title="Redis 缓存雪崩、穿透、击穿"></a>Redis 缓存雪崩、穿透、击穿</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis **的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（</strong>请允许我使用一下夸张的修辞手法<strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写</strong>《吊打面试官》**系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚瞠目结舌，疯狂收割大厂 offer ！</p>
+<h3 id="一点感慨"><a href="#一点感慨" class="headerlink" title="一点感慨"></a>一点感慨</h3><p>本来都把稿子放到公众号保存了，洗澡的时候想了一下晚上的比赛，觉得还是打开电脑写点东西，跟文章内容没关系，只是一点个人的感慨，不知道多少小伙伴看了 <strong>SKT VS G2</strong> 的比赛，又不知道多少小伙伴还记得 <strong>Faker</strong> 手抖的那一幕。</p>
+<p> <img src="https://s1.ax1x.com/2020/04/24/JBSLJs.gif" alt=""></p>
+<p>不知道你们看了是什么感受，我看到他手抖的时候我内心也抖了，世界赛我支持的都是 <strong>LPL</strong> 的队伍，但是我喜欢李哥这个人，那种对胜利的执著，这么多年了那种坚持自己的坚持，这么多利益诱惑在面前却只想要胜利，这样的人我好喜欢啊，我想很多人也喜欢。</p>
+<p>可能就像很多网友说的那样，英雄迟暮，但是我觉得他还是有点东西，就像很多人说我们程序员只能吃年轻饭一样，但是如果你坚持自己的坚持，做个腹有诗书气自华的仔，我想最后肯定会得到自己的得到。</p>
+<p>好了我也不煽情了，我们开始讲技术吧。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>上一期吊打系列我们提到了 Redis 的基础知识，还没看的小伙伴可以回顾一下：<a href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu">《吊打面试官》系列-Redis基础</a></p>
+<p>那提到 <strong>Redis</strong> 我相信各位在面试，或者实际开发过程中对缓存<strong>雪崩</strong>，<strong>穿透</strong>，<strong>击穿</strong>也不陌生吧，就算没遇到过但是你肯定听过，那三者到底有什么区别，我们又应该怎么去防止这样的情况发生呢，我们有请下一位受害者。</p>
 <h3 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h3><blockquote>
 <p>一个大腹便便，穿着格子衬衣的中年男子，拿着一个满是划痕的 Mac 向你走来，看着快秃顶的头发，心想着肯定是尼玛顶级架构师吧！但是我们腹有诗书气自华，虚都不虚。</p>
 </blockquote>
-<p> <img src="https://s1.ax1x.com/2020/04/23/JdyFeA.png" alt=""></p>
-<h3 id="小伙子您好，看你简历上写了你项目里面用到了-Redis-，你们为啥用-Redis-？"><a href="#小伙子您好，看你简历上写了你项目里面用到了-Redis-，你们为啥用-Redis-？" class="headerlink" title="小伙子您好，看你简历上写了你项目里面用到了 Redis ，你们为啥用 Redis ？"></a>小伙子您好，看你简历上写了你项目里面用到了 Redis ，你们为啥用 Redis ？</h3><p>心里忍不住暗骂，这叫啥问题，大家不都是用的这个嘛，但是你不能说出来。</p>
-<p>认真回答道：<strong>帅气迷人的面试官您好</strong>，因为传统的关系型数据库如 MySQL 已经不能适用所有的场景了，比如秒杀的库存扣减，APP 首页的访问流量高峰等等，都很容易把数据库打崩，所以引入了缓存中间件，目前市面上比较常用的缓存中间件有 <strong>Redis</strong> 和 <strong>Memcached</strong> 。不过综和考虑了他们的优缺点，最后选择了 Redis 。</p>
-<p><strong>至于更细节的对比朋友们记得查阅 Redis 和 Memcached 的区别，比如两者的优缺点对比和各自的场景，后续我有时间也会写出来。</strong></p>
-<h3 id="那小伙子，我再问你，Redis-有哪些数据结构呀？"><a href="#那小伙子，我再问你，Redis-有哪些数据结构呀？" class="headerlink" title="那小伙子，我再问你，Redis 有哪些数据结构呀？"></a>那小伙子，我再问你，Redis 有哪些数据结构呀？</h3><p>字符串 <strong><code>String</code></strong> 、字典 <strong><code>Hash</code></strong> 、列表 <strong><code>List</code></strong> 、集合 <strong><code>Set</code></strong> 、有序集合 <strong><code>SortedSet（Zset）</code></strong>。</p>
-<p><strong>这里我相信 99% 的读者都能回答上来 Redis 的5个基本数据类型。如果回答不出来的小伙伴我们就要加油补课哟，大家知道五种类型最适合的场景更好。</strong></p>
-<p>但是，如果你是 Redis 中高级用户，而且你要在这次面试中突出你和其他候选人的不同，还需要加上下面几种数据结构 HyperLogLog、Geo、Pub/Sub 。</p>
-<p>如果你还想加分，那你说还玩过 Redis Module，像 BloomFilter，RedisSearch，Redis-ML，这个时候面试官得眼睛就开始发亮了，心想这个小伙子<strong>有点东西啊</strong>。</p>
+<p> <img src="https://s1.ax1x.com/2020/04/24/JBifDx.jpg" alt=""></p>
+<h3 id="小伙子我看你的简历上写到了-Redis-，那么我们直接开门见山，直接怼常见的几个大问题，Redis-雪崩了解么？"><a href="#小伙子我看你的简历上写到了-Redis-，那么我们直接开门见山，直接怼常见的几个大问题，Redis-雪崩了解么？" class="headerlink" title="小伙子我看你的简历上写到了 Redis ，那么我们直接开门见山，直接怼常见的几个大问题，Redis 雪崩了解么？"></a>小伙子我看你的简历上写到了 Redis ，那么我们直接开门见山，直接怼常见的几个大问题，Redis 雪崩了解么？</h3><p>帅气迷人的面试官您好，我了解的，目前电商首页以及热点数据都会去做缓存 ，一般缓存都是定时任务去刷新，或者是查不到之后去更新的，定时任务刷新就有一个问题。</p>
+<p><strong>举个简单的例子：</strong>如果所有首页的 Key 失效时间都是 12 小时，中午 12 点刷新的，我零点有个秒杀活动大量用户涌入，假设当时每秒 6000 个请求，本来缓存在可以扛住每秒 5000 个请求，但是缓存当时所有的 Key 都失效了。此时 1 秒 6000 个请求全部落数据库，数据库必然扛不住，它会报一下警，真实情况可能 DBA 都没反应过来就直接挂了。此时，如果没用什么特别的方案来处理这个故障，DBA 很着急，重启数据库，但是数据库立马又被新的流量给打死了。这就是我理解的缓存雪崩。</p>
+<p><strong>我刻意看了下我做过的项目感觉再吊的都不允许这么大的 QPS 直接打 DB 去，不过没慢 SQL 加上分库，大表分表可能还还算能顶，但是跟用了 Redis 的差距还是很大。</strong></p>
+<p> <img src="https://s1.ax1x.com/2020/04/24/JBEixH.png" alt="缓存雪崩"></p>
+<p><strong>同一时间大面积失效，那一瞬间 Redis 跟没有一样，那这个数量级别的请求直接打到数据库几乎是灾难性的，你想想如果打挂的是一个用户服务的库，那其他依赖他的库所有的接口几乎都会报错，如果没做熔断等策略基本上就是瞬间挂一片的节奏，你怎么重启用户都会把你打挂，等你能重启的时候，用户早就睡觉去了，并且对你的产品失去了信心，什么垃圾产品。</strong></p>
+<h3 id="面试官摸了摸自己的头发，嗯还不错，那这种情况咋整？你都是怎么去应对的？"><a href="#面试官摸了摸自己的头发，嗯还不错，那这种情况咋整？你都是怎么去应对的？" class="headerlink" title="面试官摸了摸自己的头发，嗯还不错，那这种情况咋整？你都是怎么去应对的？"></a>面试官摸了摸自己的头发，嗯还不错，那这种情况咋整？你都是怎么去应对的？</h3><p>处理缓存雪崩简单，在批量往 <strong>Redis</strong> 存数据的时候，把每个 Key 的失效时间都加个随机值就好了，这样可以保证数据不会在同一时间大面积失效，我相信，Redis 这点流量还是顶得住的。</p>
+<pre class=" language-java"><code class="language-java"> <span class="token function">setRedis</span><span class="token punctuation">(</span>Key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> time <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10000</span><span class="token punctuation">)</span>；</code></pre>
+<p>如果 <strong>Redis</strong> 是集群部署，将热点数据均匀分布在不同的 <strong>Redis</strong> 库中也能避免全部失效的问题，不过本渣我在生产环境中操作集群的时候，单个服务都是对应的单个 <strong>Redis</strong> 分片，是为了方便数据的管理，但是也同样有了可能会失效这样的弊端，失效时间随机是个好策略。</p>
+<p>或者设置热点数据永远不过期，有更新操作就更新缓存就好了（比如运维更新了首页商品，那你刷下缓存就完事了，不要设置过期时间），电商首页的数据也可以用这个操作，保险。</p>
+<h3 id="那你了解缓存穿透和击穿么，可以说说他们跟雪崩的区别么？"><a href="#那你了解缓存穿透和击穿么，可以说说他们跟雪崩的区别么？" class="headerlink" title="那你了解缓存穿透和击穿么，可以说说他们跟雪崩的区别么？"></a>那你了解缓存穿透和击穿么，可以说说他们跟雪崩的区别么？</h3><p>嗯，了解，我先说一下缓存穿透吧，缓存穿透是指缓存和数据库中都没有的数据，而用户不断发起请求，我们数据库的 id 都是 1 开始自增上去的，如发起为id值为 <strong>-1</strong> 的数据或 id 为特别大不存在的数据。这时的用户很可能是攻击者，攻击会导致数据库压力过大，严重会击垮数据库。</p>
+<p> <img src="https://s1.ax1x.com/2020/04/24/JBLHSK.png" alt="缓存穿透"></p>
+<p><strong>像这种你如果不对参数做校验，数据库 id 都是大于 0 的，我一直用小于 0 的参数去请求你，每次都能绕开 Redis 直接打到数据库，数据库也查不到，每次都这样，并发高点就容易崩掉了。</strong></p>
+<p>至于<strong>缓存击穿</strong>嘛，这个跟<strong>缓存雪崩</strong>有点像，但是又有一点不一样，缓存雪崩是因为大面积的缓存失效，打崩了 DB ，而缓存击穿不同的是<strong>缓存击穿</strong>是指一个 Key 非常热点，在不停的扛着大并发，大并发集中对这一个点进行访问，当这个 Key 在失效的瞬间，持续的大并发就穿破缓存，直接请求数据库，就像在一个完好无损的桶上凿开了一个洞。</p>
+<p><img src="https://s1.ax1x.com/2020/04/24/JBOAmQ.jpg" alt="缓存击穿"></p>
+<h3 id="面试官露出欣慰的眼光，那他们分别怎么解决？"><a href="#面试官露出欣慰的眼光，那他们分别怎么解决？" class="headerlink" title="面试官露出欣慰的眼光，那他们分别怎么解决？"></a>面试官露出欣慰的眼光，那他们分别怎么解决？</h3><p><strong>缓存穿透</strong>我会在<strong>接口层增加校验</strong>，比如用户鉴权校验，参数做校验，不合法的参数直接代码 Return ，比如：id 做基础校验，id &lt;= 0 的直接拦截等。</p>
+<p><strong>这里我想提的一点就是，我们在开发程序的时候都要有一颗“不信任”的心，就是不要相信任何调用方，比如你提供了 API 接口出去，你有这几个参数，那我觉得作为被调用方，任何可能的参数情况都应该被考虑到，做校验，因为你不相信调用你的人，你不知道他会传什么参数给你。</strong></p>
+<p><strong>举个简单的例子，你这个接口是分页查询的，但是你没对分页参数的大小做限制，调用的人万一一口气查 <code>Integer.MAX_VALUE</code> ，一次请求就要你几秒，多几个并发你不就挂了么？是公司同事调用还好大不了发现了改掉，但是如果是黑客或者竞争对手呢？在你双十一当天就调你这个接口会发生什么，就不用我说了吧。</strong></p>
+<p>从缓存取不到的数据，在数据库中也没有取到，这时也可以将对应 Key 的 Value 对写为 null 、位置错误、稍后重试这样的值具体取啥问产品，或者看具体的场景，缓存有效时间可以设置短点，如 30 秒（设置太长会导致正常情况也没法使用）。</p>
+<p>这样可以防止攻击用户反复用同一个 id 暴力攻击，但是我们要知道正常用户是不会在单秒内发起这么多次请求的，那网关层 <strong><code>Nginx</code></strong> 本渣我也记得有配置项，可以让运维大大对单个 IP 每秒访问次数超出阈值的 IP 都拉黑。</p>
+<h3 id="那你还有别的办法么？"><a href="#那你还有别的办法么？" class="headerlink" title="那你还有别的办法么？"></a>那你还有别的办法么？</h3><p>还有我记得 <strong>Redis</strong> 还有一个高级用法<strong>布隆过滤器（Bloom Filter）</strong>这个也能很好的防止缓存穿透的发生，他的原理也很简单就是利用高效的数据结构和算法快速判断出你这个 Key 是否在数据库中存在，不存在你 return 就好了，存在你就去查了 DB 刷新 KV 再 return 。</p>
 <blockquote>
-<p>注：本人在面试回答到 Redis 相关的问题的时候，经常提到 BloomFilter（布隆过滤器）这玩意的使用场景是真的多，而且用起来是真的香，原理也好理解，看一下文章就可以在面试官面前侃侃而谈了，不香么？传送门：<a href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter">避免缓存穿透的利器之Bloom Filter</a></p>
+<p>传送门：<a href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter">避免缓存穿透的利器之Bloom Filter</a></p>
 </blockquote>
-<h3 id="如果有大量的-key-需要设置同一时间过期，一般需要注意什么？"><a href="#如果有大量的-key-需要设置同一时间过期，一般需要注意什么？" class="headerlink" title="如果有大量的 key 需要设置同一时间过期，一般需要注意什么？"></a>如果有大量的 key 需要设置同一时间过期，一般需要注意什么？</h3><p>如果大量的 key 过期时间设置的过于集中，到过期的那个时间点，Redis 可能会出现短暂的卡顿现象。严重的话会出现缓存雪崩，我们一般需要在时间上加一个随机值，使得过期时间分散一些。</p>
-<p><strong>电商首页经常会使用定时任务刷新缓存，可能大量的数据失效时间都十分集中，如果失效时间一样，又刚好在失效的时间点大量用户涌入，就有可能造成缓存雪崩。</strong></p>
-<h3 id="那你使用过-Redis-分布式锁么，它是什么回事？"><a href="#那你使用过-Redis-分布式锁么，它是什么回事？" class="headerlink" title="那你使用过 Redis 分布式锁么，它是什么回事？"></a>那你使用过 Redis 分布式锁么，它是什么回事？</h3><p>先拿 <code>setnx</code> 来争抢锁，抢到之后，再用 <code>expire</code> 给锁加一个过期时间防止锁忘记了释放。</p>
-<h3 id="这时候对方会告诉你说你回答得不错，然后接着问如果在-setnx-之后执行-expire-之前进程意外-crash-或者要重启维护了，那会怎么样？"><a href="#这时候对方会告诉你说你回答得不错，然后接着问如果在-setnx-之后执行-expire-之前进程意外-crash-或者要重启维护了，那会怎么样？" class="headerlink" title="这时候对方会告诉你说你回答得不错，然后接着问如果在 setnx 之后执行 expire 之前进程意外 crash 或者要重启维护了，那会怎么样？"></a>这时候对方会告诉你说你回答得不错，然后接着问如果在 setnx 之后执行 expire 之前进程意外 crash 或者要重启维护了，那会怎么样？</h3><p>这时候你要给予惊讶的反馈：唉，是喔，这个锁就永远得不到释放了。紧接着你需要<strong>抓一抓自己得脑袋，故作思考片刻</strong>，好像接下来的结果是你主动思考出来的，然后回答：我记得 <strong><code>set</code></strong> 指令有非常复杂的参数，这个应该是可以同时把 <code>setnx</code> 和 <code>expire</code> 合成一条指令来用的！</p>
-<h3 id="对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。"><a href="#对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。" class="headerlink" title="对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。"></a>对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。</h3><h3 id="假如-Redis-里面有-1-亿个-key-，其中有-10w-个-key-是以某个固定的已知的前缀开头的，如何将它们全部找出来？"><a href="#假如-Redis-里面有-1-亿个-key-，其中有-10w-个-key-是以某个固定的已知的前缀开头的，如何将它们全部找出来？" class="headerlink" title="假如 Redis 里面有 1 亿个 key ，其中有 10w 个 key 是以某个固定的已知的前缀开头的，如何将它们全部找出来？"></a>假如 Redis 里面有 1 亿个 key ，其中有 10w 个 key 是以某个固定的已知的前缀开头的，如何将它们全部找出来？</h3><p>使用 <strong><code>keys</code></strong> 指令可以扫出指定模式的 key 列表。</p>
-<h3 id="对方接着追问：如果这个-Redis-正在给线上的业务提供服务，那使用-keys-指令会有什么问题？"><a href="#对方接着追问：如果这个-Redis-正在给线上的业务提供服务，那使用-keys-指令会有什么问题？" class="headerlink" title="对方接着追问：如果这个 Redis 正在给线上的业务提供服务，那使用 keys 指令会有什么问题？"></a>对方接着追问：如果这个 Redis 正在给线上的业务提供服务，那使用 keys 指令会有什么问题？</h3><p>这个时候你要回答 Redis 关键的一个特性：Redis 是<strong>单线程</strong>的。<code>keys</code> 指令会导致线程阻塞一段时间，线上服务会停顿，直到指令执行完毕，服务才能恢复。这个时候可以使用 <strong><code>scan</code></strong> 指令，<strong><code>scan</code></strong> 指令可以无阻塞的提取出指定模式的 key 列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用 <code>keys</code> 指令长。</p>
-<blockquote>
-<p>不过，增量式迭代命令也不是没有缺点的： 举个例子， 使用 <strong>SMEMBERS</strong> 命令可以返回集合键当前包含的所有元素， 但是对于 <strong>SCAN</strong> 这类增量式迭代命令来说， 因为在对键进行增量式迭代的过程中， 键可能会被修改， 所以增量式迭代命令只能对被返回的元素提供有限的保证 。</p>
-</blockquote>
-<h3 id="使用过-Redis-做异步队列么，你是怎么用的？"><a href="#使用过-Redis-做异步队列么，你是怎么用的？" class="headerlink" title="使用过 Redis 做异步队列么，你是怎么用的？"></a>使用过 Redis 做异步队列么，你是怎么用的？</h3><p> 一般使用 <strong><code>List</code></strong> 结构作为队列，<strong>rpush</strong> 生产消息，<strong>lpop</strong> 消费消息。当 lpop 没有消息的时候，要适当 <strong>sleep</strong> 一会再重试。</p>
-<h3 id="如果对方追问可不可以不用-sleep-呢？"><a href="#如果对方追问可不可以不用-sleep-呢？" class="headerlink" title="如果对方追问可不可以不用 sleep 呢？"></a>如果对方追问可不可以不用 sleep 呢？</h3><p>List 还有个指令叫 <strong><code>blpop</code></strong> ，在没有消息的时候，它会阻塞住直到消息到来。</p>
-<h3 id="如果对方接着追问能不能生产一次消费多次呢？"><a href="#如果对方接着追问能不能生产一次消费多次呢？" class="headerlink" title="如果对方接着追问能不能生产一次消费多次呢？"></a>如果对方接着追问能不能生产一次消费多次呢？</h3><p>使用 <strong><code>pub/sub</code></strong> 主题订阅者模式，可以实现 1 : N 的消息队列。</p>
-<h3 id="如果对方继续追问-pub-sub-有什么缺点？"><a href="#如果对方继续追问-pub-sub-有什么缺点？" class="headerlink" title="如果对方继续追问 pub/sub 有什么缺点？"></a>如果对方继续追问 pub/sub 有什么缺点？</h3><p>在消费者下线的情况下，生产的消息会丢失，得使用专业的消息队列如 <strong>RocketMQ</strong> 等。</p>
-<h3 id="如果对方究极-TM-追问-Redis-如何实现延时队列？"><a href="#如果对方究极-TM-追问-Redis-如何实现延时队列？" class="headerlink" title="如果对方究极 TM 追问 Redis 如何实现延时队列？"></a>如果对方究极 TM 追问 Redis 如何实现延时队列？</h3><p>这一套连招下来，我估计现在你很想把面试官一棒打死（<strong>面试官自己都想打死自己了怎么问了这么多自己都不知道的</strong>），但是你很克制。平复一下激动的内心，然后神态自若的回答道：使用 SortedSet ，拿时间戳作为 score ，消息内容作为 key 调用 <strong>zadd</strong> 来生产消息，消费者用 <strong>zrangebyscore</strong> 指令获取 N 秒之前的数据轮询进行处理。</p>
-<p><strong>到这里，面试官暗地里已经对你竖起了大拇指。并且已经默默给了你 A+ ，但是他不知道的是此刻你却竖起了中指，在椅子背后。</strong></p>
-<h3 id="Redis-是怎么持久化的？服务主从数据怎么交互的？"><a href="#Redis-是怎么持久化的？服务主从数据怎么交互的？" class="headerlink" title="Redis 是怎么持久化的？服务主从数据怎么交互的？"></a>Redis 是怎么持久化的？服务主从数据怎么交互的？</h3><p><strong><code>RDB</code></strong> 做<strong>镜像全量持久化</strong>，<strong><code>AOF</code></strong> 做<strong>增量持久化</strong>。因为 RDB 会耗费较长时间，不够实时，在停机的时候会导致大量丢失数据，所以需要 AOF 来配合使用。在 Redis 实例重启时，会使用 RDB 持久化文件重新构建内存，再使用 AOF 重放近期的操作指令来实现完整恢复重启之前的状态。</p>
-<blockquote>
-<p>这里很好理解，把 <strong>RDB</strong> 理解为一整个表全量的数据，<strong>AOF</strong> 理解为每次操作的日志就好了，服务器重启的时候先把表的数据全部搞进去，但是他可能不完整，你再回放一下日志，数据不就完整了嘛。不过 <strong>Redis</strong> 本身的机制是 <strong>AOF</strong> 持久化开启且存在 <strong>AOF</strong> 文件时，优先加载 <strong>AOF</strong> 文件；<strong>AOF</strong> 关闭或者 <strong>AOF</strong> 文件不存在时，加载 <strong>RDB</strong> 文件；加载 <strong>AOF/RDB</strong> 文件城后，<strong>Redis</strong> 启动成功；<strong>AOF/RDB</strong> 文件存在错误时，<strong>Redis</strong> 启动失败并打印错误信息。</p>
-</blockquote>
-<h3 id="对方追问那如果突然机器掉电会怎样？"><a href="#对方追问那如果突然机器掉电会怎样？" class="headerlink" title="对方追问那如果突然机器掉电会怎样？"></a>对方追问那如果突然机器掉电会怎样？</h3><p>取决于 AOF 日志 <code>sync</code> 属性的配置，如果不要求性能，在每条写指令时都 sync 一下磁盘，就不会丢失数据。但是在高性能的要求下每次都 sync 是不现实的，一般都使用定时 sync ，比如 1s 1 次，这个时候最多就会丢失 1s 的数据。</p>
-<h3 id="对方追问-RDB-的原理是什么？"><a href="#对方追问-RDB-的原理是什么？" class="headerlink" title="对方追问 RDB 的原理是什么？"></a>对方追问 RDB 的原理是什么？</h3><p>你给出两个词汇就可以了，<strong><code>fork</code></strong> 和 <strong><code>cow</code></strong> 。fork 是指 Redis 通过创建<strong>子进程</strong>来进行 RDB 操作，cow 指的是 copy on write ，子进程创建后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开来。</p>
-<blockquote>
-<p>注：回答这个问题的时候，如果你还能说出 AOF 和 RDB 的优缺点，我觉得我是面试官在这个问题上我会给你点赞，两者其实区别还是很大的，而且涉及到 Redis 集群的数据同步问题等等。</p>
-</blockquote>
-<h3 id="Pipeline-有什么好处，为什么要用-Pipeline-？"><a href="#Pipeline-有什么好处，为什么要用-Pipeline-？" class="headerlink" title="Pipeline 有什么好处，为什么要用 Pipeline ？"></a>Pipeline 有什么好处，为什么要用 Pipeline ？</h3><p>可以<strong>将多次 IO 往返的时间缩减为一次</strong>，前提是 pipeline 执行的指令之间没有因果相关性。使用 <strong>redis-benchmark</strong> 进行压测的时候可以发现影响 Redis 的 QPS 峰值的一个重要因素是 pipeline 批次指令的数目。</p>
-<h3 id="Redis-的同步机制了解么？"><a href="#Redis-的同步机制了解么？" class="headerlink" title="Redis 的同步机制了解么？"></a>Redis 的同步机制了解么？</h3><p>Redis 可以使用主从同步，从从同步。第一次同步时，主节点做一次 <strong><code>bgsave</code></strong> ，并同时将后续修改操作记录到内存 buffer ，待完成后将 RDB 文件全量同步到复制节点，复制节点接受完成后将 RDB 镜像加载到内存。加载完成后，再通知主节点将期间修改的操作记录同步到复制节点进行重放就完成了同步过程。后续的增量数据通过 AOF 日志同步即可，有点类似数据库的 binlog 。</p>
-<h3 id="是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？"><a href="#是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？" class="headerlink" title="是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？"></a>是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？</h3><p><strong>Redis Sentinal</strong> 着眼于高可用，在 Master 宕机时会自动将 Slave 提升为 Master ，继续提供服务。</p>
-<p><strong>Redis Cluster</strong> 着眼于扩展性，在单个 Redis 内存不足时，使用 Cluster 进行分片存储。</p>
-<h2 id="面试结束"><a href="#面试结束" class="headerlink" title="面试结束"></a>面试结束</h2><h3 id="小伙子你可以的，什么时候有时间来上班啊，要不明天就来吧？"><a href="#小伙子你可以的，什么时候有时间来上班啊，要不明天就来吧？" class="headerlink" title="小伙子你可以的，什么时候有时间来上班啊，要不明天就来吧？"></a>小伙子你可以的，什么时候有时间来上班啊，要不明天就来吧？</h3><p>你强装镇定，这么急啊我还需要租房，要不下礼拜一吧。</p>
-<h3 id="好的。心想这小子这么-NB-是不是很多-Offer-在手上，不行我得叫-HR-给他加钱。"><a href="#好的。心想这小子这么-NB-是不是很多-Offer-在手上，不行我得叫-HR-给他加钱。" class="headerlink" title="好的。心想这小子这么 NB 是不是很多 Offer 在手上，不行我得叫 HR 给他加钱。"></a>好的。心想这小子这么 NB 是不是很多 Offer 在手上，不行我得叫 HR 给他加钱。</h3><p>能撑到最后，你自己都忍不住自己给自己点个赞了!</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>在技术面试的时候，不管是 Redis 还是什么问题，如果你能举出实际的例子，或者是直接说自己开发过程的问题和收获会给面试官的印象分会加很多，回答逻辑性也要强一点，不要东一点西一点，容易把自己都绕晕的。</strong></p>
-<p><strong>还有一点就是我问你为啥用 Redis 你不要一上来就直接回答问题了，你可以这样回答：</strong></p>
-<p><strong>帅气的面试官您好</strong>，首先我们的项目 DB 遇到了瓶颈，特别是秒杀和热点数据这样的场景 DB 基本上就扛不住了，那就需要缓存中间件的加入了，目前市面上有的缓存中间件有 Redis 和 Memcached ，他们的优缺点……，综合这些然后再结合我们项目特点，最后我们在技术选型的时候选了谁。</p>
-<p>如果你这样有条不紊，有理有据的回答了我的问题而且还说出这么多我问题外的知识点，我会觉得你不只是一个会写代码的人，你逻辑清晰，你对技术选型，对中间件对项目都有自己的理解和思考，说白了就是你的 offer 有戏了。</p>
-<p>好了，以上就是这篇文章的全部内容了，祝各位看官都能成为 offer 收割机^∨^。</p>
+<p>那又有小伙伴说了如果黑客有很多个 IP 同时发起攻击呢？这点我一直也不是很想得通，但是一般级别的黑客没这么多肉鸡，再者正常级别的 <strong>Redis</strong> 集群都能抗住这种级别的访问的，小公司我想他们不会感兴趣的。把系统的高可用做好了，集群还是很能顶的。</p>
+<p><strong>缓存击穿</strong>的话，设置热点数据永远不过期。或者加上互斥锁就能搞定了。</p>
+<p><strong>作为暖男，代码我肯定帮你们准备好了。</strong><br> <img src="https://s1.ax1x.com/2020/04/24/JBvd10.png" alt="代码示例"></p>
+<h3 id="面试结束"><a href="#面试结束" class="headerlink" title="面试结束"></a>面试结束</h3><p><strong>嗯嗯还不错，三个点都回答得很好，今天也不早了，面试就先到这里，明天你再过来二面我继续问一下你关于 Redis 集群高可用，主从同步，哨兵等知识点的问题。</strong></p>
+<p>晕居然还有下一轮面试！（强行下一期的伏笔哈哈）但是为了 offer 还是得舔，嗯嗯，好的帅气面试官。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们玩归玩，闹归闹，别拿面试开玩笑。</p>
+<p>本文简单的介绍了，<strong>Redis</strong> 的<strong>雪崩</strong>、<strong>击穿</strong>、<strong>穿透</strong>，三者其实都差不多，但是又有一些区别，在面试中其实这是问到缓存必问的，大家不要把三者搞混了，因为缓存雪崩、穿透和击穿，是缓存最大的问题，要么不出现，一旦出现就是致命性的问题，所以面试官一定会问你。</p>
+<p>大家一定要理解是<strong>怎么发生的</strong>，以及是怎么去<strong>避免</strong>的，发生之后又怎么去<strong>抢救</strong>，你可以不是知道很深入，但是你不能一点都不去想，面试有时候不一定是对知识面的拷问，或许是对你的态度的拷问，如果你思路清晰，然后<strong>知其然还知其所以然</strong>那就很赞，还知道怎么预防那来上班吧。</p>
+<h3 id="最后暖男我继续给你们做个小的技术总结："><a href="#最后暖男我继续给你们做个小的技术总结：" class="headerlink" title="最后暖男我继续给你们做个小的技术总结："></a>最后暖男我继续给你们做个小的技术总结：</h3><p>一般避免以上情况发生我们从三个时间段去分析下：</p>
+<ul>
+<li>事前：<strong>Redis</strong> 高可用，主从+哨兵，<strong>Redis Cluster</strong>，避免全盘崩溃。</li>
+<li>事中：本地 <strong>ehcache</strong> 缓存 + <strong>Hystrix</strong> 限流+降级，避免 <strong>MySQL</strong> 被打死。</li>
+<li>事后：<strong>Redis</strong> 持久化 <strong>RDB</strong>+<strong>AOF</strong> ，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。</li>
+</ul>
+<p>限流组件，可以设置每秒的请求，有多少能通过组件，剩余的未通过的请求，怎么办？<strong>走降级</strong>！可以返回一些默认的值，或者友情提示，或者空白的值。</p>
+<p><strong>好处：</strong></p>
+<p>数据库绝对不会死，限流组件确保了每秒只有多少个请求能通过。 只要数据库不死，就是说，对用户来说，3/5 的请求都是可以被处理的。 只要有 3/5 的请求可以被处理，就意味着你的系统没死，对用户来说，可能就是点击几次刷不出来页面，但是多点几次，就可以刷出来一次。</p>
+<p><strong>这个在目前主流的互联网大厂里面是最常见的，你是不是好奇，某明星爆出什么事情，你发现你去微博怎么刷都空白界面，但是有的人又直接进了，你多刷几次也出来了，现在知道了吧，那是做了降级，牺牲部分用户的体验换来服务器的安全，可还行？</strong></p>
+<p>好了，以上就是这篇文章的全部内容了，能看到这里的人呀，都是<strong>人才</strong>，祝各位看官都能成为 offer 收割机^∨^。</p>
 
             </div>
             <hr/>
@@ -574,7 +578,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/">https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/</a>
+                    <a href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/">https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -789,26 +793,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/23/shu-ju-ku/redis-shu-ju-jie-gou-di-ceng-yuan-li/">
+                <a href="/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Redis数据结构底层原理">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="布隆过滤器（Bloom Filter）">
                         
-                        <span class="card-title">Redis数据结构底层原理</span>
+                        <span class="card-title">布隆过滤器（Bloom Filter）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis 数据结构底层原理简单动态字符串（SDS）Redis 是用 C 语言写的，但是 C 语言处理字符串和数组的成本是很高的，下面我分别说几个例子。
-
-极其容易造成缓冲区溢出问题。比如用 strcat() ，在用这个函数之前必须要先给目
+                            避免缓存穿透的利器之 Bloom FilterBloom Filter 概念布隆过滤器（英语：Bloom Filter）是 1970 年由一个叫布隆的小伙子提出的。它实际上是一个很长的二进制向量和一系列随机映射函数。布隆过滤器可以用于检索一
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-24
                         </span>
                         <span class="publish-author">
                             
@@ -844,25 +846,26 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/21/shu-ju-ku/mysql-suo-yin-zong-jie/">
+                <a href="/2020/04/23/shu-ju-ku/redis-shu-ju-jie-gou-di-ceng-yuan-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="MySQL索引总结">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Redis数据结构底层原理">
                         
-                        <span class="card-title">MySQL索引总结</span>
+                        <span class="card-title">Redis数据结构底层原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            MySQL 索引总结什么是索引？索引是一种用于快速查询和检索数据的数据结构。常见的索引结构有：B 树、B+ 树和 Hash 。
-索引的作用就相当于目录的作用。打个比方：我们在查字典的时候，如果没有目录，那我们就只能一页一页的去找我们需要查的
+                            Redis 数据结构底层原理简单动态字符串（SDS）Redis 是用 C 语言写的，但是 C 语言处理字符串和数组的成本是很高的，下面我分别说几个例子。
+
+极其容易造成缓冲区溢出问题。比如用 strcat() ，在用这个函数之前必须要先给目
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
                             </span>
                         <span class="publish-author">
                             
@@ -879,8 +882,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MySQL/">
-                        <span class="chip bg-color">MySQL</span>
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BC%93%E5%AD%98/">
+                        <span class="chip bg-color">缓存</span>
                     </a>
                     
                 </div>

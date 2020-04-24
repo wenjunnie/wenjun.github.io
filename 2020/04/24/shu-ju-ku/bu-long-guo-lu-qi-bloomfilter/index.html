@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis基础, Wenjun">
+    <meta name="keywords" content="布隆过滤器（Bloom Filter）, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Redis基础 | Wenjun</title>
+    <title>布隆过滤器（Bloom Filter） | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Redis基础</h1>
+                    <h1 class="description center-align post-title">布隆过滤器（Bloom Filter）</h1>
                 </div>
             </div>
         </div>
@@ -468,7 +468,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-22
+                    2020-04-24
                 </div>
                 
 
@@ -477,14 +477,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.2k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    8 分
                 </div>
                 
 
@@ -499,56 +499,126 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Redis-基础"><a href="#Redis-基础" class="headerlink" title="Redis 基础"></a>Redis 基础</h2><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis</strong> 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（<strong>请允许我使用一下夸张的修辞手法</strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写《吊打面试官》系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚铩羽而归，疯狂收割大厂 offer ！</p>
-<h3 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h3><blockquote>
-<p>一个大腹便便，穿着格子衬衣的中年男子，拿着一个满是划痕的 Mac 向你走来，看着快秃顶的头发，心想着肯定是尼玛顶级架构师吧！但是我们腹有诗书气自华，虚都不虚。</p>
-</blockquote>
-<p> <img src="https://s1.ax1x.com/2020/04/23/JdyFeA.png" alt=""></p>
-<h3 id="小伙子您好，看你简历上写了你项目里面用到了-Redis-，你们为啥用-Redis-？"><a href="#小伙子您好，看你简历上写了你项目里面用到了-Redis-，你们为啥用-Redis-？" class="headerlink" title="小伙子您好，看你简历上写了你项目里面用到了 Redis ，你们为啥用 Redis ？"></a>小伙子您好，看你简历上写了你项目里面用到了 Redis ，你们为啥用 Redis ？</h3><p>心里忍不住暗骂，这叫啥问题，大家不都是用的这个嘛，但是你不能说出来。</p>
-<p>认真回答道：<strong>帅气迷人的面试官您好</strong>，因为传统的关系型数据库如 MySQL 已经不能适用所有的场景了，比如秒杀的库存扣减，APP 首页的访问流量高峰等等，都很容易把数据库打崩，所以引入了缓存中间件，目前市面上比较常用的缓存中间件有 <strong>Redis</strong> 和 <strong>Memcached</strong> 。不过综和考虑了他们的优缺点，最后选择了 Redis 。</p>
-<p><strong>至于更细节的对比朋友们记得查阅 Redis 和 Memcached 的区别，比如两者的优缺点对比和各自的场景，后续我有时间也会写出来。</strong></p>
-<h3 id="那小伙子，我再问你，Redis-有哪些数据结构呀？"><a href="#那小伙子，我再问你，Redis-有哪些数据结构呀？" class="headerlink" title="那小伙子，我再问你，Redis 有哪些数据结构呀？"></a>那小伙子，我再问你，Redis 有哪些数据结构呀？</h3><p>字符串 <strong><code>String</code></strong> 、字典 <strong><code>Hash</code></strong> 、列表 <strong><code>List</code></strong> 、集合 <strong><code>Set</code></strong> 、有序集合 <strong><code>SortedSet（Zset）</code></strong>。</p>
-<p><strong>这里我相信 99% 的读者都能回答上来 Redis 的5个基本数据类型。如果回答不出来的小伙伴我们就要加油补课哟，大家知道五种类型最适合的场景更好。</strong></p>
-<p>但是，如果你是 Redis 中高级用户，而且你要在这次面试中突出你和其他候选人的不同，还需要加上下面几种数据结构 HyperLogLog、Geo、Pub/Sub 。</p>
-<p>如果你还想加分，那你说还玩过 Redis Module，像 BloomFilter，RedisSearch，Redis-ML，这个时候面试官得眼睛就开始发亮了，心想这个小伙子<strong>有点东西啊</strong>。</p>
-<blockquote>
-<p>注：本人在面试回答到 Redis 相关的问题的时候，经常提到 BloomFilter（布隆过滤器）这玩意的使用场景是真的多，而且用起来是真的香，原理也好理解，看一下文章就可以在面试官面前侃侃而谈了，不香么？传送门：<a href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter">避免缓存穿透的利器之Bloom Filter</a></p>
-</blockquote>
-<h3 id="如果有大量的-key-需要设置同一时间过期，一般需要注意什么？"><a href="#如果有大量的-key-需要设置同一时间过期，一般需要注意什么？" class="headerlink" title="如果有大量的 key 需要设置同一时间过期，一般需要注意什么？"></a>如果有大量的 key 需要设置同一时间过期，一般需要注意什么？</h3><p>如果大量的 key 过期时间设置的过于集中，到过期的那个时间点，Redis 可能会出现短暂的卡顿现象。严重的话会出现缓存雪崩，我们一般需要在时间上加一个随机值，使得过期时间分散一些。</p>
-<p><strong>电商首页经常会使用定时任务刷新缓存，可能大量的数据失效时间都十分集中，如果失效时间一样，又刚好在失效的时间点大量用户涌入，就有可能造成缓存雪崩。</strong></p>
-<h3 id="那你使用过-Redis-分布式锁么，它是什么回事？"><a href="#那你使用过-Redis-分布式锁么，它是什么回事？" class="headerlink" title="那你使用过 Redis 分布式锁么，它是什么回事？"></a>那你使用过 Redis 分布式锁么，它是什么回事？</h3><p>先拿 <code>setnx</code> 来争抢锁，抢到之后，再用 <code>expire</code> 给锁加一个过期时间防止锁忘记了释放。</p>
-<h3 id="这时候对方会告诉你说你回答得不错，然后接着问如果在-setnx-之后执行-expire-之前进程意外-crash-或者要重启维护了，那会怎么样？"><a href="#这时候对方会告诉你说你回答得不错，然后接着问如果在-setnx-之后执行-expire-之前进程意外-crash-或者要重启维护了，那会怎么样？" class="headerlink" title="这时候对方会告诉你说你回答得不错，然后接着问如果在 setnx 之后执行 expire 之前进程意外 crash 或者要重启维护了，那会怎么样？"></a>这时候对方会告诉你说你回答得不错，然后接着问如果在 setnx 之后执行 expire 之前进程意外 crash 或者要重启维护了，那会怎么样？</h3><p>这时候你要给予惊讶的反馈：唉，是喔，这个锁就永远得不到释放了。紧接着你需要<strong>抓一抓自己得脑袋，故作思考片刻</strong>，好像接下来的结果是你主动思考出来的，然后回答：我记得 <strong><code>set</code></strong> 指令有非常复杂的参数，这个应该是可以同时把 <code>setnx</code> 和 <code>expire</code> 合成一条指令来用的！</p>
-<h3 id="对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。"><a href="#对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。" class="headerlink" title="对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。"></a>对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。</h3><h3 id="假如-Redis-里面有-1-亿个-key-，其中有-10w-个-key-是以某个固定的已知的前缀开头的，如何将它们全部找出来？"><a href="#假如-Redis-里面有-1-亿个-key-，其中有-10w-个-key-是以某个固定的已知的前缀开头的，如何将它们全部找出来？" class="headerlink" title="假如 Redis 里面有 1 亿个 key ，其中有 10w 个 key 是以某个固定的已知的前缀开头的，如何将它们全部找出来？"></a>假如 Redis 里面有 1 亿个 key ，其中有 10w 个 key 是以某个固定的已知的前缀开头的，如何将它们全部找出来？</h3><p>使用 <strong><code>keys</code></strong> 指令可以扫出指定模式的 key 列表。</p>
-<h3 id="对方接着追问：如果这个-Redis-正在给线上的业务提供服务，那使用-keys-指令会有什么问题？"><a href="#对方接着追问：如果这个-Redis-正在给线上的业务提供服务，那使用-keys-指令会有什么问题？" class="headerlink" title="对方接着追问：如果这个 Redis 正在给线上的业务提供服务，那使用 keys 指令会有什么问题？"></a>对方接着追问：如果这个 Redis 正在给线上的业务提供服务，那使用 keys 指令会有什么问题？</h3><p>这个时候你要回答 Redis 关键的一个特性：Redis 是<strong>单线程</strong>的。<code>keys</code> 指令会导致线程阻塞一段时间，线上服务会停顿，直到指令执行完毕，服务才能恢复。这个时候可以使用 <strong><code>scan</code></strong> 指令，<strong><code>scan</code></strong> 指令可以无阻塞的提取出指定模式的 key 列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用 <code>keys</code> 指令长。</p>
-<blockquote>
-<p>不过，增量式迭代命令也不是没有缺点的： 举个例子， 使用 <strong>SMEMBERS</strong> 命令可以返回集合键当前包含的所有元素， 但是对于 <strong>SCAN</strong> 这类增量式迭代命令来说， 因为在对键进行增量式迭代的过程中， 键可能会被修改， 所以增量式迭代命令只能对被返回的元素提供有限的保证 。</p>
-</blockquote>
-<h3 id="使用过-Redis-做异步队列么，你是怎么用的？"><a href="#使用过-Redis-做异步队列么，你是怎么用的？" class="headerlink" title="使用过 Redis 做异步队列么，你是怎么用的？"></a>使用过 Redis 做异步队列么，你是怎么用的？</h3><p> 一般使用 <strong><code>List</code></strong> 结构作为队列，<strong>rpush</strong> 生产消息，<strong>lpop</strong> 消费消息。当 lpop 没有消息的时候，要适当 <strong>sleep</strong> 一会再重试。</p>
-<h3 id="如果对方追问可不可以不用-sleep-呢？"><a href="#如果对方追问可不可以不用-sleep-呢？" class="headerlink" title="如果对方追问可不可以不用 sleep 呢？"></a>如果对方追问可不可以不用 sleep 呢？</h3><p>List 还有个指令叫 <strong><code>blpop</code></strong> ，在没有消息的时候，它会阻塞住直到消息到来。</p>
-<h3 id="如果对方接着追问能不能生产一次消费多次呢？"><a href="#如果对方接着追问能不能生产一次消费多次呢？" class="headerlink" title="如果对方接着追问能不能生产一次消费多次呢？"></a>如果对方接着追问能不能生产一次消费多次呢？</h3><p>使用 <strong><code>pub/sub</code></strong> 主题订阅者模式，可以实现 1 : N 的消息队列。</p>
-<h3 id="如果对方继续追问-pub-sub-有什么缺点？"><a href="#如果对方继续追问-pub-sub-有什么缺点？" class="headerlink" title="如果对方继续追问 pub/sub 有什么缺点？"></a>如果对方继续追问 pub/sub 有什么缺点？</h3><p>在消费者下线的情况下，生产的消息会丢失，得使用专业的消息队列如 <strong>RocketMQ</strong> 等。</p>
-<h3 id="如果对方究极-TM-追问-Redis-如何实现延时队列？"><a href="#如果对方究极-TM-追问-Redis-如何实现延时队列？" class="headerlink" title="如果对方究极 TM 追问 Redis 如何实现延时队列？"></a>如果对方究极 TM 追问 Redis 如何实现延时队列？</h3><p>这一套连招下来，我估计现在你很想把面试官一棒打死（<strong>面试官自己都想打死自己了怎么问了这么多自己都不知道的</strong>），但是你很克制。平复一下激动的内心，然后神态自若的回答道：使用 SortedSet ，拿时间戳作为 score ，消息内容作为 key 调用 <strong>zadd</strong> 来生产消息，消费者用 <strong>zrangebyscore</strong> 指令获取 N 秒之前的数据轮询进行处理。</p>
-<p><strong>到这里，面试官暗地里已经对你竖起了大拇指。并且已经默默给了你 A+ ，但是他不知道的是此刻你却竖起了中指，在椅子背后。</strong></p>
-<h3 id="Redis-是怎么持久化的？服务主从数据怎么交互的？"><a href="#Redis-是怎么持久化的？服务主从数据怎么交互的？" class="headerlink" title="Redis 是怎么持久化的？服务主从数据怎么交互的？"></a>Redis 是怎么持久化的？服务主从数据怎么交互的？</h3><p><strong><code>RDB</code></strong> 做<strong>镜像全量持久化</strong>，<strong><code>AOF</code></strong> 做<strong>增量持久化</strong>。因为 RDB 会耗费较长时间，不够实时，在停机的时候会导致大量丢失数据，所以需要 AOF 来配合使用。在 Redis 实例重启时，会使用 RDB 持久化文件重新构建内存，再使用 AOF 重放近期的操作指令来实现完整恢复重启之前的状态。</p>
-<blockquote>
-<p>这里很好理解，把 <strong>RDB</strong> 理解为一整个表全量的数据，<strong>AOF</strong> 理解为每次操作的日志就好了，服务器重启的时候先把表的数据全部搞进去，但是他可能不完整，你再回放一下日志，数据不就完整了嘛。不过 <strong>Redis</strong> 本身的机制是 <strong>AOF</strong> 持久化开启且存在 <strong>AOF</strong> 文件时，优先加载 <strong>AOF</strong> 文件；<strong>AOF</strong> 关闭或者 <strong>AOF</strong> 文件不存在时，加载 <strong>RDB</strong> 文件；加载 <strong>AOF/RDB</strong> 文件城后，<strong>Redis</strong> 启动成功；<strong>AOF/RDB</strong> 文件存在错误时，<strong>Redis</strong> 启动失败并打印错误信息。</p>
-</blockquote>
-<h3 id="对方追问那如果突然机器掉电会怎样？"><a href="#对方追问那如果突然机器掉电会怎样？" class="headerlink" title="对方追问那如果突然机器掉电会怎样？"></a>对方追问那如果突然机器掉电会怎样？</h3><p>取决于 AOF 日志 <code>sync</code> 属性的配置，如果不要求性能，在每条写指令时都 sync 一下磁盘，就不会丢失数据。但是在高性能的要求下每次都 sync 是不现实的，一般都使用定时 sync ，比如 1s 1 次，这个时候最多就会丢失 1s 的数据。</p>
-<h3 id="对方追问-RDB-的原理是什么？"><a href="#对方追问-RDB-的原理是什么？" class="headerlink" title="对方追问 RDB 的原理是什么？"></a>对方追问 RDB 的原理是什么？</h3><p>你给出两个词汇就可以了，<strong><code>fork</code></strong> 和 <strong><code>cow</code></strong> 。fork 是指 Redis 通过创建<strong>子进程</strong>来进行 RDB 操作，cow 指的是 copy on write ，子进程创建后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开来。</p>
-<blockquote>
-<p>注：回答这个问题的时候，如果你还能说出 AOF 和 RDB 的优缺点，我觉得我是面试官在这个问题上我会给你点赞，两者其实区别还是很大的，而且涉及到 Redis 集群的数据同步问题等等。</p>
-</blockquote>
-<h3 id="Pipeline-有什么好处，为什么要用-Pipeline-？"><a href="#Pipeline-有什么好处，为什么要用-Pipeline-？" class="headerlink" title="Pipeline 有什么好处，为什么要用 Pipeline ？"></a>Pipeline 有什么好处，为什么要用 Pipeline ？</h3><p>可以<strong>将多次 IO 往返的时间缩减为一次</strong>，前提是 pipeline 执行的指令之间没有因果相关性。使用 <strong>redis-benchmark</strong> 进行压测的时候可以发现影响 Redis 的 QPS 峰值的一个重要因素是 pipeline 批次指令的数目。</p>
-<h3 id="Redis-的同步机制了解么？"><a href="#Redis-的同步机制了解么？" class="headerlink" title="Redis 的同步机制了解么？"></a>Redis 的同步机制了解么？</h3><p>Redis 可以使用主从同步，从从同步。第一次同步时，主节点做一次 <strong><code>bgsave</code></strong> ，并同时将后续修改操作记录到内存 buffer ，待完成后将 RDB 文件全量同步到复制节点，复制节点接受完成后将 RDB 镜像加载到内存。加载完成后，再通知主节点将期间修改的操作记录同步到复制节点进行重放就完成了同步过程。后续的增量数据通过 AOF 日志同步即可，有点类似数据库的 binlog 。</p>
-<h3 id="是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？"><a href="#是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？" class="headerlink" title="是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？"></a>是否使用过Redis集群，集群的高可用怎么保证，集群的原理是什么？</h3><p><strong>Redis Sentinal</strong> 着眼于高可用，在 Master 宕机时会自动将 Slave 提升为 Master ，继续提供服务。</p>
-<p><strong>Redis Cluster</strong> 着眼于扩展性，在单个 Redis 内存不足时，使用 Cluster 进行分片存储。</p>
-<h2 id="面试结束"><a href="#面试结束" class="headerlink" title="面试结束"></a>面试结束</h2><h3 id="小伙子你可以的，什么时候有时间来上班啊，要不明天就来吧？"><a href="#小伙子你可以的，什么时候有时间来上班啊，要不明天就来吧？" class="headerlink" title="小伙子你可以的，什么时候有时间来上班啊，要不明天就来吧？"></a>小伙子你可以的，什么时候有时间来上班啊，要不明天就来吧？</h3><p>你强装镇定，这么急啊我还需要租房，要不下礼拜一吧。</p>
-<h3 id="好的。心想这小子这么-NB-是不是很多-Offer-在手上，不行我得叫-HR-给他加钱。"><a href="#好的。心想这小子这么-NB-是不是很多-Offer-在手上，不行我得叫-HR-给他加钱。" class="headerlink" title="好的。心想这小子这么 NB 是不是很多 Offer 在手上，不行我得叫 HR 给他加钱。"></a>好的。心想这小子这么 NB 是不是很多 Offer 在手上，不行我得叫 HR 给他加钱。</h3><p>能撑到最后，你自己都忍不住自己给自己点个赞了!</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>在技术面试的时候，不管是 Redis 还是什么问题，如果你能举出实际的例子，或者是直接说自己开发过程的问题和收获会给面试官的印象分会加很多，回答逻辑性也要强一点，不要东一点西一点，容易把自己都绕晕的。</strong></p>
-<p><strong>还有一点就是我问你为啥用 Redis 你不要一上来就直接回答问题了，你可以这样回答：</strong></p>
-<p><strong>帅气的面试官您好</strong>，首先我们的项目 DB 遇到了瓶颈，特别是秒杀和热点数据这样的场景 DB 基本上就扛不住了，那就需要缓存中间件的加入了，目前市面上有的缓存中间件有 Redis 和 Memcached ，他们的优缺点……，综合这些然后再结合我们项目特点，最后我们在技术选型的时候选了谁。</p>
-<p>如果你这样有条不紊，有理有据的回答了我的问题而且还说出这么多我问题外的知识点，我会觉得你不只是一个会写代码的人，你逻辑清晰，你对技术选型，对中间件对项目都有自己的理解和思考，说白了就是你的 offer 有戏了。</p>
-<p>好了，以上就是这篇文章的全部内容了，祝各位看官都能成为 offer 收割机^∨^。</p>
+                <h2 id="避免缓存穿透的利器之-Bloom-Filter"><a href="#避免缓存穿透的利器之-Bloom-Filter" class="headerlink" title="避免缓存穿透的利器之 Bloom Filter"></a>避免缓存穿透的利器之 Bloom Filter</h2><h3 id="Bloom-Filter-概念"><a href="#Bloom-Filter-概念" class="headerlink" title="Bloom Filter 概念"></a>Bloom Filter 概念</h3><p>布隆过滤器（英语：Bloom Filter）是 1970 年由一个叫布隆的小伙子提出的。它实际上是一个很长的二进制向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都远远超过一般的算法，缺点是有一定的误识别率和删除困难。</p>
+<p><strong>面试关联：一般都会在回答缓存穿透，或者海量数据去重这个时候引出来，加分项哟。</strong></p>
+<h3 id="Bloom-Filter-原理"><a href="#Bloom-Filter-原理" class="headerlink" title="Bloom Filter 原理"></a>Bloom Filter 原理</h3><p>布隆过滤器的原理是，当一个元素被加入集合时，通过 K 个散列函数将这个元素映射成一个位数组中的 K 个点，把它们置为 <strong>1</strong> 。检索时，我们只要看看这些点是不是都是 <strong>1</strong> 就（大约）知道集合中有没有它了：如果这些点有任何一个 <strong>0</strong> ，则被检元素<strong>一定不在</strong>；如果都是 <strong>1</strong> ，则被检元素<strong>很可能在</strong>。这就是布隆过滤器的基本思想。</p>
+<p>Bloom Filter 跟单哈希函数 Bit-Map 不同之处在于：Bloom Filter 使用了 k 个哈希函数，每个字符串跟 k 个 bit 对应。从而降低了冲突的概率。</p>
+<p> <img src="https://s1.ax1x.com/2020/04/24/JD9CLV.jpg" alt="Bloom Filter"></p>
+<p>简单的说一下就是我们先把我们数据库的数据都加载到我们的过滤器中，比如数据库的id现在有：1、2、3。</p>
+<p>那就用id：1 为例子他在上图中经过三次 hash 之后，把三次原本值 0 的地方改为 1 。</p>
+<p>下次我进来查询如果 id 也是 1 那我就把 1 拿去三次 hash 发现跟上面的三个位置完全一样，那就能证明过滤器中有 1 的。</p>
+<p>反之如果不一样就说明不存在了。</p>
+<p>那应用的场景在哪里呢？一般我们都会用来防止缓存穿透。</p>
+<p><img src="https://s1.ax1x.com/2020/04/24/JBLHSK.png" alt="缓存穿透"></p>
+<p>简单来说就是你数据库的 id 都是 1 开始然后自增的，那我知道你接口是通过 id 查询的，我就拿负数去查询，这个时候，会发现缓存里面没这个数据，我又去数据库查也没有，一个请求这样，100 个，1000 个，10000 个呢？你的 DB 基本上就扛不住了，如果在缓存里面加上这个，是不是就不存在了，你判断没这个数据就不去查了，直接 return 一个数据为空不就好了嘛。</p>
+<p>这玩意这么好使那有啥缺点么？有的，我们接着往下看。</p>
+<h3 id="Bloom-Filter-的缺点"><a href="#Bloom-Filter-的缺点" class="headerlink" title="Bloom Filter 的缺点"></a>Bloom Filter 的缺点</h3><p>Bloom Filter之所以能做到在时间和空间上的效率比较高，是因为牺牲了判断的准确率、删除的便利性。</p>
+<ul>
+<li><p><strong>存在误判。</strong>可能要查到的元素并没有在容器中，但是 hash 之后得到的 k 个位置上值都是 1 。如果 Bloom Filter 中存储的是黑名单，那么可以通过建立一个白名单来存储可能会误判的元素。</p>
+</li>
+<li><p><strong>删除困难。</strong>一个放入容器的元素映射到 Bit 数组的 k 个位置上是 1 ，删除的时候不能简单的直接置为 0 ，可能会影响其他元素的判断。可以采用 <a href="http://wiki.corp.qunar.com/confluence/download/attachments/199003276/US9740797.pdf?version=1&modificationDate=1526538500000&api=v2" target="_blank" rel="noopener">Counting Bloom Filter</a> 。</p>
+</li>
+</ul>
+<h3 id="Bloom-Filter-实现"><a href="#Bloom-Filter-实现" class="headerlink" title="Bloom Filter 实现"></a>Bloom Filter 实现</h3><p>布隆过滤器有许多实现与优化，Guava 中就提供了一种 Bloom Filter 的实现。</p>
+<p>在使用 Bloom Filter 时，绕不过的两点是预估数据量 n 以及期望的误判率 fpp 。</p>
+<p>在实现 Bloom Filter 时，绕不过的两点就是 hash 函数的选取以及 bit 数组的大小。</p>
+<p>对于一个确定的场景，我们预估要存的数据量为 n ，期望的误判率为 fpp ，然后需要计算我们需要的 Bit 数组的大小 m ，以及 hash 函数的个数 k ，并选择 hash 函数。</p>
+<h4 id="1-Bit-数组大小选择"><a href="#1-Bit-数组大小选择" class="headerlink" title="(1) Bit 数组大小选择"></a>(1) Bit 数组大小选择</h4><p>根据预估数据量 n 以及误判率 fpp ，Bit 数组大小的 m 的计算方式：</p>
+<p><img src="https://s1.ax1x.com/2020/04/24/JDCFXt.png" alt="Bit 数组大小"></p>
+<h4 id="2-哈希函数选择"><a href="#2-哈希函数选择" class="headerlink" title="(2) 哈希函数选择"></a>(2) 哈希函数选择</h4><p>由预估数据量 n 以及 Bit 数组长度 m ，可以得到一个 hash 函数的个数 k ：</p>
+<p><img src="https://s1.ax1x.com/2020/04/24/JDC5ut.png" alt="哈希函数"></p>
+<p>哈希函数的选择对性能的影响应该是很大的，一个好的哈希函数要能近似等概率的将字符串映射到各个 Bit 。选择 k 个不同的哈希函数比较麻烦，一种简单的方法是选择一个哈希函数，然后送入 k 个不同的参数。</p>
+<p>哈希函数个数 k 、Bit 数组大小 m 、加入的字符串数量 n 的关系可以参考：</p>
+<p><a href="http://pages.cs.wisc.edu/~cao/papers/summary-cache/node8.html" target="_blank" rel="noopener">Bloom Filters - the math</a> 、<a href="https://en.wikipedia.org/wiki/Bloom_filter" target="_blank" rel="noopener">Bloom_Filter - wikipedia</a></p>
+<p>要使用 Bloom Filter，需要引入 Guava 包：</p>
+<pre class=" language-java"><code class="language-java"> <span class="token operator">&lt;</span>dependency<span class="token operator">></span>
+     <span class="token operator">&lt;</span>groupId<span class="token operator">></span>com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>guava<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">></span>
+     <span class="token operator">&lt;</span>artifactId<span class="token operator">></span>guava<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">></span>
+     <span class="token operator">&lt;</span>version<span class="token operator">></span><span class="token number">28.1</span><span class="token operator">-</span>jre<span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">></span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">></span>    </code></pre>
+<p>测试分两步：</p>
+<p>1、往过滤器中放一百万个数，然后去验证这一百万个数是否能通过过滤器；</p>
+<p>2、另外找一万个数，去检验漏网之鱼的数量。</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 测试布隆过滤器(可用于Redis缓存穿透)
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestBloomFilter</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">1000000</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> BloomFilter<span class="token operator">&lt;</span>Integer<span class="token operator">></span> bf <span class="token operator">=</span> BloomFilter<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>Funnels<span class="token punctuation">.</span><span class="token function">integerFunnel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> total<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//    private static BloomFilter&lt;Integer> bf = BloomFilter.create(Funnels.integerFunnel(), total, 0.001);</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 初始化1000000条数据到过滤器中</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> total<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            bf<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">// 匹配已在过滤器中的值，是否有匹配不上的</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> total<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>bf<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"有坏人逃脱了~~~"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">// 匹配不在过滤器中的10000个值，有多少匹配出来</span>
+        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> total<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> total <span class="token operator">+</span> <span class="token number">10000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>bf<span class="token punctuation">.</span><span class="token function">mightContain</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                count<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"误伤的数量："</span> <span class="token operator">+</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>运行结果：</p>
+<pre class=" language-java"><code class="language-java">误伤的数量：<span class="token number">320</span></code></pre>
+<p>运行结果表示，遍历这一百万个在过滤器中的数时，都被识别出来了。一万个不在过滤器中的数，误伤了 320 个，错误率是 0.03 左右。</p>
+<p>看下 Bloom Filter 的源码：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> BloomFilter<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">create</span><span class="token punctuation">(</span>Funnel<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">></span> funnel<span class="token punctuation">,</span> <span class="token keyword">int</span> expectedInsertions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">create</span><span class="token punctuation">(</span>funnel<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span> expectedInsertions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>  
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> BloomFilter<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">create</span><span class="token punctuation">(</span>Funnel<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">></span> funnel<span class="token punctuation">,</span> <span class="token keyword">long</span> expectedInsertions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">create</span><span class="token punctuation">(</span>funnel<span class="token punctuation">,</span> expectedInsertions<span class="token punctuation">,</span> <span class="token number">0.03</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// FYI, for 3%, we always get 5 hash functions</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> BloomFilter<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">create</span><span class="token punctuation">(</span>
+          Funnel<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">></span> funnel<span class="token punctuation">,</span> <span class="token keyword">long</span> expectedInsertions<span class="token punctuation">,</span> <span class="token keyword">double</span> fpp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">create</span><span class="token punctuation">(</span>funnel<span class="token punctuation">,</span> expectedInsertions<span class="token punctuation">,</span> fpp<span class="token punctuation">,</span> BloomFilterStrategies<span class="token punctuation">.</span>MURMUR128_MITZ_64<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">static</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> BloomFilter<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">create</span><span class="token punctuation">(</span>
+      Funnel<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">></span> funnel<span class="token punctuation">,</span> <span class="token keyword">long</span> expectedInsertions<span class="token punctuation">,</span> <span class="token keyword">double</span> fpp<span class="token punctuation">,</span> Strategy strategy<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span></code></pre>
+<p>Bloom Filter 一共四个 <code>create()</code> 方法，不过最终都是走向第四个。看一下每个参数的含义：</p>
+<p><strong>funnel：</strong>数据类型（一般是调用 Funnels 工具类中的）</p>
+<p><strong>expectedInsertions：</strong>期望插入的值的个数</p>
+<p><strong>fpp：</strong>错误率（默认值为 0.03 ）</p>
+<p><strong>strategy：</strong>哈希算法（我也不懂啥意思）</p>
+<h3 id="Bloom-Filter-的应用"><a href="#Bloom-Filter-的应用" class="headerlink" title="Bloom Filter 的应用"></a>Bloom Filter 的应用</h3><p>在最后一个 <code>create()</code> 方法中，设置一个断点：</p>
+<p><img src="https://s1.ax1x.com/2020/04/24/JDkJM9.png" alt="create()"></p>
+<p>上面的 <strong><code>numBits</code></strong> ，表示存一百万个 int 类型数字，需要的位数为 7298440 ，700 多万位。理论上存一百万个数，一个 int 是 4 字节 32 位，需要 4<em>8</em>1000000 = 3200 万位。如果使用 HashMap 去存，按 HashMap 50% 的存储效率，需要 6400 万位。可以看出 Bloom Filter 的存储空间很小，只有 HashMap 的 1/10 左右。</p>
+<p>上面的 <strong><code>numHashFunctions</code></strong> ，表示需要 5 个函数去存这些数字。</p>
+<p>使用第三个 <code>create()</code> 方法，我们设置下错误率：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> BloomFilter<span class="token operator">&lt;</span>Integer<span class="token operator">></span> bf <span class="token operator">=</span> BloomFilter<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>Funnels<span class="token punctuation">.</span><span class="token function">integerFunnel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> total<span class="token punctuation">,</span> <span class="token number">0.0003</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>再运行看看：</p>
+<pre class=" language-java"><code class="language-java">误伤的数量：<span class="token number">4</span></code></pre>
+<p>此时误伤的数量为 4 ，错误率为 0.04% 左右。</p>
+<p><img src="https://s1.ax1x.com/2020/04/24/JDAaOs.png" alt=""></p>
+<p>当错误率设为 0.0003 时，所需要的位数为 16883499 ，1600 万位，需要 12 个函数。</p>
+<p>和上面对比可以看出，错误率越大，所需空间和时间越小，错误率越小，所需空间和时间约大 。</p>
+<p>常见的几个应用场景：</p>
+<ul>
+<li><p><strong>Cerberus</strong> 在收集监控数据的时候，有的系统的监控项量会很大，需要检查一个监控项的名字是否已经被记录到 DB 过了, 如果没有的话就需要写入 DB 。</p>
+</li>
+<li><p><strong>爬虫过滤。</strong>已抓到的 URL 就不再抓，可用 Bloom Filter 过滤。</p>
+</li>
+<li><p><strong>垃圾邮件过滤。</strong>如果用哈希表，每存储一亿个 Email 地址，就需要 1.6GB 的内存（用哈希表实现的具体办法是将每一个 Email 地址对应成一个八字节的信息指纹，然后将这些信息指纹存入哈希表，由于哈希表的存储效率一般只有 50% ，因此一个 Email 地址需要占用十六个字节。一亿个地址大约要 1.6GB ，即十六亿字节的内存）。因此存贮几十亿个邮件地址可能需要上百 GB 的内存。而 Bloom Filter 只需要哈希表 1/8 到 1/4 的大小就能解决同样的问题。</p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>好了，以上就是这篇文章的全部内容了，祝各位看官都能成为 offer 收割机^∨^。</p>
 
             </div>
             <hr/>
@@ -574,7 +644,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/">https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/</a>
+                    <a href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/">https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -785,31 +855,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/23/shu-ju-ku/redis-shu-ju-jie-gou-di-ceng-yuan-li/">
+                <a href="/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Redis数据结构底层原理">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="布隆过滤器（Bloom Filter）">
                         
-                        <span class="card-title">Redis数据结构底层原理</span>
+                        <span class="card-title">布隆过滤器（Bloom Filter）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis 数据结构底层原理简单动态字符串（SDS）Redis 是用 C 语言写的，但是 C 语言处理字符串和数组的成本是很高的，下面我分别说几个例子。
-
-极其容易造成缓冲区溢出问题。比如用 strcat() ，在用这个函数之前必须要先给目
+                            避免缓存穿透的利器之 Bloom FilterBloom Filter 概念布隆过滤器（英语：Bloom Filter）是 1970 年由一个叫布隆的小伙子提出的。它实际上是一个很长的二进制向量和一系列随机映射函数。布隆过滤器可以用于检索一
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -822,6 +891,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -844,25 +914,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/21/shu-ju-ku/mysql-suo-yin-zong-jie/">
+                <a href="/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="MySQL索引总结">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Redis缓存雪崩、穿透、击穿">
                         
-                        <span class="card-title">MySQL索引总结</span>
+                        <span class="card-title">Redis缓存雪崩、穿透、击穿</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            MySQL 索引总结什么是索引？索引是一种用于快速查询和检索数据的数据结构。常见的索引结构有：B 树、B+ 树和 Hash 。
-索引的作用就相当于目录的作用。打个比方：我们在查字典的时候，如果没有目录，那我们就只能一页一页的去找我们需要查的
+                            Redis 缓存雪崩、穿透、击穿前言Redis 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 Redis **的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（请允许
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-24
                             </span>
                         <span class="publish-author">
                             
@@ -879,8 +948,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MySQL/">
-                        <span class="chip bg-color">MySQL</span>
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BC%93%E5%AD%98/">
+                        <span class="chip bg-color">缓存</span>
                     </a>
                     
                 </div>
