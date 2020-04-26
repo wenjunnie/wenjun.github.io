@@ -6,17 +6,46 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-26T06:54:03.027Z</updated>
+  <updated>2020-04-26T07:34:07.893Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis总结</title>
+    <link href="https://www.niewenjun.com/2020/04/26/shu-ju-ku/redis-zong-jie/"/>
+    <id>https://www.niewenjun.com/2020/04/26/shu-ju-ku/redis-zong-jie/</id>
+    <published>2020-04-26T07:33:00.000Z</published>
+    <updated>2020-04-26T07:34:07.893Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Redis-总结&quot;&gt;&lt;a href=&quot;#Redis-总结&quot; class=&quot;headerlink&quot; title=&quot;Redis 总结&quot;&gt;&lt;/a&gt;Redis 总结&lt;/h2&gt;&lt;h3 id=&quot;回望过去&quot;&gt;&lt;a href=&quot;#回望过去&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis线程模型、双写一致性</title>
     <link href="https://www.niewenjun.com/2020/04/25/shu-ju-ku/redis-xian-cheng-mo-xing-shuang-xie-yi-zhi-xing/"/>
     <id>https://www.niewenjun.com/2020/04/25/shu-ju-ku/redis-xian-cheng-mo-xing-shuang-xie-yi-zhi-xing/</id>
     <published>2020-04-25T07:00:00.000Z</published>
-    <updated>2020-04-26T06:54:03.027Z</updated>
+    <updated>2020-04-26T07:09:37.631Z</updated>
     
     <summary type="html">
     
@@ -548,35 +577,6 @@
         
         
           &lt;h3 id=&quot;何谓乐观锁与悲观锁&quot;&gt;&lt;a href=&quot;#何谓乐观锁与悲观锁&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java线程池学习总结</title>
-    <link href="https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-xian-cheng-chi-xue-xi-zong-jie/"/>
-    <id>https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/java-xian-cheng-chi-xue-xi-zong-jie/</id>
-    <published>2020-04-16T07:31:00.000Z</published>
-    <updated>2020-04-18T09:32:13.191Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;一-使用线程池的好处&quot;&gt;&lt;a href=&quot;#一-使用线程池的好处&quot; class=&quot;headerlink&quot; title=&quot;一 使用线程池的好处&quot;&gt;&lt;/a&gt;一
         
       
     

@@ -537,7 +537,7 @@
 <p>比如可以搞个简单的<strong>消息队列</strong>，从 <strong>List</strong> 头怼进去，从 <strong>List</strong> 屁股那里弄出来。</p>
 <p><strong>List</strong> 本身就是我们在开发过程中比较常用的数据结构了，热点数据更不用说了。</p>
 <ul>
-<li><p><strong>消息队列：Redis</strong>的链表结构，可以轻松实现阻塞队列，可以使用左进右出的命令组成来完成队列的设计。</p>
+<li><p><strong>消息队列：Redis</strong> 的链表结构，可以轻松实现阻塞队列，可以使用左进右出的命令组成来完成队列的设计。</p>
 <p>比如：数据的生产者可以通过 <strong>Lpush</strong> 命令从左边插入数据，多个数据消费者，可以使用 <strong>BRpop</strong> 命令阻塞地“抢”列表尾部的数据。</p>
 </li>
 <li><p>文章列表或者数据分页展示的应用。</p>
@@ -545,19 +545,17 @@
 </li>
 </ul>
 <h4 id="Set："><a href="#Set：" class="headerlink" title="Set："></a>Set：</h4><p><strong>Set</strong> 是无序集合，会自动去重的那种。</p>
-<p>直接基于 <strong>Set</strong> 将系统里需要去重的数据扔进去，自动就给去重了，如果你需要对一些数据进行快速的全局去重，你当然也可以基于 <strong>JVM</strong> 内存里的 <strong>HashSet</strong> 进行去重，但是如果你的某个系统部署在多台机器上呢？得基于<strong>Redis</strong>进行全局的 <strong>Set</strong> 去重。</p>
+<p>直接基于 <strong>Set</strong> 将系统里需要去重的数据扔进去，自动就给去重了，如果你需要对一些数据进行快速的全局去重，你当然也可以基于 <strong>JVM</strong> 内存里的 <strong>HashSet</strong> 进行去重，但是如果你的某个系统部署在多台机器上呢？得基于 <strong>Redis</strong> 进行全局的 <strong>Set</strong> 去重。</p>
 <p>可以基于 <strong>Set</strong> 玩儿交集、并集、差集的操作，比如交集吧，我们可以把两个人的好友列表整一个交集，看看俩人的共同好友是谁？对吧。</p>
 <p>反正这些场景比较多，因为对比很快，操作也简单，两个查询一个 <strong>Set</strong> 搞定。</p>
 <h4 id="Sorted-Set："><a href="#Sorted-Set：" class="headerlink" title="Sorted Set："></a>Sorted Set：</h4><p><strong>Sorted Set</strong> 是排序的 <strong>Set</strong> ，去重但可以排序，写进去的时候给一个分数，自动根据分数排序。</p>
-<p>有序集合的使用场景与集合类似，但是set集合不是自动有序的，而 <strong>Sorted Set</strong> 可以利用分数进行成员间的排序，而且是插入时就排序好。所以当你需要一个有序且不重复的集合列表时，就可以选择 <strong>Sorted Set</strong> 数据结构作为选择方案。</p>
+<p>有序集合的使用场景与集合类似，但是 set 集合不是自动有序的，而 <strong>Sorted Set</strong> 可以利用分数进行成员间的排序，而且是插入时就排序好。所以当你需要一个有序且不重复的集合列表时，就可以选择 <strong>Sorted Set</strong> 数据结构作为选择方案。</p>
 <ul>
-<li><p>排行榜：有序集合经典使用场景。例如视频网站需要对用户上传的视频做排行榜，榜单维护可能是多方面：按照时间、按照播放量、按照获得的赞数等。</p>
-</li>
-<li><p>用 <strong>Sorted Sets</strong> 来做带权重的队列，比如普通消息的 score 为 1 ，重要消息的 score 为 2 ，然后工作线程可以选择按 score 的倒序来获取工作任务。让重要的任务优先执行。</p>
-<p>微博热搜榜，就是有个后面的热度值，前面就是名称：</p>
-<p><img src="https://s1.ax1x.com/2020/04/26/J6jLa8.jpg" alt="微博热搜榜"></p>
-</li>
+<li>排行榜：有序集合经典使用场景。例如视频网站需要对用户上传的视频做排行榜，榜单维护可能是多方面：按照时间、按照播放量、按照获得的赞数等。</li>
+<li>用 <strong>Sorted Set</strong> 来做带权重的队列，比如普通消息的 score 为 1 ，重要消息的 score 为 2 ，然后工作线程可以选择按 score 的倒序来获取工作任务。让重要的任务优先执行。</li>
 </ul>
+<p>如微博热搜榜，就是有个后面的热度值，前面就是名称：</p>
+<p><img src="https://s1.ax1x.com/2020/04/26/J6jLa8.jpg" alt="微博热搜榜"></p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><strong>Redis</strong> 基础类型有五种，这个我在基础里面也有提到了，这个问题其实一般都是对 P6 以下，也就是 1-3 年左右的小伙伴可能是会问得比较多的问题。</p>
 <p>能回答出来五种我想大家都可以，但是不知道大家是否知道，五种类型具体的使用场景，以及什么时候用什么类型最合适呢？</p>
 <p>要是你回答的不好，没说出几种数据类型，也没说什么场景，你完了，面试官对你印象肯定不好，觉得你平时就是做个简单的 set 和 get 。所以看似很简单的面试题实则最容易看出你的深浅了，大家都要注意<strong>打好基础</strong>。</p>
@@ -577,7 +575,7 @@
 <p>每次要<strong>写之前，先判断</strong>一下当前这个 Value 的时间戳是否比缓存里的 Value 的时间戳要新。如果是的话，那么可以写，否则，就不能用旧的数据覆盖新的数据。</p>
 <h3 id="你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？"><a href="#你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？" class="headerlink" title="你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？"></a>你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？</h3><p>一般来说，如果允许缓存可以稍微的跟数据库偶尔有不一致的情况，也就是说如果你的系统<strong>不是严格要求</strong> “缓存+数据库” 必须保持一致性的话，最好不要做这个方案，即：<strong>读请求和写请求串行化</strong>，串到一个<strong>内存队列</strong>里去。</p>
 <p>串行化可以保证一定不会出现不一致的情况，但是它也会导致系统的吞吐量大幅度降低，用比正常情况下多几倍的机器去支撑线上的一个请求。</p>
-<p>把一些列的操作都放到队列里面，顺序肯定不会乱，但是并发高了，这队列很容易阻塞，反而会成为整个系统的弱点，瓶颈。</p>
+<p>把一些列的操作都放到队列里面，顺序肯定不会乱，但是并发高了，这队列很容易阻塞，反而会成为整个系统的弱点、瓶颈。</p>
 <p><img src="https://s1.ax1x.com/2020/04/26/J6xctO.jpg" alt=""></p>
 <h3 id="你了解最经典的-KV、DB-读写模式么？"><a href="#你了解最经典的-KV、DB-读写模式么？" class="headerlink" title="你了解最经典的 KV、DB 读写模式么？"></a>你了解最经典的 KV、DB 读写模式么？</h3><p>最经典的缓存+数据库读写的模式，就是 <strong><code>Cache Aside Pattern</code></strong> 。</p>
 <ul>
@@ -910,30 +908,33 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/25/shu-ju-ku/redis-xian-cheng-mo-xing-shuang-xie-yi-zhi-xing/">
+                <a href="/2020/04/26/shu-ju-ku/redis-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Redis线程模型、双写一致性">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Redis总结">
                         
-                        <span class="card-title">Redis线程模型、双写一致性</span>
+                        <span class="card-title">Redis总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis 线程模型、双写一致性前言Redis 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 Redis 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（请允许我使
+                            Redis 总结回望过去上几期吊打系列我们提到了 Redis 的很多知识，还没看的小伙伴可以回顾一下！
+
+《吊打面试官》系列-Redis基础
+《吊打面试官》系列-Redis缓存雪崩、穿透、击穿
+《吊打面试官》系列-Redis集群、持久化、L
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-25
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-26
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -946,7 +947,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
