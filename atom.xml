@@ -6,10 +6,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-26T07:34:07.893Z</updated>
+  <updated>2020-04-26T16:07:45.358Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HyperLogLog</title>
+    <link href="https://www.niewenjun.com/2020/04/27/shu-ju-ku/hyperloglog/"/>
+    <id>https://www.niewenjun.com/2020/04/27/shu-ju-ku/hyperloglog/</id>
+    <published>2020-04-27T00:54:00.000Z</published>
+    <updated>2020-04-26T16:07:45.358Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;一、HyperLogLog-简介&quot;&gt;&lt;a href=&quot;#一、HyperLogLog-简介&quot; class=&quot;headerlink&quot; title=&quot;一、HyperLogLog 简介&quot;&gt;&lt;/a&gt;一、HyperLogLog
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis总结</title>
@@ -45,7 +74,7 @@
     <link href="https://www.niewenjun.com/2020/04/25/shu-ju-ku/redis-xian-cheng-mo-xing-shuang-xie-yi-zhi-xing/"/>
     <id>https://www.niewenjun.com/2020/04/25/shu-ju-ku/redis-xian-cheng-mo-xing-shuang-xie-yi-zhi-xing/</id>
     <published>2020-04-25T07:00:00.000Z</published>
-    <updated>2020-04-26T07:09:37.631Z</updated>
+    <updated>2020-04-26T15:58:49.118Z</updated>
     
     <summary type="html">
     
@@ -548,35 +577,6 @@
         
           &lt;p&gt;&lt;img src=&quot;https://s1.ax1x.com/2020/04/17/JVzVrq.png&quot; alt=&quot;Synchronized 关键字使用、底层原理、JDK1.6 之后的底层优化以及和 ReentrantLock 的对比&quot;&gt;&lt;/p&gt;
 &lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>乐观锁与悲观锁</title>
-    <link href="https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/le-guan-suo-yu-bei-guan-suo/"/>
-    <id>https://www.niewenjun.com/2020/04/16/hou-duan/bing-fa/le-guan-suo-yu-bei-guan-suo/</id>
-    <published>2020-04-16T09:03:00.000Z</published>
-    <updated>2020-04-17T14:11:02.686Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;何谓乐观锁与悲观锁&quot;&gt;&lt;a href=&quot;#何谓乐观锁与悲观锁&quot; class=&quot;headerlink&quot;
         
       
     
