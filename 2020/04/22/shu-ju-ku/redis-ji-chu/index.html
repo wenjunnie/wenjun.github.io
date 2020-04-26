@@ -499,15 +499,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Redis-基础"><a href="#Redis-基础" class="headerlink" title="Redis 基础"></a>Redis 基础</h2><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis</strong> 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（<strong>请允许我使用一下夸张的修辞手法</strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写《吊打面试官》系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚铩羽而归，疯狂收割大厂 offer ！</p>
-<h3 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h3><blockquote>
+                <h1 id="Redis-基础"><a href="#Redis-基础" class="headerlink" title="Redis 基础"></a>Redis 基础</h1><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis</strong> 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（<strong>请允许我使用一下夸张的修辞手法</strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写《吊打面试官》系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚铩羽而归，疯狂收割大厂 offer ！</p>
+<h2 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h2><blockquote>
 <p>一个大腹便便，穿着格子衬衣的中年男子，拿着一个满是划痕的 Mac 向你走来，看着快秃顶的头发，心想着肯定是尼玛顶级架构师吧！但是我们腹有诗书气自华，虚都不虚。</p>
 </blockquote>
 <p> <img src="https://s1.ax1x.com/2020/04/23/JdyFeA.png" alt=""></p>
 <h3 id="小伙子您好，看你简历上写了你项目里面用到了-Redis-，你们为啥用-Redis-？"><a href="#小伙子您好，看你简历上写了你项目里面用到了-Redis-，你们为啥用-Redis-？" class="headerlink" title="小伙子您好，看你简历上写了你项目里面用到了 Redis ，你们为啥用 Redis ？"></a>小伙子您好，看你简历上写了你项目里面用到了 Redis ，你们为啥用 Redis ？</h3><p>心里忍不住暗骂，这叫啥问题，大家不都是用的这个嘛，但是你不能说出来。</p>
 <p>认真回答道：<strong>帅气迷人的面试官您好</strong>，因为传统的关系型数据库如 MySQL 已经不能适用所有的场景了，比如秒杀的库存扣减，APP 首页的访问流量高峰等等，都很容易把数据库打崩，所以引入了缓存中间件，目前市面上比较常用的缓存中间件有 <strong>Redis</strong> 和 <strong>Memcached</strong> 。不过综和考虑了他们的优缺点，最后选择了 Redis 。</p>
 <p><strong>至于更细节的对比朋友们记得查阅 Redis 和 Memcached 的区别，比如两者的优缺点对比和各自的场景，后续我有时间也会写出来。</strong></p>
-<h3 id="那小伙子，我再问你，Redis-有哪些数据结构呀？"><a href="#那小伙子，我再问你，Redis-有哪些数据结构呀？" class="headerlink" title="那小伙子，我再问你，Redis 有哪些数据结构呀？"></a>那小伙子，我再问你，Redis 有哪些数据结构呀？</h3><p>字符串 <strong><code>String</code></strong> 、字典 <strong><code>Hash</code></strong> 、列表 <strong><code>List</code></strong> 、集合 <strong><code>Set</code></strong> 、有序集合 <strong><code>SortedSet（Zset）</code></strong>。</p>
+<h3 id="那小伙子，我再问你，Redis-有哪些数据结构呀？"><a href="#那小伙子，我再问你，Redis-有哪些数据结构呀？" class="headerlink" title="那小伙子，我再问你，Redis 有哪些数据结构呀？"></a>那小伙子，我再问你，Redis 有哪些数据结构呀？</h3><p>字符串 <strong><code>String</code></strong> 、字典 <strong><code>Hash</code></strong> 、列表 <strong><code>List</code></strong> 、集合 <strong><code>Set</code></strong> 、有序集合 <strong><code>SortedSet（ZSet）</code></strong>。</p>
 <p><strong>这里我相信 99% 的读者都能回答上来 Redis 的5个基本数据类型。如果回答不出来的小伙伴我们就要加油补课哟，大家知道五种类型最适合的场景更好。</strong></p>
 <p>但是，如果你是 Redis 中高级用户，而且你要在这次面试中突出你和其他候选人的不同，还需要加上下面几种数据结构 HyperLogLog、Geo、Pub/Sub 。</p>
 <p>如果你还想加分，那你说还玩过 Redis Module，像 BloomFilter，RedisSearch，Redis-ML，这个时候面试官得眼睛就开始发亮了，心想这个小伙子<strong>有点东西啊</strong>。</p>
@@ -548,7 +548,7 @@
 <p><strong>还有一点就是我问你为啥用 Redis 你不要一上来就直接回答问题了，你可以这样回答：</strong></p>
 <p><strong>帅气的面试官您好</strong>，首先我们的项目 DB 遇到了瓶颈，特别是秒杀和热点数据这样的场景 DB 基本上就扛不住了，那就需要缓存中间件的加入了，目前市面上有的缓存中间件有 Redis 和 Memcached ，他们的优缺点……，综合这些然后再结合我们项目特点，最后我们在技术选型的时候选了谁。</p>
 <p>如果你这样有条不紊，有理有据的回答了我的问题而且还说出这么多我问题外的知识点，我会觉得你不只是一个会写代码的人，你逻辑清晰，你对技术选型，对中间件对项目都有自己的理解和思考，说白了就是你的 offer 有戏了。</p>
-<p>好了，以上就是这篇文章的全部内容了，祝各位看官都能成为 offer 收割机^∨^。</p>
+<p>好了，以上就是这篇文章的全部内容了，能看到这里的人呀，都是<strong>人才</strong>，祝各位看官都能成为 offer 收割机^∨^。</p>
 
             </div>
             <hr/>

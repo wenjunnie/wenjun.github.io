@@ -499,15 +499,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Redis-集群、哨兵、持久化、LRU"><a href="#Redis-集群、哨兵、持久化、LRU" class="headerlink" title="Redis 集群、哨兵、持久化、LRU"></a>Redis 集群、哨兵、持久化、LRU</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis</strong> 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（<strong>请允许我使用一下夸张的修辞手法</strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写<strong>《吊打面试官》</strong>系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚瞠目结舌，疯狂收割大厂 <strong>offer</strong> ！</p>
+                <h1 id="Redis-集群、哨兵、持久化、LRU"><a href="#Redis-集群、哨兵、持久化、LRU" class="headerlink" title="Redis 集群、哨兵、持久化、LRU"></a>Redis 集群、哨兵、持久化、LRU</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis</strong> 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（<strong>请允许我使用一下夸张的修辞手法</strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写<strong>《吊打面试官》</strong>系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚瞠目结舌，疯狂收割大厂 <strong>offer</strong> ！</p>
 <hr>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>上几期<strong>《吊打面试官》</strong>还没看的小伙伴可以回顾一下！</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>上几期<strong>《吊打面试官》</strong>还没看的小伙伴可以回顾一下！</p>
 <ul>
 <li><a href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu">《吊打面试官》系列-Redis基础</a></li>
-<li><a href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan">《吊打面试官》系列-缓存雪崩、击穿、穿透</a></li>
+<li><a href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan">《吊打面试官》系列-Redis缓存雪崩、穿透、击穿</a></li>
 </ul>
 <p>大家都知道一个技术的引入方便了开发，解决了各种问题，但是也会带来对应的问题，<strong>技术是把双刃剑</strong>嘛，集群的引入也会带来很多问题，如：集群的高可用怎么保证，数据怎么同步等等，我们话不多说，有请下一位受害者为我们展示。</p>
-<h3 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h3><blockquote>
+<h2 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h2><blockquote>
 <p>三个大腹便便，穿着格子衬衣的中年男子，拿着三个满是划痕的 Mac 向你走来，看着快秃顶的头发，心想着肯定是尼玛顶级架构师吧！而且还是三个，但是我们腹有诗书气自华，根本虚都不虚好伐。</p>
 </blockquote>
 <p><img src="https://s1.ax1x.com/2020/04/24/JDwjkq.jpg" alt=""></p>
@@ -623,7 +623,7 @@
 <p>当容量超过 100 时，开始执行 <strong>LRU</strong> 策略：将最近最少未使用的 <strong>TimeoutInfoHolder</strong> 对象 <strong>evict</strong> 掉。</p>
 <p>真实面试中会让你写 LUR 算法，你可别搞原始的那个，那真 TM 多，写不完的，你要么怼上面这个，要么怼下面这个，找一个数据结构实现下 Java 版本的 LRU 还是比较容易的，知道啥原理就好了。</p>
 <p><img src="https://s1.ax1x.com/2020/04/24/JDgd7F.jpg" alt="LRU 算法"></p>
-<h3 id="面试结束"><a href="#面试结束" class="headerlink" title="面试结束"></a>面试结束</h3><h3 id="小伙子，你确实有点东西，HRBP-会联系你的，请务必保持你的手机畅通好么？"><a href="#小伙子，你确实有点东西，HRBP-会联系你的，请务必保持你的手机畅通好么？" class="headerlink" title="小伙子，你确实有点东西，HRBP 会联系你的，请务必保持你的手机畅通好么？"></a>小伙子，你确实有点东西，HRBP 会联系你的，请务必保持你的手机畅通好么？</h3><p>好的谢谢面试官，面试官真好，我还想再面几次，噗此。</p>
+<h2 id="面试结束"><a href="#面试结束" class="headerlink" title="面试结束"></a>面试结束</h2><h3 id="小伙子，你确实有点东西，HRBP-会联系你的，请务必保持你的手机畅通好么？"><a href="#小伙子，你确实有点东西，HRBP-会联系你的，请务必保持你的手机畅通好么？" class="headerlink" title="小伙子，你确实有点东西，HRBP 会联系你的，请务必保持你的手机畅通好么？"></a>小伙子，你确实有点东西，HRBP 会联系你的，请务必保持你的手机畅通好么？</h3><p>好的谢谢面试官，面试官真好，我还想再面几次，噗此。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好了，我们玩归玩，闹归闹，别拿面试开玩笑，我这么写是为了节目效果，大家面试请认真对待。</p>
 <p>以上就是这篇文章的全部内容了，能看到这里的人呀，都是<strong>人才</strong>，祝各位看官都能成为 offer 收割机^∨^。</p>
 <p>给大家推荐几本经典的 Redis 入门的书籍和我参考的资料：</p>
@@ -883,30 +883,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/">
+                <a href="/2020/04/25/shu-ju-ku/redis-xian-cheng-mo-xing-shuang-xie-yi-zhi-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Redis集群、持久化、LRU">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Redis线程模型、双写一致性">
                         
-                        <span class="card-title">Redis集群、持久化、LRU</span>
+                        <span class="card-title">Redis线程模型、双写一致性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis 集群、哨兵、持久化、LRU前言Redis 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 Redis 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（请允
+                            Redis 线程模型、双写一致性前言Redis 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 Redis 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（请允许我使
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-24
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-25
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -919,7 +918,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     

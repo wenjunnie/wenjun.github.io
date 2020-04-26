@@ -499,15 +499,18 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Redis-缓存雪崩、穿透、击穿"><a href="#Redis-缓存雪崩、穿透、击穿" class="headerlink" title="Redis 缓存雪崩、穿透、击穿"></a>Redis 缓存雪崩、穿透、击穿</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis</strong> 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（<strong>请允许我使用一下夸张的修辞手法</strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写<strong>《吊打面试官》</strong>系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚瞠目结舌，疯狂收割大厂 offer ！</p>
-<h3 id="一点感慨"><a href="#一点感慨" class="headerlink" title="一点感慨"></a>一点感慨</h3><p>本来都把稿子放到公众号保存了，洗澡的时候想了一下晚上的比赛，觉得还是打开电脑写点东西，跟文章内容没关系，只是一点个人的感慨，不知道多少小伙伴看了 <strong>SKT VS G2</strong> 的比赛，又不知道多少小伙伴还记得 <strong>Faker</strong> 手抖的那一幕。</p>
+                <h1 id="Redis-缓存雪崩、穿透、击穿"><a href="#Redis-缓存雪崩、穿透、击穿" class="headerlink" title="Redis 缓存雪崩、穿透、击穿"></a>Redis 缓存雪崩、穿透、击穿</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>Redis</strong> 在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在 <strong>Redis</strong> 的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸（<strong>请允许我使用一下夸张的修辞手法</strong>），打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚，在一个寂寞难耐的夜晚，我痛定思痛，决定开始写<strong>《吊打面试官》</strong>系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚瞠目结舌，疯狂收割大厂 offer ！</p>
+<h2 id="一点感慨"><a href="#一点感慨" class="headerlink" title="一点感慨"></a>一点感慨</h2><p>本来都把稿子放到公众号保存了，洗澡的时候想了一下晚上的比赛，觉得还是打开电脑写点东西，跟文章内容没关系，只是一点个人的感慨，不知道多少小伙伴看了 <strong>SKT VS G2</strong> 的比赛，又不知道多少小伙伴还记得 <strong>Faker</strong> 手抖的那一幕。</p>
 <p> <img src="https://s1.ax1x.com/2020/04/24/JBSLJs.gif" alt=""></p>
 <p>不知道你们看了是什么感受，我看到他手抖的时候我内心也抖了，世界赛我支持的都是 <strong>LPL</strong> 的队伍，但是我喜欢李哥这个人，那种对胜利的执著，这么多年了那种坚持自己的坚持，这么多利益诱惑在面前却只想要胜利，这样的人我好喜欢啊，我想很多人也喜欢。</p>
 <p>可能就像很多网友说的那样，英雄迟暮，但是我觉得他还是有点东西，就像很多人说我们程序员只能吃年轻饭一样，但是如果你坚持自己的坚持，做个腹有诗书气自华的仔，我想最后肯定会得到自己的得到。</p>
 <p>好了我也不煽情了，我们开始讲技术吧。</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>上一期吊打系列我们提到了 Redis 的基础知识，还没看的小伙伴可以回顾一下：<a href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu">《吊打面试官》系列-Redis基础</a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>上一期吊打系列我们提到了 Redis 的基础知识，还没看的小伙伴可以回顾一下！</p>
+<ul>
+<li><a href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu">《吊打面试官》系列-Redis基础</a></li>
+</ul>
 <p>那提到 <strong>Redis</strong> 我相信各位在面试，或者实际开发过程中对缓存<strong>雪崩</strong>，<strong>穿透</strong>，<strong>击穿</strong>也不陌生吧，就算没遇到过但是你肯定听过，那三者到底有什么区别，我们又应该怎么去防止这样的情况发生呢，我们有请下一位受害者。</p>
-<h3 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h3><blockquote>
+<h2 id="面试开始"><a href="#面试开始" class="headerlink" title="面试开始"></a>面试开始</h2><blockquote>
 <p>一个大腹便便，穿着格子衬衣的中年男子，拿着一个满是划痕的 Mac 向你走来，看着快秃顶的头发，心想着肯定是尼玛顶级架构师吧！但是我们腹有诗书气自华，虚都不虚。</p>
 </blockquote>
 <p> <img src="https://s1.ax1x.com/2020/04/24/JBifDx.jpg" alt=""></p>
@@ -537,9 +540,9 @@
 <p>那又有小伙伴说了如果黑客有很多个 IP 同时发起攻击呢？这点我一直也不是很想得通，但是一般级别的黑客没这么多肉鸡，再者正常级别的 <strong>Redis</strong> 集群都能抗住这种级别的访问的，小公司我想他们不会感兴趣的。把系统的高可用做好了，集群还是很能顶的。</p>
 <p><strong>缓存击穿</strong>的话，设置热点数据永远不过期。或者加上互斥锁就能搞定了。</p>
 <p><strong>作为暖男，代码我肯定帮你们准备好了。</strong><br> <img src="https://s1.ax1x.com/2020/04/24/JBvd10.png" alt="代码示例"></p>
-<h3 id="面试结束"><a href="#面试结束" class="headerlink" title="面试结束"></a>面试结束</h3><p><strong>嗯嗯还不错，三个点都回答得很好，今天也不早了，面试就先到这里，明天你再过来二面我继续问一下你关于 Redis 集群高可用，主从同步，哨兵等知识点的问题。</strong></p>
+<h2 id="面试结束"><a href="#面试结束" class="headerlink" title="面试结束"></a>面试结束</h2><p><strong>嗯嗯还不错，三个点都回答得很好，今天也不早了，面试就先到这里，明天你再过来二面我继续问一下你关于 Redis 集群高可用，主从同步，哨兵等知识点的问题。</strong></p>
 <p>晕居然还有下一轮面试！（强行下一期的伏笔哈哈）但是为了 offer 还是得舔，嗯嗯，好的帅气面试官。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们玩归玩，闹归闹，别拿面试开玩笑。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们玩归玩，闹归闹，别拿面试开玩笑。</p>
 <p>本文简单的介绍了，<strong>Redis</strong> 的<strong>雪崩</strong>、<strong>击穿</strong>、<strong>穿透</strong>，三者其实都差不多，但是又有一些区别，在面试中其实这是问到缓存必问的，大家不要把三者搞混了，因为缓存雪崩、穿透和击穿，是缓存最大的问题，要么不出现，一旦出现就是致命性的问题，所以面试官一定会问你。</p>
 <p>大家一定要理解是<strong>怎么发生的</strong>，以及是怎么去<strong>避免</strong>的，发生之后又怎么去<strong>抢救</strong>，你可以不是知道很深入，但是你不能一点都不去想，面试有时候不一定是对知识面的拷问，或许是对你的态度的拷问，如果你思路清晰，然后<strong>知其然还知其所以然</strong>那就很赞，还知道怎么预防那来上班吧。</p>
 <h3 id="最后暖男我继续给你们做个小的技术总结："><a href="#最后暖男我继续给你们做个小的技术总结：" class="headerlink" title="最后暖男我继续给你们做个小的技术总结："></a>最后暖男我继续给你们做个小的技术总结：</h3><p>一般避免以上情况发生我们从三个时间段去分析下：</p>

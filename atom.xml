@@ -6,17 +6,17 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-24T11:39:20.642Z</updated>
+  <updated>2020-04-26T06:54:03.027Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Redis集群、持久化、LRU</title>
-    <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/"/>
-    <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/</id>
-    <published>2020-04-24T10:54:00.000Z</published>
-    <updated>2020-04-24T11:39:20.642Z</updated>
+    <title>Redis线程模型、双写一致性</title>
+    <link href="https://www.niewenjun.com/2020/04/25/shu-ju-ku/redis-xian-cheng-mo-xing-shuang-xie-yi-zhi-xing/"/>
+    <id>https://www.niewenjun.com/2020/04/25/shu-ju-ku/redis-xian-cheng-mo-xing-shuang-xie-yi-zhi-xing/</id>
+    <published>2020-04-25T07:00:00.000Z</published>
+    <updated>2020-04-26T06:54:03.027Z</updated>
     
     <summary type="html">
     
@@ -24,7 +24,36 @@
       
         
         
-          &lt;h2 id=&quot;Redis-集群、哨兵、持久化、LRU&quot;&gt;&lt;a href=&quot;#Redis-集群、哨兵、持久化、LRU&quot; class=&quot;headerlink&quot; title=&quot;Redis 集群、哨兵、持久化、LRU&quot;&gt;&lt;/a&gt;Redis 集群、哨兵、持久化、LRU&lt;/h2&gt;&lt;h2
+          &lt;h1 id=&quot;Redis-线程模型、双写一致性&quot;&gt;&lt;a href=&quot;#Redis-线程模型、双写一致性&quot; class=&quot;headerlink&quot; title=&quot;Redis 线程模型、双写一致性&quot;&gt;&lt;/a&gt;Redis 线程模型、双写一致性&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis集群、持久化、LRU</title>
+    <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/"/>
+    <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/</id>
+    <published>2020-04-24T10:54:00.000Z</published>
+    <updated>2020-04-26T06:53:24.985Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Redis-集群、哨兵、持久化、LRU&quot;&gt;&lt;a href=&quot;#Redis-集群、哨兵、持久化、LRU&quot; class=&quot;headerlink&quot; title=&quot;Redis 集群、哨兵、持久化、LRU&quot;&gt;&lt;/a&gt;Redis 集群、哨兵、持久化、LRU&lt;/h1&gt;&lt;h2
         
       
     
@@ -45,7 +74,7 @@
     <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/"/>
     <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/</id>
     <published>2020-04-24T08:00:00.000Z</published>
-    <updated>2020-04-24T08:00:29.881Z</updated>
+    <updated>2020-04-26T06:39:46.031Z</updated>
     
     <summary type="html">
     
@@ -74,7 +103,7 @@
     <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/"/>
     <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-huan-cun-xue-beng-chuan-tou-ji-chuan/</id>
     <published>2020-04-24T03:54:00.000Z</published>
-    <updated>2020-04-24T08:25:07.752Z</updated>
+    <updated>2020-04-26T06:33:51.094Z</updated>
     
     <summary type="html">
     
@@ -82,7 +111,7 @@
       
         
         
-          &lt;h2 id=&quot;Redis-缓存雪崩、穿透、击穿&quot;&gt;&lt;a href=&quot;#Redis-缓存雪崩、穿透、击穿&quot; class=&quot;headerlink&quot; title=&quot;Redis 缓存雪崩、穿透、击穿&quot;&gt;&lt;/a&gt;Redis 缓存雪崩、穿透、击穿&lt;/h2&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;a
+          &lt;h1 id=&quot;Redis-缓存雪崩、穿透、击穿&quot;&gt;&lt;a href=&quot;#Redis-缓存雪崩、穿透、击穿&quot; class=&quot;headerlink&quot; title=&quot;Redis 缓存雪崩、穿透、击穿&quot;&gt;&lt;/a&gt;Redis 缓存雪崩、穿透、击穿&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a
         
       
     
@@ -103,7 +132,7 @@
     <link href="https://www.niewenjun.com/2020/04/23/shu-ju-ku/redis-shu-ju-jie-gou-di-ceng-yuan-li/"/>
     <id>https://www.niewenjun.com/2020/04/23/shu-ju-ku/redis-shu-ju-jie-gou-di-ceng-yuan-li/</id>
     <published>2020-04-23T12:28:00.000Z</published>
-    <updated>2020-04-23T12:40:05.480Z</updated>
+    <updated>2020-04-26T06:39:36.069Z</updated>
     
     <summary type="html">
     
@@ -132,7 +161,7 @@
     <link href="https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/"/>
     <id>https://www.niewenjun.com/2020/04/22/shu-ju-ku/redis-ji-chu/</id>
     <published>2020-04-22T03:56:00.000Z</published>
-    <updated>2020-04-24T08:06:15.380Z</updated>
+    <updated>2020-04-26T06:39:18.310Z</updated>
     
     <summary type="html">
     
@@ -140,7 +169,7 @@
       
         
         
-          &lt;h2 id=&quot;Redis-基础&quot;&gt;&lt;a href=&quot;#Redis-基础&quot; class=&quot;headerlink&quot; title=&quot;Redis 基础&quot;&gt;&lt;/a&gt;Redis 基础&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Redis&lt;/strong&gt;
+          &lt;h1 id=&quot;Redis-基础&quot;&gt;&lt;a href=&quot;#Redis-基础&quot; class=&quot;headerlink&quot; title=&quot;Redis 基础&quot;&gt;&lt;/a&gt;Redis 基础&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Redis&lt;/strong&gt;
         
       
     
@@ -560,35 +589,6 @@
       <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
     
       <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何设计一个RPC框架</title>
-    <link href="https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/"/>
-    <id>https://www.niewenjun.com/2020/04/16/kuang-jia/wei-fu-wu/ru-he-she-ji-yi-ge-rpc-kuang-jia/</id>
-    <published>2020-04-16T04:36:00.000Z</published>
-    <updated>2020-04-19T16:10:57.068Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;如何设计一个-RPC-框架？&quot;&gt;&lt;a href=&quot;#如何设计一个-RPC-框架？&quot; class=&quot;headerlink&quot; title=&quot;如何设计一个 RPC 框架？&quot;&gt;&lt;/a&gt;如何设计一个 RPC 框架？&lt;/h2&gt;&lt;p&gt;如何设计一个 RPC
-        
-      
-    
-    </summary>
-    
-    
-      <category term="框架" scheme="https://www.niewenjun.com/categories/%E6%A1%86%E6%9E%B6/"/>
-    
-    
-      <category term="微服务" scheme="https://www.niewenjun.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
-      <category term="RPC" scheme="https://www.niewenjun.com/tags/RPC/"/>
     
   </entry>
   
