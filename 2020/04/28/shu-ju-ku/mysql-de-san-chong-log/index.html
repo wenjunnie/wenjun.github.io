@@ -1,0 +1,1283 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MySQL的三种log, Wenjun">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>MySQL的三种log | Wenjun</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Wenjun</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Wenjun</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wenjunnie" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wenjunnie" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MySQL的三种log</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    .toc-fixed .toc-link::before{
+        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                数据库
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-04-28
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    12 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="MySQL-的三种-log"><a href="#MySQL-的三种-log" class="headerlink" title="MySQL 的三种 log"></a>MySQL 的三种 log</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在前一阵子，大哥问过我：”你知道 MySQL 的原子性是怎么保证的吗。“我懵逼了，MySQL 怎么保证原子性？我不会啊。</p>
+<p>谁都知道在事务里边原子性的意思：”<strong>一个事务包含多个操作，这些操作要么全部执行，要么全都不执行。</strong>“</p>
+<p>于是大哥就给我讲：”用的就是 <code>undo log</code> 啊。“</p>
+<p>我：”卧槽，又是知识盲区“</p>
+<p>后来在网上翻了一下，MySQL 里边还有几种常见的 <code>log</code> ，分别为：</p>
+<ul>
+<li><code>bin log</code></li>
+<li><code>redo log</code></li>
+<li><code>undo log</code></li>
+</ul>
+<p>如果你也未曾关注过这些 <code>log</code> ，麻烦给我留个言，<strong>让我觉得不是只有我一个人这么菜，行不行</strong>？</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J50WcD.jpg" alt=""></p>
+<p>后来我又去搜了一下，其实这几种 log 在<strong>面试</strong>的时候也经常会问到，这篇文章以最简单的方式来讲讲，希望对大家有帮助。</p>
+<h3 id="一、什么是-binlog-？"><a href="#一、什么是-binlog-？" class="headerlink" title="一、什么是 binlog ？"></a>一、什么是 binlog ？</h3><p><code>binlog</code> 其实在日常的开发中是听得很多的，因为很多时候数据的更新就依赖着 <code>binlog</code> 。</p>
+<p>举个很简单的例子：我们的数据是保存在数据库里边的嘛，现在我们对某个商品的某个字段的内容改了（数据库变更），而<strong>用户检索的出来数据是走搜索引擎的</strong>。为了让用户能搜到最新的数据，我们需要把引擎的数据也改掉。</p>
+<p>一句话：<strong>数据库的变更，搜索引擎的数据也需要变更</strong>。</p>
+<p>于是，我们就会监听 <code>binlog</code> 的变更，如果 <code>binlog</code> 有变更了，那我们就需要将变更写到对应的数据源。</p>
+<blockquote>
+<p>什么是 <code>binlog</code> ？</p>
+</blockquote>
+<p><code>binlog</code> 记录了数据库表结构和表数据变更，比如 <code>update/delete/insert/truncate/create</code> 。它不会记录 <code>select</code>（因为这没有对表没有进行变更）。</p>
+<blockquote>
+<p><code>binlog</code> 长什么样？</p>
+</blockquote>
+<p><code>binlog</code> 我们可以简单理解为：存储着每条变更的 <code>SQL</code> 语句（当然从下面的图看来看，不止SQL，还有XID「事务Id」等等）。</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J5DPZd.jpg" alt=""></p>
+<blockquote>
+<p><code>binlog</code> 一般用来做什么？</p>
+</blockquote>
+<p>主要有两个作用：<strong>复制和恢复数据</strong>。</p>
+<ul>
+<li>MySQL 在公司使用的时候往往都是<strong>一主多从</strong>结构的，从服务器需要与主服务器的数据保持一致，这就是通过 <code>binlog</code> 来实现的。</li>
+<li>数据库的数据被干掉了，我们可以通过 <code>binlog</code> 来对数据进行恢复。</li>
+</ul>
+<p>因为 <code>binlog</code> 记录了数据库表的变更，所以我们可以用 <code>binlog</code> 进行复制（主从复制）和恢复数据。</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J5DDF1.jpg" alt=""></p>
+<h3 id="二、binlog-的三种模式"><a href="#二、binlog-的三种模式" class="headerlink" title="二、binlog 的三种模式"></a>二、binlog 的三种模式</h3><h4 id="Row："><a href="#Row：" class="headerlink" title="Row："></a>Row：</h4><p><strong>描述：</strong>日志中会记录成每一行数据被修改的形式，然后在 Slave 端再对相同的数据进行修改，只记录要修改的数据，只有 Value ，不会有 SQL 多表关联的情况。</p>
+<p><strong>优点：</strong>记录详细，解决了 <strong>Statement</strong> 模式的复制问题。</p>
+<blockquote>
+<p>在 <strong>Row</strong> 模式下，binlog 中可以不记录执行的 SQL 语句的上下文相关的信息，仅仅只需要记录哪一条记录被修改了，修改成什么样了，所以 Row 的日志内容会非常清楚的记录下每一行数据修改的细节，非常容易理解。而且不会出现某些特定情况下的存储过程和函数，以及触发器的调用和触发无法被正确复制问题。</p>
+</blockquote>
+<p><strong>缺点：</strong>在 <strong>Row</strong> 模式下，所有的执行语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容。</p>
+<blockquote>
+<p>比如有这样一条 update 语句：update product set name = ‘apple’; 这条语句不是记录的一条，而是修改的每一条都会记录下来。</p>
+</blockquote>
+<h4 id="Statement：-不支持-RU（未提交读）、RC（已提交读）隔离级别"><a href="#Statement：-不支持-RU（未提交读）、RC（已提交读）隔离级别" class="headerlink" title="Statement：(不支持 RU（未提交读）、RC（已提交读）隔离级别)"></a><strong>Statement：</strong>(不支持 RU（未提交读）、RC（已提交读）隔离级别)</h4><p><strong>描述：</strong>每一条修改数据的 SQL 都会记录到 Master 的 binlog 中，Slave 在复制的时候 SQL 进程会解析成 Master 端执行过的相同的 SQL 在 Slave 库上再次执行。</p>
+<p><strong>优点：</strong>解决了 <strong>Row</strong> 模式下的缺点，不需要记录每一行的变化，较少 binlog 日志量，节约 IO ，提高性能。因为它只需要记录在 Master 上所执行的语句的细节，以及执行语句时候的上下文信息。</p>
+<p><strong>缺点：</strong>导致主从不一致。</p>
+<blockquote>
+<p>由于它是记录执行语句，所以，为了让这些语句在 Slave 端也能正确执行，那么它还必须记录每条语句在执行的时候的一些相关信息，也就是<strong>上下文信息</strong>，来保证所有语句在 Slave 端能够得到和在 Master 端<strong>相同的执行结果</strong>。由于 MySQL 更新较快，使 MySQL 的赋值遇到了不小的挑战，自然赋值的时候就会涉及到越复杂的内容，Bug 也就容易出现。在 <strong>Statement</strong> 模式下，目前就已经发现了不少情况会造成 MySQL 的复制出现问题，主要是修改数据的时候使用了某些特定的函数或者功能的时候会出现。比如：<code>sleep()</code> 函数在有些版本中就不能正确赋值，在存储过程中使用了 <code>last_insert_id()</code> 函数，可能会使 Slave 和 Master 上得到不一致的 Id 等。由于 Row 模式是基于每一行记录的变化，所以不会出现类似的问题。</p>
+</blockquote>
+<h4 id="Mixed："><a href="#Mixed：" class="headerlink" title="Mixed："></a>Mixed：</h4><p>描述：实际上就是前两种模式的结合。在 <strong>Mixed</strong> 模式下，MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 <strong>Statement</strong> 和 <strong>Row</strong> 之间选择一种。</p>
+<blockquote>
+<p>新版本中的 <strong>Statement</strong> 还是和以前一样，仅仅记录执行的语句。而新版本的 MySQL 中对 <strong>Row</strong> 模式也做了优化，并不是所有的修改都会以 <strong>Row</strong> 模式来记录，比如遇到表结构变更的时候就会以 <strong>Statement</strong> 模式来记录，如果 SQL 语句确实就是 Update 或者 Delete 等修改数据的语句，那么还是会记录所有行的变更。</p>
+</blockquote>
+<p>查看 <code>binlog</code> 日志模式：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%binlog_format%'</span><span class="token punctuation">;</span></code></pre>
+<p>修改 <code>binlog</code> 日志模式：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token keyword">global</span> binlog_format <span class="token operator">=</span> <span class="token string">'MIXED'</span><span class="token punctuation">;</span></code></pre>
+<h3 id="三、什么是-redo-log-？"><a href="#三、什么是-redo-log-？" class="headerlink" title="三、什么是 redo log ？"></a>三、什么是 redo log ？</h3><p>假设我们有一条 SQL 语句：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">update</span> user_table <span class="token keyword">set</span> name<span class="token operator">=</span><span class="token string">'java3y'</span> <span class="token keyword">where</span> id <span class="token operator">=</span> <span class="token string">'3'</span><span class="token punctuation">;</span></code></pre>
+<p>MySQL 执行这条 SQL 语句，肯定是先把 <code>id=3</code> 的这条记录查出来，然后将 <code>name</code> 字段给改掉。这没问题吧？</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J5rM6O.jpg" alt=""></p>
+<p>实际上 MySQL 的基本存储结构是<strong>页</strong>（记录都存在页里边），所以 MySQL 是先把这条记录所在的<strong>页</strong>找到，然后把该页加载到内存中，将对应记录进行修改。</p>
+<p>现在就可能存在一个问题：<strong>如果在内存中把数据改了，还没来得及落磁盘，而此时的数据库挂了怎么办</strong>？显然这次更改就丢了。</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J5rzHH.jpg" alt=""></p>
+<p>如果每个请求都需要将数据<strong>立马</strong>落磁盘之后，那速度会很慢，MySQL 可能也顶不住。所以MySQL 是怎么做的呢？</p>
+<p>MySQL 引入了 <code>redo log</code> ，内存写完了，然后会写一份 <code>redo log</code> ，这份 <code>redo log</code> 记载着这次<strong>在某个页上做了什么修改</strong>。</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J5swP1.jpg" alt=""></p>
+<p>其实写 <code>redo log</code> 的时候，也会有 <code>buffer</code> ，是先写 <code>buffer</code> ，再真正落到磁盘中的。至于 <code>buffer</code> 什么时候落磁盘，会有配置供我们配置。</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J5sXin.jpg" alt=""></p>
+<p>写 <code>redo log</code> 也是需要写磁盘的，但它的好处就是 <code>顺序IO</code>（我们都知道顺序 IO 比随机 IO 快非常多）。</p>
+<p>所以，<code>redo log</code> 的存在为了：<strong>当我们修改的时候，写完内存了，但数据还没真正写到磁盘的时候</strong>。此时我们的数据库挂了，我们可以根据 <code>redo log</code> 来对数据进行恢复。因为 <code>redo log</code> 是顺序 IO ，所以<strong>写入的速度很快</strong>，并且 <code>redo log</code> 记载的是物理变化（ xxxx 页做了 xxx 修改），文件的体积很小，<strong>恢复速度很快</strong>。</p>
+<h3 id="四、binlog-和-redo-log"><a href="#四、binlog-和-redo-log" class="headerlink" title="四、binlog 和 redo log"></a>四、binlog 和 redo log</h3><p>看到这里，你可能会想：<code>binlog</code> 和 <code>redo log</code> 这俩也太像了吧，都是用作”恢复“的。</p>
+<p>其实他俩除了”恢复”这块是相似的，很多都不一样，下面看我列一下。</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J565DS.jpg" alt=""></p>
+<h4 id="存储的内容"><a href="#存储的内容" class="headerlink" title="存储的内容"></a>存储的内容</h4><p><code>binlog</code> 记载的是 <code>update/delete/insert</code> 这样的SQL语句，而 <code>redo log</code> 记载的是物理修改的内容（ xxxx 页修改了 xxx ）。</p>
+<p>所以在搜索资料的时候会有这样的说法：<code>redo log</code> 记录的是数据的<strong>物理变化</strong>，<code>binlog</code> 记录的是数据的<strong>逻辑变化</strong>。</p>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p><code>redo log</code> 的作用是为<strong>持久化</strong>而生的。写完内存，如果数据库挂了，那我们可以通过 <code>redo log</code> 来恢复内存还没来得及刷到磁盘的数据，将 <code>redo log</code> 加载到内存里边，那内存就能恢复到挂掉之前的数据了。</p>
+<p><code>binlog</code> 的作用是<strong>复制和恢复</strong>而生的。</p>
+<ul>
+<li>主从服务器需要保持数据的一致性，通过 <code>binlog</code> 来同步数据。</li>
+<li>如果整个数据库的数据都被删除了，<code>binlog</code> 存储着所有的数据变更情况，那么可以通过 <code>binlog</code> 来对数据进行恢复。</li>
+</ul>
+<p>又看到这里，你会想：”如果整个数据库的数据都被删除了，那我可以用 <code>redo log</code> 的记录来恢复吗？“ <strong>不能。</strong></p>
+<p>因为功能的不同，<code>redo log</code> 存储的是物理数据的变更，如果我们内存的数据已经刷到了磁盘了，那 <code>redo log</code> 的数据就无效了。所以 <code>redo log</code> 不会存储着<strong>历史</strong>所有数据的变更，<strong>文件的内容会被覆盖的</strong>。</p>
+<h4 id="binlog-和-redo-log-写入的细节"><a href="#binlog-和-redo-log-写入的细节" class="headerlink" title="binlog 和 redo log 写入的细节"></a>binlog 和 redo log 写入的细节</h4><p><code>redo log</code> 是 MySQL 的 InnoDB 引擎所产生的。</p>
+<p><code>binlog</code> 无论 MySQL 用什么引擎，都会有的。</p>
+<p>InnoDB 是有事务的，事务的四大特性之一：持久性就是靠 <code>redo log</code> 来实现的（如果写入内存成功，但数据还没真正刷到磁盘，如果此时的数据库挂了，我们可以靠 <code>redo log</code> 来恢复内存的数据，这就实现了持久性）。</p>
+<p>上面也提到，在修改的数据的时候，<code>binlog</code> 会记载着变更的类容，<code>redo log</code> 也会记载着变更的内容。（只不过一个存储的是物理变化，一个存储的是逻辑变化）。那他们的写入顺序是什么样的呢？</p>
+<p><code>redo log</code> <strong>事务开始</strong>的时候，就开始记录每次的变更信息，而 <code>binlog</code> 是在<strong>事务提交</strong>的时候才记录。</p>
+<p>于是新有的问题又出现了：我写其中的某一个 <code>log</code> ，失败了，那会怎么办？现在我们的前提是先写 <code>redo log</code> ，再写 <code>binlog</code> ，我们来看看：</p>
+<ul>
+<li>如果写 <code>redo log</code> 失败了，那我们就认为这次事务有问题，回滚，不再写 <code>binlog</code> 。</li>
+<li>如果写 <code>redo log</code> 成功了，写 <code>binlog</code> ，写 <code>binlog</code> 写一半了，但失败了怎么办？我们还是会对这次的<strong>事务回滚</strong>，将无效的 <code>binlog</code> 给删除（因为 <code>binlog</code> 会影响从库的数据，所以需要做删除操作）。</li>
+<li>如果写 <code>redo log</code> 和 <code>binlog</code> 都成功了，那这次算是事务才会真正成功。</li>
+</ul>
+<p><strong>简单来说：</strong>MySQL 需要保证 <code>redo log</code> 和 <code>binlog</code> 的<strong>数据是一致</strong>的，如果不一致，那就乱套了。</p>
+<ul>
+<li>如果 <code>redo log</code> 写失败了，而 <code>binlog</code> 写成功了。那假设内存的数据还没来得及落磁盘，机器就挂掉了。那主从服务器的数据就不一致了。（从服务器通过 <code>binlog</code> 得到最新的数据，而主服务器由于 <code>redo log</code> 没有记载，没法恢复数据）</li>
+<li>如果 <code>redo log</code> 写成功了，而 <code>binlog</code> 写失败了。那从服务器就拿不到最新的数据了。</li>
+</ul>
+<p>MySQL 通过<strong>两阶段提交（2PC）</strong>来保证 <code>redo log</code> 和 <code>binlog</code> 的数据是一致的。</p>
+<p><img src="https://s1.ax1x.com/2020/04/28/J5cDx0.jpg" alt=""></p>
+<p><strong>过程：</strong></p>
+<ul>
+<li>阶段1：InnoDB <code>redo log</code> 写盘，InnoDB 事务进入 <strong><code>prepare</code></strong> 状态。</li>
+<li>阶段2：<code>binlog</code> 写盘，InooDB 事务进入 <strong><code>commit</code></strong> 状态。</li>
+<li>每个事务 <code>binlog</code> 的末尾，会记录一个 <code>XID event</code> ，标志着事务是否提交成功，也就是说，恢复过程中，<code>binlog</code> 最后一个 <code>XID event</code> 之后的内容都应该被 <code>purge</code>（清除）。</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/04/28/J5c5xx.jpg" alt=""></p>
+<h3 id="五、什么是-undo-log-？"><a href="#五、什么是-undo-log-？" class="headerlink" title="五、什么是 undo log ？"></a>五、什么是 undo log ？</h3><blockquote>
+<p><code>undo log</code> 有什么用？ </p>
+</blockquote>
+<p><code>undo log</code> 主要有两个作用：回滚和多版本并发控制（MVCC）。</p>
+<p>在数据修改的时候，不仅记录了 <code>redo log</code> ，还记录 <code>undo log</code> ，如果因为某些原因导致事务失败或回滚了，可以用 <code>undo log</code> 进行回滚。</p>
+<p><code>undo log</code> 主要存储的也是逻辑日志，比如我们要 <code>insert</code> 一条数据了，那 <code>undo log</code> 会记录的一条对应的 <code>delete</code> 日志。我们要 <code>update</code> 一条记录时，它会记录一条对应<strong>相反</strong>的update记录。</p>
+<p>这也应该容易理解，毕竟回滚嘛，跟需要修改的操作相反就好，这样就能达到回滚的目的。因为支持回滚操作，所以我们就能保证：“<strong>一个事务包含多个操作，这些操作要么全部执行，要么全都不执行。</strong>”【原子性】</p>
+<p>因为 <code>undo log</code> 存储着修改之前的数据，相当于一个<strong>前版本</strong>，<strong>MVCC</strong> 实现的是读写不阻塞，读的时候只要返回前一个版本的数据就行了。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这篇文章把 <code>binlog</code> /<code>redo log</code>/<code>undo log</code> 最核心的知识给讲了，还有一些细节性的东西可以自行去补充（比如文章提到的刷盘策略等）。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://www.jianshu.com/p/4bcfffb27ed5" target="_blank" rel="noopener">https://www.jianshu.com/p/4bcfffb27ed5</a></li>
+<li><a href="https://yq.aliyun.com/articles/617335" target="_blank" rel="noopener">https://yq.aliyun.com/articles/617335</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247485215&idx=1&sn=536d992835b4a40f7dc968acc5bea9c1&chksm=ebd7461edca0cf081bab56fb7b041331714f7d4849b605d8fb9390175f4a3eb7728a346ac02c&token=1230572157&lang=zh_CN###rd" target="_blank" rel="noopener">MySQL的ACID原理！</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247486392&idx=2&sn=9acbd3e958a40e559ea41b878bc1da64&chksm=ebd74ab9dca0c3af3aca763faf2072e709ba54a4bbd8c37b25ba29f0fb88ce56443750342443&token=1436027357&lang=zh_CN#rd" target="_blank" rel="noopener">MySQL 是如何实现 ACID 中的 D 的？</a></li>
+<li><a href="https://www.cnblogs.com/myseries/p/10728533.html" target="_blank" rel="noopener">https://www.cnblogs.com/myseries/p/10728533.html</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485097&idx=1&sn=84c89da477b1338bdf3e9fcd65514ac1&chksm=cea24962f9d5c074d8d3ff1ab04ee8f0d6486e3d015cfd783503685986485c11738ccb542ba7&token=79317275&lang=zh_CN#rd" target="_blank" rel="noopener">一条SQL语句在MySQL中如何执行的？</a></li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com" rel="external nofollow noreferrer">wenjun</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/">https://www.niewenjun.com/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.niewenjun.com" target="_blank">wenjun</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="MySQL的三种log">
+                        
+                        <span class="card-title">MySQL的三种log</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MySQL 的三种 log前言在前一阵子，大哥问过我：”你知道 MySQL 的原子性是怎么保证的吗。“我懵逼了，MySQL 怎么保证原子性？我不会啊。
+谁都知道在事务里边原子性的意思：”一个事务包含多个操作，这些操作要么全部执行，要么全都不
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/27/shu-ju-ku/hyperloglog/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="HyperLogLog">
+                        
+                        <span class="card-title">HyperLogLog</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一、HyperLogLog 简介HyperLogLog 是最早由 Flajolet 及其同事在 2007 年提出的一种 估算基数的近似最优算法。但跟原版论文不同的是，好像很多书包括 Redis 作者都把它称为一种 新的数据结构（算法确实需要
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BC%93%E5%AD%98/">
+                        <span class="chip bg-color">缓存</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.niewenjun.com" target="_blank"></a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "4";
+                    var startDate = "12";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wenjunnie" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1287018840@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1287018840" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1287018840" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

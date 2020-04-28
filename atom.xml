@@ -6,10 +6,37 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-26T16:07:45.358Z</updated>
+  <updated>2020-04-28T10:01:51.777Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL的三种log</title>
+    <link href="https://www.niewenjun.com/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/"/>
+    <id>https://www.niewenjun.com/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/</id>
+    <published>2020-04-28T09:56:00.000Z</published>
+    <updated>2020-04-28T10:01:51.777Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;MySQL-的三种-log&quot;&gt;&lt;a href=&quot;#MySQL-的三种-log&quot; class=&quot;headerlink&quot; title=&quot;MySQL 的三种 log&quot;&gt;&lt;/a&gt;MySQL 的三种 log&lt;/h2&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="https://www.niewenjun.com/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>HyperLogLog</title>
@@ -275,7 +302,7 @@
     <link href="https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-chang-jian-wen-ti-zong-jie/"/>
     <id>https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-chang-jian-wen-ti-zong-jie/</id>
     <published>2020-04-21T13:56:00.000Z</published>
-    <updated>2020-04-21T16:35:00.873Z</updated>
+    <updated>2020-04-28T10:19:34.855Z</updated>
     
     <summary type="html">
     
@@ -547,36 +574,6 @@
         
         
           &lt;h3 id=&quot;1-Atomic-原子类介绍&quot;&gt;&lt;a href=&quot;#1-Atomic-原子类介绍&quot; class=&quot;headerlink&quot; title=&quot;1 Atomic 原子类介绍&quot;&gt;&lt;/a&gt;1 Atomic
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>synchronized</title>
-    <link href="https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/synchronized/"/>
-    <id>https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/synchronized/</id>
-    <published>2020-04-17T03:03:00.000Z</published>
-    <updated>2020-04-18T09:03:53.845Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;img src=&quot;https://s1.ax1x.com/2020/04/17/JVzVrq.png&quot; alt=&quot;Synchronized 关键字使用、底层原理、JDK1.6 之后的底层优化以及和 ReentrantLock 的对比&quot;&gt;&lt;/p&gt;
-&lt;h3
         
       
     
