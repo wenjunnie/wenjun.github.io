@@ -6,10 +6,68 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-04-28T10:01:51.777Z</updated>
+  <updated>2020-04-29T07:40:01.922Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis Sentinel</title>
+    <link href="https://www.niewenjun.com/2020/04/29/shu-ju-ku/redis-sentinel/"/>
+    <id>https://www.niewenjun.com/2020/04/29/shu-ju-ku/redis-sentinel/</id>
+    <published>2020-04-29T07:29:00.000Z</published>
+    <updated>2020-04-29T07:40:01.922Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Redis-Sentinel&quot;&gt;&lt;a href=&quot;#Redis-Sentinel&quot; class=&quot;headerlink&quot; title=&quot;Redis Sentinel&quot;&gt;&lt;/a&gt;Redis Sentinel&lt;/h1&gt;&lt;h2 id=&quot;哨兵的介绍&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis Cluster</title>
+    <link href="https://www.niewenjun.com/2020/04/29/shu-ju-ku/redis-cluster/"/>
+    <id>https://www.niewenjun.com/2020/04/29/shu-ju-ku/redis-cluster/</id>
+    <published>2020-04-29T06:48:00.000Z</published>
+    <updated>2020-04-29T06:51:48.258Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Redis-Cluster&quot;&gt;&lt;a href=&quot;#Redis-Cluster&quot; class=&quot;headerlink&quot; title=&quot;Redis Cluster&quot;&gt;&lt;/a&gt;Redis Cluster&lt;/h1&gt;&lt;h2 id=&quot;面试题&quot;&gt;&lt;a href=&quot;#面试题&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
+    
+      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL的三种log</title>
@@ -130,7 +188,7 @@
     <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/"/>
     <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/</id>
     <published>2020-04-24T10:54:00.000Z</published>
-    <updated>2020-04-26T06:53:24.985Z</updated>
+    <updated>2020-04-29T06:58:23.969Z</updated>
     
     <summary type="html">
     
@@ -514,66 +572,6 @@
         
         
           &lt;h1 id=&quot;Java-并发基础常见面试题总结&quot;&gt;&lt;a href=&quot;#Java-并发基础常见面试题总结&quot; class=&quot;headerlink&quot; title=&quot;Java 并发基础常见面试题总结&quot;&gt;&lt;/a&gt;Java 并发基础常见面试题总结&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AQS总结</title>
-    <link href="https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/aqs-zong-jie/"/>
-    <id>https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/aqs-zong-jie/</id>
-    <published>2020-04-17T14:26:00.000Z</published>
-    <updated>2020-04-18T09:27:47.921Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;img src=&quot;https://s1.ax1x.com/2020/04/18/Jmw9zt.png&quot; alt=&quot;AQS 原理以及 AQS 同步组件总结&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;常见问题：AQS 原理？CountDownLatch 和
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="并发" scheme="https://www.niewenjun.com/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Atomic原子类总结</title>
-    <link href="https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/atomic-yuan-zi-lei-zong-jie/"/>
-    <id>https://www.niewenjun.com/2020/04/17/hou-duan/bing-fa/atomic-yuan-zi-lei-zong-jie/</id>
-    <published>2020-04-17T09:48:00.000Z</published>
-    <updated>2020-04-18T08:42:18.286Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;1-Atomic-原子类介绍&quot;&gt;&lt;a href=&quot;#1-Atomic-原子类介绍&quot; class=&quot;headerlink&quot; title=&quot;1 Atomic 原子类介绍&quot;&gt;&lt;/a&gt;1 Atomic
         
       
     

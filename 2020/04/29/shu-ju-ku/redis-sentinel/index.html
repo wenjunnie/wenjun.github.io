@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="MySQL的三种log, Wenjun">
+    <meta name="keywords" content="Redis Sentinel, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>MySQL的三种log | Wenjun</title>
+    <title>Redis Sentinel | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">MySQL的三种log</h1>
+                    <h1 class="description center-align post-title">Redis Sentinel</h1>
                 </div>
             </div>
         </div>
@@ -439,8 +439,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/MySQL/">
-                                <span class="chip bg-color">MySQL</span>
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BC%93%E5%AD%98/">
+                                <span class="chip bg-color">缓存</span>
                             </a>
                         
                     </div>
@@ -464,7 +468,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-28
+                    2020-04-29
                 </div>
                 
 
@@ -473,14 +477,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.4k
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    8 分
                 </div>
                 
 
@@ -495,134 +499,95 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="MySQL-的三种-log"><a href="#MySQL-的三种-log" class="headerlink" title="MySQL 的三种 log"></a>MySQL 的三种 log</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在前一阵子，大哥问过我：”你知道 MySQL 的原子性是怎么保证的吗。“我懵逼了，MySQL 怎么保证原子性？我不会啊。</p>
-<p>谁都知道在事务里边原子性的意思：”<strong>一个事务包含多个操作，这些操作要么全部执行，要么全都不执行。</strong>“</p>
-<p>于是大哥就给我讲：”用的就是 <code>undo log</code> 啊。“</p>
-<p>我：”卧槽，又是知识盲区“</p>
-<p>后来在网上翻了一下，MySQL 里边还有几种常见的 <code>log</code> ，分别为：</p>
+                <h1 id="Redis-Sentinel"><a href="#Redis-Sentinel" class="headerlink" title="Redis Sentinel"></a>Redis Sentinel</h1><h2 id="哨兵的介绍"><a href="#哨兵的介绍" class="headerlink" title="哨兵的介绍"></a>哨兵的介绍</h2><p><strong>Sentinel</strong> ，中文名是哨兵。哨兵是 Redis 集群架构中非常重要的一个组件，主要有以下功能：</p>
 <ul>
-<li><code>bin log</code></li>
-<li><code>redo log</code></li>
-<li><code>undo log</code></li>
+<li><strong>集群监控：</strong>负责监控 Redis Master 和 Slave 进程是否正常工作。</li>
+<li><strong>消息通知：</strong>如果某个 Redis 实例有故障，那么哨兵负责发送消息作为报警通知给管理员。</li>
+<li><strong>故障转移：</strong>如果 Master Node 挂掉了，会自动转移到 Slave Node 上。</li>
+<li><strong>配置中心：</strong>如果故障转移发生了，通知 Client 客户端新的 Master 地址。</li>
 </ul>
-<p>如果你也未曾关注过这些 <code>log</code> ，麻烦给我留个言，<strong>让我觉得不是只有我一个人这么菜，行不行</strong>？</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J50WcD.jpg" alt=""></p>
-<p>后来我又去搜了一下，其实这几种 log 在<strong>面试</strong>的时候也经常会问到，这篇文章以最简单的方式来讲讲，希望对大家有帮助。</p>
-<h3 id="一、什么是-binlog-？"><a href="#一、什么是-binlog-？" class="headerlink" title="一、什么是 binlog ？"></a>一、什么是 binlog ？</h3><p><code>binlog</code> 其实在日常的开发中是听得很多的，因为很多时候数据的更新就依赖着 <code>binlog</code> 。</p>
-<p>举个很简单的例子：我们的数据是保存在数据库里边的嘛，现在我们对某个商品的某个字段的内容改了（数据库变更），而<strong>用户检索的出来数据是走搜索引擎的</strong>。为了让用户能搜到最新的数据，我们需要把引擎的数据也改掉。</p>
-<p>一句话：<strong>数据库的变更，搜索引擎的数据也需要变更</strong>。</p>
-<p>于是，我们就会监听 <code>binlog</code> 的变更，如果 <code>binlog</code> 有变更了，那我们就需要将变更写到对应的数据源。</p>
-<blockquote>
-<p>什么是 <code>binlog</code> ？</p>
-</blockquote>
-<p><code>binlog</code> 记录了数据库表结构和表数据变更，比如 <code>update/delete/insert/truncate/create</code> 。它不会记录 <code>select</code>（因为这没有对表没有进行变更）。</p>
-<blockquote>
-<p><code>binlog</code> 长什么样？</p>
-</blockquote>
-<p><code>binlog</code> 我们可以简单理解为：存储着每条变更的 <code>SQL</code> 语句（当然从下面的图看来看，不止SQL，还有XID「事务Id」等等）。</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J5DPZd.jpg" alt=""></p>
-<blockquote>
-<p><code>binlog</code> 一般用来做什么？</p>
-</blockquote>
-<p>主要有两个作用：<strong>复制和恢复数据</strong>。</p>
+<p>哨兵用于实现 Redis 集群的高可用，本身也是分布式的，作为一个哨兵集群去运行，互相协同工作。</p>
 <ul>
-<li>MySQL 在公司使用的时候往往都是<strong>一主多从</strong>结构的，从服务器需要与主服务器的数据保持一致，这就是通过 <code>binlog</code> 来实现的。</li>
-<li>数据库的数据被干掉了，我们可以通过 <code>binlog</code> 来对数据进行恢复。</li>
+<li>故障转移时，判断一个 Master Node 是否宕机了，需要大部分的哨兵都同意才行，涉及到了分布式选举的问题。</li>
+<li>即使部分哨兵节点挂掉了，哨兵集群还是能正常工作的，因为如果一个作为高可用机制重要组成部分的故障转移系统本身是单点的，那就很坑爹了。</li>
 </ul>
-<p>因为 <code>binlog</code> 记录了数据库表的变更，所以我们可以用 <code>binlog</code> 进行复制（主从复制）和恢复数据。</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J5DDF1.jpg" alt=""></p>
-<h3 id="二、binlog-的三种模式"><a href="#二、binlog-的三种模式" class="headerlink" title="二、binlog 的三种模式"></a>二、binlog 的三种模式</h3><h4 id="Row："><a href="#Row：" class="headerlink" title="Row："></a>Row：</h4><p><strong>描述：</strong>日志中会记录成每一行数据被修改的形式，然后在 Slave 端再对相同的数据进行修改，只记录要修改的数据，只有 Value ，不会有 SQL 多表关联的情况。</p>
-<p><strong>优点：</strong>记录详细，解决了 <strong>Statement</strong> 模式的复制问题。</p>
-<blockquote>
-<p>在 <strong>Row</strong> 模式下，binlog 中可以不记录执行的 SQL 语句的上下文相关的信息，仅仅只需要记录哪一条记录被修改了，修改成什么样了，所以 Row 的日志内容会非常清楚的记录下每一行数据修改的细节，非常容易理解。而且不会出现某些特定情况下的存储过程和函数，以及触发器的调用和触发无法被正确复制问题。</p>
-</blockquote>
-<p><strong>缺点：</strong>在 <strong>Row</strong> 模式下，所有的执行语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容。</p>
-<blockquote>
-<p>比如有这样一条 update 语句：update product set name = ‘apple’; 这条语句不是记录的一条，而是修改的每一条都会记录下来。</p>
-</blockquote>
-<h4 id="Statement：-不支持-RU（未提交读）、RC（已提交读）隔离级别"><a href="#Statement：-不支持-RU（未提交读）、RC（已提交读）隔离级别" class="headerlink" title="Statement：(不支持 RU（未提交读）、RC（已提交读）隔离级别)"></a><strong>Statement：</strong>(不支持 RU（未提交读）、RC（已提交读）隔离级别)</h4><p><strong>描述：</strong>每一条修改数据的 SQL 都会记录到 Master 的 binlog 中，Slave 在复制的时候 SQL 进程会解析成 Master 端执行过的相同的 SQL 在 Slave 库上再次执行。</p>
-<p><strong>优点：</strong>解决了 <strong>Row</strong> 模式下的缺点，不需要记录每一行的变化，较少 binlog 日志量，节约 IO ，提高性能。因为它只需要记录在 Master 上所执行的语句的细节，以及执行语句时候的上下文信息。</p>
-<p><strong>缺点：</strong>导致主从不一致。</p>
-<blockquote>
-<p>由于它是记录执行语句，所以，为了让这些语句在 Slave 端也能正确执行，那么它还必须记录每条语句在执行的时候的一些相关信息，也就是<strong>上下文信息</strong>，来保证所有语句在 Slave 端能够得到和在 Master 端<strong>相同的执行结果</strong>。由于 MySQL 更新较快，使 MySQL 的赋值遇到了不小的挑战，自然赋值的时候就会涉及到越复杂的内容，Bug 也就容易出现。在 <strong>Statement</strong> 模式下，目前就已经发现了不少情况会造成 MySQL 的复制出现问题，主要是修改数据的时候使用了某些特定的函数或者功能的时候会出现。比如：<code>sleep()</code> 函数在有些版本中就不能正确赋值，在存储过程中使用了 <code>last_insert_id()</code> 函数，可能会使 Slave 和 Master 上得到不一致的 Id 等。由于 Row 模式是基于每一行记录的变化，所以不会出现类似的问题。</p>
-</blockquote>
-<h4 id="Mixed："><a href="#Mixed：" class="headerlink" title="Mixed："></a>Mixed：</h4><p>描述：实际上就是前两种模式的结合。在 <strong>Mixed</strong> 模式下，MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 <strong>Statement</strong> 和 <strong>Row</strong> 之间选择一种。</p>
-<blockquote>
-<p>新版本中的 <strong>Statement</strong> 还是和以前一样，仅仅记录执行的语句。而新版本的 MySQL 中对 <strong>Row</strong> 模式也做了优化，并不是所有的修改都会以 <strong>Row</strong> 模式来记录，比如遇到表结构变更的时候就会以 <strong>Statement</strong> 模式来记录，如果 SQL 语句确实就是 Update 或者 Delete 等修改数据的语句，那么还是会记录所有行的变更。</p>
-</blockquote>
-<p>查看 <code>binlog</code> 日志模式：</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%binlog_format%'</span><span class="token punctuation">;</span></code></pre>
-<p>修改 <code>binlog</code> 日志模式：</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token keyword">global</span> binlog_format <span class="token operator">=</span> <span class="token string">'MIXED'</span><span class="token punctuation">;</span></code></pre>
-<h3 id="三、什么是-redo-log-？"><a href="#三、什么是-redo-log-？" class="headerlink" title="三、什么是 redo log ？"></a>三、什么是 redo log ？</h3><p>假设我们有一条 SQL 语句：</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">update</span> user_table <span class="token keyword">set</span> name<span class="token operator">=</span><span class="token string">'java3y'</span> <span class="token keyword">where</span> id <span class="token operator">=</span> <span class="token string">'3'</span><span class="token punctuation">;</span></code></pre>
-<p>MySQL 执行这条 SQL 语句，肯定是先把 <code>id=3</code> 的这条记录查出来，然后将 <code>name</code> 字段给改掉。这没问题吧？</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J5rM6O.jpg" alt=""></p>
-<p>实际上 MySQL 的基本存储结构是<strong>页</strong>（记录都存在页里边），所以 MySQL 是先把这条记录所在的<strong>页</strong>找到，然后把该页加载到内存中，将对应记录进行修改。</p>
-<p>现在就可能存在一个问题：<strong>如果在内存中把数据改了，还没来得及落磁盘，而此时的数据库挂了怎么办</strong>？显然这次更改就丢了。</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J5rzHH.jpg" alt=""></p>
-<p>如果每个请求都需要将数据<strong>立马</strong>落磁盘之后，那速度会很慢，MySQL 可能也顶不住。所以MySQL 是怎么做的呢？</p>
-<p>MySQL 引入了 <code>redo log</code> ，内存写完了，然后会写一份 <code>redo log</code> ，这份 <code>redo log</code> 记载着这次<strong>在某个页上做了什么修改</strong>。</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J5swP1.jpg" alt=""></p>
-<p>其实写 <code>redo log</code> 的时候，也会有 <code>buffer</code> ，是先写 <code>buffer</code> ，再真正落到磁盘中的。至于 <code>buffer</code> 什么时候落磁盘，会有配置供我们配置。</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J5sXin.jpg" alt=""></p>
-<p>写 <code>redo log</code> 也是需要写磁盘的，但它的好处就是 <code>顺序IO</code>（我们都知道顺序 IO 比随机 IO 快非常多）。</p>
-<p>所以，<code>redo log</code> 的存在为了：<strong>当我们修改的时候，写完内存了，但数据还没真正写到磁盘的时候</strong>。此时我们的数据库挂了，我们可以根据 <code>redo log</code> 来对数据进行恢复。因为 <code>redo log</code> 是顺序 IO ，所以<strong>写入的速度很快</strong>，并且 <code>redo log</code> 记载的是物理变化（ xxxx 页做了 xxx 修改），文件的体积很小，<strong>恢复速度很快</strong>。</p>
-<h3 id="四、binlog-和-redo-log"><a href="#四、binlog-和-redo-log" class="headerlink" title="四、binlog 和 redo log"></a>四、binlog 和 redo log</h3><p>看到这里，你可能会想：<code>binlog</code> 和 <code>redo log</code> 这俩也太像了吧，都是用作”恢复“的。</p>
-<p>其实他俩除了”恢复”这块是相似的，很多都不一样，下面看我列一下。</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J565DS.jpg" alt=""></p>
-<h4 id="存储的内容"><a href="#存储的内容" class="headerlink" title="存储的内容"></a>存储的内容</h4><p><code>binlog</code> 记载的是 <code>update/delete/insert</code> 这样的SQL语句，而 <code>redo log</code> 记载的是物理修改的内容（ xxxx 页修改了 xxx ）。</p>
-<p>所以在搜索资料的时候会有这样的说法：<code>redo log</code> 记录的是数据的<strong>物理变化</strong>，<code>binlog</code> 记录的是数据的<strong>逻辑变化</strong>。</p>
-<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p><code>redo log</code> 的作用是为<strong>持久化</strong>而生的。写完内存，如果数据库挂了，那我们可以通过 <code>redo log</code> 来恢复内存还没来得及刷到磁盘的数据，将 <code>redo log</code> 加载到内存里边，那内存就能恢复到挂掉之前的数据了。</p>
-<p><code>binlog</code> 的作用是<strong>复制和恢复</strong>而生的。</p>
+<h2 id="哨兵的核心知识"><a href="#哨兵的核心知识" class="headerlink" title="哨兵的核心知识"></a>哨兵的核心知识</h2><ul>
+<li>哨兵至少需要 3 个实例，来保证自己的健壮性。</li>
+<li>哨兵 + Redis 主从的部署架构，是<strong>不保证数据零丢失</strong>的，只能保证 Redis 集群的<strong>高可用</strong>性。</li>
+<li>对于哨兵 + Redis 主从这种复杂的部署架构，尽量在测试环境和生产环境，都进行充足的测试和演练。</li>
+</ul>
+<p>哨兵集群必须部署 2 个以上节点，如果哨兵集群仅仅部署了 2 个哨兵实例，quorum = 1 。</p>
+<p><img src="https://s1.ax1x.com/2020/04/24/JDry4I.jpg" alt="两个哨兵集群"></p>
+<p>配置 <code>quorum = 1</code> ，如果 Master 宕机， S1 和 S2 中只要有 1 个哨兵认为 Master 宕机了，就可以进行切换，同时 S1 和 S2 会选举出一个哨兵来执行故障转移。但是同时这个时候，需要 Majority，也就是大多数哨兵都是运行的。</p>
+<pre class=" language-java"><code class="language-java"><span class="token number">2</span> 个哨兵，majority<span class="token operator">=</span><span class="token number">2</span>
+<span class="token number">3</span> 个哨兵，majority<span class="token operator">=</span><span class="token number">2</span>
+<span class="token number">4</span> 个哨兵，majority<span class="token operator">=</span><span class="token number">2</span>
+<span class="token number">5</span> 个哨兵，majority<span class="token operator">=</span><span class="token number">3</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre>
+<p>如果此时仅仅是 M1 进程宕机了，哨兵 S1 正常运行，那么故障转移是 OK 的。但是如果是整个 M1 和 S1 运行的机器宕机了，那么哨兵只有 1 个，此时就没有 Majority 来允许执行故障转移，虽然另外一台机器上还有一个 R1 ，但是故障转移不会执行。</p>
+<p>经典的 3 节点哨兵集群是这样的：</p>
+<p><img src="https://s1.ax1x.com/2020/04/24/JDsCP1.jpg" alt="经典的三哨兵集群"></p>
+<p>配置 <code>quorum = 2</code> ，如果 M1 所在机器宕机了，那么三个哨兵还剩下 2 个，S2 和 S3 可以一致认为 Master 宕机了，然后选举出一个来执行故障转移，同时 3 个哨兵的 Majority 是 2 ，所以还剩下的 2 个哨兵运行着，就可以允许执行故障转移。</p>
+<h2 id="Redis-哨兵主备切换的数据丢失问题"><a href="#Redis-哨兵主备切换的数据丢失问题" class="headerlink" title="Redis 哨兵主备切换的数据丢失问题"></a>Redis 哨兵主备切换的数据丢失问题</h2><h3 id="导致数据丢失的两种情况"><a href="#导致数据丢失的两种情况" class="headerlink" title="导致数据丢失的两种情况"></a>导致数据丢失的两种情况</h3><p>主备切换的过程，可能会导致数据丢失：</p>
 <ul>
-<li>主从服务器需要保持数据的一致性，通过 <code>binlog</code> 来同步数据。</li>
-<li>如果整个数据库的数据都被删除了，<code>binlog</code> 存储着所有的数据变更情况，那么可以通过 <code>binlog</code> 来对数据进行恢复。</li>
+<li><strong>异步复制导致的数据丢失</strong></li>
 </ul>
-<p>又看到这里，你会想：”如果整个数据库的数据都被删除了，那我可以用 <code>redo log</code> 的记录来恢复吗？“ <strong>不能。</strong></p>
-<p>因为功能的不同，<code>redo log</code> 存储的是物理数据的变更，如果我们内存的数据已经刷到了磁盘了，那 <code>redo log</code> 的数据就无效了。所以 <code>redo log</code> 不会存储着<strong>历史</strong>所有数据的变更，<strong>文件的内容会被覆盖的</strong>。</p>
-<h4 id="binlog-和-redo-log-写入的细节"><a href="#binlog-和-redo-log-写入的细节" class="headerlink" title="binlog 和 redo log 写入的细节"></a>binlog 和 redo log 写入的细节</h4><p><code>redo log</code> 是 MySQL 的 InnoDB 引擎所产生的。</p>
-<p><code>binlog</code> 无论 MySQL 用什么引擎，都会有的。</p>
-<p>InnoDB 是有事务的，事务的四大特性之一：持久性就是靠 <code>redo log</code> 来实现的（如果写入内存成功，但数据还没真正刷到磁盘，如果此时的数据库挂了，我们可以靠 <code>redo log</code> 来恢复内存的数据，这就实现了持久性）。</p>
-<p>上面也提到，在修改的数据的时候，<code>binlog</code> 会记载着变更的类容，<code>redo log</code> 也会记载着变更的内容。（只不过一个存储的是物理变化，一个存储的是逻辑变化）。那他们的写入顺序是什么样的呢？</p>
-<p><code>redo log</code> <strong>事务开始</strong>的时候，就开始记录每次的变更信息，而 <code>binlog</code> 是在<strong>事务提交</strong>的时候才记录。</p>
-<p>于是新有的问题又出现了：我写其中的某一个 <code>log</code> ，失败了，那会怎么办？现在我们的前提是先写 <code>redo log</code> ，再写 <code>binlog</code> ，我们来看看：</p>
+<p>因为 Master -&gt; Slave 的复制是异步的，所以可能有部分数据还没复制到 Slave ，Master 就宕机了，此时这部分数据就丢失了。</p>
+<p><img src="https://s1.ax1x.com/2020/04/29/JT6SxI.png" alt="async-replication-data-lose-case"></p>
 <ul>
-<li>如果写 <code>redo log</code> 失败了，那我们就认为这次事务有问题，回滚，不再写 <code>binlog</code> 。</li>
-<li>如果写 <code>redo log</code> 成功了，写 <code>binlog</code> ，写 <code>binlog</code> 写一半了，但失败了怎么办？我们还是会对这次的<strong>事务回滚</strong>，将无效的 <code>binlog</code> 给删除（因为 <code>binlog</code> 会影响从库的数据，所以需要做删除操作）。</li>
-<li>如果写 <code>redo log</code> 和 <code>binlog</code> 都成功了，那这次算是事务才会真正成功。</li>
+<li><strong>脑裂导致的数据丢失</strong></li>
 </ul>
-<p><strong>简单来说：</strong>MySQL 需要保证 <code>redo log</code> 和 <code>binlog</code> 的<strong>数据是一致</strong>的，如果不一致，那就乱套了。</p>
+<p>脑裂，也就是说，某个 Master 所在机器突然<strong>脱离了正常的网络</strong>，跟其他 Slave 机器不能连接，但是实际上 Master 还运行着。此时哨兵可能就会<strong>认为</strong> Master 宕机了，然后开启选举，将其他 Slave 切换成了 Master 。这个时候，集群里就会有两个 Master ，也就是所谓的<strong>脑裂</strong>。</p>
+<p>此时虽然某个 Slave 被切换成了 Master，但是可能 Client 还没来得及切换到新的 Master，还继续向旧 Master 写数据。因此旧 Master 再次恢复的时候，会被作为一个 Slave 挂到新的 Master 上去，自己的数据会清空，重新从新的 Master 复制数据。而新的 Master 并没有后来 Client 写入的数据，因此，这部分数据也就丢失了。</p>
+<p><img src="https://s1.ax1x.com/2020/04/29/JT6BdO.png" alt="redis-cluster-split-brain"></p>
+<h3 id="数据丢失问题的解决方案"><a href="#数据丢失问题的解决方案" class="headerlink" title="数据丢失问题的解决方案"></a>数据丢失问题的解决方案</h3><p>进行如下配置：</p>
+<pre class=" language-bash"><code class="language-bash">min-slaves-to-write 1
+min-slaves-max-lag 10</code></pre>
+<p>表示，要求至少有 1 个 Slave ，数据复制和同步的延迟不能超过 10 秒。</p>
+<p>如果说一旦所有的 Slave ，数据复制和同步的延迟都超过了 10 秒钟，那么这个时候，Master 就不会再接收任何请求了。</p>
 <ul>
-<li>如果 <code>redo log</code> 写失败了，而 <code>binlog</code> 写成功了。那假设内存的数据还没来得及落磁盘，机器就挂掉了。那主从服务器的数据就不一致了。（从服务器通过 <code>binlog</code> 得到最新的数据，而主服务器由于 <code>redo log</code> 没有记载，没法恢复数据）</li>
-<li>如果 <code>redo log</code> 写成功了，而 <code>binlog</code> 写失败了。那从服务器就拿不到最新的数据了。</li>
+<li><strong>减少异步复制数据的丢失</strong></li>
 </ul>
-<p>MySQL 通过<strong>两阶段提交（2PC）</strong>来保证 <code>redo log</code> 和 <code>binlog</code> 的数据是一致的。</p>
-<p><img src="https://s1.ax1x.com/2020/04/28/J5cDx0.jpg" alt=""></p>
-<p><strong>过程：</strong></p>
+<p>有了 <code>min-slaves-max-lag</code> 这个配置，就可以确保说，一旦 Slave 复制数据和 ACK 延时太长，就认为可能 Master 宕机后损失的数据太多了，那么就拒绝写请求，这样可以把 Master 宕机时由于部分数据未同步到 Slave 导致的数据丢失降低的可控范围内。</p>
 <ul>
-<li>阶段1：InnoDB <code>redo log</code> 写盘，InnoDB 事务进入 <strong><code>prepare</code></strong> 状态。</li>
-<li>阶段2：<code>binlog</code> 写盘，InooDB 事务进入 <strong><code>commit</code></strong> 状态。</li>
-<li>每个事务 <code>binlog</code> 的末尾，会记录一个 <code>XID event</code> ，标志着事务是否提交成功，也就是说，恢复过程中，<code>binlog</code> 最后一个 <code>XID event</code> 之后的内容都应该被 <code>purge</code>（清除）。</li>
+<li><strong>减少脑裂的数据丢失</strong></li>
 </ul>
-<p><img src="https://s1.ax1x.com/2020/04/28/J5c5xx.jpg" alt=""></p>
-<h3 id="五、什么是-undo-log-？"><a href="#五、什么是-undo-log-？" class="headerlink" title="五、什么是 undo log ？"></a>五、什么是 undo log ？</h3><blockquote>
-<p><code>undo log</code> 有什么用？ </p>
+<p>如果一个 Master 出现了脑裂，跟其他 Slave 丢了连接，那么上面两个配置可以确保说，如果不能继续给指定数量的 Slave 发送数据，而且 Slave 超过 10 秒没有给自己 ACK 消息，那么就直接拒绝客户端的写请求。因此在脑裂场景下，最多就丢失 10 秒的数据。</p>
+<h2 id="sdown-和-odown-转换机制"><a href="#sdown-和-odown-转换机制" class="headerlink" title="sdown 和 odown 转换机制"></a>sdown 和 odown 转换机制</h2><ul>
+<li><code>sdown</code> 是主观宕机，就一个哨兵如果自己觉得一个 Master 宕机了，那么就是主观宕机。</li>
+<li><code>odown</code> 是客观宕机，如果 <code>quorum</code> 数量的哨兵都觉得一个 Master 宕机了，那么就是客观宕机。</li>
+</ul>
+<p>sdown 达成的条件很简单，如果一个哨兵 <code>ping</code> 一个 Master，超过了 <code>is-master-down-after-milliseconds</code> 指定的毫秒数之后，就主观认为 Master 宕机了；如果一个哨兵在指定时间内，收到了 quorum 数量的其它哨兵也认为那个 Master 是 sdown 的，那么就认为是 odown 了。</p>
+<h2 id="哨兵集群的自动发现机制"><a href="#哨兵集群的自动发现机制" class="headerlink" title="哨兵集群的自动发现机制"></a>哨兵集群的自动发现机制</h2><p>哨兵互相之间的发现，是通过 Redis 的 <code>Pub/Sub</code> 系统实现的，每个哨兵都会往 <code>__sentinel__:hello</code> 这个 Channel 里发送一个消息，这时候所有其他哨兵都可以消费到这个消息，并感知到其他的哨兵的存在。</p>
+<p>每隔两秒钟，每个哨兵都会往自己监控的某个 Master + Slaves 对应的 <code>__sentinel__:hello</code> Channel 里<strong>发送一个消息</strong>，内容是自己的 Host 、IP 和 Run ID 还有对这个 Master 的监控配置。</p>
+<p>每个哨兵也会去<strong>监听</strong>自己监控的每个 Master + Slaves 对应的 <code>__sentinel__:hello</code> Channel，然后去感知到同样在监听这个 Master + Slaves 的其他哨兵的存在。</p>
+<p>每个哨兵还会跟其他哨兵交换对 <code>Master</code> 的监控配置，互相进行监控配置的同步。</p>
+<h2 id="Slave-配置的自动纠正"><a href="#Slave-配置的自动纠正" class="headerlink" title="Slave 配置的自动纠正"></a>Slave 配置的自动纠正</h2><p>哨兵会负责自动纠正 Slave 的一些配置，比如 Slave 如果要成为潜在的 Master 候选人，哨兵会确保 Slave 复制现有 Master 的数据；如果 Slave 连接到了一个错误的 Master 上，比如故障转移之后，那么哨兵会确保它们连接到正确的 Master 上。</p>
+<h2 id="Slave-gt-Master-选举算法"><a href="#Slave-gt-Master-选举算法" class="headerlink" title="Slave -&gt; Master 选举算法"></a>Slave -&gt; Master 选举算法</h2><p>如果一个 Master 被认为 <code>odown</code> 了，而且 Majority 数量的哨兵都允许主备切换，那么某个哨兵就会执行主备切换操作，此时首先要选举一个 Slave 来，会考虑 Slave 的一些信息：</p>
+<ul>
+<li>跟 Master 断开连接的时长</li>
+<li>Slave 优先级</li>
+<li>复制 offset</li>
+<li>Run ID</li>
+</ul>
+<p>如果一个 Slave 跟 Master 断开连接的时间已经超过了 <code>down-after-milliseconds</code> 的 10 倍，外加 Master 宕机的时长，那么 Slave 就被认为不适合选举为 Master 。</p>
+<blockquote>
+<p><strong>(down-after-milliseconds * 10) + milliseconds_since_master_is_in_SDOWN_state</strong></p>
 </blockquote>
-<p><code>undo log</code> 主要有两个作用：回滚和多版本并发控制（MVCC）。</p>
-<p>在数据修改的时候，不仅记录了 <code>redo log</code> ，还记录 <code>undo log</code> ，如果因为某些原因导致事务失败或回滚了，可以用 <code>undo log</code> 进行回滚。</p>
-<p><code>undo log</code> 主要存储的也是逻辑日志，比如我们要 <code>insert</code> 一条数据了，那 <code>undo log</code> 会记录的一条对应的 <code>delete</code> 日志。我们要 <code>update</code> 一条记录时，它会记录一条对应<strong>相反</strong>的update记录。</p>
-<p>这也应该容易理解，毕竟回滚嘛，跟需要修改的操作相反就好，这样就能达到回滚的目的。因为支持回滚操作，所以我们就能保证：“<strong>一个事务包含多个操作，这些操作要么全部执行，要么全都不执行。</strong>”【原子性】</p>
-<p>因为 <code>undo log</code> 存储着修改之前的数据，相当于一个<strong>前版本</strong>，<strong>MVCC</strong> 实现的是读写不阻塞，读的时候只要返回前一个版本的数据就行了。</p>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这篇文章把 <code>binlog</code> /<code>redo log</code>/<code>undo log</code> 最核心的知识给讲了，还有一些细节性的东西可以自行去补充（比如文章提到的刷盘策略等）。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://www.jianshu.com/p/4bcfffb27ed5" target="_blank" rel="noopener">https://www.jianshu.com/p/4bcfffb27ed5</a></li>
-<li><a href="https://yq.aliyun.com/articles/617335" target="_blank" rel="noopener">https://yq.aliyun.com/articles/617335</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247485215&idx=1&sn=536d992835b4a40f7dc968acc5bea9c1&chksm=ebd7461edca0cf081bab56fb7b041331714f7d4849b605d8fb9390175f4a3eb7728a346ac02c&token=1230572157&lang=zh_CN###rd" target="_blank" rel="noopener">MySQL的ACID原理！</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247486392&idx=2&sn=9acbd3e958a40e559ea41b878bc1da64&chksm=ebd74ab9dca0c3af3aca763faf2072e709ba54a4bbd8c37b25ba29f0fb88ce56443750342443&token=1436027357&lang=zh_CN#rd" target="_blank" rel="noopener">MySQL 是如何实现 ACID 中的 D 的？</a></li>
-<li><a href="https://www.cnblogs.com/myseries/p/10728533.html" target="_blank" rel="noopener">https://www.cnblogs.com/myseries/p/10728533.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485097&idx=1&sn=84c89da477b1338bdf3e9fcd65514ac1&chksm=cea24962f9d5c074d8d3ff1ab04ee8f0d6486e3d015cfd783503685986485c11738ccb542ba7&token=79317275&lang=zh_CN#rd" target="_blank" rel="noopener">一条SQL语句在MySQL中如何执行的？</a></li>
+<p><strong>接下来会对 Slave 进行排序：</strong></p>
+<ul>
+<li>按照 Slave 优先级进行排序，Slave Priority 越低，优先级就越高。</li>
+<li>如果 Slave Priority 相同，那么看 Replica offset，哪个 Slave 复制了越多的数据，offset 越靠后，优先级就越高。</li>
+<li>如果上面两个条件都相同，那么选择一个 Run ID 比较小的那个 Slave 。</li>
 </ul>
+<h2 id="Quorum-和-Majority"><a href="#Quorum-和-Majority" class="headerlink" title="Quorum 和 Majority"></a>Quorum 和 Majority</h2><p>每次一个哨兵要做主备切换，首先需要 quorum 数量的哨兵认为 <code>odown</code> ，然后选举出一个哨兵来做切换，这个哨兵还需要得到 majority 哨兵的授权，才能正式执行切换。</p>
+<p>如果 quorum &lt; majority ，比如 5 个哨兵，majority 就是 3 ，quorum 设置为 2 ，那么只需 3 个哨兵授权就可以执行切换。</p>
+<p>但是如果 quorum &gt;= majority ，那么必须 quorum 数量的哨兵都授权，比如 5 个哨兵，quorum 是 5 ，那么必须 5 个哨兵都同意授权，才能执行切换。</p>
+<h2 id="Configuration-Epoch"><a href="#Configuration-Epoch" class="headerlink" title="Configuration Epoch"></a>Configuration Epoch</h2><p>哨兵会对一套 <strong>Redis Master + Slaves</strong> 进行监控，有相应的监控的配置。</p>
+<p>执行切换的那个哨兵，会从要切换到的新 Master（ Salve -&gt; Master ）那里得到一个 <strong>Configuration Epoch</strong> ，这就是一个 <strong>Version</strong> 号，每次切换的 Version 号都必须是<strong>唯一</strong>的。</p>
+<p>如果第一个选举出的哨兵切换失败了，那么其他哨兵，会等待 <code>failover-timeout</code> 时间，然后接替继续执行切换，此时会重新获取一个新的 <strong>Configuration Epoch</strong> ，作为新的 Version 号。</p>
+<h2 id="Configuration-传播"><a href="#Configuration-传播" class="headerlink" title="Configuration 传播"></a>Configuration 传播</h2><p>哨兵完成切换之后，会在自己本地更新生成最新的 Master 配置，然后同步给其他的哨兵，就是通过之前说的 <code>Pub/Sub</code> 消息机制。</p>
+<p>这里之前的 Version 号就很重要了，因为各种消息都是通过一个 <strong>Channel</strong> 去发布和监听的，所以一个哨兵完成一次新的切换之后，新的 Master 配置是跟着新的 Version 号的。其他的哨兵都是根据版本号的大小来更新自己的 Master 配置的。</p>
 
             </div>
             <hr/>
@@ -648,7 +613,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/">https://www.niewenjun.com/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/</a>
+                    <a href="https://www.niewenjun.com/2020/04/29/shu-ju-ku/redis-sentinel/">https://www.niewenjun.com/2020/04/29/shu-ju-ku/redis-sentinel/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -686,8 +651,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/MySQL/">
-                                    <span class="chip bg-color">MySQL</span>
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BC%93%E5%AD%98/">
+                                    <span class="chip bg-color">缓存</span>
                                 </a>
                             
                         </div>
@@ -855,30 +824,33 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/29/shu-ju-ku/redis-cluster/">
+                <a href="/2020/04/29/shu-ju-ku/redis-sentinel/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Redis Cluster">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Redis Sentinel">
                         
-                        <span class="card-title">Redis Cluster</span>
+                        <span class="card-title">Redis Sentinel</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis Cluster面试题Redis 集群模式的工作原理能说一下么？在集群模式下，Redis 的 Key 是如何寻址的？分布式寻址都有哪些算法？了解一致性 Hash 算法吗？
-面试官心理分析在前几年，Redis 如果要搞几个节点，每个
+                            Redis Sentinel哨兵的介绍Sentinel ，中文名是哨兵。哨兵是 Redis 集群架构中非常重要的一个组件，主要有以下功能：
+
+集群监控：负责监控 Redis Master 和 Slave 进程是否正常工作。
+消息通知：如果某
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -891,6 +863,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -913,24 +886,25 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/27/shu-ju-ku/hyperloglog/">
+                <a href="/2020/04/29/shu-ju-ku/redis-cluster/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="HyperLogLog">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Redis Cluster">
                         
-                        <span class="card-title">HyperLogLog</span>
+                        <span class="card-title">Redis Cluster</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、HyperLogLog 简介HyperLogLog 是最早由 Flajolet 及其同事在 2007 年提出的一种 估算基数的近似最优算法。但跟原版论文不同的是，好像很多书包括 Redis 作者都把它称为一种 新的数据结构（算法确实需要
+                            Redis Cluster面试题Redis 集群模式的工作原理能说一下么？在集群模式下，Redis 的 Key 是如何寻址的？分布式寻址都有哪些算法？了解一致性 Hash 算法吗？
+面试官心理分析在前几年，Redis 如果要搞几个节点，每个
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-29
                             </span>
                         <span class="publish-author">
                             
