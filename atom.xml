@@ -6,10 +6,66 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-05-02T16:31:35.092Z</updated>
+  <updated>2020-05-04T14:09:45.855Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算机网络常见面试题</title>
+    <link href="https://www.niewenjun.com/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/"/>
+    <id>https://www.niewenjun.com/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/</id>
+    <published>2020-05-04T11:15:00.000Z</published>
+    <updated>2020-05-04T14:09:45.855Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;计算机网络常见面试题&quot;&gt;&lt;a href=&quot;#计算机网络常见面试题&quot; class=&quot;headerlink&quot; title=&quot;计算机网络常见面试题&quot;&gt;&lt;/a&gt;计算机网络常见面试题&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
+    
+    
+      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线上CPU打到100%解决方案</title>
+    <link href="https://www.niewenjun.com/2020/05/04/shi-jian/xian-shang-cpu-da-dao-100-jie-jue-fang-an/"/>
+    <id>https://www.niewenjun.com/2020/05/04/shi-jian/xian-shang-cpu-da-dao-100-jie-jue-fang-an/</id>
+    <published>2020-05-04T08:20:00.000Z</published>
+    <updated>2020-05-04T14:13:34.668Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;线上-CPU-打到-100-解决方案&quot;&gt;&lt;a href=&quot;#线上-CPU-打到-100-解决方案&quot; class=&quot;headerlink&quot; title=&quot;线上 CPU 打到 100% 解决方案&quot;&gt;&lt;/a&gt;线上 CPU 打到 100%
+        
+      
+    
+    </summary>
+    
+    
+      <category term="实践" scheme="https://www.niewenjun.com/categories/%E5%AE%9E%E8%B7%B5/"/>
+    
+    
+      <category term="CPU" scheme="https://www.niewenjun.com/tags/CPU/"/>
+    
+      <category term="故障排查" scheme="https://www.niewenjun.com/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis分布式锁</title>
@@ -515,65 +571,6 @@
         
           &lt;h1 id=&quot;一文带你认识类&quot;&gt;&lt;a href=&quot;#一文带你认识类&quot; class=&quot;headerlink&quot; title=&quot;一文带你认识类&quot;&gt;&lt;/a&gt;一文带你认识类&lt;/h1&gt;&lt;p&gt;本文将从类文件结构、类的生命周期、类加载器三个部分带你认识 Java 类。&lt;/p&gt;
 &lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="JVM" scheme="https://www.niewenjun.com/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JVM参数指南</title>
-    <link href="https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-can-shu-zhi-nan/"/>
-    <id>https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-can-shu-zhi-nan/</id>
-    <published>2020-04-19T09:25:00.000Z</published>
-    <updated>2020-04-19T09:31:54.677Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;1-概述&quot;&gt;&lt;a href=&quot;#1-概述&quot; class=&quot;headerlink&quot; title=&quot;1.概述&quot;&gt;&lt;/a&gt;1.概述&lt;/h2&gt;&lt;p&gt;在本篇文章中，你将掌握最常用的 JVM 参数配置。&lt;/p&gt;
-&lt;h2 id=&quot;2-堆内存相关&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="JVM" scheme="https://www.niewenjun.com/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JVM垃圾回收</title>
-    <link href="https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/"/>
-    <id>https://www.niewenjun.com/2020/04/19/hou-duan/jvm/jvm-la-ji-hui-shou/</id>
-    <published>2020-04-19T09:11:00.000Z</published>
-    <updated>2020-04-20T09:16:28.746Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;JVM-垃圾回收&quot;&gt;&lt;a href=&quot;#JVM-垃圾回收&quot; class=&quot;headerlink&quot; title=&quot;JVM 垃圾回收&quot;&gt;&lt;/a&gt;JVM 垃圾回收&lt;/h1&gt;&lt;h3 id=&quot;本文导火索&quot;&gt;&lt;a href=&quot;#本文导火索&quot;
         
       
     
