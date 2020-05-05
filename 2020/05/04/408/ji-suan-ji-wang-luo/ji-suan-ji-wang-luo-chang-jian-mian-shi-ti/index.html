@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -618,7 +618,7 @@
 <h3 id="4-3-拥塞控制"><a href="#4-3-拥塞控制" class="headerlink" title="4.3 拥塞控制"></a>4.3 拥塞控制</h3><p>在某段时间，若对网络中某一资源的需求超过了该资源所能提供的可用部分，网络的性能就要变坏。这种情况就叫拥塞。拥塞控制就是为了防止过多的数据注入到网络中，这样就可以使网络中的路由器或链路不致过载。拥塞控制所要做的都有一个前提，就是网络能够承受现有的网络负荷。拥塞控制是一个<strong>全局性</strong>的过程，涉及到所有的主机，所有的路由器，以及与降低网络传输性能有关的所有因素。相反，流量控制往往是点对点通信量的控制，是个端到端的问题。流量控制所要做到的就是抑制发送端发送数据的速率，以便使接收端来得及接收。</p>
 <p>为了进行拥塞控制，TCP 发送方要维持一个 <strong>拥塞窗口（cwnd）</strong> 的状态变量。拥塞控制窗口的大小取决于网络的拥塞程度，并且动态变化。发送方让自己的发送窗口取为拥塞窗口和接收方的接受窗口中较小的一个。</p>
 <p>TCP 的拥塞控制采用了四种算法，即 <strong>慢开始</strong>、<strong>拥塞避免</strong>、<strong>快重传</strong>和<strong>快恢复</strong>。在网络层也可以使路由器采用适当的分组丢弃策略（如主动队列管理 AQM ），以减少网络拥塞的发生。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/YC8X4K.png" alt="TCP 拥塞控制"></p>
+<p><img src="https://s1.ax1x.com/2020/05/05/YF36C6.png" alt="TCP 拥塞控制"></p>
 <ul>
 <li><strong>慢开始：</strong> 慢开始算法的思路是当主机开始发送数据时，如果立即把大量数据字节注入到网络，那么可能会引起网络阻塞，因为现在还不知道网络的符合情况。经验表明，较好的方法是先探测一下，即由小到大逐渐增大发送窗口，也就是由小到大逐渐增大拥塞窗口数值。cwnd 初始值为 <strong>1</strong> ，每经过一个传播轮次，cwnd 加倍。</li>
 <li><strong>拥塞避免：</strong> 拥塞避免算法的思路是让拥塞窗口 cwnd 缓慢增大，即每经过一个往返时间 RTT 就把发送方的 cwnd 加 1 。</li>
@@ -943,32 +943,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/">
+                <a href="/2020/05/05/408/ji-suan-ji-wang-luo/tcp/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="计算机网络常见面试题">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="TCP">
                         
-                        <span class="card-title">计算机网络常见面试题</span>
+                        <span class="card-title">TCP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            计算机网络常见面试题一 OSI 与 TCP/IP 各层的结构与功能，都有哪些协议？学习计算机网络时我们一般采用折中的办法，也就是中和 OSI 和 TCP/IP 的优点，采用一种只有五层协议的体系结构，这样既简洁又能将概念阐述清楚。
-
-结合互
+                            TCP概述传输控制协议（TCP，Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层通信协议，由 IETF 的 RFC 793 定义。
+TCP 旨在适应支持多网络应用的分层协议层次结构。 
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-04
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-05
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -981,12 +979,15 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
                         <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                    <a href="/tags/TCP/">
+                        <span class="chip bg-color">TCP</span>
                     </a>
                     
                 </div>
