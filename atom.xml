@@ -6,10 +6,68 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-05-05T15:23:46.156Z</updated>
+  <updated>2020-05-06T15:23:31.728Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTTP</title>
+    <link href="https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/http/"/>
+    <id>https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/http/</id>
+    <published>2020-05-06T15:07:00.000Z</published>
+    <updated>2020-05-06T15:23:31.728Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;HTTP&quot;&gt;&lt;a href=&quot;#HTTP&quot; class=&quot;headerlink&quot; title=&quot;HTTP&quot;&gt;&lt;/a&gt;HTTP&lt;/h1&gt;&lt;h2 id=&quot;一-、基础概念&quot;&gt;&lt;a href=&quot;#一-、基础概念&quot; class=&quot;headerlink&quot; title=&quot;一
+        
+      
+    
+    </summary>
+    
+    
+      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
+    
+    
+      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="HTTP" scheme="https://www.niewenjun.com/tags/HTTP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络层</title>
+    <link href="https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/wang-luo-ceng/"/>
+    <id>https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/wang-luo-ceng/</id>
+    <published>2020-05-06T03:30:00.000Z</published>
+    <updated>2020-05-06T03:36:39.253Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;网络层&quot;&gt;&lt;a href=&quot;#网络层&quot; class=&quot;headerlink&quot; title=&quot;网络层&quot;&gt;&lt;/a&gt;网络层&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
+    
+    
+      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="网络层" scheme="https://www.niewenjun.com/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
+    
+  </entry>
   
   <entry>
     <title>TCP</title>
@@ -45,7 +103,7 @@
     <link href="https://www.niewenjun.com/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/"/>
     <id>https://www.niewenjun.com/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/</id>
     <published>2020-05-04T11:15:00.000Z</published>
-    <updated>2020-05-05T10:06:34.954Z</updated>
+    <updated>2020-05-06T03:46:32.535Z</updated>
     
     <summary type="html">
     
@@ -526,62 +584,6 @@
     
     
       <category term="MySQL" scheme="https://www.niewenjun.com/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL常见问题总结</title>
-    <link href="https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-chang-jian-wen-ti-zong-jie/"/>
-    <id>https://www.niewenjun.com/2020/04/21/shu-ju-ku/mysql-chang-jian-wen-ti-zong-jie/</id>
-    <published>2020-04-21T13:56:00.000Z</published>
-    <updated>2020-04-28T10:19:34.855Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;MySQL-常见问题总结&quot;&gt;&lt;a href=&quot;#MySQL-常见问题总结&quot; class=&quot;headerlink&quot; title=&quot;MySQL 常见问题总结&quot;&gt;&lt;/a&gt;MySQL 常见问题总结&lt;/h2&gt;&lt;h3 id=&quot;什么是-MySQL-？&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="MySQL" scheme="https://www.niewenjun.com/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>大白话带你认识JVM</title>
-    <link href="https://www.niewenjun.com/2020/04/20/hou-duan/jvm/da-bai-hua-dai-ni-ren-shi-jvm/"/>
-    <id>https://www.niewenjun.com/2020/04/20/hou-duan/jvm/da-bai-hua-dai-ni-ren-shi-jvm/</id>
-    <published>2020-04-20T07:26:00.000Z</published>
-    <updated>2020-04-20T07:38:39.819Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="后端" scheme="https://www.niewenjun.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
-    
-      <category term="JVM" scheme="https://www.niewenjun.com/tags/JVM/"/>
     
   </entry>
   

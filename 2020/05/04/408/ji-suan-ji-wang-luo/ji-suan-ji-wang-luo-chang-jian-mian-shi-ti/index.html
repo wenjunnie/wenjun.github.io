@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -653,7 +653,7 @@
 <p><img src="https://s1.ax1x.com/2020/05/04/YCrasP.png" alt="各种协议与 HTTP 协议之间的关系"></p>
 <h2 id="八-HTTP-长连接、短连接"><a href="#八-HTTP-长连接、短连接" class="headerlink" title="八  HTTP 长连接、短连接"></a>八  HTTP 长连接、短连接</h2><p>在 HTTP/1.0 中默认使用短连接。也就是说，客户端和服务器每进行一次 HTTP 操作，就建立一次连接，任务结束就中断连接。当客户端浏览器访问的某个 HTML 或其他类型的 Web 页中包含有其他的 Web 资源（如 JavaScript 文件、图像文件、CSS 文件等），每遇到这样一个 Web 资源，浏览器就会重新建立一个 HTTP 会话。</p>
 <p>而从 HTTP/1.1 起，默认使用长连接，用以保持连接特性。使用长连接的 HTTP 协议，会在响应头加入这行代码：</p>
-<pre class=" language-javascript"><code class="language-javascript">Connection<span class="token punctuation">:</span>keep<span class="token operator">-</span>alive</code></pre>
+<pre class=" language-html"><code class="language-html">Connection: keep-alive</code></pre>
 <p>在使用长连接的情况下，当一个网页打开完成后，客户端和服务器之间用于传输 HTTP 数据的 TCP 连接不会关闭，客户端再次访问这个服务器时，会继续使用这一条已经建立的连接。Keep-Alive 不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如 Apache ）中设定这个时间。实现长连接需要客户端和服务端都支持长连接。</p>
 <p><strong>HTTP 协议的长连接和短连接，实质上是 TCP 协议的长连接和短连接。</strong> </p>
 <p>参考： <a href="https://www.cnblogs.com/gotodsp/p/6366163.html" target="_blank" rel="noopener">《HTTP长连接、短连接究竟是什么？》</a></p>
