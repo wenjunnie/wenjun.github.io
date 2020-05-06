@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ZooKeeper分布式锁, Wenjun">
+    <meta name="keywords" content="HTTPS, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ZooKeeper分布式锁 | Wenjun</title>
+    <title>HTTPS | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ZooKeeper分布式锁</h1>
+                    <h1 class="description center-align post-title">HTTPS</h1>
                 </div>
             </div>
         </div>
@@ -439,12 +439,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
-                                <span class="chip bg-color">分布式锁</span>
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
                             </a>
                         
-                            <a href="/tags/ZooKeeper/">
-                                <span class="chip bg-color">ZooKeeper</span>
+                            <a href="/tags/HTTPS/">
+                                <span class="chip bg-color">HTTPS</span>
                             </a>
                         
                     </div>
@@ -455,8 +455,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
-                                分布式
+                            <a href="/categories/408/" class="post-category">
+                                408
                             </a>
                         
                     </div>
@@ -468,7 +468,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-02
+                    2020-05-07
                 </div>
                 
 
@@ -477,14 +477,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.9k
+                    4.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    15 分
                 </div>
                 
 
@@ -499,207 +499,154 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="ZooKeeper-分布式锁"><a href="#ZooKeeper-分布式锁" class="headerlink" title="ZooKeeper 分布式锁"></a>ZooKeeper 分布式锁</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h3><p>锁我想不需要我过多的去说，大家都知道是怎么一回事了吧？</p>
-<p>在多线程环境下，由于上下文的切换，数据可能出现不一致的情况或者数据被污染，我们需要保证数据安全，所以想到了加锁。</p>
-<p>所谓的加锁机制呢，就是当一个线程访问该类的某个数据时，进行保护，其他线程不能进行访问，直到该线程读取完，其他线程才可使用。</p>
-<p>还记得我之前说过 Redis 在分布式的情况下，需要对存在并发竞争的数据进行加锁，老公们十分费解，Redis 是单线程的嘛？为啥还要加锁呢？</p>
-<p>看来老公们还是年轻啊，你说的不需要加锁的情况是这样的：</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvIL0x.png" alt=""></p>
-<p>单个服务去访问 Redis 的时候，确实因为 Redis 本身单线程的原因是不用考虑线程安全的，但是，现在有哪个公司还是单机的呀？肯定都是分布式集群了嘛。</p>
-<p>老公们你看下这样的场景是不是就有问题了：</p>
-<p>你们经常不是说秒杀嘛，拿到库存判断，那老婆告诉你分布式情况就是会出问题的。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvowuR.png" alt=""></p>
-<p>我们为了减少 DB 的压力，把库存预热到了 KV ，现在 KV 的库存是 1 。</p>
+                <h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><p>每篇文章都希望你能收获到东西，这篇将带你<strong>深入 HTTPS 加解密原理</strong>，希望看完能够有这些收获：</p>
+<ul>
+<li>明白 HTTPS 到底解决了什么问题</li>
+<li>理解对称加密与非对称加密的原理和使用场景</li>
+<li>明白 CA 机构和根证书到底起了什么作用</li>
+</ul>
+<h2 id="Why-HTTPS-？"><a href="#Why-HTTPS-？" class="headerlink" title="Why HTTPS ？"></a>Why HTTPS ？</h2><blockquote>
+<p>近几年来，各大公司都在大力推进 HTTPS 的建设。Google Chrome 将非 HTTPS 的网站标注为「不安全」，苹果要求 APP 中需要使用 HTTPS 进行通信，微信小程序也要求使用 HTTPS 协议。那么，我们为什么非要做这么一件事呢？</p>
+</blockquote>
+<p>我们先来看看 HTTP 。HTTP（Hypertext Transfer Protocol）超文本传输协议，是一种用于分布式、协作式和超媒体信息系统的应用层协议，可以说 HTTP 是当代互联网通信的基础。</p>
+<p>但是，HTTP 有着一个致命的缺陷，那就是内容是<strong>明文传输</strong>的，没有经过任何加密，而这些明文数据会经过 <strong>WiFi 、路由器、运营商、机房</strong>等多个物理设备节点，如果在这中间任意一个节点被监听，传输的内容就会完全暴露，这一攻击手法叫做 MITM（Man In The Middle）<strong>中间人</strong>攻击。</p>
+<p><img src="https://s1.ax1x.com/2020/05/06/YVNE8J.png" alt=""></p>
+<p><strong>举个例子，稍微有点长，但这个例子透露出了我对安全如此痴迷的原因😝~~</strong></p>
+<hr>
+<p>可以拿小时候上课传纸条来类比，你坐在教室靠墙的一边，想要传一句<strong>「晚上放学操场我等你」</strong>给坐在窗边的小红，中间要经过六七个人的传递。虽然你把纸条对折了一下，但是防君子不防小人，中间的所有人都可以很轻易地打开纸条看到你想要说什么。</p>
+<p>只是看还好，如果有小刚也喜欢小红，看到你俩马上就要甜甜蜜蜜地回家了，心有不甘，换了一张纸条，改成了<strong>「晚上放学你自己回家吧，我要去网吧玩游戏」</strong>。</p>
+<p>小红看到你要抛弃她自己去玩游戏，非常伤心，开始在纸条上质问<strong>「说好的一起回家呢，为什么要去打游戏，哼」</strong>。</p>
+<p>在小红的纸条传回来的路上，小刚又改了纸条<strong>「你玩你的游戏去吧，我要和小刚回家」</strong>。</p>
+<p>于是，你和小红都倍感伤心，小刚横刀夺爱，而你一头雾水。</p>
+<hr>
+<p>回忆一下几年前遍地都是的<strong>运营商劫持</strong>，当你访问一个本来很正常的网页，但页面上却莫名其妙出现了一些广告标签、跳转脚本、欺骗性的红包按钮，甚至有时候本来要下载一个文件，最后下下来却变成了另外一个完全不同的东西，这些都是被运营商劫持了 HTTP 明文数据的现象。</p>
+<p><img src="https://s1.ax1x.com/2020/05/06/YVNfaT.png" alt="运营商劫持"></p>
+<p>还有各大公司的员工<strong>安全培训</strong>里都有一条「不要连陌生的 WiFi 」，也是类似的原因，恶意 WiFi 的控制者可以看到和篡改 HTTP 明文传输的信息。</p>
+<p>为了解决 HTTP 明文传输数据可能导致的安全问题，1994 年网景公司提出了 HTTPS（HyperText Transfer Protocol Secure）超文本传输安全协议，数据通信仍然是 HTTP ，但利用 <strong>SSL/TLS</strong> 加密数据包。</p>
+<h2 id="HTTPS-实现原理"><a href="#HTTPS-实现原理" class="headerlink" title="HTTPS 实现原理"></a>HTTPS 实现原理</h2><blockquote>
+<p>前面说到，HTTPS 其实就是将 HTTP 的数据包再通过 SSL/TLS 加密后传输，那么 SSL/TLS 又是什么呢？</p>
+</blockquote>
+<p>SSL（Secure Sockets Layer）安全套接层和 TLS（Transport Layer Security）传输层安全协议其实是<strong>一套东西</strong>。</p>
+<p>网景公司在 1994 年提出 HTTPS 协议时，使用的是 SSL 进行加密。后来 IETF（Internet Engineering Task Force）互联网工程任务组将 SSL 进一步标准化，于 1999 年公布第一版 TLS 协议文件 TLS 1.0 。目前最新版的 TLS 协议是 TLS 1.3 ，于 2018 年公布。</p>
+<h3 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h3><p>SSL 协议位于传输层与应用层之间，为数据通讯提供安全支持。应用层数据不再直接传递给传输层，而是传递给 SSL 层，SSL 层对从应用层收到的数据进行加密，并增加自己的 SSL 头。SSL 协议可分为两层：</p>
+<ul>
+<li><strong>SSL 握手协议（SSL Handshake Protocol）：</strong>它建立在 SSL 记录协议之上，用于在实际的数据传输开始前，通讯双方进行<strong>身份认证、协商加密算法、交换加密密钥</strong>等。</li>
+<li><strong>SSL 记录协议（SSL Record Protocol）：</strong>它建立在可靠的传输协议（如 TCP ）之上，为高层协议提供<strong>数据封装、压缩、加密</strong>等基本功能的支持。</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/05/07/YVwEo6.png" alt="SSL"></p>
+<h4 id="握手协议"><a href="#握手协议" class="headerlink" title="握手协议"></a>握手协议</h4><p>握手协议是客户机和服务器用 SSL 连接通信时使用的<strong>第一个</strong>子协议，握手协议包括客户机与服务器之间的一系列消息。SSL 中最复杂的协议就是握手协议。该协议允许服务器和客户机相互验证，协商加密和 MAC（Message Authentication Codes）算法以及保密密钥，用来保护在 SSL 记录中发送的数据。握手协议是在应用程序的数据传输之前使用的。</p>
+<p>每个握手协议包含以下 3 个字段：</p>
+<ul>
+<li><strong>Type ：</strong>表示 10 种消息类型之一。</li>
+<li><strong>Length ：</strong>表示消息长度字节数。</li>
+<li><strong>Content ：</strong>与消息相关的参数。</li>
+</ul>
+<h4 id="记录协议"><a href="#记录协议" class="headerlink" title="记录协议"></a>记录协议</h4><p>记录协议在客户机和服务器握手成功后使用，即客户机和服务器鉴别对方和确定安全信息交换使用的算法后，进入 SSL 记录协议，记录协议向 SSL 连接提供两个服务：</p>
+<ul>
+<li><strong>保密性：</strong>使用握手协议定义的秘密密钥实现。</li>
+<li><strong>完整性：</strong>握手协议定义了 MAC ，用于保证消息完整性。</li>
+</ul>
+<p><strong>发送方的工作过程为：</strong></p>
+<ul>
+<li>从上层接受要发送的数据（包括各种消息和数据）；</li>
+<li>对信息进行分段，分成若干纪录；</li>
+<li>使用指定的压缩算法进行数据压缩（可选）；</li>
+<li>使用指定的 MAC 算法生成 MAC ；</li>
+<li>使用指定的加密算法进行数据加密；</li>
+<li>添加 SSL 记录协议的头，发送数据。</li>
+</ul>
+<p><strong>接收方的工作过程为：</strong></p>
+<ul>
+<li>接收数据，从 SSL 记录协议的头中获取相关信息；</li>
+<li>使用指定的解密算法解密数据；</li>
+<li>使用指定的 MAC 算法校验 MAC ；</li>
+<li>使用压缩算法对数据解压缩（在需要进行）；</li>
+<li>将记录进行数据重组；</li>
+<li>将数据发送给高层。</li>
+</ul>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>我们先来看看 HTTPS 的加解密流程。</p>
+<p><img src="https://s1.ax1x.com/2020/05/06/YVUW6A.png" alt="HTTPS 加解密流程"><strong>HTTPS 加解密流程：</strong></p>
 <ol>
-<li>服务 A 去 Redis 查询到库存发现是 1 ，那说明我能抢到这个商品对不对，那我就准备减一了，但是还没减。</li>
-<li>同时服务 B 也去拿发现也是 1 ，那我也抢到了呀，那我也减。</li>
-<li>C 同理。</li>
-<li>等所有的服务都判断完了，你发现诶，怎么变成 -2 了，超卖了呀，这下完了。</li>
+<li>用户在浏览器发起 HTTPS 请求（如 <a href="https://www.baidu.com/" target="_blank" rel="noopener">https://www.baidu.com/</a> ），默认使用服务端的 <strong>443</strong> 端口进行连接；</li>
+<li>HTTPS 需要使用一套 <strong>CA 数字证书</strong>，证书内会附带一个<strong>公钥 Pub</strong> ，而与之对应的<strong>私钥 Private</strong> 保留在服务端不公开；</li>
+<li>服务端收到请求，返回配置好的包含<strong>公钥 Pub</strong> 的证书给客户端；</li>
+<li>客户端收到<strong>证书</strong>，校验合法性，主要包括是否在有效期内、证书的域名与请求的域名是否匹配，上一级证书是否有效（递归判断，直到判断到系统内置或浏览器配置好的根证书），如果不通过，则显示 HTTPS 警告信息，如果通过则继续；</li>
+<li>客户端生成一个用于对称加密的<strong>随机 Key</strong> ，并用证书内的<strong>公钥 Pub</strong> 进行加密，发送给服务端；</li>
+<li>服务端收到<strong>随机 Key</strong> 的密文，使用与<strong>公钥 Pub</strong> 配对的<strong>私钥 Private</strong> 进行解密，得到客户端真正想发送的<strong>随机 Key</strong> ；</li>
+<li>服务端使用客户端发送过来的<strong>随机 Key</strong> 对要传输的 HTTP 数据进行对称加密，将密文返回客户端；</li>
+<li>客户端使用<strong>随机 Key</strong> 对称解密密文，得到 HTTP 数据明文；</li>
+<li>后续 HTTPS 请求使用之前交换好的<strong>随机 Key</strong> 进行对称加解密。</li>
 </ol>
-<p>老公们是不是发现问题了，这就需要分布式锁的介入了，我会分三个章节去分别介绍分布式锁的三种实现方式<strong>（Zookeeper ，Redis ，MySQL）</strong>，说出他们的优缺点，以及一般大厂的实践场景。</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><blockquote>
-<p>一个骚里骚气的面试官啥也没拿的就走了进来，你一看，这不是你老婆嘛，你正准备叫他的时候，发现他一脸严肃，死鬼还装严肃，肯定会给我放水的吧。</p>
-<p>咳咳，我们啥也不说了，开始今天的面试吧。</p>
-<p>正常线程进程同步的机制有哪些？</p>
+<p><img src="https://s1.ax1x.com/2020/05/07/YVDEoq.png" alt=""></p>
+<h3 id="对称加密与非对称加密"><a href="#对称加密与非对称加密" class="headerlink" title="对称加密与非对称加密"></a>对称加密与非对称加密</h3><blockquote>
+<p>又是对称加密又是非对称加密，一会公钥一会私钥一会随机 Key ，为什么要这么复杂呢，一套搞到底不好么？</p>
 </blockquote>
+<p>对称加密是指有一个密钥，用它可以对一段明文加密，加密之后也只能用这个密钥来解密得到明文。如果通信双方都持有密钥，且天知地知你知我知，绝对不会有别的人知道，那么通信安全自然是可以得到保证的（在<strong>密钥足够强</strong>的情况下）。</p>
+<p>然而，在 HTTPS 的传输场景下，服务端事先并不知道客户端是谁，你也<strong>不可能在事先不通过互联网和每一个网站的管理员都悄悄商量好一个通信密钥</strong>出来，那么必然存在一个密钥在互联网上传输的过程，如果在传输过程中被别人监听到了，那么后续的所有加密都是无用功。</p>
+<p>这时，我们就需要另一种神奇的加密类型，非对称加密。</p>
+<p>非对称加密有两个密钥，一个是公钥，另一个是私钥。一般来说，公钥用来加密，这时密文只能用私钥才能解开。</p>
+<p>那么，当客户端发起连接请求，服务端将公钥传输过去，客户端利用公钥加密好信息，再将密文发送给服务端，服务端里有私钥可以解密。</p>
+<p>但是，当服务端要返回数据，如果用公钥加密，那么客户端并没有私钥用来解密，而如果用私钥加密，客户端虽然有公钥可以解密，但这个公钥之前就在<strong>互联网上传输过</strong>，很有可能已经有人拿到，并不安全，所以这一过程只用非对称加密是不能满足的。</p>
+<blockquote>
+<p>注意，严格来讲，私钥并不能用来加密，只能用作签名使用，这是由于密码学中生成公钥私钥时对不同变量的数学要求是不同的，因此公钥私钥抵抗攻击的能力也不同，在实际使用中不可互换。签名的功能在 HTTPS 里也有用到，下文中会说明。</p>
+</blockquote>
+<p>只有一组公钥私钥只能保证单程的加解密，那么如果我们准备<strong>两组公钥私钥</strong>呢，是不是可以解决这个问题？来看下面这个过程。</p>
+<ol>
+<li>服务端有非对称加密的公钥 A1 ，私钥 A2 ；</li>
+<li>客户端有非对称加密的公钥 B1 ，私钥 B2 ；</li>
+<li>客户端向服务端发起请求，服务端将公钥 A1 返回给客户端；</li>
+<li>浏览器收到公钥 A1 ，将自己保存的公钥 B1 发送给服务端；</li>
+<li>之后浏览器所有向客户端发送的数据，使用公钥 B1 加密，客户端可以使用私钥 B2 解密；</li>
+<li>客户端所有向服务端发送的数据，使用公钥 A1 加密，服务端可以使用私钥 A2 解密。</li>
+</ol>
+<p>此时，两条传输方向的数据都经过非对称加密，都能保证安全性，那么为什么不采用这种方案呢？</p>
+<p><img src="https://s1.ax1x.com/2020/05/07/YVrTDH.png" alt=""></p>
+<p>最主要的原因是<strong>非对称加解密耗时要远大于对称加解密</strong>，对性能有很大损耗，大家的使用体验很差。</p>
+<p>所以，我们才最终选用了上文介绍到<strong>非对称加密+对称加密</strong>的方案，再复习一下↓↓↓😝</p>
+<ol>
+<li>服务端有非对称加密的公钥 A1 ，私钥 A2 ；</li>
+<li>客户端发起请求，服务端将公钥 A1 返回给客户端；</li>
+<li>客户端随机生成一个对称加密的密钥 K ，用公钥 A1 加密后发送给服务端；</li>
+<li>服务端收到密文后用自己的私钥 A2 解密，得到对称密钥 K ，此时完成了安全的对称密钥交换，解决了对称加密时密钥传输被人窃取的问题；</li>
+<li>之后双方通信都使用密钥 K 进行对称加解密。</li>
+</ol>
+<p>看起来是一个非常完美的方案，<strong>兼顾</strong>了安全性和性能，但是，真的就安全了么？</p>
+<h3 id="CA-颁发机构"><a href="#CA-颁发机构" class="headerlink" title="CA 颁发机构"></a>CA 颁发机构</h3><p>依然考虑<strong>中间人攻击</strong>的情况，非对称加密的算法都是<strong>公开</strong>的，所有人都可以自己生成一对公钥私钥。</p>
+<p>当服务端向客户端返回公钥 A1 的时候，中间人将其<strong>替换</strong>成自己的公钥 B1 传送给浏览器。</p>
+<p>而浏览器此时一无所知，傻乎乎地使用公钥 B1 加密了密钥 K 发送出去，又被<strong>中间人截获</strong>，中间人利用自己的私钥 B2 解密，得到密钥 K ，再使用服务端的公钥 A1 加密传送给服务端，完成了通信链路，而服务端和客户端毫无感知。</p>
+<p><img src="https://s1.ax1x.com/2020/05/07/YVrxxS.png" alt="HTTPS 中间人"></p>
+<p>出现这一问题的核心原因是<strong>客户端无法确认收到的公钥是不是真的是服务端发来的</strong>。为了解决这个问题，互联网引入了一个公信机构，这就是 CA 。</p>
+<p>服务端在使用 HTTPS 前，去经过认证的 CA 机构申请颁发一份<strong>数字证书</strong>，数字证书里包含有证书持有者、证书有效期、公钥等信息，服务端将证书发送给客户端，客户端校验证书身份和要访问的网站身份确实一致后再进行后续的加密操作。</p>
+<p>但是，如果中间人也聪明一点，<strong>只改动了证书中的公钥部分</strong>，客户端依然不能确认证书<strong>是否被篡改</strong>，这时我们就需要一些防伪技术了。</p>
+<p>前面说过，非对称加密中一般公钥用来加密，私钥用来解密，虽然私钥加密理论上可行，但由于数学上的设计这么做并不适合，那么私钥就只有解密这个功能了么？</p>
+<p>私钥除了解密外的真正用途其实还有一个，就是<strong>数字签名</strong>，其实就是一种防伪技术，只要有人篡改了证书，那么数字签名必然校验失败。具体过程如下：</p>
+<ol>
+<li>CA 机构拥有自己的一对公钥和私钥；</li>
+<li>CA 机构在颁发证书时对证书明文信息进行哈希；</li>
+<li>将哈希值用私钥进行<strong>加签</strong>，得到数字签名。</li>
+</ol>
+<p><strong>明文数据和数字签名组成证书，传递给客户端。</strong></p>
+<ol>
+<li>客户端得到证书，分解成明文部分 <code>Text</code> 和数字签名 <code>Sig1</code> ；</li>
+<li>用 CA 机构的公钥进行<strong>解签</strong>，得到 <code>Sig2</code>（由于 CA 机构是一种公信身份，因此在系统或浏览器中会内置 CA 机构的证书和公钥信息）；</li>
+<li>用证书里声明的哈希算法对明文 <code>Text</code> 部分进行哈希得到 H ；</li>
+<li>当自己计算得到的哈希值 T 与<strong>解签</strong>后的 <code>Sig2</code> <strong>相等</strong>，表示证书可信，<strong>没有被篡改</strong>。</li>
+</ol>
+<p><img src="https://s1.ax1x.com/2020/05/07/YVy4ne.png" alt=""></p>
+<p>这时，签名是由 CA 机构的私钥生成的，中间人篡改信息后无法拿到 CA 机构的私钥，保证了证书可信。</p>
+<blockquote>
+<p>注意，这里有一个比较<strong>难以理解</strong>的地方，非对称加密的签名过程是，私钥将一段消息进行加签，然后将签名部分和消息本身一起发送给对方，收到消息后对签名部分利用公钥验签，如果验签出来的内容和消息本身一致，表明消息没有被篡改。</p>
+</blockquote>
+<p>在这个过程中，系统或浏览器中内置的 CA 机构的证书和公钥成为了至关重要的环节，这也是 CA 机构公信身份的证明，如果系统或浏览器中没有这个 CA 机构，那么客户端可以不接受服务端传回的证书，显示 HTTPS 警告。</p>
+<p>实际上 CA 机构的证书是一条信任链，A 信任 B ，B 信任 C ，以<strong>掘金的证书</strong>为例，掘金向 RapidSSL 申请一张证书，而 RapidSSL 的 CA 身份是由 DigiCert Global 根 CA 认证的，构成了一条信任链。</p>
+<p>各级 CA 机构的私钥是绝对的私密信息，一旦 CA 机构的私钥泄露，其公信力就会一败涂地。之前就有过几次 <strong>CA 机构私钥泄露</strong>，引发信任危机，各大系统和浏览器只能纷纷吊销内置的对应 CA 的根证书。</p>
+<p>有些老旧的网站会要求使用前下载安装他自己的根证书，这就是这个网站使用的证书并不能在系统内置的 CA 机构和根证书之间形成一条信任链，需要自己安装根证书来构成信任链，这里的风险就要<strong>使用者自己承担</strong>了。</p>
+<p><img src="https://s1.ax1x.com/2020/05/07/YVs0II.png" alt="证书明细"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>HTTPS 的出发点是<strong>解决 HTTP 明文传输时信息被篡改和监听的问题</strong>。</p>
 <ul>
-<li>互斥：互斥的机制，保证同一时间只有一个线程可以操作共享资源 <strong>synchronized</strong> ，<strong>Lock</strong> 等。</li>
-<li>临界值：让多线程串行化去访问资源。</li>
-<li>事件通知：通过事件的通知去保证大家都有序访问共享资源。</li>
-<li>信号量：多个任务同时访问，同时限制数量，比如发令枪 <strong>CDL</strong> ，<strong>Semaphore</strong> 等。</li>
+<li>为了兼顾性能和安全性，使用了<strong>非对称加密+对称加密</strong>的方案。</li>
+<li>为了保证公钥传输中不被篡改，又使用了<strong>非对称加密的数字签名</strong>功能，借助 CA 机构和系统根证书的机制保证了 HTTPS 证书的公信力。</li>
 </ul>
-<blockquote>
-<p>那分布式锁你了解过有哪些么？</p>
-</blockquote>
-<p>分布式锁实现主要以 <strong>Zookeeper</strong>（以下简称 ZK ）、<strong>Redis</strong> 、<strong>MySQL</strong> 这三种为主。</p>
-<blockquote>
-<p>那先跟我聊一下 ZK 吧，你能说一下他常见的使用场景么？</p>
-</blockquote>
-<p>他主要的应用场景有以下几个：</p>
-<ul>
-<li>服务注册与订阅（共用节点）</li>
-<li>分布式通知（监听 znode ）</li>
-<li>服务命名（ znode 特性）</li>
-<li>数据订阅、发布（ watcher ）</li>
-<li>分布式锁（临时节点）</li>
-</ul>
-<blockquote>
-<p>ZK 是啥？</p>
-</blockquote>
-<p>它是个数据库，文件存储系统，并且有监听通知机制（观察者模式）。</p>
-<blockquote>
-<p>存文件系统，他存了什么？</p>
-</blockquote>
-<p>节点。</p>
-<p>ZK 的节点类型有 <strong>4</strong> 大类：</p>
-<ul>
-<li><strong>持久化节点</strong>（ ZK 断开后节点还在）</li>
-<li><strong>持久化顺序编号目录节点</strong></li>
-<li><strong>临时目录节点</strong>（客户端断开后节点就删除了）</li>
-<li><strong>临时目录编号目录节点</strong></li>
-</ul>
-<p>节点名称都是<strong>唯一</strong>的。</p>
-<blockquote>
-<p>节点怎么创建？</p>
-</blockquote>
-<p>我特么，这样问的么？可是我面试只看了分布式锁，我得好好想想！！！</p>
-<p>还好我之前在自己的服务器搭建了一个 ZK 的集群，我刚好跟大家回忆一波。</p>
-<pre class=" language-bash"><code class="language-bash">create /test laogong // 创建永久节点 </code></pre>
-<p><img src="https://s1.ax1x.com/2020/05/02/Jvoq2Q.png" alt="创建永久节点"></p>
-<blockquote>
-<p>那临时节点呢？</p>
-</blockquote>
-<pre class=" language-bash"><code class="language-bash">create -e /test laogong // 创建临时节点</code></pre>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvTKPO.png" alt="创建临时节点"></p>
-<p>临时节点就创建成功了，如果我断开这次链接，这个节点自然就消失了，这是我的一个 ZK 管理工具，目录可能清晰点。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvT8sA.png" alt=""></p>
-<blockquote>
-<p>如何创建顺序节点呢？</p>
-</blockquote>
-<pre class=" language-bash"><code class="language-bash">create -s /test // 创建顺序节点</code></pre>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvTGqI.png" alt="创建顺序节点"></p>
-<blockquote>
-<p>临时顺序节点呢？</p>
-</blockquote>
-<p>我想聪明的老公都会抢答了</p>
-<pre class=" language-bash"><code class="language-bash">create -e -s /test  // 创建临时顺序节点</code></pre>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvTai8.png" alt="创建临时顺序节点"></p>
-<p>我退出后，重新连接，发现刚才创建的所有临时节点都没了。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/Jv7Kwq.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/02/Jv7lkV.png" alt=""></p>
-<p>开篇演示这么多呢，我就是想给大家看到的 ZK 大概的一个操作流程和数据结构，中间涉及的搭建以及其他的技能我就不说了，我们重点聊一下他在分布式锁中的实现。</p>
-<p>ZK 就是基于节点去实现各种分布式锁的。</p>
-<blockquote>
-<p>就拿开头的场景来说，ZK 应该怎么去保证分布式情况下的线程安全呢？并发竞争他是怎么控制的呢？</p>
-</blockquote>
-<p>为了模拟并发竞争这样一个情况，我写了点伪代码，大家可以先看看。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/Jv7y1e.png" alt=""></p>
-<p>我定义了一个库存 <code>inventory</code> 值为 1 ，还用到了一个 <strong>CountDownLatch</strong> 发令枪，等 10 个线程都就绪了一起去扣减库存。</p>
-<p>是不是就像 10 台机器一起去拿到库存，然后扣减库存了？</p>
-<p>所有机器一起去拿，发现都是 1 ，那大家都认为是自己抢到了，都做了减一的操作，但是等所有人都执行完，再去 set 值的时候，发现其实已经超卖了，我打印出来给大家看看。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/Jv7T1g.png" alt=""></p>
-<p>是吧，这还不是超卖一个两个的问题，超卖 7 个都有，代码里面明明判断了库存大于 0 才去减的，怎么回事开头我说明了。</p>
-<blockquote>
-<p>那怎么解决这个问题？</p>
-</blockquote>
-<p>synchronized ，Lock 也只能保证你当前机器线程安全，这样分布式访问还是有问题。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvHFBR.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvHkH1.png" alt=""></p>
-<p>上面跟大家提到的 ZK 的节点就可以解决这个问题。</p>
-<p>ZK 节点有个<strong>唯一</strong>的特性，就是我们创建过这个节点了，你再创建 ZK 是会报错的，那我们就利用一下他的唯一性去实现一下。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvHm9O.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvHlDA.png" alt=""></p>
-<blockquote>
-<p>怎么实现呢？</p>
-</blockquote>
-<p>上面不是 10 个线程嘛？</p>
-<p>我们全部去创建，创建成功的第一个返回 True 他就可以继续下面的扣减库存操作，后续的节点访问就会全部报错，扣减失败，我们把它们丢一个队列去排队。</p>
-<blockquote>
-<p>那怎么释放锁呢？</p>
-</blockquote>
-<p>删除节点咯，删了再通知其他的人过来加锁，依次类推。</p>
-<p>我们实现一下，ZK 加锁的场景。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvHfKJ.png" alt=""></p>
-<p>是不是，只有第一个线程能扣减成功，其他的都失败了。</p>
-<blockquote>
-<p>但是你发现问题没有，你加了锁了，你得释放啊，你不释放后面的报错了就不重试了。</p>
-</blockquote>
-<p>那简单，删除锁就释放掉了，Lock 在 <code>finally</code> 里面 <code>unLock()</code> ，现在我们在 <code>finally</code> 删除节点。</p>
-<blockquote>
-<p>加锁我们知道创建节点就够了，但是你得实现一个阻塞的效果呀，那咋搞？</p>
-</blockquote>
-<p>死循环，递归不断去尝试，直到成功，一个伪装的阻塞效果。</p>
-<blockquote>
-<p>怎么知道前面的老哥删除节点了嗯？</p>
-</blockquote>
-<p>监听节点的删除事件。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvHT56.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvHq2D.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvHvqA.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvbCPf.png" alt=""></p>
-<blockquote>
-<p>但是你发现你这样做的问题没？</p>
-</blockquote>
-<p>是的，会出现死锁。</p>
-<p>第一个仔加锁成功了，在执行代码的时候，机器宕机了，那节点是不是就不能删除了？</p>
-<p>你要故作沉思，自问自答，时而看看远方，时而看看面试官，假装自己什么都不知道。</p>
-<p>哦我想起来了，创建临时节点就好了，客户端连接一断开，别的就可以监听到节点的变化了。</p>
-<blockquote>
-<p>嗯还不错，那你发现还有别的问题没？</p>
-</blockquote>
-<p>好像这种监听机制也不好。</p>
-<blockquote>
-<p>怎么个不好呢？</p>
-</blockquote>
-<p>你们可以看到，监听，是所有服务都去监听一个节点的，节点的释放也会通知所有的服务器，如果是 900 个服务器呢？</p>
-<p>这对服务器是很大的一个挑战，一个释放的消息，就好像一个牧羊犬进入了羊群，大家都四散而开，随时可能干掉机器，会占用服务资源，网络带宽等等。</p>
-<p>这就是羊群效应。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JvbAMQ.gif" alt="羊群效应"></p>
-<blockquote>
-<p>那怎么解决这个问题？</p>
-</blockquote>
-<p>继续故作沉思，啊啊啊，好难，我的脑袋。。。。</p>
-<blockquote>
-<p>你 TM 别装了好不好？</p>
-</blockquote>
-<p>好的，临时顺序节点，可以顺利解决这个问题。</p>
-<p>怎么实现老公你先别往下看，先自己想想。</p>
-<p>之前说了全部监听一个节点问题很大，那我们就监听我们的前一个节点，因为是顺序的，很容易找到自己的前后。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/Jx3Icq.png" alt=""></p>
-<p>和之前监听一个永久节点的区别就在于，这里每个节点只监听了自己的前一个节点，释放当然也是一个个释放下去，就不会出现羊群效应了。</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/Jx8GCj.png" alt=""></p>
-<blockquote>
-<p>你说了这么多，挺不错的，你能说说 ZK 在分布式锁中实践的一些缺点么？</p>
-</blockquote>
-<p>ZK <strong>性能</strong>上可能并没有缓存服务那么高。</p>
-<p>因为每次在创建锁和释放锁的过程中，都要动态创建、销毁瞬时节点来实现锁功能。</p>
-<p>ZK 中创建和删除节点只能通过 Leader 服务器来执行，然后将数据同步到所有的 Follower 机器上。（这里涉及 ZK 集群的知识，我就不展开了，以后 ZK 章节跟老公们细聊）</p>
-<blockquote>
-<p>还有么？</p>
-</blockquote>
-<p>使用 ZooKeeper 也有可能带来<strong>并发问题</strong>，只是并不常见而已。</p>
-<p>由于网络抖动，客户端和 ZK 集群的 <strong>Session</strong> 连接断了，那么 ZK 以为客户端挂了，就会删除临时节点，这时候其他客户端就可以获取到分布式锁了。</p>
-<p>就可能产生并发问题了，这个问题不常见是因为 ZK 有<strong>重试</strong>机制，一旦 ZK 集群检测不到客户端的心跳，就会重试，Curator 客户端支持多种重试策略。</p>
-<p>多次重试之后还不行的话才会删除临时节点。</p>
-<p>Tip：所以，选择一个合适的重试策略也比较重要，要在锁的粒度和并发之间找一个平衡。</p>
-<blockquote>
-<p>有更好的实现么？</p>
-</blockquote>
-<p>基于 Redis 的分布式锁</p>
-<blockquote>
-<p>能跟我聊聊么？</p>
-</blockquote>
-<p>我看看了手上的表，老公，今天天色不早了，你全问完了，我怎么多水几篇文章呢？</p>
-<blockquote>
-<p>行，确实很晚了，那你回家去把家务干了吧？</p>
-</blockquote>
-<p>我？？？？</p>
-<p><img src="https://s1.ax1x.com/2020/05/02/JxGZoF.png" alt="么么哒"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ZK 通过临时节点，解决掉了<strong>死锁</strong>的问题，一旦客户端获取到锁之后突然挂掉（ Session 连接断开），那么这个临时节点就会自动删除掉，其他客户端自动获取锁。</p>
-<p>ZK 通过节点排队监听的机制，也实现了<strong>阻塞</strong>的原理，其实就是个递归在那无限等待最小节点释放的过程。</p>
-<p>我上面没实现锁的<strong>可重入</strong>，但是也很好实现，可以带上线程信息就可以了，或者机器信息这样的唯一标识，获取的时候判断一下。</p>
-<p>ZK 的集群也是<strong>高可用</strong>的，只要半数以上的或者，就可以对外提供服务了。</p>
-<p>这周会写完 Redis 和数据库的分布式锁的，老公们等好。</p>
 
             </div>
             <hr/>
@@ -725,7 +672,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/05/02/fen-bu-shi/zookeeper-fen-bu-shi-suo/">https://www.niewenjun.com/2020/05/02/fen-bu-shi/zookeeper-fen-bu-shi-suo/</a>
+                    <a href="https://www.niewenjun.com/2020/05/07/408/ji-suan-ji-wang-luo/https/">https://www.niewenjun.com/2020/05/07/408/ji-suan-ji-wang-luo/https/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -763,12 +710,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
-                                    <span class="chip bg-color">分布式锁</span>
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
                                 </a>
                             
-                                <a href="/tags/ZooKeeper/">
-                                    <span class="chip bg-color">ZooKeeper</span>
+                                <a href="/tags/HTTPS/">
+                                    <span class="chip bg-color">HTTPS</span>
                                 </a>
                             
                         </div>
@@ -936,54 +883,58 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/03/fen-bu-shi/redis-fen-bu-shi-suo/">
+                <a href="/2020/05/07/408/ji-suan-ji-wang-luo/https/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Redis分布式锁">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="HTTPS">
                         
-                        <span class="card-title">Redis分布式锁</span>
+                        <span class="card-title">HTTPS</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis 分布式锁前言上一章节我提到了基于 ZK 分布式锁的实现，这章节就来说一下基于 Redis 的分布式锁实现吧。
+                            HTTPS每篇文章都希望你能收获到东西，这篇将带你深入 HTTPS 加解密原理，希望看完能够有这些收获：
 
-ZK 实现分布式锁的传送门：ZooKeeper分布式锁
+明白 HTTPS 到底解决了什么问题
+理解对称加密与非对称加密的原理和使用场景
+明白 CA 机构和根证书到底起了什么作用
 
-在开始提到 Redis 分布式锁之前，我想跟大家聊点 Re
+Why 
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
-                                    分布式
+                            <a href="/categories/408/" class="post-category">
+                                    408
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Redis/">
-                        <span class="chip bg-color">Redis</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
                     </a>
                     
-                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
-                        <span class="chip bg-color">分布式锁</span>
+                    <a href="/tags/HTTPS/">
+                        <span class="chip bg-color">HTTPS</span>
                     </a>
                     
                 </div>
@@ -997,31 +948,39 @@ ZK 实现分布式锁的传送门：ZooKeeper分布式锁
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/30/fen-bu-shi/raft-xie-yi/">
+                <a href="/2020/05/06/408/ji-suan-ji-wang-luo/http/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Raft协议">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="HTTP">
                         
-                        <span class="card-title">Raft协议</span>
+                        <span class="card-title">HTTP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Raft 协议前言Raft 协议是用来解决分布式系统一致性问题的协议，在很长一段时间，Paxos 被认为是解决分布式系统一致性的代名词。但是 Paxos 难于理解，更难以实现，诸如 Google 大牛们开发的分布式锁系统 Chubby 都遭
+                            HTTP一 、基础概念URIURI 包含 URL 和 URN 。
+
+请求和响应报文1. 请求报文
+2. 响应报文
+二、HTTP 方法客户端发送的 请求报文 第一行为请求行，包含了方法字段。
+GET
+获取资源
+
+当前网络请求中，绝大部分使用的
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
-                                    分布式
+                            <a href="/categories/408/" class="post-category">
+                                    408
                                 </a>
                             
                             
@@ -1031,16 +990,12 @@ ZK 实现分布式锁的传送门：ZooKeeper分布式锁
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Redis/">
-                        <span class="chip bg-color">Redis</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
                     </a>
                     
-                    <a href="/tags/Raft/">
-                        <span class="chip bg-color">Raft</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%8D%8F%E8%AE%AE/">
-                        <span class="chip bg-color">协议</span>
+                    <a href="/tags/HTTP/">
+                        <span class="chip bg-color">HTTP</span>
                     </a>
                     
                 </div>
