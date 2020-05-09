@@ -1,0 +1,1448 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="RocketMQ, Wenjun">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>RocketMQ | Wenjun</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Wenjun</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Wenjun</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wenjunnie" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wenjunnie" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">RocketMQ</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    .toc-fixed .toc-link::before{
+        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                                <span class="chip bg-color">消息队列</span>
+                            </a>
+                        
+                            <a href="/tags/RocketMQ/">
+                                <span class="chip bg-color">RocketMQ</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                分布式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-05-09
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    7.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    27 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>消息队列</strong>在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在<strong>消息队列</strong>的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸，打败了无数竞争对手，每次都只能看到无数落寞的身影失望的离开，略感愧疚（<strong>请允许我使用一下夸张的修辞手法</strong>）。于是在一个寂寞难耐的夜晚，我痛定思痛，决定开始写<strong>《吊打面试官》</strong>系列，希望能帮助各位读者以后面试势如破竹，对面试官进行 360° 的反击，吊打问你的面试官，让一同面试的同僚瞠目结舌，疯狂收割大厂offer ！</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="RocketMQ-简介"><a href="#RocketMQ-简介" class="headerlink" title="RocketMQ 简介"></a>RocketMQ 简介</h3><blockquote>
+<p>RocketMQ 是一个纯 Java 、分布式、队列模型的开源消息中间件，前身是 MetaQ ，是阿里参考 Kafka 特点研发的一个队列模型的消息中间件，后开源给 Apache 基金会成为了 Apache 的顶级开源项目，具有高性能、高可靠、高实时、分布式特点。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9hjvwekvkg309j06makn.gif" alt=""></p>
+<p>在阿里巴巴内部围绕着 RocketMQ 内核打造了三款产品，分别是 <strong>MetaQ</strong> 、<strong>Notify</strong> 和 <strong>Aliware MQ</strong> 。</p>
+<p>这三者分别采用了不同的模型，<strong>MetaQ</strong> 主要使用了拉模型，解决了顺序消息和海量堆积问题；<strong>Notify</strong> 主要使用了推模型，解决了事务消息；而云产品 <strong>Aliware MQ</strong> 则是提供了商业化的版本。</p>
+<h4 id="经历多次双-11-洗礼的英雄"><a href="#经历多次双-11-洗礼的英雄" class="headerlink" title="经历多次双 11 洗礼的英雄"></a>经历多次双 11 洗礼的英雄</h4><p>   在备战2016年双十一时，<strong>RocketMq</strong> 团队重点做了<strong>两件事情</strong>，优化慢请求与统一存储引擎。</p>
+<ul>
+<li><strong>优化慢请求</strong>：这里主要是解决在海量高并发场景下降低慢请求对整个集群带来的抖动，<strong>毛刺问题</strong>。这是一个极具挑战的技术活，团队同学经过长达 1 个多月的跟进调优，从双十一的复盘情况来看，99.996% 的延迟落在了 10ms 以内，<strong>而 99.6% 的延迟在 1ms 以内</strong>。优化主要集中在 <strong>RocketMQ</strong> 存储层算法优化、JVM 与操作系统调优。更多的细节大家可以参考《万亿级数据洪峰下的分布式消息引擎》。</li>
+<li><strong>统一存储引擎</strong>：主要解决的消息引擎的高可用，成本问题。在多代消息引擎共存的前提下，我们对 <strong>Notify</strong> 的存储模块进行了全面移植与替换。</li>
+</ul>
+<p><strong>RocketMQ 天生为金融互联网领域而生</strong>，追求高可靠、高可用、高并发、低延迟，是一个阿里巴巴由内而外成功孕育的典范，除了阿里集团上千个应用外，根据我们不完全统计，国内至少有上百家单位、科研教育机构在使用。</p>
+<p><strong>RocketMQ</strong> 在阿里集团也被广泛应用在订单，交易，充值，流计算，消息推送，日志流式处理，<strong>binglog</strong> 分发等场景。</p>
+<h4 id="它所拥有的功能"><a href="#它所拥有的功能" class="headerlink" title="它所拥有的功能"></a>它所拥有的功能</h4><p>我们直接去 <strong>GitHub</strong> 上看 <strong>Apache</strong> 对它的描述可能会好点：</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YMj2mq.png" alt="RocketMQ 功能"></p>
+<p>功能完整到爆炸有木有？</p>
+<h4 id="它的项目结构组成是怎么样子的？"><a href="#它的项目结构组成是怎么样子的？" class="headerlink" title="它的项目结构组成是怎么样子的？"></a>它的项目结构组成是怎么样子的？</h4><blockquote>
+<p>GitHub 地址：<a href="https://github.com/apache/rocketmq" target="_blank" rel="noopener">https://github.com/apache/rocketmq</a></p>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2020/05/09/YMjL0x.jpg" alt="RocketMQ 项目结构"></p>
+<p><strong>它的核心模块：</strong></p>
+<ul>
+<li><strong>rocketmq-broker：</strong>接受生产者发来的消息并存储（通过调用 rocketmq-store ），消费者从这里取得消息。</li>
+<li><strong>rocketmq-client：</strong>提供发送、接受消息的客户端 API 。</li>
+<li><strong>rocketmq-namesrv：</strong>NameServer ，类似于 ZooKeeper ，这里保存着消息的 TopicName 、队列等运行时的元信息。</li>
+<li><strong>rocketmq-common：</strong>通用的一些类、方法、数据结构等。</li>
+<li><strong>rocketmq-remoting：</strong>基于 Netty4 的 client/server + fastjson 序列化 + 自定义二进制协议。</li>
+<li><strong>rocketmq-store：</strong>消息、索引存储等。</li>
+<li><strong>rocketmq-filtersrv：</strong>消息过滤器 Server ，需要注意的是，要实现这种过滤，需要上传代码到 MQ ！（一般而言，我们利用 <code>Tag</code> 足以满足大部分的过滤需求，如果更灵活更复杂的过滤需求，可以考虑 <code>filtersrv</code> 组件）。</li>
+<li><strong>rocketmq-tools：</strong>命令行工具。</li>
+</ul>
+<h3 id="它的架构组成，或者理解为为什么它这么快？这么强？这么厉害？"><a href="#它的架构组成，或者理解为为什么它这么快？这么强？这么厉害？" class="headerlink" title="它的架构组成，或者理解为为什么它这么快？这么强？这么厉害？"></a>它的架构组成，或者理解为为什么它这么快？这么强？这么厉害？</h3><p>它主要有四大核心组成部分：<strong>NameServer</strong> 、<strong>Broker</strong> 、<strong>Producer</strong> 以及 <strong>Consumer</strong> 四部分。</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YMv8EV.jpg" alt="RocketMQ 架构组成"></p>
+<blockquote>
+<p><strong>Tips：</strong>我们可以看到 <strong>RocketMQ</strong> 啥都是<strong>集群</strong>部署的，这是它<strong>吞吐量大</strong>，<strong>高可用</strong>的原因之一，集群的模式也很花哨，可以支持多 Master 模式、多 Master 多 Slave 异步复制模式、多 Master 多 Slave 同步双写模式。</p>
+</blockquote>
+<p>而且这个模式好像 Kafka 啊！（我这里是废话，本身就是阿里基于 Kafka 的很多特性研发的）。</p>
+<h3 id="分别介绍下各个集群组成部分吧"><a href="#分别介绍下各个集群组成部分吧" class="headerlink" title="分别介绍下各个集群组成部分吧"></a>分别介绍下各个集群组成部分吧</h3><h4 id="NameServer"><a href="#NameServer" class="headerlink" title="NameServer"></a>NameServer</h4><blockquote>
+<p>主要负责对于源数据的管理，包括了对于 <strong>Topic</strong> 和路由信息的管理。</p>
+</blockquote>
+<p><strong>NameServer</strong> 是一个功能齐全的服务器，其角色类似 Dubbo 中的 ZooKeeper ，但 NameServer 与 ZooKeeper 相比<strong>更轻量</strong>。主要是因为每个 NameServer 节点互相之间是独立的，没有任何信息交互。</p>
+<p><strong>NameServer</strong> 压力不会太大，平时主要开销是在<strong>维持心跳</strong>和<strong>提供 Topic-Broker 的关系数据</strong>。</p>
+<p>但有一点需要注意，Broker 向 NameServer 发心跳时， 会带上当前自己所负责的所有 <strong>Topic</strong> 信息，如果 <strong>Topic</strong> 个数太多（万级别），会导致一次心跳中，单 Topic 的数据就几十M，网络情况差的话， 网络传输失败，心跳失败，导致 NameServer 误认为 Broker 心跳失败。</p>
+<p><strong>NameServer</strong> 被设计成几乎无状态的，可以横向扩展，节点之间相互之间无通信，通过部署多台机器来标记自己是一个伪集群。</p>
+<p>每个 Broker 在启动的时候会到 NameServer 注册，Producer 在发送消息前会根据 Topic 到 <strong>NameServer</strong> 获取到 Broker 的路由信息，Consumer 也会定时获取 Topic 的路由信息。</p>
+<p>所以从功能上看 NameServer 应该是和 ZooKeeper 差不多，据说 RocketMQ 的早期版本确实是使用的 ZooKeeper ，后来改为了自己实现的 NameServer 。</p>
+<p>我们看一下 <strong>Dubbo</strong> 中注册中心的角色，是不是真的一毛一样，师出同门相似点真的很多：</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YMxp5T.jpg" alt="Dubbo 架构"></p>
+<h4 id="Producer"><a href="#Producer" class="headerlink" title="Producer"></a>Producer</h4><blockquote>
+<p>消息生产者，负责产生消息，一般由业务系统负责产生消息。</p>
+</blockquote>
+<ul>
+<li><p><strong>Producer</strong> 由用户进行分布式部署，消息由 <strong>Producer</strong> 通过多种负载均衡模式发送到 <strong>Broker</strong> 集群，发送低延时，支持快速失败。</p>
+</li>
+<li><p><strong>RocketMQ</strong> 提供了三种方式发送消息：<strong>同步</strong>、<strong>异步</strong>和<strong>单向</strong>。</p>
+</li>
+<li><p><strong>同步发送：</strong>同步发送指消息发送方发出数据后会在收到接收方发回响应之后才发下一个数据包。一般用于重要通知消息，例如重要通知邮件、营销短信。</p>
+</li>
+<li><p><strong>异步发送：</strong>异步发送指发送方发出数据后，不等接收方发回响应，接着发送下个数据包，一般用于可能链路耗时较长而对响应时间敏感的业务场景，例如用户视频上传后通知启动转码服务。</p>
+</li>
+<li><p><strong>单向发送：</strong>单向发送是指只负责发送消息而不等待服务器回应且没有回调函数触发，适用于某些耗时非常短但对可靠性要求并不高的场景，例如日志收集。</p>
+</li>
+</ul>
+<h4 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a>Broker</h4><blockquote>
+<p>消息中转角色，负责<strong>存储消息</strong>，转发消息。</p>
+</blockquote>
+<ul>
+<li><strong>Broker</strong> 是具体提供业务的服务器，单个 Broker 节点与所有的 NameServer 节点保持长连接及心跳，并会定时将 <strong>Topic</strong> 信息注册到 NameServer ，顺带一提底层的通信和连接都是<strong>基于 Netty 实现</strong>的。</li>
+<li><strong>Broker</strong> 负责消息存储，以 Topic 为纬度支持轻量级的队列，单机可以支撑上万队列规模，支持消息推拉模型。</li>
+<li>官网上有数据显示：具有<strong>上亿级消息堆积能力</strong>，同时可<strong>严格保证消息的有序性</strong>。</li>
+</ul>
+<h4 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h4><blockquote>
+<p>消息消费者，负责消费消息，一般是后台系统负责异步消费。</p>
+</blockquote>
+<ul>
+<li><p><strong>Consumer</strong> 也由用户部署，支持 <strong>PUSH</strong> 和 <strong>PULL</strong> 两种<strong>消费模式</strong>，支持<strong>集群消费</strong>和<strong>广播消费</strong>，提供<strong>实时的消息订阅机制</strong>。</p>
+<ul>
+<li><p><strong>Pull：</strong>拉取型消费者（Pull Consumer）。主动从消息服务器拉取信息，只要批量拉取到消息，用户应用就会启动消费过程，所以 Pull 称为<strong>主动</strong>消费型。</p>
+</li>
+<li><p><strong>Push：</strong>推送型消费者（Push Consumer）。封装了消息的拉取、消费进度和其它的内部维护工作，将消息到达时执行的回调接口留给用户应用程序来实现。所以 Push 称为<strong>被动</strong>消费类型，但从实现上看还是从消息服务器中拉取消息，不同于 Pull 的是 Push 首先要注册<strong>消费监听器</strong>，当监听器处触发后才开始消费消息。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="消息领域模型"><a href="#消息领域模型" class="headerlink" title="消息领域模型"></a>消息领域模型</h3><p><img src="https://s1.ax1x.com/2020/05/09/YQS9c4.md.png" alt="消息领域模型"></p>
+<h4 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h4><p><strong>Message</strong>（消息）就是要传输的信息。</p>
+<p>一条消息必须有一个主题（Topic），主题可以看做是你的信件要邮寄的地址。</p>
+<p>一条消息也可以拥有一个可选的标签（Tag）和额处的键值对，它们可以用于设置一个业务 Key 并在 Broker 上查找此消息以便在开发期间查找问题。</p>
+<h4 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h4><p><strong>Topic</strong>（主题）可以看做消息的规类，它是消息的第一级类型。比如一个电商系统可以分为：交易消息、物流消息等，一条消息必须有一个 Topic 。</p>
+<p><strong>Topic</strong> 与生产者和消费者的关系非常松散，一个 Topic 可以有 0 个、1 个、多个生产者向其发送消息，一个生产者也可以同时向不同的 Topic 发送消息。</p>
+<p>一个 Topic 也可以被  0 个、1 个、多个消费者订阅。</p>
+<h4 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h4><p><strong>Tag</strong>（标签）可以看作子主题，它是消息的第二级类型，用于为用户提供额外的灵活性。使用标签，同一业务模块不同目的的消息就可以用相同 Topic 而不同的 <strong>Tag</strong> 来标识。比如交易消息又可以分为：交易创建消息、交易完成消息等，一条消息可以没有 <strong>Tag</strong> 。</p>
+<p>标签有助于保持您的代码干净和连贯，并且还可以为 <strong>RocketMQ</strong> 提供的查询系统提供帮助。</p>
+<h4 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h4><p>分组，一个组可以订阅多个Topic。</p>
+<p>分为 <strong>ProducerGroup</strong> 与 <strong>ConsumerGroup</strong> ，代表某一类的生产者和消费者，一般来说同一个服务可以作为Group，同一个Group一般来说发送和消费的消息都是一样的。</p>
+<h4 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h4><p>在 <strong>Kafka</strong> 中叫 Partition ，每个 Queue 内部是有序的，在 <strong>RocketMQ</strong> 中分为读和写两种队列，一般来说读写队列数量一致，如果不一致就会出现很多问题。</p>
+<h4 id="Message-Queue"><a href="#Message-Queue" class="headerlink" title="Message Queue"></a>Message Queue</h4><p><strong>Message Queue</strong>（消息队列），主题被划分为一个或多个子主题，即消息队列。</p>
+<p>一个 Topic 下可以设置多个消息队列，发送消息时执行该消息的 Topic ，RocketMQ 会轮询该 Topic 下的所有队列将消息发出去。</p>
+<p>消息的物理管理单位。一个 Topic 下可以有多个 Queue ，Queue 的引入使得消息的存储可以分布式集群化，具有了水平扩展能力。</p>
+<h4 id="Offset"><a href="#Offset" class="headerlink" title="Offset"></a>Offset</h4><p>在 <strong>RocketMQ</strong> 中，所有消息队列都是持久化，长度无限的数据结构，所谓长度无限是指队列中的每个存储单元都是定长，访问其中的存储单元使用 Offset 来访问，Offset 为 java long 类型，64 位，理论上在 100 年内不会溢出，所以认为是长度无限。</p>
+<p>也可以认为 Message Queue 是一个长度无限的数组，<strong>Offset</strong> 就是下标。</p>
+<h4 id="消息消费模式"><a href="#消息消费模式" class="headerlink" title="消息消费模式"></a>消息消费模式</h4><p>消息消费模式有两种：<strong>Clustering</strong>（集群消费）和 <strong>Broadcasting</strong>（广播消费）。</p>
+<p><strong>默认情况下就是集群消费</strong>，该模式下一个消费者集群共同消费一个主题的多个队列，一个队列只会被一个消费者消费，如果某个消费者挂掉，分组内其它消费者会接替挂掉的消费者继续消费。</p>
+<p>而广播消费消息会发给消费者组中的每一个消费者进行消费。</p>
+<h4 id="Message-Order"><a href="#Message-Order" class="headerlink" title="Message Order"></a>Message Order</h4><p><strong>Message Order</strong>（消息顺序）有两种：<strong>Orderly</strong>（顺序消费）和 <strong>Concurrently</strong>（并行消费）。</p>
+<p>顺序消费表示消息消费的顺序同生产者为每个消息队列发送的顺序一致，所以如果正在处理全局顺序是强制性的场景，需要确保使用的主题只有一个消息队列。</p>
+<p>并行消费不再保证消息顺序，消费的最大并行数量受每个消费者客户端指定的线程池限制。</p>
+<h3 id="一次完整的通信流程是怎样的？"><a href="#一次完整的通信流程是怎样的？" class="headerlink" title="一次完整的通信流程是怎样的？"></a>一次完整的通信流程是怎样的？</h3><p>Producer 与 NameServer 集群中的其中一个节点（随机选择）建立长连接，定期从 NameServer 获取 <strong>Topic</strong> 路由信息，并向提供 Topic 服务的 <strong>Broker Master</strong> 建立长连接，且定时向 <strong>Broker</strong> 发送心跳。</p>
+<p><strong>Producer</strong> <strong>只能</strong>将消息发送到 Broker Master ，但是 <strong>Consumer</strong> 则不一样，它<strong>同时</strong>和提供 Topic 服务的 Master 和 Slave 建立<strong>长连接</strong>，既可以从 Broker Master 订阅消息，也可以从 Broker Slave 订阅消息。</p>
+<p>具体如下图：</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQ9Umj.jpg" alt="通信流程"></p>
+<p>我上面说过它跟 <strong>Dubbo</strong> 像不是我瞎说的，就连它的注册过程都很像 <strong>Dubbo</strong> 的服务暴露过程。</p>
+<p>是不是觉得很简单，但是你同时也产生了好奇心，每一步是怎么初始化启动的呢？我们一步步分析一下。</p>
+<h4 id="NameService-启动流程"><a href="#NameService-启动流程" class="headerlink" title="NameService 启动流程"></a>NameService 启动流程</h4><p>在 org.apache.rocketmq.namesrv 目录下的 <strong>NamesrvStartup</strong> 这个启动类基本上描述了它的启动过程我们可以看一下代码：</p>
+<ul>
+<li><p>第一步是初始化配置。</p>
+</li>
+<li><p>d第二步是创建 <strong>NamesrvController</strong> 实例，并开启两个定时任务：</p>
+<ul>
+<li><p>每隔 10s 扫描一次 <strong>Broker</strong> ，移除处于不激活的 <strong>Broker</strong> ；</p>
+</li>
+<li><p>每隔 10s 打印一次 KV 配置。</p>
+</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQCGU1.jpg" alt="开启定时任务"></p>
+</li>
+<li><p>第三步注册钩子函数，启动服务器并监听 Broker 。</p>
+</li>
+</ul>
+<blockquote>
+<p>钩子：钩子是一种方法，它在抽象类中不做事，或者只做默认的事情，子类可以选择要不要去覆盖它。</p>
+</blockquote>
+<p><strong>NameService</strong> 还有很多东西的哈我这里就介绍它的启动流程，大家还可以去看看代码，还是很有意思的，比如路由注册会发送心跳包，还有<strong>心跳包的处理流程</strong>，<strong>路由删除</strong>，<strong>路由发现</strong>等。</p>
+<h4 id="Producer-1"><a href="#Producer-1" class="headerlink" title="Producer"></a>Producer</h4><p>链路很长涉及的细节也多，我就发一下链路图。</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQPcw9.jpg" alt="Producer 链路"></p>
+<p><strong>Producer</strong> 是消息发送方，那它怎么发送的呢？</p>
+<p>通过轮训，<strong>Producer</strong> 轮询某个 <strong>Topic</strong> 下面的所有队列实现发送方的负载均衡。</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQF8Ej.png" alt="消息发送"></p>
+<h4 id="Broker-1"><a href="#Broker-1" class="headerlink" title="Broker"></a>Broker</h4><p><strong>Broker</strong> 在 RocketMQ 中是进行处理 Producer 发送消息请求，Consumer 消费消息的请求，并且进行消息的持久化，以及 HA 策略和服务端过滤的模块，就是集群中很重的工作都是交给了 <strong>Broker</strong> 进行处理。</p>
+<p><strong>Broker</strong> 模块是通过 BrokerStartup 进行启动的，会实例化 <strong>BrokerController</strong> ，并且调用其初始化方法。</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQFIVH.jpg" alt="Broker"></p>
+<p>大家去看 <strong>Broker</strong> 的源码的话会发现，它的<strong>初始化流程很冗长</strong>，会根据配置创建很多线程池主要用来<strong>发送消息</strong>、<strong>拉取消息</strong>、<strong>查询消息</strong>、<strong>客户端管理</strong>和<strong>消费者管理</strong>，也有很多<strong>定时任务</strong>，同时也注册了很多<strong>请求处理器</strong>，用来发送拉取消息查询消息的。</p>
+<h4 id="Consumer-1"><a href="#Consumer-1" class="headerlink" title="Consumer"></a>Consumer</h4><p>不说了直接怼图吧！</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQkMJ1.jpg" alt="Consumer"></p>
+<p><strong>Consumer</strong> 是消息接收，那它怎么接收消息的呢？</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQk5lV.jpg" alt="消息接收"></p>
+<p>消费端会通过 <strong>RebalanceService</strong> 线程，10 秒钟做一次基于 <strong>Topic</strong> 下的所有队列负载。</p>
+<h2 id="面试常见问题分析"><a href="#面试常见问题分析" class="headerlink" title="面试常见问题分析"></a>面试常见问题分析</h2><h3 id="它的优缺点是啥？"><a href="#它的优缺点是啥？" class="headerlink" title="它的优缺点是啥？"></a>它的优缺点是啥？</h3><p><strong>RocketMQ 优点：</strong></p>
+<ul>
+<li><p>单机吞吐量：十万级。</p>
+</li>
+<li><p>可用性：非常高，分布式架构。</p>
+</li>
+<li><p>消息可靠性：经过参数优化配置，消息可以做到 0 丢失。</p>
+</li>
+<li><p>功能支持：MQ 功能较为完善，还是分布式的，扩展性好。</p>
+</li>
+<li><p>支持 10 亿级别的消息堆积，不会因为堆积导致性能下降。</p>
+</li>
+<li><p>源码是 Java ，我们可以自己阅读源码，定制自己公司的 MQ ，可以掌控 。</p>
+</li>
+<li><p>天生为金融互联网领域而生，对于可靠性要求很高的场景，尤其是电商里面的订单扣款，以及业务削峰，在大量交易涌入时，后端可能无法及时处理的情况。</p>
+</li>
+<li><p><strong>RocketMQ</strong> 在稳定性上可能更值得信赖，这些业务场景在阿里双11已经经历了多次考验，如果你的业务有上述并发场景，建议可以选择 <strong>RocketMQ</strong> 。</p>
+</li>
+</ul>
+<p><strong>RocketMQ 缺点：</strong></p>
+<ul>
+<li><p>支持的客户端语言不多，目前是 Java 及 C++ ，其中 C++ 不成熟。</p>
+</li>
+<li><p>社区活跃度不是特别活跃那种。</p>
+</li>
+<li><p>没有在 MQ 核心中去实现 <strong>JMS</strong> 等接口，有些系统要迁移需要修改大量代码。</p>
+</li>
+</ul>
+<h3 id="消息去重"><a href="#消息去重" class="headerlink" title="消息去重"></a>消息去重</h3><p><strong>去重原则：</strong>使用业务端逻辑保持幂等性。</p>
+<p><strong>幂等性：</strong>就是用户对于同一操作发起的一次请求或者多次请求的结果是一致的，不会因为多次点击而产生了副作用，数据库的结果都是唯一的，不可变的。</p>
+<p>只要保持幂等性，不管来多少条重复消息，最后处理的结果都一样，需要业务端来实现。</p>
+<p><strong>去重策略：</strong>保证每条消息都有唯一编号<strong>（比如唯一流水号）</strong>，且保证消息处理成功与去重表的日志同时出现。</p>
+<p>建立一个消息表，拿到这个消息做数据库的 Insert 操作。给这个消息做一个唯一主键（Primary Key）或者唯一约束，那么就算出现重复消费的情况，就会导致主键冲突，那么就不再处理这条消息。</p>
+<h3 id="消息重复"><a href="#消息重复" class="headerlink" title="消息重复"></a>消息重复</h3><p>消息领域有一个对消息投递的 QoS（Quality of Service，服务质量）定义，分为：</p>
+<ul>
+<li>最多一次（At Most Once）</li>
+<li>至少一次（At Least Once）</li>
+<li>仅一次（ Exactly Once）</li>
+</ul>
+<p>几乎所有的 MQ 产品都声称自己做到了<strong>At Least Once</strong> 。</p>
+<p>既然是至少一次，那避免不了消息重复，尤其是在分布式网络环境下。</p>
+<p>比如：网络原因闪断，ACK 返回失败等等故障，确认信息没有传送到消息队列，导致消息队列不知道自己已经消费过该消息了，再次将该消息分发给其它的消费者。</p>
+<p>不同的消息队列发送的确认信息形式不同，例如 <strong>RabbitMQ</strong> 是发送一个 ACK 确认消息，<strong>RocketMQ</strong> 是返回一个 <strong>CONSUME_SUCCESS</strong> 成功标志，<strong>Kafka</strong> 实际上有个 <strong>Offset</strong> 的概念。</p>
+<p><strong>RocketMQ</strong> 没有内置消息去重的解决方案，最新版本是否支持还需确认。</p>
+<h3 id="消息的可用性"><a href="#消息的可用性" class="headerlink" title="消息的可用性"></a>消息的可用性</h3><p>当我们选择好了集群模式之后，那么我们需要关心的就是怎么去存储和复制这个数据，<strong>RocketMQ</strong> 对消息的刷盘提供了同步和异步的策略来满足我们的需求，当我们选择同步刷盘之后，如果刷盘超时会给返回 <strong>FLUSH_DISK_TIMEOUT</strong> ，如果是异步刷盘不会返回刷盘相关信息，选择同步刷盘可以尽最大程度满足我们的消息不会丢失。</p>
+<p>除了存储有选择之后，我们的主从同步提供了同步和异步两种模式来进行复制，当然选择同步可以提升可用性，但是消息的发送 RT 时间会下降 10% 左右。</p>
+<p><strong>RocketMQ</strong> 采用的是<strong>混合型</strong>的存储结构，即为 <strong>Broker</strong> 单个实例下所有的队列共用一个日志数据文件（即为 CommitLog ）来存储。</p>
+<p>而 <strong>Kafka</strong> 采用的是<strong>独立型</strong>的存储结构，每个队列一个文件。</p>
+<p>这里我认为，<strong>RocketMQ</strong> 采用混合型存储结构的缺点在于，会存在较多的随机读操作，因此读的效率偏低。同时消费消息需要依赖 <strong>ConsumeQueue</strong> ，构建该逻辑消费队列需要一定开销。</p>
+<h3 id="RocketMQ-刷盘实现"><a href="#RocketMQ-刷盘实现" class="headerlink" title="RocketMQ 刷盘实现"></a>RocketMQ 刷盘实现</h3><p><strong>Broker</strong> 在消息的存取时直接操作的是内存（内存映射文件），这可以提供系统的吞吐量，但是无法避免机器掉电时数据丢失，所以需要持久化到磁盘中。</p>
+<p>刷盘的最终实现都是使用 <strong>NIO</strong> 中的 <code>MappedByteBuffer.force()</code> 将映射区的数据写入到磁盘，如果是同步刷盘的话，在 <strong>Broker</strong> 把消息写到 <strong>CommitLog</strong> 映射区后，就会等待写入完成。</p>
+<p>异步而言，只是唤醒对应的线程，不保证执行的时机，流程如图所示。</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQEtPA.jpg" alt="RocketMQ 刷盘实现"></p>
+<ul>
+<li><strong>同步刷盘方式：</strong>在返回写成功状态时，消息已经被写入磁盘。具体流程是，消息写入内存的 <strong>PAGECACHE</strong> 后，立刻通知刷盘线程刷盘，然后等待刷盘完成，刷盘线程执行完成后唤醒等待的线程，返回消息写成功的状态。</li>
+<li><strong>异步刷盘方式：</strong>在返回写成功状态时，消息可能只是被写入了内存的 <strong>PAGECACHE</strong> ，写操作的返回快，吞吐量大；当内存里的消息量积累到一定程度时，统一触发写磁盘操作，快速写入。</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQVMJs.png" alt="同步刷盘与异步刷盘"></p>
+<blockquote>
+<p>同步刷盘还是异步刷盘，是通过 Broker 配置文件里的 <code>flushDiskType</code> 参数设置的，这个参数被设置成 <strong>SYNC_FLUSH</strong> 、<strong>ASYNC_FLUSH</strong> 中的一个。</p>
+</blockquote>
+<h3 id="顺序消息"><a href="#顺序消息" class="headerlink" title="顺序消息"></a>顺序消息</h3><p>我简单的说一下我们使用的 <strong>RocketMQ</strong> 里面的一个简单实现吧。</p>
+<p>生产者消费者一般需要保证顺序消息的话，可能就是一个业务场景下的，比如订单的创建、支付、发货、收货。</p>
+<p>那这些东西是不是一个订单号呢？一个订单的肯定是一个订单号的说，那简单了呀。</p>
+<p><strong>一个 Topic 下有多个队列</strong>，为了保证发送有序，<strong>RocketMQ</strong> 提供了 <strong>MessageQueueSelector</strong> 队列选择机制，它有三种实现：</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YMGEi6.png" alt=""></p>
+<p>我们可使用 <strong>Hash 取模法</strong>，让同一个订单发送到同一个队列中，再使用同步发送，只有同个订单的创建消息发送成功，再发送支付消息。这样，我们保证了发送有序。</p>
+<p><strong>RocketMQ</strong> 的 Topic 内的队列机制，可以保证存储满足 <strong>FIFO</strong>（First Input First Output ，简单说就是指先进先出），剩下的只需要消费者顺序消费即可。</p>
+<p><strong>RocketMQ</strong> 仅保证顺序发送，顺序消费由消费者业务保证！！！</p>
+<p>这里很好理解，一个订单你发送的时候放到一个队列里面去，你同一个的订单号 Hash 一下是不是还是一样的结果，那肯定是一个消费者消费，那顺序是不是就保证了？</p>
+<p>真正的顺序消费不同的中间件都有自己的不同实现我这里就举个例子，大家思路理解下。</p>
+<blockquote>
+<p><strong>Tips：</strong>有人问我，一个队列有序出去，一个消费者消费不就好了，我想说的是<strong>消费者是多线程</strong>的，你消息是有序的给它的，你能保证它是有序的处理的？还是一个消费成功了再发下一个<strong>稳妥</strong>。</p>
+</blockquote>
+<h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><h4 id="Half-Message（半消息）"><a href="#Half-Message（半消息）" class="headerlink" title="Half Message（半消息）"></a>Half Message（半消息）</h4><p><strong>是指暂不能被 Consumer 消费的消息</strong>。Producer 已经把消息成功发送到了 Broker 端，但此消息被标记为 <code>暂不能投递</code> 状态，处于该种状态下的消息称为半消息。需要 Producer 对消息的 <code>二次确认</code> 后，Consumer 才能去消费它。</p>
+<h4 id="消息回查"><a href="#消息回查" class="headerlink" title="消息回查"></a>消息回查</h4><p>由于网络闪段，生产者应用重启等原因。导致 <strong>Producer</strong> 端一直没有对 <strong>Half Message（半消息）</strong>进行<strong>二次确认</strong>。这时 <strong>Brock</strong> 服务器会定时扫描 <code>长期处于半消息的消息</code> ，会主动询问 <strong>Producer</strong> 端该消息的最终状态（ <strong>Commit</strong> 或者 <strong>Rollback</strong> ），该消息即为<strong>消息回查</strong>。</p>
+<p><img src="https://s1.ax1x.com/2020/05/09/YQZVpR.jpg" alt="消息回查"></p>
+<ol>
+<li>A 服务先发送个 Half Message 给 Broker 端，消息中携带 B 服务 即将要 +100 元的信息。 </li>
+<li>当 A 服务知道 Half Message 发送成功后，那么开始第 3 步执行本地事务。 </li>
+<li>执行本地事务会有三种情况（1、执行成功 2、执行失败 3、网络等原因导致没有响应）。 </li>
+<li>如果本地事务成功，那么 Producer 向 Broker 服务器发送 <strong>COMMIT_MESSAGE</strong> ，这样 B 服务就可以消费该 Message 。 </li>
+<li>如果本地事务失败，那么 Producer 向 Broker 服务器发送 <strong>ROLLBACK_MESSAGE</strong> ，那么就会直接删除上面这条半消息。</li>
+<li>如果因为网络等原因迟迟没有返回失败还是成功（<strong>UNKNOW</strong>），那么会执行 RocketMQ 的回调接口，来进行事务的回查。</li>
+</ol>
+<h3 id="消息过滤"><a href="#消息过滤" class="headerlink" title="消息过滤"></a>消息过滤</h3><ul>
+<li><strong>Broker</strong> 端消息过滤：<br>在 <strong>Broker</strong> 中，按照 <strong>Consumer</strong> 的要求做过滤，优点是减少了对于 <strong>Consumer</strong> 无用消息的网络传输。缺点是增加了 Broker 的负担，实现相对复杂。</li>
+<li><strong>Consumer</strong> 端消息过滤：<br>这种过滤方式可由应用完全自定义实现，但是缺点是很多无用的消息要传输到 <strong>Consumer</strong> 端。</li>
+</ul>
+<h3 id="Broker-的-Buffer-问题"><a href="#Broker-的-Buffer-问题" class="headerlink" title="Broker 的 Buffer 问题"></a>Broker 的 Buffer 问题</h3><p>Broker 的 <strong>Buffer</strong> 通常指的是 Broker 中一个队列的内存 Buffer 大小，这类 <strong>Buffer</strong> 通常大小有限。</p>
+<p>另外，RocketMQ 没有内存 <strong>Buffer</strong> 概念，RocketMQ 的队列都是持久化磁盘，数据定期清除。</p>
+<p>RocketMQ 同其它 MQ 有非常显著的区别，RocketMQ 的内存 <strong>Buffer</strong> 抽象成一个无限长度的队列，不管有多少数据进来都能装得下，这个无限是有前提的，Broker 会定期删除过期的数据。</p>
+<p>例如 Broker 只保存 3 天的消息，那么这个 <strong>Buffer</strong> 虽然长度无限，但是 3 天前的数据会被从<strong>队尾</strong>删除。</p>
+<h3 id="回溯消费"><a href="#回溯消费" class="headerlink" title="回溯消费"></a>回溯消费</h3><p>回溯消费是指 Consumer 已经消费成功的消息，由于业务上的需求需要重新消费，要支持此功能，Broker 在向 Consumer 投递成功消息后，消息仍然需要保留。并且重新消费一般是按照时间维度。</p>
+<p>例如由于 Consumer 系统故障，恢复后需要重新消费 1 小时前的数据，那么 Broker 要提供一种机制，可以按照时间维度来回退消费进度。</p>
+<p><strong>RocketMQ</strong> 支持按照<strong>时间</strong>回溯消费，时间维度精确到毫秒，可以向前回溯，也可以向后回溯。</p>
+<h3 id="消息堆积"><a href="#消息堆积" class="headerlink" title="消息堆积"></a>消息堆积</h3><p>消息中间件的主要功能是异步解耦，还有个重要功能是挡住前端的数据洪峰，保证后端系统的稳定性，这就要求消息中间件具有一定的消息堆积能力，消息堆积分以下两种情况：</p>
+<ul>
+<li>消息堆积在内存 <strong>Buffer</strong> ，一旦超过内存 <strong>Buffer</strong> ，可以根据一定的丢弃策略来丢弃消息，如 <strong>CORBA Notification</strong> 规范中描述。适合能容忍丢弃消息的业务，这种情况消息的堆积能力主要在于内存 <strong>Buffer</strong> 大小，而且消息堆积后，性能下降不会太大，因为内存中数据多少对于对外提供的访问能力影响有限。</li>
+<li>消息堆积到持久化存储系统中，例如 DB ，KV 存储，文件记录形式。 当消息不能在内存 Cache 命中时，要不可避免的访问磁盘，会产生大量读 IO ，读 IO 的吞吐量直接决定了消息堆积后的访问能力。</li>
+<li>评估消息堆积能力主要有以下四点：<ul>
+<li>消息能堆积多少条，多少字节？即消息的堆积容量。</li>
+<li>消息堆积后，发消息的吞吐量大小，是否会受堆积影响？</li>
+<li>消息堆积后，正常消费的 Consumer 是否会受影响？</li>
+<li>消息堆积后，访问堆积在磁盘的消息时，吞吐量有多大？</li>
+</ul>
+</li>
+</ul>
+<h3 id="定时消息"><a href="#定时消息" class="headerlink" title="定时消息"></a>定时消息</h3><p>定时消息是指消息发到 <strong>Broker</strong> 后，不能立刻被 <strong>Consumer</strong> 消费，要到特定的时间点或者等待特定的时间后才能被消费。</p>
+<p>如果要支持任意的时间精度，在 <strong>Broker</strong> 层面，必须要做<strong>消息排序</strong>，如果再涉及到持久化，那么消息排序要不可避免的产生巨大性能开销。</p>
+<p><strong>RocketMQ</strong> 支持定时消息，但是不支持任意时间精度，支持特定的 Level ，例如定时 5s ，10s ，1m 等。</p>
+<h3 id="RocketMQ-如何保证消息不丢失？"><a href="#RocketMQ-如何保证消息不丢失？" class="headerlink" title="RocketMQ 如何保证消息不丢失？"></a>RocketMQ 如何保证消息不丢失？</h3><p>分别从 Producer 发送机制、Broker 的持久化机制，以及 Consumer 的 Offset 机制来最大程度保证消息不易丢失。</p>
+<ul>
+<li><strong>从 Producer 的视角来看：</strong>如果消息未能正确的存储在 MQ 中，或者消费者未能正确的消费到这条消息，都是消息丢失。</li>
+<li><strong>从 Broker 的视角来看：</strong>如果消息已经存在 Broker 里面了，如何保证不会丢失呢（宕机、磁盘崩溃）？</li>
+<li><strong>从 Consumer 的视角来看：</strong>如果消息已经完成持久化了，但是 Consumer 取了，但是未消费成功且没有反馈，就是消息丢失。</li>
+</ul>
+<h4 id="Producer-如何保证消息不丢失？"><a href="#Producer-如何保证消息不丢失？" class="headerlink" title="Producer 如何保证消息不丢失？"></a>Producer 如何保证消息不丢失？</h4><ul>
+<li>默认情况下，可以通过同步的方式阻塞式的发送，检查发送状态，状态是 <strong>OK</strong> ，表示消息一定成功的投递到了 Broker ，状态超时或者失败，则会触发默认的 <strong>2</strong> 次重试。此方法的发送结果，可能 Broker 存储成功了，也可能没成功。</li>
+<li>采取事务消息的投递方式，并不能保证消息 100% 投递成功到了 Broker ，但是如果消息发送 ACK 失败的话，此消息会存储在 <code>CommitLog</code> 当中，但是对 ConsumerQueue 是不可见的。可以在日志中查看到这条异常的消息，严格意义上来讲，也并没有完全丢失。</li>
+<li>RocketMQ 支持日志的索引，如果一条消息发送之后超时，也可以通过查询日志的 API ，来检查是否在 Broker 存储成功。</li>
+</ul>
+<h4 id="Broker-如何保证消息不丢失？"><a href="#Broker-如何保证消息不丢失？" class="headerlink" title="Broker 如何保证消息不丢失？"></a>Broker 如何保证消息不丢失？</h4><ul>
+<li>消息支持持久化到 <code>CommitLog</code> 里面，即使宕机后重启，未消费的消息也是可以加载出来的。</li>
+<li>Broker 自身支持<strong>同步刷盘</strong>、<strong>异步刷盘</strong>的策略，可以保证接收到的消息一定存储在本地的内存中。</li>
+<li>Broker 集群支持 1 主 N 从的策略，支持<strong>同步复制</strong>和<strong>异步复制</strong>的方式，同步复制可以保证即使 Master 磁盘崩溃，消息仍然不会丢失。</li>
+</ul>
+<h4 id="Consumer-如何保证消息不丢失？"><a href="#Consumer-如何保证消息不丢失？" class="headerlink" title="Consumer 如何保证消息不丢失？"></a>Consumer 如何保证消息不丢失？</h4><ul>
+<li>Consumer 自身维护一个持久化的 <strong>Offset</strong>（对应 MessageQueue 里面的 <code>min offset</code> ），标记已经成功消费或者已经成功发回到 Broker 的消息下标。</li>
+<li>如果 Consumer 消费失败，那么它会把这个消息发回给 Broker ，发回成功后，再更新自己的 Offset 。</li>
+<li>如果 Consumer 消费失败，发回给 Broker 时，Broker挂掉了，那么 Consumer 会定时重试这个操作。</li>
+<li>如果 Consumer 和 Broker 一起挂了，消息也不会丢失，因为 Consumer 里面的 Offset 是定时持久化的，重启之后，继续拉取 Offset 之前的消息到本地。</li>
+</ul>
+<blockquote>
+<p>重试队列（默认重试 16 次） -&gt; 死信队列</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>好了，以上就是这篇文章的全部内容了，能看到这里的人呀，都是<strong>人才</strong>，祝各位看官都能成为 offer 收割机^∨^。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com" rel="external nofollow noreferrer">wenjun</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com/2020/05/09/fen-bu-shi/rocketmq/">https://www.niewenjun.com/2020/05/09/fen-bu-shi/rocketmq/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.niewenjun.com" target="_blank">wenjun</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                                    <span class="chip bg-color">消息队列</span>
+                                </a>
+                            
+                                <a href="/tags/RocketMQ/">
+                                    <span class="chip bg-color">RocketMQ</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/05/09/fen-bu-shi/rocketmq/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="RocketMQ">
+                        
+                        <span class="card-title">RocketMQ</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            RocketMQ前言消息队列在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在消息队列的使用和原理方面对小伙伴们进行 360° 的刁难。作为一个在互联网公司面一次拿一次 offer 的面霸，打败了无数竞争对手，每次都只能看到无
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <span class="chip bg-color">消息队列</span>
+                    </a>
+                    
+                    <a href="/tags/RocketMQ/">
+                        <span class="chip bg-color">RocketMQ</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/05/09/fen-bu-shi/xiao-xi-dui-lie-ji-chu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="消息队列基础">
+                        
+                        <span class="card-title">消息队列基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            消息队列基础前言消息队列在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在消息队列的使用和原理方面对小伙伴们进行 360° 的刁难。
+作为一个在互联网公司面一次拿一次 offer 的面霸，打败了无数竞争对手，每次都只能看到无数
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <span class="chip bg-color">消息队列</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.niewenjun.com" target="_blank"></a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "4";
+                    var startDate = "12";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wenjunnie" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1287018840@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1287018840" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1287018840" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
