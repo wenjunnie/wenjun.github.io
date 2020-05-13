@@ -6,10 +6,37 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-05-09T05:56:56.180Z</updated>
+  <updated>2020-05-13T14:18:59.382Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>单例模式</title>
+    <link href="https://www.niewenjun.com/2020/05/13/she-ji-mo-shi/dan-li-mo-shi/"/>
+    <id>https://www.niewenjun.com/2020/05/13/she-ji-mo-shi/dan-li-mo-shi/</id>
+    <published>2020-05-13T14:15:00.000Z</published>
+    <updated>2020-05-13T14:18:59.382Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;单例模式&quot;&gt;&lt;a href=&quot;#单例模式&quot; class=&quot;headerlink&quot; title=&quot;单例模式&quot;&gt;&lt;/a&gt;单例模式&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="https://www.niewenjun.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="单例模式" scheme="https://www.niewenjun.com/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>RocketMQ</title>
@@ -543,35 +570,6 @@
         
         
           &lt;h1 id=&quot;Redis-集群、哨兵、持久化、LRU&quot;&gt;&lt;a href=&quot;#Redis-集群、哨兵、持久化、LRU&quot; class=&quot;headerlink&quot; title=&quot;Redis 集群、哨兵、持久化、LRU&quot;&gt;&lt;/a&gt;Redis 集群、哨兵、持久化、LRU&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
-    
-      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>布隆过滤器（Bloom Filter）</title>
-    <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/"/>
-    <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/bu-long-guo-lu-qi-bloomfilter/</id>
-    <published>2020-04-24T08:00:00.000Z</published>
-    <updated>2020-04-26T06:39:46.031Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;避免缓存穿透的利器之-Bloom-Filter&quot;&gt;&lt;a href=&quot;#避免缓存穿透的利器之-Bloom-Filter&quot; class=&quot;headerlink&quot; title=&quot;避免缓存穿透的利器之 Bloom Filter&quot;&gt;&lt;/a&gt;避免缓存穿透的利器之 Bloom
         
       
     
