@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="TCP, Wenjun">
+    <meta name="keywords" content="抢红包算法, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>TCP | Wenjun</title>
+    <title>抢红包算法 | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">TCP</h1>
+                    <h1 class="description center-align post-title">抢红包算法</h1>
                 </div>
             </div>
         </div>
@@ -439,16 +439,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%8D%8F%E8%AE%AE/">
-                                <span class="chip bg-color">协议</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
-                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                                <span class="chip bg-color">计算机网络</span>
-                            </a>
-                        
-                            <a href="/tags/TCP/">
-                                <span class="chip bg-color">TCP</span>
+                            <a href="/tags/%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95/">
+                                <span class="chip bg-color">抢红包算法</span>
                             </a>
                         
                     </div>
@@ -459,8 +455,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/408/" class="post-category">
-                                408
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                算法
                             </a>
                         
                     </div>
@@ -472,7 +468,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-05
+                    2020-05-15
                 </div>
                 
 
@@ -481,14 +477,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    17 分
+                    4 分
                 </div>
                 
 
@@ -503,127 +499,117 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>传输控制协议（TCP，Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层通信协议，由 IETF 的 RFC 793 定义。</p>
-<p>TCP 旨在适应支持多网络应用的分层协议层次结构。 连接到不同但互连的计算机通信网络的主计算机中的成对进程之间依靠 TCP 提供可靠的通信服务。TCP 假设它可以从较低级别的协议获得简单的，可能不可靠的数据报服务。 原则上，TCP 应该能够在从硬线连接到分组交换或电路交换网络的各种通信系统之上操作。</p>
-<h3 id="首部"><a href="#首部" class="headerlink" title="首部"></a>首部</h3><p><img src="https://s1.ax1x.com/2020/05/05/YFAolt.png" alt="TCP 首部"></p>
-<ul>
-<li>源端口和目的端口，各占 2 个字节，分别写入源端口和目的端口；</li>
-<li>序号，占 4 个字节，TCP 连接中传送的字节流中的每个字节都按顺序编号。例如，一段报文的序号字段值是 301 ，而携带的数据共有 100 字段，显然下一个报文段（如果还有的话）的数据序号应该从 401 开始；</li>
-<li>确认号，占 4 个字节，是期望收到对方下一个报文的第一个数据字节的序号。例如，B 收到了 A 发送过来的报文，其序列号字段是 501 ，而数据长度是 200 字节，这表明 B 正确的收到了 A 发送的到序号 700 为止的数据。因此，B 期望收到 A 的下一个数据序号是 701 ，于是 B 在发送给 A 的确认报文段中把确认号置为 701 ；</li>
-<li>数据偏移，占 4 位，它指出 TCP 报文的数据距离 TCP 报文段的起始处有多远；</li>
-<li>保留，占 6 位，保留今后使用，但目前应都为 0 ；</li>
-<li>紧急 <strong>URG</strong> ，当 URG = 1 ，表明紧急指针字段有效。告诉系统此报文段中有紧急数据；</li>
-<li>确认 <strong>ACK</strong> ，仅当 ACK = 1 时，确认号字段才有效。TCP 规定，在连接建立后所有报文的传输都必须把 ACK 置 1 ；</li>
-<li>推送 <strong>PSH</strong> ，当两个应用进程进行交互式通信时，有时在一端的应用进程希望在键入一个命令后立即就能收到对方的响应，这时候就将 PSH = 1 ；</li>
-<li>复位 <strong>RST</strong> ，当 RST = 1 ，表明 TCP 连接中出现严重差错，必须释放连接，然后再重新建立连接；</li>
-<li>同步 <strong>SYN</strong> ，在连接建立时用来同步序号。当 SYN = 1 ，ACK = 0 ，表明是连接请求报文，若同意连接，则响应报文中应该使 SYN = 1 ，ACK = 1 ；</li>
-<li>终止 <strong>FIN</strong> ，用来释放连接。当 FIN = 1 ，表明此报文的发送方的数据已经发送完毕，并且要求释放；</li>
-<li>窗口，占 2 字节，指的是通知接收方，发送本报文你需要有多大的空间来接受；</li>
-<li>检验和，占 2 字节，校验首部和数据这两部分；</li>
-<li>紧急指针，占 2 字节，指出本报文段中的紧急数据的字节数；</li>
-<li>选项，长度可变，定义一些其他的可选的参数。</li>
-</ul>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><blockquote>
-<p>最开始的时候客户端和服务器都是处于 CLOSED 状态。主动打开连接的为客户端，被动打开连接的是服务器。</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2020/05/05/YFkvM6.png" alt="TCP 三次握手"></p>
-<ul>
-<li>TCP 服务器进程先创建传输控制块 TCB ，时刻准备接受客户进程的连接请求，此时服务器就进入了 <strong>LISTEN</strong>（监听）状态。</li>
-<li>TCP 客户进程也是先创建传输控制块 TCB ，然后向服务器发出连接请求报文，这时报文首部中的同步位 SYN = 1 ，同时选择一个初始序列号 seq = x ，此时，TCP 客户端进程进入了 <strong>SYN-SENT</strong>（同步已发送状态）状态。<strong>TCP 规定，SYN 报文段（ SYN = 1 的报文段）不能携带数据，但需要消耗掉一个序号。</strong></li>
-<li>TCP 服务器收到请求报文后，如果同意连接，则发出确认报文。确认报文中应该 ACK = 1 ，SYN = 1 ，确认号是 ack = x+1 ，同时也要为自己初始化一个序列号 seq = y ，此时，TCP 服务器进程进入了 <strong>SYN-RCVD</strong>（同步收到）状态。<strong>这个报文也不能携带数据，但是同样要消耗一个序号。</strong></li>
-<li>TCP 客户进程收到确认后，还要向服务器给出确认。确认报文的 ACK = 1 ，ack = y+1 ，自己的序列号 seq = x+1 ，此时，TCP 连接建立，客户端进入 <strong>ESTABLISHED</strong>（已建立连接）状态。<strong>TCP 规定，ACK 报文段可以携带数据，但是如果不携带数据则不消耗序号。</strong></li>
-<li>当服务器收到客户端的确认后也进入 <strong>ESTABLISHED</strong> 状态，此后双方就可以开始通信了。</li>
-</ul>
-<h3 id="为什么-TCP-客户端最后还要发送一次确认呢？"><a href="#为什么-TCP-客户端最后还要发送一次确认呢？" class="headerlink" title="为什么 TCP 客户端最后还要发送一次确认呢？"></a>为什么 TCP 客户端最后还要发送一次确认呢？</h3><p>一句话，主要防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误。</p>
+                <h2 id="抢红包算法"><a href="#抢红包算法" class="headerlink" title="抢红包算法"></a>抢红包算法</h2><p><img src="https://s1.ax1x.com/2020/05/14/YDhTaQ.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD4iGR.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD4uIH.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD4Gsf.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD40Wn.png" alt=""></p>
 <blockquote>
-<p>如果使用的是两次握手建立连接，假设有这样一种场景，客户端发送了第一个请求连接并且没有丢失，只是因为在网络结点中滞留的时间太长了，由于 TCP 的客户端迟迟没有收到确认报文，以为服务器没有收到，此时重新向服务器发送这条报文，此后客户端和服务器经过两次握手完成连接，传输数据，然后关闭连接。此时此前滞留的那一次请求连接，网络通畅了到达了服务器，这个报文本该是失效的，但是，两次握手的机制将会让客户端和服务器再次建立连接，这将导致不必要的错误和资源的浪费。</p>
-<p>如果采用的是三次握手，就算是那一次失效的报文传送过来了，服务端接受到了那条失效报文并且回复了确认报文，但是客户端不会再次发出确认。由于服务器收不到确认，就知道客户端并没有请求连接。</p>
+<p>发出一个固定金额的红包，由若干个人来抢，需要满足哪些规则？</p>
 </blockquote>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><blockquote>
-<p>数据传输完毕后，双方都可释放连接。最开始的时候，客户端和服务器都是处于 ESTABLISHED 状态，然后客户端主动关闭，服务器被动关闭。</p>
-</blockquote>
-<p><img src="https://s1.ax1x.com/2020/05/05/YFVDr6.png" alt="TCP 四次挥手"></p>
-<ul>
-<li>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN = 1 ，其序列号为 seq = u（等于前面已经传送过来的数据的最后一个字节的序号加 1 ），此时，客户端进入 <strong>FIN-WAIT-1</strong>（终止等待 1 ）状态。 <strong>TCP 规定，FIN 报文段即使不携带数据，也要消耗一个序号。</strong></li>
-<li>服务器收到连接释放报文，发出确认报文，ACK = 1 ，ack = u+1 ，并且带上自己的序列号 seq = v ，此时，服务端就进入了 <strong>CLOSE-WAIT</strong>（关闭等待）状态。TCP 服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于<strong>半关闭状态</strong>，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个 <strong>CLOSE-WAIT</strong> 状态持续的时间。</li>
-<li>客户端收到服务器的确认请求后，此时，客户端就进入 <strong>FIN-WAIT-2</strong>（终止等待 2 ）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。</li>
-<li>服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN = 1 ，ack = u+1 ，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为 seq = w ，此时，服务器就进入了 <strong>LAST-ACK</strong>（最后确认）状态，等待客户端的确认。</li>
-<li>客户端收到服务器的连接释放报文后，必须发出确认，ACK = 1 ，ack = w+1 ，而自己的序列号是 seq = u+1 ，此时，客户端就进入了 <strong>TIME-WAIT</strong>（时间等待）状态。注意此时 TCP 连接还没有释放，必须经过 2MSL（最长报文段寿命）的时间后，当客户端撤销相应的 TCB 后，才进入 <strong>CLOSED</strong> 状态。</li>
-<li>服务器只要收到了客户端发出的确认，立即进入 <strong>CLOSED</strong> 状态。同样，撤销 TCB 后，就结束了这次的 TCP 连接。可以看到，服务器结束 TCP 连接的时间要比客户端早一些。</li>
-</ul>
-<h3 id="为什么要四次挥手？"><a href="#为什么要四次挥手？" class="headerlink" title="为什么要四次挥手？"></a>为什么要四次挥手？</h3><p>任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入半关闭状态。当另一方也没有数据再发送的时候，则发出连接释放通知，对方确认后就完全关闭了 TCP 连接。</p>
+<p><strong>1.所有人抢到金额之和等于红包金额，不能超过，也不能少于。</strong></p>
+<p><strong>2.每个人至少抢到一分钱。</strong></p>
+<p><strong>3.要保证所有人抢到金额的几率相等。</strong></p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD4IQx.png" alt=""></p>
 <blockquote>
-<p>举个例子：A 和 B 打电话，通话即将结束后，A 说“我没啥要说的了”，B 回答“我知道了”，但是 B 可能还会有要说的话，A 不能要求 B 跟着自己的节奏结束通话，于是 B 可能又巴拉巴拉说了一通，最后 B 说“我说完了”，A 回答“知道了”，这样通话才算结束。</p>
+<p>小灰的思路是什么样呢？</p>
 </blockquote>
-<p>上面讲的比较概括，推荐一篇讲的比较细致的文章：<a href="https://blog.csdn.net/qzcsu/article/details/72861891" target="_blank" rel="noopener">两张动图-彻底明白TCP的三次握手与四次挥手</a></p>
-<h3 id="为什么客户端最后还要等待-2MSL-？"><a href="#为什么客户端最后还要等待-2MSL-？" class="headerlink" title="为什么客户端最后还要等待 2MSL ？"></a>为什么客户端最后还要等待 2MSL ？</h3><p>MSL（Maximum Segment Lifetime），TCP 允许不同的实现可以设置不同的 MSL 值。</p>
-<ul>
-<li>第一，保证客户端发送的最后一个 ACK 报文能够到达服务器，因为这个 ACK 报文可能丢失，站在服务器的角度看来，我已经发送了 FIN+ACK 报文请求断开了，客户端还没有给我回应，应该是我发送的请求断开报文它没有收到，于是服务器又会重新发送一次，而客户端就能在这个 2MSL 时间段内收到这个重传的报文，接着给出回应报文，并且会重启 2MSL 计时器。</li>
-<li>第二，防止类似于“三次握手”中提到了的“已经失效的连接请求报文段”出现在本连接中。客户端发送完最后一个确认报文后，在这个 2MSL 时间中，就可以使本连接持续的时间内所产生的所有报文段都从网络中消失。这样新的连接中不会出现旧连接的请求报文。</li>
-</ul>
-<h3 id="为什么建立连接是三次握手，关闭连接确是四次挥手呢？"><a href="#为什么建立连接是三次握手，关闭连接确是四次挥手呢？" class="headerlink" title="为什么建立连接是三次握手，关闭连接确是四次挥手呢？"></a>为什么建立连接是三次握手，关闭连接确是四次挥手呢？</h3><p>建立连接的时候， 服务器在 LISTEN 状态下，收到建立连接请求的 SYN 报文后，把 ACK 和 SYN 放在一个报文里发送给客户端。</p>
-<p>而关闭连接时，服务器收到对方的 FIN 报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送 FIN 报文给对方来表示同意现在关闭连接，因此，己方 ACK 和 FIN 一般都会分开发送，从而导致多了一次。</p>
-<h3 id="如果已经建立了连接，但是客户端突然出现故障了怎么办？"><a href="#如果已经建立了连接，但是客户端突然出现故障了怎么办？" class="headerlink" title="如果已经建立了连接，但是客户端突然出现故障了怎么办？"></a>如果已经建立了连接，但是客户端突然出现故障了怎么办？</h3><p><strong>TCP 设有一个保活计时器。</strong>显然，客户端如果出现故障，服务器不能一直等下去，白白浪费资源。服务器每收到一次客户端的请求后都会重新复位这个计时器，时间通常是设置为 2 小时，若 2 小时还没有收到客户端的任何数据，服务器就会发送一个探测报文段，以后每隔 75 秒发送一次。若一连发送 10 个探测报文仍然没反应，服务器就认为客户端出了故障，接着就关闭连接。</p>
-<h3 id="TCP-可靠传输"><a href="#TCP-可靠传输" class="headerlink" title="TCP 可靠传输"></a>TCP 可靠传输</h3><p>TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文段在超时时间内没有收到确认，那么就重传这个报文段。</p>
-<p>一个报文段从发送再到接收到确认所经过的时间称为往返时间 RTT ，加权平均往返时间 RTTs 计算如下：</p>
-<p><img src="https://s1.ax1x.com/2020/05/05/YFniFS.gif" alt=""></p>
-<p>其中，0 ≤ a &lt; 1 ，RTTs 随着 a 的增加更容易受到 RTT 的影响。</p>
-<p>超时时间 RTO 应该略大于 RTTs ，TCP 使用的超时时间计算如下：</p>
-<p><img src="https://s1.ax1x.com/2020/05/05/YFnNex.gif" alt=""></p>
-<p>其中 RTT<sub>d</sub> 为偏差的加权平均值。</p>
-<h3 id="TCP-滑动窗口"><a href="#TCP-滑动窗口" class="headerlink" title="TCP 滑动窗口"></a>TCP 滑动窗口</h3><p>窗口是缓存的一部分，用来暂时存放字节流。发送方和接收方各有一个窗口，接收方通过 TCP 报文段中的窗口字段告诉发送方自己的窗口大小，发送方根据这个值和其它信息设置自己的窗口大小。</p>
-<p>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。</p>
-<p>接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为 {31, 34, 35} ，其中 {31} 按序到达，而  {34, 35} 就不是，因此只对字节 31 进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。</p>
-<p><img src="https://s1.ax1x.com/2020/05/05/YFM201.jpg" alt="TCP 滑动窗口"></p>
-<h3 id="TCP-流量控制"><a href="#TCP-流量控制" class="headerlink" title="TCP 流量控制"></a>TCP 流量控制</h3><p>流量控制是为了控制发送方发送速率，保证接收方来得及接收。</p>
-<p>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。</p>
-<h3 id="TCP-拥塞控制"><a href="#TCP-拥塞控制" class="headerlink" title="TCP 拥塞控制"></a>TCP 拥塞控制</h3><p>如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接收，而拥塞控制是为了降低整个网络的拥塞程度。</p>
-<p><img src="https://s1.ax1x.com/2020/05/05/YF3iBd.jpg" alt="TCP 拥塞控制"></p>
-<p>TCP 主要通过四个算法来进行拥塞控制：<strong>慢开始</strong>、<strong>拥塞避免</strong>、<strong>快重传</strong>、<strong>快恢复</strong>。</p>
-<p>发送方需要维护一个叫做拥塞窗口（cwnd）的状态变量，注意拥塞窗口与发送方窗口的区别：拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口。</p>
-<p>为了便于讨论，做如下假设：</p>
-<ul>
-<li>接收方有足够大的接收缓存，因此不会发生流量控制；</li>
-<li>虽然 TCP 的窗口基于字节，但是这里设窗口的大小单位为报文段。</li>
-</ul>
-<p><img src="https://s1.ax1x.com/2020/05/05/YF36C6.png" alt="TCP 拥塞控制"></p>
-<h4 id="1-慢开始与拥塞避免"><a href="#1-慢开始与拥塞避免" class="headerlink" title="1. 慢开始与拥塞避免"></a>1. 慢开始与拥塞避免</h4><p>发送的最初执行慢开始，令 cwnd = 1 ，发送方只能发送 1 个报文段；当收到确认后，将 cwnd 加倍，因此之后发送方能够发送的报文段数量为：2、4、8 …</p>
-<p>注意到慢开始每个轮次都将 cwnd 加倍，这样会让 cwnd  增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能性也就更高。设置一个慢开始门限 ssthresh ，当 cwnd &gt;=  ssthresh 时，进入拥塞避免，每个轮次只将 cwnd 加 1 。</p>
-<p>如果出现了超时，则令 ssthresh = cwnd / 2 ，然后重新执行慢开始。</p>
-<h4 id="2-快重传与快恢复"><a href="#2-快重传与快恢复" class="headerlink" title="2. 快重传与快恢复"></a>2. 快重传与快恢复</h4><p>在接收方，要求每次接收到报文段都应该对最后一个已收到的有序报文段进行确认。例如已经接收到 M1 和 M2 ，此时收到 M4，应当发送对 M2 的确认。</p>
-<p>在发送方，如果收到三个重复确认，那么可以知道下一个报文段丢失，此时执行快重传，立即重传下一个报文段。例如收到三个 M2，则 M3 丢失，立即重传 M3 。</p>
-<p>在这种情况下，只是丢失个别报文段，而不是网络拥塞。因此执行快恢复，令 ssthresh = cwnd / 2 ，cwnd = ssthresh ，注意到此时直接进入拥塞避免。</p>
-<p>慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh 。</p>
-<p><img src="https://s1.ax1x.com/2020/05/05/YF3xVs.png" alt="快重传"></p>
-<h3 id="TCP-粘包-拆包"><a href="#TCP-粘包-拆包" class="headerlink" title="TCP 粘包/拆包"></a>TCP 粘包/拆包</h3><h4 id="什么是-TCP-粘包-拆包？"><a href="#什么是-TCP-粘包-拆包？" class="headerlink" title="什么是 TCP 粘包/拆包？"></a>什么是 TCP 粘包/拆包？</h4><p>TCP 是个“<strong>流</strong>”协议，所谓流，就是没有界限的一串数据。大家可以想想河里的流水，它们是连成一片的，其间并没有分界线。TCP底层并不了解上层业务数据的具体含义，它会根据 TCP 缓冲区的实际情况进行包的划分，所以在业务上认为，一个完整的包可能会被 TCP 拆分成多个包进行发送，也有可能把多个小的包封装成一个大的数据包发送，这就是所谓的 TCP 粘包和拆包问题。</p>
-<h4 id="TCP-粘包-拆包问题说明"><a href="#TCP-粘包-拆包问题说明" class="headerlink" title="TCP 粘包/拆包问题说明"></a>TCP 粘包/拆包问题说明</h4><p>我们可以通过图解对 TCP 粘包和拆包问题进行说明，粘包问题示例如图所示（来源《Netty权威指南》）：</p>
-<p><img src="https://s1.ax1x.com/2020/05/05/YkuBo6.png" alt="TCP 粘包/拆包问题"></p>
-<p>假设客户端分别发送了两个数据包 D1 和 D2 给服务端，由于服务端一次读取到的字节数是不确定的，故可能存在以下 4 种情况。</p>
-<ul>
-<li>服务端分两次读取到了两个独立的数据包，分别是 D1 和 D2 ，没有粘包和拆包；</li>
-<li>服务端一次接收到了两个数据包，D1 和 D2 粘合在一起，被称为 TCP 粘包；</li>
-<li>服务端分两次读取到了两个数据包，第一次读取到了完整的 D1 包和 D2 包的部分内容，第二次读取到了 D2 包的剩余内容，这被称为 TCP 拆包；</li>
-<li>服务端分两次读取到了两个数据包，第一次读取到了 Dl 包的部分内容 D1_1 ，第二次读取到了 D1 包的剩余内容 D1_2 和 D2 包的整包。</li>
-<li>如果此时服务端 TCP 接收滑窗非常小，而数据包 D1 和 D2 比较大，很有可能会发生第 5 种可能，即服务端分多次才能将 D1 和 D2 包接收完全，期间发生多次拆包。</li>
-</ul>
-<h4 id="TCP-粘包-拆包发生的原因"><a href="#TCP-粘包-拆包发生的原因" class="headerlink" title="TCP 粘包/拆包发生的原因"></a>TCP 粘包/拆包发生的原因</h4><p>问题产生的原因有三个，分别如下。</p>
-<ul>
-<li>应用程序 write 写入的字节大小大于套接口发送缓冲区大小；</li>
-<li>进行 MSS（最大报文段长度）大小的 TCP 分段；</li>
-<li>以太网帧的 payload 大于 MTU（最大传输单元） 进行 IP 分片。</li>
-</ul>
-<p><img src="https://s1.ax1x.com/2020/05/05/YkYN4A.png" alt="TCP 粘包/拆包发生的原因"></p>
-<h4 id="粘包问题的解决策略"><a href="#粘包问题的解决策略" class="headerlink" title="粘包问题的解决策略"></a>粘包问题的解决策略</h4><p>由于底层的 TCP 无法理解上层的业务数据，所以在底层是无法保证数据包不被拆分和重组的，这个问题只能通过上层的应用协议栈设计来解决，根据业界的主流协议的解决方案，可以归纳如下。</p>
-<ul>
-<li>消息定长，例如每个报文的大小为固定长度 200 字节，如果不够，空位补空格；</li>
-<li>在包尾增加回车换行符进行分割，例如 FTP 协议。</li>
-<li>将消息分为消息头和消息体，消息头中包含表示消息总长度（或者消息体长度）的字段，通常设计思路为消息头的第一个字段使用 int32 来表示消息的总长度；</li>
-<li>更复杂的应用层协议。</li>
-</ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://blog.csdn.net/qzcsu/article/details/72861891" target="_blank" rel="noopener">两张动图-彻底明白TCP的三次握手与四次挥手</a></li>
-<li>《Netty权威指南》</li>
-</ul>
+<p>每次抢到的金额 = 随机区间 <strong>( 0 , 剩余金额)</strong></p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD4XYd.png" alt=""></p>
+<blockquote>
+<p>为什么这么说呢？让我们看一个栗子：</p>
+</blockquote>
+<p>假设有 10 个人，红包总额 100 元。</p>
+<p>第一个人的随机范围是<strong>（0 , 100 元)</strong>，平均可以抢到 <strong>50 元</strong>。</p>
+<p>假设第一个人随机到 50 元，那么剩余金额是 100 - 50 = 50 元。</p>
+<p>第二个人的随机范围是 <strong>（0 , 50 元）</strong>，平均可以抢到 <strong>25 元</strong>。</p>
+<p>假设第二个人随机到 25 元，那么剩余金额是 50 - 25 = 25 元。</p>
+<p>第三个人的随机范围是 <strong>（0 , 25 元）</strong>，平均可以抢到 <strong>12.5 元</strong>。</p>
+<p>以此类推，每一次随机范围越来越小。</p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD58h9.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD54Ag.png" alt=""></p>
+<h3 id="方法-1-：二倍均值法"><a href="#方法-1-：二倍均值法" class="headerlink" title="方法 1 ：二倍均值法"></a><strong>方法 1 ：二倍均值法</strong></h3><p>剩余红包金额为 M ，剩余人数为 N ，那么有如下公式：</p>
+<p>每次抢到的金额 = 随机区间 <strong>（0 , M / N * 2）</strong></p>
+<p>这个公式，保证了<strong>每次随机金额的平均值是相等的</strong>，不会因为抢红包的先后顺序而造成不公平。</p>
+<blockquote>
+<p>举个栗子：</p>
+</blockquote>
+<p>假设有 10 个人，红包总额 100 元。</p>
+<p>100/10*2 = 20 ，所以第一个人的随机范围是<strong>（0 ，20 )</strong> ，平均可以抢到 <strong>10 元</strong>。</p>
+<p>假设第一个人随机到 10 元，那么剩余金额是 100 - 10 = 90 元。</p>
+<p>90/9*2 = 20 ，所以第二个人的随机范围同样是<strong>（0 ，20 )</strong>，平均可以抢到 <strong>10 元</strong>。</p>
+<p>假设第二个人随机到 10 元，那么剩余金额是 90-10 = 80 元。</p>
+<p>80/8*2 = 20 ，所以第三个人的随机范围同样是<strong>（0 ，20 )</strong>，平均可以抢到 <strong>10 元</strong>。</p>
+<p>以此类推，每一次随机范围的均值是相等的。</p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YDIBrV.png" alt=""></p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//抢红包算法，金额参数以分为单位</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> <span class="token function">divideRedPackage</span><span class="token punctuation">(</span>Integer totalAmount<span class="token punctuation">,</span> Integer totalPeopleNum<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> amountList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>Integer<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Integer restAmount <span class="token operator">=</span> totalAmount<span class="token punctuation">;</span>
+    Integer restPeopleNum <span class="token operator">=</span> totalPeopleNum<span class="token punctuation">;</span>
+    Random random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> totalPeopleNum <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//随机范围：[1，剩余人均金额的两倍)，左闭右开，保证最小随机数为 1</span>
+        <span class="token keyword">int</span> amount <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>restAmount <span class="token operator">/</span> restPeopleNum <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        restAmount <span class="token operator">-=</span> amount<span class="token punctuation">;</span>
+        restPeopleNum <span class="token operator">--</span><span class="token punctuation">;</span>
+        amountList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    amountList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>restAmount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> amountList<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> amountList <span class="token operator">=</span> <span class="token function">divideRedPackage</span><span class="token punctuation">(</span><span class="token number">5000</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>Integer amount <span class="token operator">:</span> amountList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"抢到金额："</span> <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">divide</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><strong>程序输出结果如下：</strong></p>
+<p>抢到金额：2.92</p>
+<p>抢到金额：1.48</p>
+<p>抢到金额：3.05</p>
+<p>抢到金额：0.53</p>
+<p>抢到金额：0.45</p>
+<p>抢到金额：1.36</p>
+<p>抢到金额：1.02</p>
+<p>抢到金额：1.99</p>
+<p>抢到金额：1.3</p>
+<p>抢到金额：0.48</p>
+<p>抢到金额：0.83</p>
+<p>抢到金额：2.89</p>
+<p>抢到金额：0.94</p>
+<p>抢到金额：2.11</p>
+<p>抢到金额：3.13</p>
+<p>抢到金额：0.91</p>
+<p>抢到金额：2.64</p>
+<p>抢到金额：2.02</p>
+<p>抢到金额：2.88</p>
+<p>抢到金额：1.13</p>
+<p>抢到金额：2.09</p>
+<p>抢到金额：1.37</p>
+<p>抢到金额：2.41</p>
+<p>抢到金额：2.13</p>
+<p>抢到金额：1.32</p>
+<p>抢到金额：0.44</p>
+<p>抢到金额：1.62</p>
+<p>抢到金额：1.89</p>
+<p>抢到金额：2.23</p>
+<p>抢到金额：0.44</p>
+<p><img src="https://s1.ax1x.com/2020/05/14/YD7qG4.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/15/YD7LRJ.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/15/YD7jMR.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/15/YDHPiD.png" alt=""></p>
+<h3 id="方法-2-：线段切割法"><a href="#方法-2-：线段切割法" class="headerlink" title="方法 2 ：线段切割法"></a><strong>方法 2 ：线段切割法</strong></h3><p>何谓线段切割法？我们可以把红包总金额想象成一条很长的线段，而每个人抢到的金额，则是这条主线段所拆分出的若干子线段。</p>
+<p><img src="https://s1.ax1x.com/2020/05/15/YDHwYF.png" alt=""></p>
+<p>如何确定每一条子线段的长度呢？由“切割点”来决定。当 N 个人一起抢红包的时候，就需要确定 N-1 个切割点。</p>
+<p>因此，当 N 个人一起抢总金额为 M 的红包时，我们需要做 N-1 次随机运算，以此确定 N-1 个切割点。随机的范围区间是<strong>（1 , M）</strong>。</p>
+<p>当所有切割点确定以后，子线段的长度也随之确定。这样每个人来抢红包的时候，只需要顺次领取与子线段长度等价的红包金额即可。</p>
+<p>这就是<strong>线段切割法</strong>的思路。在这里需要注意以下两点：</p>
+<p><strong>1.当随机切割点出现重复，如何处理。</strong></p>
+<p><strong>2.如何尽可能降低时间复杂度和空间复杂度。</strong></p>
+<p><img src="https://s1.ax1x.com/2020/05/15/YDHsyR.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/15/YDH2TK.png" alt=""></p>
 
             </div>
             <hr/>
@@ -649,7 +635,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/05/05/408/ji-suan-ji-wang-luo/tcp/">https://www.niewenjun.com/2020/05/05/408/ji-suan-ji-wang-luo/tcp/</a>
+                    <a href="https://www.niewenjun.com/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/">https://www.niewenjun.com/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -687,16 +673,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%8D%8F%E8%AE%AE/">
-                                    <span class="chip bg-color">协议</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
-                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                                    <span class="chip bg-color">计算机网络</span>
-                                </a>
-                            
-                                <a href="/tags/TCP/">
-                                    <span class="chip bg-color">TCP</span>
+                                <a href="/tags/%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95/">
+                                    <span class="chip bg-color">抢红包算法</span>
                                 </a>
                             
                         </div>
@@ -864,53 +846,67 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/06/408/ji-suan-ji-wang-luo/wang-luo-ceng/">
+                <a href="/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="网络层">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="抢红包算法">
                         
-                        <span class="card-title">网络层</span>
+                        <span class="card-title">抢红包算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            网络层概述因为网络层是整个互联网的核心，因此应当让网络层尽可能简单。网络层向上只提供简单灵活的、无连接的、尽最大努力交互的数据报服务。
-使用 IP 协议，可以把异构的物理网络连接起来，使得在网络层看起来好像是一个统一的网络。
+                            抢红包算法
 
-与 IP 协
+
+
+
+
+发出一个固定金额的红包，由若干个人来抢，需要满足哪些规则？
+
+1.所有人抢到金额之和等于红包金额，不能超过，也不能少于。
+2.每个人至少抢到一分钱。
+3.要保证所有人抢到金额的几率相等。
+
+
+小灰的思路是什么样呢？
+
+
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-06
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/408/" class="post-category">
-                                    408
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">计算机网络</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">
-                        <span class="chip bg-color">网络层</span>
+                    <a href="/tags/%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">抢红包算法</span>
                     </a>
                     
                 </div>
@@ -924,33 +920,37 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/">
+                <a href="/2020/05/13/she-ji-mo-shi/dan-li-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="计算机网络常见面试题">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="单例模式">
                         
-                        <span class="card-title">计算机网络常见面试题</span>
+                        <span class="card-title">单例模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            计算机网络常见面试题一 OSI 与 TCP/IP 各层的结构与功能，都有哪些协议？学习计算机网络时我们一般采用折中的办法，也就是中和 OSI 和 TCP/IP 的优点，采用一种只有五层协议的体系结构，这样既简洁又能将概念阐述清楚。
+                            单例模式概述单例模式确保一个类只有一个实例，并提供全局访问点。
+八种写法
+饿汉式（静态常量）（可用）
 
-结合互
+public class Singleton {
+
+    private final static Singleton INSTANC
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-13
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/408/" class="post-category">
-                                    408
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
                                 </a>
                             
                             
@@ -960,8 +960,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">计算机网络</span>
+                    <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">单例模式</span>
                     </a>
                     
                 </div>

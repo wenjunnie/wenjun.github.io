@@ -6,10 +6,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-05-13T14:18:59.382Z</updated>
+  <updated>2020-05-14T16:26:36.679Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>抢红包算法</title>
+    <link href="https://www.niewenjun.com/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/"/>
+    <id>https://www.niewenjun.com/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/</id>
+    <published>2020-05-14T16:11:00.000Z</published>
+    <updated>2020-05-14T16:26:36.679Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;抢红包算法&quot;&gt;&lt;a href=&quot;#抢红包算法&quot; class=&quot;headerlink&quot; title=&quot;抢红包算法&quot;&gt;&lt;/a&gt;抢红包算法&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://s1.ax1x.com/2020/05/14/YDhTaQ.png&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://www.niewenjun.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
+    
+      <category term="抢红包算法" scheme="https://www.niewenjun.com/tags/%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>单例模式</title>
@@ -128,7 +157,7 @@
     <link href="https://www.niewenjun.com/2020/05/07/408/ji-suan-ji-wang-luo/https/"/>
     <id>https://www.niewenjun.com/2020/05/07/408/ji-suan-ji-wang-luo/https/</id>
     <published>2020-05-06T17:30:00.000Z</published>
-    <updated>2020-05-06T17:10:29.845Z</updated>
+    <updated>2020-05-14T16:17:57.953Z</updated>
     
     <summary type="html">
     
@@ -146,6 +175,8 @@
       <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
     
     
+      <category term="协议" scheme="https://www.niewenjun.com/tags/%E5%8D%8F%E8%AE%AE/"/>
+    
       <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
       <category term="HTTPS" scheme="https://www.niewenjun.com/tags/HTTPS/"/>
@@ -157,7 +188,7 @@
     <link href="https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/http/"/>
     <id>https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/http/</id>
     <published>2020-05-06T15:07:00.000Z</published>
-    <updated>2020-05-06T15:23:31.728Z</updated>
+    <updated>2020-05-14T16:17:47.890Z</updated>
     
     <summary type="html">
     
@@ -174,6 +205,8 @@
     
       <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
     
+    
+      <category term="协议" scheme="https://www.niewenjun.com/tags/%E5%8D%8F%E8%AE%AE/"/>
     
       <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
@@ -215,7 +248,7 @@
     <link href="https://www.niewenjun.com/2020/05/05/408/ji-suan-ji-wang-luo/tcp/"/>
     <id>https://www.niewenjun.com/2020/05/05/408/ji-suan-ji-wang-luo/tcp/</id>
     <published>2020-05-05T15:23:00.000Z</published>
-    <updated>2020-05-05T15:23:46.156Z</updated>
+    <updated>2020-05-14T16:18:07.259Z</updated>
     
     <summary type="html">
     
@@ -232,6 +265,8 @@
     
       <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
     
+    
+      <category term="协议" scheme="https://www.niewenjun.com/tags/%E5%8D%8F%E8%AE%AE/"/>
     
       <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
@@ -541,35 +576,6 @@
         
         
           &lt;h1 id=&quot;Redis-线程模型、双写一致性&quot;&gt;&lt;a href=&quot;#Redis-线程模型、双写一致性&quot; class=&quot;headerlink&quot; title=&quot;Redis 线程模型、双写一致性&quot;&gt;&lt;/a&gt;Redis 线程模型、双写一致性&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
-    
-      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redis集群、持久化、LRU</title>
-    <link href="https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/"/>
-    <id>https://www.niewenjun.com/2020/04/24/shu-ju-ku/redis-ji-qun-chi-jiu-hua-lru/</id>
-    <published>2020-04-24T10:54:00.000Z</published>
-    <updated>2020-04-29T06:58:23.969Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Redis-集群、哨兵、持久化、LRU&quot;&gt;&lt;a href=&quot;#Redis-集群、哨兵、持久化、LRU&quot; class=&quot;headerlink&quot; title=&quot;Redis 集群、哨兵、持久化、LRU&quot;&gt;&lt;/a&gt;Redis 集群、哨兵、持久化、LRU&lt;/h1&gt;&lt;h2
         
       
     
