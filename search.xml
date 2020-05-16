@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>什么是拜占庭将军问题？</title>
+      <link href="/2020/05/16/fen-bu-shi/shi-me-shi-bai-zhan-ting-jiang-jun-wen-ti/"/>
+      <url>/2020/05/16/fen-bu-shi/shi-me-shi-bai-zhan-ting-jiang-jun-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什么是拜占庭将军问题？"><a href="#什么是拜占庭将军问题？" class="headerlink" title="什么是拜占庭将军问题？"></a>什么是拜占庭将军问题？</h2><p><img src="https://s1.ax1x.com/2020/05/16/YcYB0x.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YcY74S.png" alt=""></p><p><strong>————— 第二天 —————</strong></p><p><img src="https://s1.ax1x.com/2020/05/16/YcY21H.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YcYjun.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/Yct94U.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YctFgJ.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YctZHx.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YctlgH.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YctJbt.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YctrKs.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YctcV0.png" alt=""></p><h3 id="什么是拜占庭将军问题？-1"><a href="#什么是拜占庭将军问题？-1" class="headerlink" title="什么是拜占庭将军问题？"></a>什么是拜占庭将军问题？</h3><p>在很久很久以前，拜占庭是东罗马帝国的首都。那个时候罗马帝国国土辽阔，为了防御目的，因此每个军队都分隔很远，将军与将军之间只能靠信使传递消息。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcXS6f.png" alt=""></p><p>在打仗的时候，拜占庭军队内所有将军必需达成<strong>一致的共识</strong>，才能更好地赢得胜利。但是，在军队内有可能存有叛徒，扰乱将军们的决定。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcXKnU.png" alt=""></p><p>这时候，在已知有成员不可靠的情况下，其余忠诚的将军需要在不受叛徒或间谍的影响下达成一致的协议。</p><p>莱斯利·兰伯特（Leslie Lamport）通过这个比喻，表达了计算机网络中所存在的一致性问题。这个问题被称为<strong>拜占庭将军问题</strong>。</p><p><img src="https://s1.ax1x.com/2020/05/16/Ych5tO.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/Yc4Ccj.png" alt=""></p><h3 id="什么是-Raft-算法？"><a href="#什么是-Raft-算法？" class="headerlink" title="什么是 Raft 算法？"></a>什么是 Raft 算法？</h3><p>Raft 算法是一种简单易懂的共识算法。它依靠 <strong>状态机</strong> 和 <strong>主从同步</strong> 的方式，在各个节点之间实现数据的一致性。</p><p>在学习 Raft 算法的时候，大家需要了解 Raft 的两个核心要点：</p><ul><li><p><strong>选取主节点</strong></p></li><li><p><strong>同步数据</strong></p></li></ul><p>不难理解，使用主从同步的方式，可以让集群各个节点的数据更新以主节点为准，从而保证了一致性。那么，如何选取主节点呢？</p><p><img src="https://s1.ax1x.com/2020/05/16/Yc4NCD.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/Yc4R2Q.png" alt=""></p><p>我们的出生，离不开无数小蝌蚪之间的激烈竞争。在竞争的过程中，某个速度最快运气最好的小蝌蚪最终胜出，让我们诞生到了这个世界。</p><p>同样道理，Raft 算法在选择主节点的过程中，也是通过多个节点之间的<strong>投票竞争</strong>。</p><p>说到这里，不得不说一下 Raft 算法的状态机。Raft 算法为节点定义了三种角色：</p><ul><li><p><strong>Leader</strong>（主节点）</p></li><li><p><strong>Follower</strong>（从节点）</p></li><li><p><strong>Candidate</strong>（参与投票竞争的节点）</p></li></ul><p>让我们来看一看选主的具体流程：</p><p><strong>第一步</strong>，在最初，还没有一个主节点的时候，所有节点的身份都是 Follower 。每一个节点都有自己的计时器，当计时达到了超时时间（Election Timeout），该节点会转变为 Candidate 。</p><p><img src="https://s1.ax1x.com/2020/05/16/Yc5diT.png" alt=""></p><p><strong>第二步</strong>，成为 Candidate 的节点，会首先给自己投票，然后向集群中其他所有的节点发起请求，要求大家都给自己投票。</p><p><img src="https://s1.ax1x.com/2020/05/16/Yc5WFK.png" alt=""></p><p><strong>第三步</strong>，其他收到投票请求且还未投票的 Follower 节点会向发起者投票，发起者收到反馈通知后，票数增加。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcIM01.png" alt=""></p><p><strong>第四步</strong>，当得票数超过了集群节点数量的一半，该节点晋升为 Leader 节点。Leader 节点会立刻向其他节点发出通知，告诉大家自己才是老大。收到通知的节点全部变为 Follower ，并且各自的计时器清零。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcIt6H.png" alt=""></p><p>这里需要说明一点，每个节点的超时时间都是不一样的。比如 A 节点的超时时间是 3 秒，B 节点的超时时间是 5 秒，C 节点的超时时间是 4 秒。这样一来，A 节点将会最先发起投票请求，而不是所有节点同时发起。</p><p>为什么这样设计呢？设想如果所有节点同时发起投票，必然会导致大家的票数差不多，形成僵局，谁也当不成老大。</p><p>那么，成为 Leader 的节点是否就坐稳了老大的位置呢？并不是。Leader 节点需要每隔一段时间向集群其他节点发送<strong>心跳通知</strong>，表明你们的老大还活着。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcIt6H.png" alt=""></p><p>一旦 Leader 节点挂掉，发不出通知，那么计时达到了超时时间的 Follower 节点会转变为 Candidate 节点，发起选主投票，周而复始……</p><p><img src="https://s1.ax1x.com/2020/05/16/YcoZUP.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YcoNCT.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YcojMQ.png" alt=""></p><p>让我们来看一看数据同步的流程：</p><p><strong>第一步</strong>，由客户端提交数据到 Leader 节点。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcTFRU.png" alt=""></p><p><strong>第二步</strong>，由 Leader 节点把数据复制到集群内所有的 Follower 节点。如果一次复制失败，会不断进行重试。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcTMi6.png" alt=""></p><p><strong>第三步</strong>，Follower 节点们接收到复制的数据，会反馈给 Leader 节点。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcTNdI.png" alt=""></p><p><strong>第四步</strong>，如果 Leader 节点接收到超过半数的 Follower 反馈，表明复制成功。于是提交自己的数据，并通知客户端数据提交成功。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcT0W8.png" alt=""></p><p><strong>第五步</strong>，由 Leader 节点通知集群内所有的 Follower 节点提交数据，从而完成数据同步流程。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcTHm9.png" alt=""></p><h3 id="共识算法的应用场景？"><a href="#共识算法的应用场景？" class="headerlink" title="共识算法的应用场景？"></a>共识算法的应用场景？</h3><p><img src="https://s1.ax1x.com/2020/05/16/Yc7pOH.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/Yc7Eff.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/YcXJ91.jpg" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/Yc7BA1.png" alt=""></p><p><img src="https://s1.ax1x.com/2020/05/16/Yc7738.png" alt=""></p><h4 id="Paxos-算法："><a href="#Paxos-算法：" class="headerlink" title="Paxos 算法："></a>Paxos 算法：</h4><p>早期的共识算法，由拜占庭将军问题的提出者 Leslie Lamport 所发明。谷歌的分布式锁服务 Chubby 就是以 Paxos 算法为基础。</p><h4 id="ZAB-算法："><a href="#ZAB-算法：" class="headerlink" title="ZAB 算法："></a>ZAB 算法：</h4><p>Zookeeper 所使用的一致性算法，在流程上和 Raft 算法比较接近。</p><h4 id="PBFT-算法："><a href="#PBFT-算法：" class="headerlink" title="PBFT 算法："></a>PBFT 算法：</h4><p>区块链技术所使用的共识算法之一，适用于私有链的共识。</p><p><img src="https://s1.ax1x.com/2020/05/16/YcHnC6.png" alt=""></p><blockquote><p>更正：Raft ，ZAB ，Paxos 解决的是节点故障问题，而非拜占庭问题（节点故意欺骗）。因为它们都没有办法进行拜占庭容错，只是单纯的可信前提下的分布式容错。PBFT 解决了拜占庭问题，这对于区块链的共识是必要的。</p><p>以小灰的理解，拜占庭的叛徒有两种情况，一种是节点故障，一种是节点故意捣乱。Raft 解决的是节点故障，以及捣乱者不是主节点的情况，但无法解决捣乱者成为主节点的情况。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分布式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Raft </tag>
+            
+            <tag> 拜占庭 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>抢红包算法</title>
       <link href="/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/"/>
       <url>/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/</url>
