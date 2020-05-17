@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="什么是拜占庭将军问题？, Wenjun">
+    <meta name="keywords" content="ZAB协议, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>什么是拜占庭将军问题？ | Wenjun</title>
+    <title>ZAB协议 | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">什么是拜占庭将军问题？</h1>
+                    <h1 class="description center-align post-title">ZAB协议</h1>
                 </div>
             </div>
         </div>
@@ -439,12 +439,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Raft/">
-                                <span class="chip bg-color">Raft</span>
+                            <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                <span class="chip bg-color">协议</span>
                             </a>
                         
-                            <a href="/tags/%E6%8B%9C%E5%8D%A0%E5%BA%AD/">
-                                <span class="chip bg-color">拜占庭</span>
+                            <a href="/tags/ZooKeeper/">
+                                <span class="chip bg-color">ZooKeeper</span>
+                            </a>
+                        
+                            <a href="/tags/ZAB/">
+                                <span class="chip bg-color">ZAB</span>
                             </a>
                         
                     </div>
@@ -468,7 +472,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-16
+                    2020-05-17
                 </div>
                 
 
@@ -477,14 +481,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    7 分
                 </div>
                 
 
@@ -499,89 +503,135 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="什么是拜占庭将军问题？"><a href="#什么是拜占庭将军问题？" class="headerlink" title="什么是拜占庭将军问题？"></a>什么是拜占庭将军问题？</h2><p><img src="https://s1.ax1x.com/2020/05/16/YcYB0x.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcY74S.png" alt=""></p>
-<p><strong>————— 第二天 —————</strong></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcY21H.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcYjun.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yct94U.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YctFgJ.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YctZHx.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YctlgH.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YctJbt.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YctrKs.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YctcV0.png" alt=""></p>
-<h3 id="什么是拜占庭将军问题？-1"><a href="#什么是拜占庭将军问题？-1" class="headerlink" title="什么是拜占庭将军问题？"></a>什么是拜占庭将军问题？</h3><p>在很久很久以前，拜占庭是东罗马帝国的首都。那个时候罗马帝国国土辽阔，为了防御目的，因此每个军队都分隔很远，将军与将军之间只能靠信使传递消息。</p>
-<p><img src="https://s1.ax1x.com/2020/05/17/YgYMrR.png" alt=""></p>
-<p>在打仗的时候，拜占庭军队内所有将军必需达成<strong>一致的共识</strong>，才能更好地赢得胜利。但是，在军队内有可能存有叛徒，扰乱将军们的决定。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcXKnU.png" alt=""></p>
-<p>这时候，在已知有成员不可靠的情况下，其余忠诚的将军需要在不受叛徒或间谍的影响下达成一致的协议。</p>
-<p>莱斯利·兰伯特（Leslie Lamport）通过这个比喻，表达了计算机网络中所存在的一致性问题。这个问题被称为<strong>拜占庭将军问题</strong>。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Ych5tO.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yc4Ccj.png" alt=""></p>
-<h3 id="什么是-Raft-算法？"><a href="#什么是-Raft-算法？" class="headerlink" title="什么是 Raft 算法？"></a>什么是 Raft 算法？</h3><p>Raft 算法是一种简单易懂的共识算法。它依靠 <strong>状态机</strong> 和 <strong>主从同步</strong> 的方式，在各个节点之间实现数据的一致性。</p>
-<p>在学习 Raft 算法的时候，大家需要了解 Raft 的两个核心要点：</p>
-<ul>
-<li><p><strong>选取主节点</strong></p>
+                <h2 id="ZAB-协议"><a href="#ZAB-协议" class="headerlink" title="ZAB 协议"></a>ZAB 协议</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>ZAB（Zookeeper Atomic Broadcast）是为 ZooKeeper 设计的崩溃恢复原子广播协议，它保证 ZooKeeper 集群数据的一致性和命令的全局有序性。</p>
+<h3 id="概念介绍"><a href="#概念介绍" class="headerlink" title="概念介绍"></a>概念介绍</h3><p>在介绍 ZAB 协议之前首先要知道 ZooKeeper 相关的几个概念，才能更好的了解 ZAB 协议。</p>
+<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><ul>
+<li><p><strong>Leader ：</strong>同一时间集群总只允许有一个 Leader ，提供对客户端的读写功能，负责将数据同步至各个节点。</p>
 </li>
-<li><p><strong>同步数据</strong></p>
+<li><p><strong>Follower ：</strong>提供对客户端读功能，写请求则转发给 Leader 处理，当 Leader 崩溃失联之后参与 Leader 选举。</p>
+</li>
+<li><p><strong>Observer ：</strong>与 Follower 不同的是不参与 Leader 选举。</p>
 </li>
 </ul>
-<p>不难理解，使用主从同步的方式，可以让集群各个节点的数据更新以主节点为准，从而保证了一致性。那么，如何选取主节点呢？</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yc4NCD.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yc4R2Q.png" alt=""></p>
-<p>我们的出生，离不开无数小蝌蚪之间的激烈竞争。在竞争的过程中，某个速度最快运气最好的小蝌蚪最终胜出，让我们诞生到了这个世界。</p>
-<p>同样道理，Raft 算法在选择主节点的过程中，也是通过多个节点之间的<strong>投票竞争</strong>。</p>
-<p>说到这里，不得不说一下 Raft 算法的状态机。Raft 算法为节点定义了三种角色：</p>
-<ul>
-<li><p><strong>Leader</strong>（主节点）</p>
+<h4 id="服务状态"><a href="#服务状态" class="headerlink" title="服务状态"></a>服务状态</h4><ul>
+<li><p><strong>LOOKING ：</strong>当节点认为集群中没有 Leader ，服务器会进入 LOOKING 状态，目的是为了查找或者选举 Leader 。</p>
 </li>
-<li><p><strong>Follower</strong>（从节点）</p>
+<li><p><strong>FOLLOWING ：</strong>Follower 角色。</p>
 </li>
-<li><p><strong>Candidate</strong>（参与投票竞争的节点）</p>
+<li><p><strong>LEADING ：</strong>Leader 角色。</p>
+</li>
+<li><p><strong>OBSERVING ：</strong>Observer 角色。</p>
 </li>
 </ul>
-<p>让我们来看一看选主的具体流程：</p>
-<p><strong>第一步</strong>，在最初，还没有一个主节点的时候，所有节点的身份都是 Follower 。每一个节点都有自己的计时器，当计时达到了超时时间（Election Timeout），该节点会转变为 Candidate 。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yc5diT.png" alt=""></p>
-<p><strong>第二步</strong>，成为 Candidate 的节点，会首先给自己投票，然后向集群中其他所有的节点发起请求，要求大家都给自己投票。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yc5WFK.png" alt=""></p>
-<p><strong>第三步</strong>，其他收到投票请求且还未投票的 Follower 节点会向发起者投票，发起者收到反馈通知后，票数增加。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcIM01.png" alt=""></p>
-<p><strong>第四步</strong>，当得票数超过了集群节点数量的一半，该节点晋升为 Leader 节点。Leader 节点会立刻向其他节点发出通知，告诉大家自己才是老大。收到通知的节点全部变为 Follower ，并且各自的计时器清零。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcIt6H.png" alt=""></p>
-<p>这里需要说明一点，每个节点的超时时间都是不一样的。比如 A 节点的超时时间是 3 秒，B 节点的超时时间是 5 秒，C 节点的超时时间是 4 秒。这样一来，A 节点将会最先发起投票请求，而不是所有节点同时发起。</p>
-<p>为什么这样设计呢？设想如果所有节点同时发起投票，必然会导致大家的票数差不多，形成僵局，谁也当不成老大。</p>
-<p>那么，成为 Leader 的节点是否就坐稳了老大的位置呢？并不是。Leader 节点需要每隔一段时间向集群其他节点发送<strong>心跳通知</strong>，表明你们的老大还活着。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcIt6H.png" alt=""></p>
-<p>一旦 Leader 节点挂掉，发不出通知，那么计时达到了超时时间的 Follower 节点会转变为 Candidate 节点，发起选主投票，周而复始……</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcoZUP.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcoNCT.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcojMQ.png" alt=""></p>
-<p>让我们来看一看数据同步的流程：</p>
-<p><strong>第一步</strong>，由客户端提交数据到 Leader 节点。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcTFRU.png" alt=""></p>
-<p><strong>第二步</strong>，由 Leader 节点把数据复制到集群内所有的 Follower 节点。如果一次复制失败，会不断进行重试。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcTMi6.png" alt=""></p>
-<p><strong>第三步</strong>，Follower 节点们接收到复制的数据，会反馈给 Leader 节点。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcTNdI.png" alt=""></p>
-<p><strong>第四步</strong>，如果 Leader 节点接收到超过半数的 Follower 反馈，表明复制成功。于是提交自己的数据，并通知客户端数据提交成功。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcT0W8.png" alt=""></p>
-<p><strong>第五步</strong>，由 Leader 节点通知集群内所有的 Follower 节点提交数据，从而完成数据同步流程。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcTHm9.png" alt=""></p>
-<h3 id="共识算法的应用场景？"><a href="#共识算法的应用场景？" class="headerlink" title="共识算法的应用场景？"></a>共识算法的应用场景？</h3><p><img src="https://s1.ax1x.com/2020/05/16/Yc7pOH.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yc7Eff.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcXJ91.jpg" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yc7BA1.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/16/Yc7738.png" alt=""></p>
-<h4 id="Paxos-算法："><a href="#Paxos-算法：" class="headerlink" title="Paxos 算法："></a>Paxos 算法：</h4><p>早期的共识算法，由拜占庭将军问题的提出者 Leslie Lamport 所发明。谷歌的分布式锁服务 Chubby 就是以 Paxos 算法为基础。</p>
-<h4 id="ZAB-算法："><a href="#ZAB-算法：" class="headerlink" title="ZAB 算法："></a>ZAB 算法：</h4><p>Zookeeper 所使用的一致性算法，在流程上和 Raft 算法比较接近。</p>
-<h4 id="PBFT-算法："><a href="#PBFT-算法：" class="headerlink" title="PBFT 算法："></a>PBFT 算法：</h4><p>区块链技术所使用的共识算法之一，适用于私有链的共识。</p>
-<p><img src="https://s1.ax1x.com/2020/05/16/YcHnC6.png" alt=""></p>
-<blockquote>
-<p>更正：Raft ，ZAB ，Paxos 解决的是节点故障问题，而非拜占庭问题（节点故意欺骗）。因为它们都没有办法进行拜占庭容错，只是单纯的可信前提下的分布式容错。PBFT 解决了拜占庭问题，这对于区块链的共识是必要的。</p>
-<p>以小灰的理解，拜占庭的叛徒有两种情况，一种是节点故障，一种是节点故意捣乱。Raft 解决的是节点故障，以及捣乱者不是主节点的情况，但无法解决捣乱者成为主节点的情况。</p>
-</blockquote>
+<p>可以知道 ZooKeeper 是通过自身的状态来区分自己所属的角色，来执行自己应该的任务。</p>
+<h4 id="ZAB-状态"><a href="#ZAB-状态" class="headerlink" title="ZAB 状态"></a>ZAB 状态</h4><p>ZooKeeper 还给 ZAB 定义了 4 种状态，反映了 ZooKeeper 从选举到对外提供服务的过程中的四个步骤。状态枚举定义：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> ZabState <span class="token punctuation">{</span>
+    ELECTION<span class="token punctuation">,</span>
+    DISCOVERY<span class="token punctuation">,</span>
+    SYNCHRONIZATION<span class="token punctuation">,</span>
+    BROADCAST
+<span class="token punctuation">}</span></code></pre>
+<ul>
+<li><p><strong>ELECTION ：</strong>集群进入选举状态，此过程会选出一个节点作为 Leader 角色。</p>
+</li>
+<li><p><strong>DISCOVERY ：</strong>连接上 Leader ，响应 Leader 心跳，并且检测 Leader 的角色是否更改，通过此步骤之后选举出的 Leader 才能执行真正职务。</p>
+</li>
+<li><p><strong>SYNCHRONIZATION ：</strong>整个集群都确认 Leader 之后，将会把 Leader 的数据同步到各个节点，保证整个集群的数据一致性。</p>
+</li>
+<li><p><strong>BROADCAST ：</strong>过渡到广播状态，集群开始对外提供服务。</p>
+</li>
+</ul>
+<h4 id="ZXID"><a href="#ZXID" class="headerlink" title="ZXID"></a>ZXID</h4><p>ZXID 是极为重要的概念，它是一个 <code>long</code> 型（64位）整数，分为两部分：<strong>纪元（epoch）</strong>部分和<strong>计数器（counter）</strong>部分，是一个<strong>全局有序</strong>的数字。</p>
+<p><code>epoch</code> 代表当前集群所属哪个 Leader ，Leader 的选举就类似一个朝代的更替，你前朝的剑不能斩本朝的官，用 epoch 代表当前命令的有效性，counter 是一个递增的数字。</p>
+<h3 id="选举"><a href="#选举" class="headerlink" title="选举"></a>选举</h3><p>基础概念介绍完了，下面开始介绍 ZAB 协议是怎么支持 Leader 选举的。进行 Leader 选举有三个问题，什么时候进行？选举规则？选择流程？</p>
+<p>下面我会一一解答这三个问题：</p>
+<ol>
+<li><p><strong>选举发生的时机</strong></p>
+<p>Leader 发生选举有两个时机。</p>
+<p>一个是服务启动的时候当整个集群都没有 Leader 节点会进入选举状态，如果 Leader 已经存在就会告诉该节点 Leader 的信息，自己连接上 Leader ，整个集群不用进入选举状态。</p>
+<p>还有一个就是在服务运行中，可能会出现各种情况，服务宕机、断电、网络延迟很高的时候 Leader 都不能再对外提供服务了，所以当其他节点通过心跳检测到 Leader 失联之后，集群也会进入选举状态。</p>
+</li>
+<li><p><strong>选举规则</strong></p>
+<p>进入投票选举流程，怎么才能选举出 Leader ？或者说按照什么规则来让其他节点都能选举你当 Leader 。</p>
+<p>ZAB 协议是按照几个比较规则来进行投票的筛选，如果你的票比我更好，就修改自身的投票信息，改投你当 Leader 。</p>
+<p>下面代码是 ZooKeeper 投票比较规则：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/*
+ * We return true if one of the following three cases hold:
+ * 1- New epoch is higher
+ * 2- New epoch is the same as current epoch, but new zxid is higher
+ * 3- New epoch is the same as current epoch, new zxid is the same
+ *  as current zxid, but server id is higher.
+ */</span>
+
+<span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>newEpoch <span class="token operator">></span> curEpoch<span class="token punctuation">)</span>
+        <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>newEpoch <span class="token operator">==</span> curEpoch<span class="token punctuation">)</span>
+            <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>newZxid <span class="token operator">></span> curZxid<span class="token punctuation">)</span>
+                <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>newZxid <span class="token operator">==</span> curZxid<span class="token punctuation">)</span>
+                    <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>newId <span class="token operator">></span> curId<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>当其他节点的<strong>纪元（epoch）</strong>比自身高投它，如果纪元相同比较自身的 <strong>ZXID</strong> 的大小，选举 ZXID 大的节点，这里的 ZXID 代表节点所提交事务最大的 ID ，ZXID 越大代表该节点的数据越完整。</p>
+<p>最后如果 epoch 和 ZXID 都相等，则比较服务的 <strong>serverId</strong> ，这个 ID 是配置 ZooKeeper 集群时所配置的，所以我们配置 ZooKeeper 集群的时候可以把服务性能更高的集群的 serverId 配置大些，让性能好的机器担任 Leader 角色。</p>
+</li>
+<li><p><strong>选举流程</strong></p>
+<p>时机和规则都有了，下面就是 Leader 的选举流程：</p>
+<p><img src="https://s1.ax1x.com/2020/05/17/Y2bedH.png" alt="选举流程"></p>
+</li>
+</ol>
+<ul>
+<li>所有节点第一票先选举自己当 Leader ，将投票信息广播出去；</li>
+<li>从队列中接受投票信息；</li>
+<li>按照规则判断是否需要更改投票信息，将更改后的投票信息再次广播出去；</li>
+<li>判断是否有超过一半的投票选举同一个节点，如果是根据投票结果设置自己的服务状态，选举结束，否则继续进入投票流程。</li>
+</ul>
+<p><strong>举例</strong></p>
+<p><img src="https://s1.ax1x.com/2020/05/17/Y2brOU.png" alt=""></p>
+<p>上图来自《ZooKeeper：分布式过程协同技术详解》，整体流程还是比较简单，这里就不具体分析了。</p>
+<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>集群在经过 Leader 选举之后还会有<strong>连接 Leader</strong> 和<strong>同步</strong>两个步骤，这里就不具体分析这两个步骤的流程了，主要介绍集群对外提供服务如何保证各个节点数据的一致性。</p>
+<p>ZAB 在广播状态中保证以下特征：</p>
+<ul>
+<li><strong>可靠传递：</strong>如果消息 m 由一台服务器传递，那么它最终将由所有服务器传递。</li>
+<li><strong>全局有序：</strong>如果一个消息 a 在消息 b 之前被一台服务器交付，那么所有服务器都交付了 a 和 b ，并且 a 先于 b 。</li>
+<li><strong>因果有序：</strong>如果消息 a 在因果上先于消息 b 并且二者都被交付，那么 a 必须排在 b 之前。</li>
+</ul>
+<p><strong>有序性</strong>是 ZAB 协议必须要保证的一个属性，因为 ZooKeeper 是以类似目录结构的数据结构存储数据的，必须要求命名的有序性。</p>
+<p>比如一个命名 a 创建路径为 <code>/test</code> ，然后命名 b 创建路径为 <code>/test/123</code> ，如果不能保证有序性，b 命名在 a 之前，b 命令会因为父节点不存在而创建失败。</p>
+<p><img src="https://s1.ax1x.com/2020/05/17/Y2LN2q.png" alt="Broadcast"></p>
+<p>如上图所示，整个写请求类似一个<strong>二阶段</strong>的提交。</p>
+<p>当收到客户端的写请求的时候会经历以下几个步骤：</p>
+<ul>
+<li><p>Leader 收到客户端的写请求，生成一个事务（Proposal），其中包含了 ZXID ；</p>
+</li>
+<li><p>Leader 开始广播该事务，需要注意的是所有节点的通讯都是由一个 FIFO 的队列维护的；</p>
+</li>
+<li><p>Follower 接受到事务之后，将事务写入本地磁盘，写入成功之后返回 Leader 一个 ACK ；</p>
+</li>
+<li><p>Leader 收到过半的 ACK 之后，开始提交本事务，并广播事务提交信息；</p>
+</li>
+<li><p>从节点开始提交本事务。</p>
+</li>
+</ul>
+<p>由以上流程可知，ZooKeeper 通过二阶段提交来保证集群中数据的一致性，因为只需要收到过半的 ACK 就可以提交事务，所以 ZooKeeper 的数据并不是强一致性。</p>
+<p>ZAB 协议的有序性保证是通过几个方面来体现的。</p>
+<p>第一，服务之前用 TCP 协议进行通讯，保证在网络传输中的有序性；</p>
+<p>第二，节点之前都维护了一个 FIFO 的队列，保证全局有序性；</p>
+<p>第三，通过全局递增的 ZXID 保证因果有序性。</p>
+<h3 id="状态流转"><a href="#状态流转" class="headerlink" title="状态流转"></a>状态流转</h3><p>前面介绍了 ZooKeeper 服务状态有四种，ZAB 状态也有四种。这里就简单介绍一个他们之间的状态流转，更能加深对 ZAB 协议在 ZooKeeper 工作流程中作用的理解。</p>
+<p><img src="https://s1.ax1x.com/2020/05/17/Y2LfsK.png" alt="状态流转"></p>
+<ul>
+<li><p>服务在启动或者和 Leader 失联之后服务状态转为 <strong>LOOKING</strong> ；</p>
+</li>
+<li><p>如果 Leader 不存在选举 Leader ，如果存在直接连接 Leader ，此时 ZAB 协议状态为 <strong>ELECTION</strong> ；</p>
+</li>
+<li><p>如果有超过半数的投票选择同一台 Server ，则 Leader 选举结束，被选举为 Leader 的 Server 服务状态为 <strong>LEADING</strong> ，其他 Server 服务状态为 <strong>FOLLOWING/OBSERVING</strong> ；</p>
+</li>
+<li><p>所有 Server 连接上 Leader ，此时 ZAB 协议状态为 <strong>DISCOVERY</strong> ；</p>
+</li>
+<li><p>Leader 同步数据给 Learner（从节点），使各个从节点数据和 Leader 保持一致，此时 ZAB 协议状态为 <strong>SYNCHRONIZATION</strong> ；</p>
+</li>
+<li><p>同步超过一半的 Server 之后，集群对外提供服务，此时 ZAB 状态为 <strong>BROADCAST</strong> 。</p>
+</li>
+</ul>
+<p>可以知道整个 ZooKeeper 服务的工作流程类似一个状态机的转换，而 ZAB 协议就是驱动服务状态流转的关键，理解了 ZAB 就理解了 ZooKeeper 工作的关键原理。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文对 ZAB 协议在 ZooKeeper 中的工作流程做了简单的介绍，希望对大家理解学习 ZooKeeper 有所帮助。</p>
 
             </div>
             <hr/>
@@ -607,7 +657,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/05/16/fen-bu-shi/shi-me-shi-bai-zhan-ting-jiang-jun-wen-ti/">https://www.niewenjun.com/2020/05/16/fen-bu-shi/shi-me-shi-bai-zhan-ting-jiang-jun-wen-ti/</a>
+                    <a href="https://www.niewenjun.com/2020/05/17/fen-bu-shi/zab-xie-yi/">https://www.niewenjun.com/2020/05/17/fen-bu-shi/zab-xie-yi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -645,12 +695,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Raft/">
-                                    <span class="chip bg-color">Raft</span>
+                                <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                    <span class="chip bg-color">协议</span>
                                 </a>
                             
-                                <a href="/tags/%E6%8B%9C%E5%8D%A0%E5%BA%AD/">
-                                    <span class="chip bg-color">拜占庭</span>
+                                <a href="/tags/ZooKeeper/">
+                                    <span class="chip bg-color">ZooKeeper</span>
+                                </a>
+                            
+                                <a href="/tags/ZAB/">
+                                    <span class="chip bg-color">ZAB</span>
                                 </a>
                             
                         </div>
@@ -818,9 +872,69 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/05/17/fen-bu-shi/zab-xie-yi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="ZAB协议">
+                        
+                        <span class="card-title">ZAB协议</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ZAB 协议前言ZAB（Zookeeper Atomic Broadcast）是为 ZooKeeper 设计的崩溃恢复原子广播协议，它保证 ZooKeeper 集群数据的一致性和命令的全局有序性。
+概念介绍在介绍 ZAB 协议之前首先要知道
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">协议</span>
+                    </a>
+                    
+                    <a href="/tags/ZooKeeper/">
+                        <span class="chip bg-color">ZooKeeper</span>
+                    </a>
+                    
+                    <a href="/tags/ZAB/">
+                        <span class="chip bg-color">ZAB</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/05/17/fen-bu-shi/shi-me-shi-zookeeper/">
                     <div class="card-image">
@@ -860,9 +974,9 @@ ZooKeeper 的数据模型ZooKeeper 的数据模型是什么样子呢？它很像
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-17
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -884,74 +998,6 @@ ZooKeeper 的数据模型ZooKeeper 的数据模型是什么样子呢？它很像
                     
                     <a href="/tags/ZAB/">
                         <span class="chip bg-color">ZAB</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="抢红包算法">
-                        
-                        <span class="card-title">抢红包算法</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            抢红包算法
-
-
-
-
-
-发出一个固定金额的红包，由若干个人来抢，需要满足哪些规则？
-
-1.所有人抢到金额之和等于红包金额，不能超过，也不能少于。
-2.每个人至少抢到一分钱。
-3.要保证所有人抢到金额的几率相等。
-
-
-小灰的思路是什么样呢？
-
-
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-15
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">抢红包算法</span>
                     </a>
                     
                 </div>
