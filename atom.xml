@@ -6,10 +6,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-05-17T09:53:29.110Z</updated>
+  <updated>2020-05-18T16:32:12.211Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTTP常见面试题</title>
+    <link href="https://www.niewenjun.com/2020/05/19/408/ji-suan-ji-wang-luo/http-chang-jian-mian-shi-ti/"/>
+    <id>https://www.niewenjun.com/2020/05/19/408/ji-suan-ji-wang-luo/http-chang-jian-mian-shi-ti/</id>
+    <published>2020-05-18T16:20:00.000Z</published>
+    <updated>2020-05-18T16:32:12.211Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;HTTP-常见面试题&quot;&gt;&lt;a href=&quot;#HTTP-常见面试题&quot; class=&quot;headerlink&quot; title=&quot;HTTP 常见面试题&quot;&gt;&lt;/a&gt;HTTP 常见面试题&lt;/h1&gt;&lt;h2 id=&quot;HTTP-和-HTTPS-的区别&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
+    
+    
+      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="HTTP" scheme="https://www.niewenjun.com/tags/HTTP/"/>
+    
+  </entry>
   
   <entry>
     <title>ZAB协议</title>
@@ -563,33 +592,6 @@
       <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
     
       <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL的三种log</title>
-    <link href="https://www.niewenjun.com/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/"/>
-    <id>https://www.niewenjun.com/2020/04/28/shu-ju-ku/mysql-de-san-chong-log/</id>
-    <published>2020-04-28T09:56:00.000Z</published>
-    <updated>2020-04-28T10:01:51.777Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;MySQL-的三种-log&quot;&gt;&lt;a href=&quot;#MySQL-的三种-log&quot; class=&quot;headerlink&quot; title=&quot;MySQL 的三种 log&quot;&gt;&lt;/a&gt;MySQL 的三种 log&lt;/h2&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="MySQL" scheme="https://www.niewenjun.com/tags/MySQL/"/>
     
   </entry>
   
