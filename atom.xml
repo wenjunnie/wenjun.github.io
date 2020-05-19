@@ -6,10 +6,37 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-05-18T16:32:12.211Z</updated>
+  <updated>2020-05-19T14:08:55.402Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>蓄水池采样算法</title>
+    <link href="https://www.niewenjun.com/2020/05/19/suan-fa/xu-shui-chi-cai-yang-suan-fa/"/>
+    <id>https://www.niewenjun.com/2020/05/19/suan-fa/xu-shui-chi-cai-yang-suan-fa/</id>
+    <published>2020-05-19T13:43:00.000Z</published>
+    <updated>2020-05-19T14:08:55.402Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;蓄水池采样算法&quot;&gt;&lt;a href=&quot;#蓄水池采样算法&quot; class=&quot;headerlink&quot; title=&quot;蓄水池采样算法&quot;&gt;&lt;/a&gt;蓄水池采样算法&lt;/h2&gt;&lt;h3 id=&quot;问题描述分析&quot;&gt;&lt;a href=&quot;#问题描述分析&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://www.niewenjun.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="蓄水池采样算法" scheme="https://www.niewenjun.com/tags/%E8%93%84%E6%B0%B4%E6%B1%A0%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTP常见面试题</title>
@@ -551,35 +578,6 @@
         
         
           &lt;h1 id=&quot;Redis-Sentinel&quot;&gt;&lt;a href=&quot;#Redis-Sentinel&quot; class=&quot;headerlink&quot; title=&quot;Redis Sentinel&quot;&gt;&lt;/a&gt;Redis Sentinel&lt;/h1&gt;&lt;h2 id=&quot;哨兵的介绍&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="数据库" scheme="https://www.niewenjun.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="Redis" scheme="https://www.niewenjun.com/tags/Redis/"/>
-    
-      <category term="缓存" scheme="https://www.niewenjun.com/tags/%E7%BC%93%E5%AD%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redis Cluster</title>
-    <link href="https://www.niewenjun.com/2020/04/29/shu-ju-ku/redis-cluster/"/>
-    <id>https://www.niewenjun.com/2020/04/29/shu-ju-ku/redis-cluster/</id>
-    <published>2020-04-29T06:48:00.000Z</published>
-    <updated>2020-04-29T06:51:48.258Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Redis-Cluster&quot;&gt;&lt;a href=&quot;#Redis-Cluster&quot; class=&quot;headerlink&quot; title=&quot;Redis Cluster&quot;&gt;&lt;/a&gt;Redis Cluster&lt;/h1&gt;&lt;h2 id=&quot;面试题&quot;&gt;&lt;a href=&quot;#面试题&quot;
         
       
     
