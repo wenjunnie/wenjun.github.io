@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="线上CPU打到100%解决方案, Wenjun">
+    <meta name="keywords" content="分布式锁实现选型, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>线上CPU打到100%解决方案 | Wenjun</title>
+    <title>分布式锁实现选型 | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">线上CPU打到100%解决方案</h1>
+                    <h1 class="description center-align post-title">分布式锁实现选型</h1>
                 </div>
             </div>
         </div>
@@ -439,12 +439,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CPU/">
-                                <span class="chip bg-color">CPU</span>
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
                             </a>
                         
-                            <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">
-                                <span class="chip bg-color">故障排查</span>
+                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                                <span class="chip bg-color">分布式锁</span>
+                            </a>
+                        
+                            <a href="/tags/ZooKeeper/">
+                                <span class="chip bg-color">ZooKeeper</span>
                             </a>
                         
                     </div>
@@ -455,8 +459,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%AE%9E%E8%B7%B5/" class="post-category">
-                                实践
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                分布式
                             </a>
                         
                     </div>
@@ -468,7 +472,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-04
+                    2020-05-03
                 </div>
                 
 
@@ -477,14 +481,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    1.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    5 分
                 </div>
                 
 
@@ -499,50 +503,90 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="线上-CPU-打到-100-解决方案"><a href="#线上-CPU-打到-100-解决方案" class="headerlink" title="线上 CPU 打到 100% 解决方案"></a>线上 CPU 打到 100% 解决方案</h2><p>事情是这样的……</p>
-<p>我和小组伙伴最近负责的系统今天上线了，因为涉及到的业务特别多所以选择白天发布，怕出问题找不到对应的负责人。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/Y9ssbT.png" alt=""></p>
-<p>看到 15:25 那个 Full GC 没，我发布上去一分钟不到就疯狂 GC ，我当时就吓尿了，马上点了回滚按钮。</p>
-<p>而且我发现 CPU 几乎在我发布的瞬间，直接打到了峰值。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/Y9scaF.png" alt=""></p>
-<p>所幸只发布了一台，我紧张的望向了周围，发现周围的同事没注意到我，我顿时没那么紧张了，拿起桌上用剩下的纸巾搽掉了我鬓角马上留下的汗水。</p>
-<p>我其实已经知道大概是什么问题了，无非就是死循环，或者大对象什么的。</p>
-<p>但是我还是想找个人承担这个锅。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/Y9sHaD.png" alt=""></p>
-<p>我马上找到 ** ，我问他：你刚才是不是点过我的系统？</p>
-<p>他说：对啊，我刚才点了，我本来就经常使用你的系统，咋了？（刚好正中下怀嘻嘻）</p>
-<p>我说过多少次啊，叫你不要乱点，这已经不是第一次了，现在把我的系统点坏了，怎么办？都怪你。</p>
-<p>他：委屈巴巴一副要哭的样子。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/Y9ymLV.gif" alt=""></p>
-<p>我：诶，算了算了，下次注意哈，我去排查下什么情况，看看你点坏了哪里。</p>
-<p>他：* 哥真好，* 哥真棒，* 哥我爱你。</p>
-<p>总算是找到背锅侠了，我就开始排查问题吧。</p>
-<p>注：以下代码都是伪代码，为了还原排查过程。</p>
-<p>一般 CPU 100% 疯狂 GC ，都是死循环的锅，那怎么排查呢？</p>
-<p>先进服务器，用 <strong>top -c</strong> 命令找出当前进程的运行列表。</p>
-<p>按一下 <strong>P</strong> 可以按照 CPU 使用率进行排序。</p>
-<p>显示 Java 进程 PID 为 2609 的 Java 进程消耗最高。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/Y96F0K.png" alt=""></p>
-<p>然后我们需要根据 PID 查出 CPU 里面消耗最高的进程。</p>
-<p>使用命令 <strong>top -Hp 2609</strong> 找出这个进程下面的线程，继续按 <strong>P</strong> 排序。</p>
-<p>可以看到 2854 CPU 消耗最高。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/Y96EkD.png" alt=""></p>
-<p>2854 是十进制的，我们需要转换为十六进制，转换结果：b26</p>
-<p>接下来就需要导出我们的进程快照了，看看这个线程做了啥：</p>
-<pre class=" language-bash"><code class="language-bash">jstack -l 2609 <span class="token operator">></span> ./2609.stack</code></pre>
-<p>再用 <strong>grep</strong> 查看一下线程在文件里做了啥：</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">cat</span> 2609.stack <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">'b26'</span> -C 8</code></pre>
-<p>我这里就随便定位一个，基本上这样查都可以定位到你死循环的那个类，那一行，这里你还可以在 <strong>jstack</strong> 出来的文件中看到很多熟悉的名词，至于是啥，就当是个课后作业了。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/Y968AS.png" alt=""></p>
-<p>我写了个伪代码，看看当时我为啥会写出这个死循环，对了当时我上线的是预发，也是后台系统非线上的，虽然都是自己在玩，但是大家还是要引以为戒。</p>
-<p><img src="https://s1.ax1x.com/2020/05/04/Y96JhQ.png" alt=""></p>
-<p>我当时写了个代码准备去查出数据库的数据，订正下日期，仔细看没问题，但是我忘了数据库的偏移值自己去计算了，因为以前都是框架，自己临时写的就没管。</p>
-<p>导致每次都能查出 10 个数据，在最后判断的时候就一直 True 不退出了，其实最后会退出，但是得循环很多次。</p>
-<p>我这里退出的逻辑比较取巧，就是想着最后一次查询肯定跟我的页数不一样，那就是最后一页了，那我就处理完退出。</p>
-<p>结果没想到也是个坑了。</p>
-<p>大家写的时候也要注意很多小坑，还有代码一定要本地测了再发，我这次其实是本地发现了，然后想着干脆就写个排查经过的吧，机制吧。</p>
-<p>这个 Demo 顺便带大家温习一下线上 100% CPU 故障的排查，下次我可能搞点内存泄露，集群宕机什么的故障，这样就有素材了呀。</p>
-<p>如果真出问题，第一时间找个 ** 这样的背锅侠，排查过程自己去电脑上操作一下。</p>
+                <h2 id="分布式锁实现选型"><a href="#分布式锁实现选型" class="headerlink" title="分布式锁实现选型"></a>分布式锁实现选型</h2><h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><p>我们知道在同一个 JVM 中，可以通过 Volatile 、Synchronized 、ReentrantLock 三个关键字来实现线程的安全。</p>
+<p>那么在分布式系统中这些是无法保证的，所以要通过分布式锁来实现。</p>
+<p>基于分布式锁的实现有多种方案，现针对 Redis 和 ZooKeeper 这两种方式聊一聊功能具体实现方式、优缺点以及各自适用的业务场景。</p>
+<h3 id="基于-Redis-Cluster-模式下的分布式锁的实现"><a href="#基于-Redis-Cluster-模式下的分布式锁的实现" class="headerlink" title="基于 Redis Cluster 模式下的分布式锁的实现"></a>基于 Redis Cluster 模式下的分布式锁的实现</h3><h4 id="基于-setnx-锁实现"><a href="#基于-setnx-锁实现" class="headerlink" title="基于 setnx 锁实现"></a>基于 setnx 锁实现</h4><h5 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a>加锁</h5><p>正常基于 Redis 自带的 <code>setnx</code> 命令就可以实现简单的加锁功能：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token operator">></span> setnx <span class="token keyword">key</span> <span class="token keyword">value</span></code></pre>
+<p>Key 作为锁的唯一标识，当线程 <code>setnx</code> 返回 1 时，说明原本 Key 不存在，该线程成功得到了锁；如果返回的结果为 0 ，则说明 Key 已经存在，线程获取锁失败。</p>
+<h5 id="解锁"><a href="#解锁" class="headerlink" title="解锁"></a>解锁</h5><p>当线程获取锁，执行完任务后，需要释放锁，以便后续线程使用。可以通过 <code>del</code> 这个 Key 来实现：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token operator">></span> del <span class="token keyword">key</span></code></pre>
+<p>但是由于加锁和解锁是分为两步实现，不是原子操作，所以可能会出现中间状态：即加锁完成后，没有解锁（或解锁失败）；导致资源锁住。</p>
+<p>基于此有两种方案：</p>
+<ol>
+<li><p>通过制定 key 的过期时间，让锁到期后自动释放：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token operator">></span> expire <span class="token keyword">key</span></code></pre>
+<p>显而易见，这边也有一个上述的风险点：就是非原子操作，可能存在中间状态。</p>
+<p>所以我们引入第二种方案。</p>
+</li>
+<li><p>基于 <code>set</code> 原子操作实现：</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token operator">></span> <span class="token keyword">set</span> <span class="token keyword">key</span> <span class="token keyword">value</span> <span class="token punctuation">[</span>EX seconds<span class="token punctuation">]</span> <span class="token punctuation">[</span>PX milliseconds<span class="token punctuation">]</span> <span class="token punctuation">[</span>NX<span class="token operator">|</span>XX<span class="token punctuation">]</span></code></pre>
+<ul>
+<li><strong>EX seconds ：</strong>设置键 key 的过期时间，单位是秒;</li>
+<li><strong>PX milliseconds ：</strong>设置键 key 的过期时间，单位是毫秒;</li>
+<li><strong>NX ：</strong>只有键 key 不存在的时候才会设置 key 的值；</li>
+<li><strong>XX ：</strong>只有键 key 存在的时候才会设置 key 的值。</li>
+</ul>
+<p>通过 <code>set (key, value, EX a, NX)</code> 取代 <code>setnx</code> 来实现原子加锁（自动释放锁）操作。</p>
+<blockquote>
+<p>Squirrel-Client 中的 API setnx 即是基于此实现，所以在使用中直接调用 API 的 setnx 。</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="基于-Redis-实现分布式锁的一些问题"><a href="#基于-Redis-实现分布式锁的一些问题" class="headerlink" title="基于 Redis 实现分布式锁的一些问题"></a>基于 Redis 实现分布式锁的一些问题</h4><ul>
+<li><p>在高并发下的分布式锁实现中，key 的过期肯定不能设置的太长，否则会影响后续线程持有该锁；</p>
+</li>
+<li><p>但是如果设置过期时间很短，直到 key 过期，持有该锁的线程还未执行完任务；接着下一个线程获取到该锁，这时候前一个线程执行完成后触发 <code>del</code> 释放该锁，而这把锁这个时候其实是另外一个线程持有；</p>
+</li>
+<li><p>获取锁是非阻塞的，无论成功还是失败就直接返回；</p>
+</li>
+<li><p>锁公平问题，所有等待线程同时发起获取锁命令操作。</p>
+</li>
+</ul>
+<p>针对上述问题需要另外服务来保证实现：</p>
+<ol>
+<li>守护线程：如果某个线程在 <code>expire</code> 时间内，还未执行完成，守护线程自动 <code>expire</code> 一个新过期时间，直到该线程执行完成或释放；</li>
+<li>释放验证：线程加锁前通过线程 ID 和 Key Value 匹配，释放前通过两者判断是否一致，一致再释放该锁，避免错误释放其他线程执行时持有相同的锁（原子性可以通过 <strong>Lua</strong> 脚本来实现）；</li>
+<li>阻塞锁： 通过 while true 之类的机制去阻塞代码实现；</li>
+<li>公平锁：可以通过将所有等待线程放入同一个队列来实现。</li>
+</ol>
+<h5 id="可重入性"><a href="#可重入性" class="headerlink" title="可重入性"></a>可重入性</h5><p> Java 中的 Lock 对象以及 Synchronized 关键字语块都可具有可重入性，可以实现同一个线程中共用同一把锁；避免死锁发生的可能。</p>
+<p>而在 Redis 上述实现中则没有相应的功能，如果业务上需要，则需在业务代码中实现其逻辑。</p>
+<h5 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h5><p>Redis Cluster 在 Master 异常情况下，会发生主从切换，而主从是异步复制，极大可能导致数据丢失，从而导致锁的失效。这块安全性方面 Redis Cluster 无法保证。</p>
+<p>但是 Redis 作者实现了基于多节点的高可用分布式锁的算法 <a href="https://redis.io/topics/distlock" target="_blank" rel="noopener">RedLock</a> 。有兴趣的可以了解一下。</p>
+<h3 id="基于-ZooKeeper-集群模式下的分布锁的实现"><a href="#基于-ZooKeeper-集群模式下的分布锁的实现" class="headerlink" title="基于 ZooKeeper 集群模式下的分布锁的实现"></a>基于 ZooKeeper 集群模式下的分布锁的实现</h3><p>ZooKeeper 通过临时有序（顺序）节点实现分布式锁。</p>
+<p>所谓临时顺序节点就是 ZooKeeper 根据创建的时间给该节点名称进行编号，当创建节点的客户端与 ZooKeeper 断开连接后，临时节点就被删除。</p>
+<p>ZooKeeper 通过创建临时有序节点实现上锁，只有序号最小（或顺序最靠前）的可以成功获取到锁；如果该序号不是最小（或不是顺序最靠前）则向它前一个节点注册 <strong>Watcher</strong> ，通过 watch 来监听前一个节点是否存在，等待 watch 事件（即监听节点的状态变化），如果监听到 watch 事件发生，则再次判断该节点是否为序号最小节点，如果是则成功获取锁，否则，继续监听等待。</p>
+<h4 id="ZooKeeper-实现分布式锁的功能"><a href="#ZooKeeper-实现分布式锁的功能" class="headerlink" title="ZooKeeper 实现分布式锁的功能"></a>ZooKeeper 实现分布式锁的功能</h4><p>ZooKeeper 实现分布式锁的方式较为简单。</p>
+<ul>
+<li>由于 ZooKeeper 使用集群模式，可以避免单点故障；</li>
+<li>临时有序节点，临时节点可以避免锁的中间状态（即永久持有该锁）；有序可以保障锁的公平问题；</li>
+<li>通过 watch 实现阻塞。</li>
+</ul>
+<h4 id="ZooKeeper-实现分布式锁的一些问题"><a href="#ZooKeeper-实现分布式锁的一些问题" class="headerlink" title="ZooKeeper 实现分布式锁的一些问题"></a>ZooKeeper 实现分布式锁的一些问题</h4><p>每次在创建锁和释放锁的过程中，都要动态创建、销毁瞬时节点来实现锁功能。ZooKeeper 中创建和删除节点只能通过 Leader 服务器来执行，然后将数据同步到所有的 Follower 机器上。</p>
+<p>所以性能开销这块比 Redis 大，即并发性能不如 Redis 。</p>
+<h3 id="Redis-和-ZooKeeper-分布锁实现比较"><a href="#Redis-和-ZooKeeper-分布锁实现比较" class="headerlink" title="Redis 和 ZooKeeper 分布锁实现比较"></a>Redis 和 ZooKeeper 分布锁实现比较</h3><table>
+<thead>
+<tr>
+<th>实现方式</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Redis Cluster</td>
+<td>实现指令性能较高。</td>
+<td>1. 实现较为复杂；<br />2. 需要额外多个服务来保障；<br />3. 安全性较低。</td>
+<td>高并发的分布式锁实现。</td>
+</tr>
+<tr>
+<td>ZooKeeper</td>
+<td>1. 现有的框架，实现简单；<br />2. 等待锁队列，提升抢占锁效率。</td>
+<td>添加和删除节点性能较低。</td>
+<td>并发量小，安全性要求较高的业务场景。</td>
+</tr>
+</tbody></table>
 
             </div>
             <hr/>
@@ -568,7 +612,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/05/04/shi-jian/xian-shang-cpu-da-dao-100-jie-jue-fang-an/">https://www.niewenjun.com/2020/05/04/shi-jian/xian-shang-cpu-da-dao-100-jie-jue-fang-an/</a>
+                    <a href="https://www.niewenjun.com/2020/05/03/fen-bu-shi/fen-bu-shi-suo-shi-xian-xuan-xing/">https://www.niewenjun.com/2020/05/03/fen-bu-shi/fen-bu-shi-suo-shi-xian-xuan-xing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -606,12 +650,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CPU/">
-                                    <span class="chip bg-color">CPU</span>
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
                                 </a>
                             
-                                <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">
-                                    <span class="chip bg-color">故障排查</span>
+                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                                    <span class="chip bg-color">分布式锁</span>
+                                </a>
+                            
+                                <a href="/tags/ZooKeeper/">
+                                    <span class="chip bg-color">ZooKeeper</span>
                                 </a>
                             
                         </div>
@@ -783,21 +831,22 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/">
+                <a href="/2020/05/04/shi-jian/xian-shang-cpu-da-dao-100-jie-jue-fang-an/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="计算机网络常见面试题">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="线上CPU打到100%解决方案">
                         
-                        <span class="card-title">计算机网络常见面试题</span>
+                        <span class="card-title">线上CPU打到100%解决方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            计算机网络常见面试题一 OSI 与 TCP/IP 各层的结构与功能，都有哪些协议？学习计算机网络时我们一般采用折中的办法，也就是中和 OSI 和 TCP/IP 的优点，采用一种只有五层协议的体系结构，这样既简洁又能将概念阐述清楚。
+                            线上 CPU 打到 100% 解决方案事情是这样的……
+我和小组伙伴最近负责的系统今天上线了，因为涉及到的业务特别多所以选择白天发布，怕出问题找不到对应的负责人。
 
-结合互
+看到 15:25 那个 Full GC 没，我发布上去一分钟不到就疯狂 G
                         
                     </div>
                     <div class="publish-info">
@@ -808,8 +857,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/408/" class="post-category">
-                                    408
+                            <a href="/categories/%E5%AE%9E%E8%B7%B5/" class="post-category">
+                                    实践
                                 </a>
                             
                             
@@ -819,8 +868,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">计算机网络</span>
+                    <a href="/tags/CPU/">
+                        <span class="chip bg-color">CPU</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">
+                        <span class="chip bg-color">故障排查</span>
                     </a>
                     
                 </div>
@@ -834,21 +887,23 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/03/fen-bu-shi/fen-bu-shi-suo-shi-xian-xuan-xing/">
+                <a href="/2020/05/03/fen-bu-shi/redis-fen-bu-shi-suo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="分布式锁实现选型">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Redis分布式锁">
                         
-                        <span class="card-title">分布式锁实现选型</span>
+                        <span class="card-title">Redis分布式锁</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            分布式锁实现选型分布式锁我们知道在同一个 JVM 中，可以通过 Volatile 、Synchronized 、ReentrantLock 三个关键字来实现线程的安全。
-那么在分布式系统中这些是无法保证的，所以要通过分布式锁来实现。
-基于分
+                            Redis 分布式锁前言上一章节我提到了基于 ZK 分布式锁的实现，这章节就来说一下基于 Redis 的分布式锁实现吧。
+
+ZK 实现分布式锁的传送门：ZooKeeper分布式锁
+
+在开始提到 Redis 分布式锁之前，我想跟大家聊点 Re
                         
                     </div>
                     <div class="publish-info">
@@ -876,10 +931,6 @@
                     
                     <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
                         <span class="chip bg-color">分布式锁</span>
-                    </a>
-                    
-                    <a href="/tags/ZooKeeper/">
-                        <span class="chip bg-color">ZooKeeper</span>
                     </a>
                     
                 </div>
