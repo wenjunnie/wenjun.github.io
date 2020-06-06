@@ -506,7 +506,7 @@
 <p>ArrayList 实现了 <strong>RandomAccess 接口</strong> ， <strong>RandomAccess</strong> 是一个标志接口，表明实现这个这个接口的 List 集合是支持<strong>快速随机访问</strong>的。在 ArrayList 中，我们可以通过元素的序号快速获取元素对象，这就是快速随机访问。</p>
 <p>ArrayList 实现了 <strong>Cloneable 接口</strong>，即覆盖了函数 <code>clone()</code> ，<strong>能被克隆</strong>。</p>
 <p>ArrayList 实现了 <strong>java.io.Serializable 接口</strong>，这意味着 ArrayList <strong>支持序列化</strong>，<strong>能通过序列化去传输</strong>。</p>
-<p>和 Vector 不同，<strong>ArrayList 中的操作不是线程安全的</strong>！所以，建议在单线程中才使用 ArrayList ，而在多线程中可以选择 <strong>Vector</strong> 或者 <strong>CopyOnWriteArrayList</strong> 。</p>
+<p>和 Vector 不同，<strong>ArrayList 中的操作不是线程安全的</strong>！所以，建议在单线程中才使用 ArrayList ，而在多线程中可以选择 <strong>Vector</strong> 或者 <strong>CopyOnWriteArrayList（读多写少）</strong>。</p>
 <h3 id="ArrayList-核心源码"><a href="#ArrayList-核心源码" class="headerlink" title="ArrayList 核心源码"></a>ArrayList 核心源码</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> java<span class="token punctuation">.</span>util<span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>function<span class="token punctuation">.</span>Consumer<span class="token punctuation">;</span>

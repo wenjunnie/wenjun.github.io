@@ -515,7 +515,7 @@
 </li>
 </ul>
 <h4 id="1-2-2-Spring-MVC-的-Controller"><a href="#1-2-2-Spring-MVC-的-Controller" class="headerlink" title="1.2.2 Spring MVC 的 Controller"></a>1.2.2 Spring MVC 的 Controller</h4><p>Spring MVC 结合 Front Controller 模式以及 Page Controller 模式，将单一的 Servlet 作为整个应用的前端控制器 DispatcherServlet ，该 Servlet 接收到具体的 Web 请求之后，按照可配置的映射信息，将待处理的 Web 请求转发给次级控制器处理：（ sub-controller 即 org.springframework.web.servlet.mvc.Controller ）</p>
-<p><img src="https://s1.ax1x.com/2020/05/29/tmKs6e.png" alt="draw.io"></p>
+<p><img src="https://s1.ax1x.com/2020/05/29/tmKs6e.png" alt=""></p>
 <h3 id="1-3-Spring-MVC-中的基本概念"><a href="#1-3-Spring-MVC-中的基本概念" class="headerlink" title="1.3 Spring MVC 中的基本概念"></a>1.3 Spring MVC 中的基本概念</h3><h4 id="1-3-1-本文出现的词汇大全"><a href="#1-3-1-本文出现的词汇大全" class="headerlink" title="1.3.1 本文出现的词汇大全"></a>1.3.1 本文出现的词汇大全</h4><p>这里的中文名都是个人命名词汇，可能与其他描述有偏差，文章中的名词均以这里为准。</p>
 <table>
 <thead>
@@ -577,7 +577,7 @@
 <span class="token keyword">private</span> <span class="token keyword">final</span> Method bridgedMethod<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//当前方法的参数</span>
 <span class="token keyword">private</span> <span class="token keyword">final</span> MethodParameter<span class="token punctuation">[</span><span class="token punctuation">]</span> parameters<span class="token punctuation">;</span></code></pre>
-<h3 id="1-3-3-什么是处理链？"><a href="#1-3-3-什么是处理链？" class="headerlink" title="1.3.3 什么是处理链？"></a>1.3.3 什么是处理链？</h3><p>Spring MVC 不仅要执行处理器中包含的方法，它自己也有许多工作，例如执行多种拦截器、异常处理等。所有这些方法都会聚合到一个处理器链当中。所以处理器链通常包含<strong>一个处理器</strong>和<strong>多个拦截器</strong>。</p>
+<h4 id="1-3-3-什么是处理链？"><a href="#1-3-3-什么是处理链？" class="headerlink" title="1.3.3 什么是处理链？"></a>1.3.3 什么是处理链？</h4><p>Spring MVC 不仅要执行处理器中包含的方法，它自己也有许多工作，例如执行多种拦截器、异常处理等。所有这些方法都会聚合到一个处理器链当中。所以处理器链通常包含<strong>一个处理器</strong>和<strong>多个拦截器</strong>。</p>
 <p>org.springframework.web.servlet.HandlerExecutionChain 的定义如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HandlerExecutionChain</span> <span class="token punctuation">{</span>
 <span class="token comment" spellcheck="true">//处理器</span>
@@ -650,7 +650,7 @@
 <h4 id="2-3-2-常用参数解析器——RequestParamMethodArgumentResolver"><a href="#2-3-2-常用参数解析器——RequestParamMethodArgumentResolver" class="headerlink" title="2.3.2 常用参数解析器——RequestParamMethodArgumentResolver"></a>2.3.2 常用参数解析器——RequestParamMethodArgumentResolver</h4><p>让我们挑一个最常见的参数解析器来研究一下，当方法的参数被 <strong>@RequestParam</strong> 注解修饰的时候，就会进入 RequestParamMethodArgumentResolver 进行解析。</p>
 <p><img src="https://s1.ax1x.com/2020/05/29/tmMmcD.png" alt=""></p>
 <p>RequestParamMethodArgumentResolver 的参数解析流程图，其中红色线表示在我们项目中绝大多数参数解析的流程：</p>
-<p><img src="http://i1.fuimg.com/720005/1e8a5665f7e8451a.png" alt=""></p>
+<p><img src="https://ae01.alicdn.com/kf/Hbcd3ee2a24304bc2a032b65c280ed3cfT.jpg" alt=""></p>
 <p>目前我们开发使用到的参数基本都是由 <strong>ConversionService</strong> 进行解析的了。ConversionService 是 spring-core 包中专门进行类型转换的工具，十分强大。</p>
 <h3 id="2-4-视图解析阶段——ViewResolver"><a href="#2-4-视图解析阶段——ViewResolver" class="headerlink" title="2.4 视图解析阶段——ViewResolver"></a><del>2.4 视图解析阶段——ViewResolver</del></h3><p>在第二节一开始的生命周期图中 DispatcherServlet 总是返回视图给用户的意思现在并不准确了。目前更多的是 DispatcherServlet 返回数据给前端，前端渲染视图再给用户。<br><strong>所以在如今的前后端分离的场景中，Spring MVC 已经名存实亡，更多的是 Spring MC 。</strong>这里就不深入探讨视图解析阶段了。</p>
 <h2 id="3-常用的注解与接口"><a href="#3-常用的注解与接口" class="headerlink" title="3 常用的注解与接口"></a>3 常用的注解与接口</h2><h3 id="3-1-ResponseBody-与-RequestParam"><a href="#3-1-ResponseBody-与-RequestParam" class="headerlink" title="3.1 @ResponseBody 与 @RequestParam"></a>3.1 @ResponseBody 与 @RequestParam</h3><ul>
@@ -691,9 +691,9 @@
 <p><img src="https://s1.ax1x.com/2020/05/29/tmMWDJ.png" alt=""></p>
 <p><strong>但是这里需要注意的是，多个异常处理器是串行执行的，只要有一个异常处理器返回的 ModelAndView 不是 null ，执行就结束了。</strong></p>
 <h2 id="4-参考"><a href="#4-参考" class="headerlink" title="4 参考"></a>4 参考</h2><ul>
-<li><p><a href="https://spring.io/projects/spring-framework" target="_blank" rel="noopener">SpringMVC 官方文档</a></p>
+<li><p><a href="https://spring.io/projects/spring-framework" target="_blank" rel="noopener">Spring MVC 官方文档</a></p>
 </li>
-<li><p><a href="https://km.sankuai.com/page/47794821" target="_blank" rel="noopener">【SpringMVC】数据类型转换方式</a></p>
+<li><p><a href="https://km.sankuai.com/page/47794821" target="_blank" rel="noopener">【Spring MVC】数据类型转换方式</a></p>
 </li>
 <li><p><a href="https://km.sankuai.com/page/28098548" target="_blank" rel="noopener">【Spring Framework手册】Spring MVC框架基础</a></p>
 </li>
@@ -940,32 +940,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/29/kuang-jia/spring/spring-mvc/">
+                <a href="/2020/06/07/kuang-jia/spring/spring-chang-jian-wen-ti-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Spring MVC">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Spring常见问题总结">
                         
-                        <span class="card-title">Spring MVC</span>
+                        <span class="card-title">Spring常见问题总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring MVC1 概念梳理1.1 MVC 框架
-MVC 全名是 Model View Controller ，是 模型(model)－视图(view)－控制器(controller) 的缩写，一种软件设计典范。
-用一种业务逻辑、数据、
+                            Spring 常见问题总结1. 什么是 Spring 框架?Spring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。
+我们一般说 Spring 框架指的都是 Spring Framework ，它是很多模块的集合，
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-29
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -978,16 +976,11 @@ MVC 全名是 Model View Controller ，是 模型(model)－视图(view)－控制
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/Spring/">
                         <span class="chip bg-color">Spring</span>
-                    </a>
-                    
-                    <a href="/tags/Spring-MVC/">
-                        <span class="chip bg-color">Spring MVC</span>
                     </a>
                     
                 </div>

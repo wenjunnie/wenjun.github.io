@@ -6,17 +6,44 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-05-28T18:43:45.407Z</updated>
+  <updated>2020-06-06T17:42:19.253Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring常见问题总结</title>
+    <link href="https://www.niewenjun.com/2020/06/07/kuang-jia/spring/spring-chang-jian-wen-ti-zong-jie/"/>
+    <id>https://www.niewenjun.com/2020/06/07/kuang-jia/spring/spring-chang-jian-wen-ti-zong-jie/</id>
+    <published>2020-06-06T17:42:00.000Z</published>
+    <updated>2020-06-06T17:42:19.253Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Spring-常见问题总结&quot;&gt;&lt;a href=&quot;#Spring-常见问题总结&quot; class=&quot;headerlink&quot; title=&quot;Spring 常见问题总结&quot;&gt;&lt;/a&gt;Spring 常见问题总结&lt;/h2&gt;&lt;h3 id=&quot;1-什么是-Spring-框架&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="框架" scheme="https://www.niewenjun.com/categories/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+      <category term="Spring" scheme="https://www.niewenjun.com/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring MVC</title>
     <link href="https://www.niewenjun.com/2020/05/29/kuang-jia/spring/spring-mvc/"/>
     <id>https://www.niewenjun.com/2020/05/29/kuang-jia/spring/spring-mvc/</id>
     <published>2020-05-28T18:28:00.000Z</published>
-    <updated>2020-05-28T18:43:45.407Z</updated>
+    <updated>2020-06-06T18:00:40.397Z</updated>
     
     <summary type="html">
     
@@ -557,35 +584,6 @@
     
     
       <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线上CPU打到100%解决方案</title>
-    <link href="https://www.niewenjun.com/2020/05/04/shi-jian/xian-shang-cpu-da-dao-100-jie-jue-fang-an/"/>
-    <id>https://www.niewenjun.com/2020/05/04/shi-jian/xian-shang-cpu-da-dao-100-jie-jue-fang-an/</id>
-    <published>2020-05-04T08:20:00.000Z</published>
-    <updated>2020-05-04T14:13:34.668Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;线上-CPU-打到-100-解决方案&quot;&gt;&lt;a href=&quot;#线上-CPU-打到-100-解决方案&quot; class=&quot;headerlink&quot; title=&quot;线上 CPU 打到 100% 解决方案&quot;&gt;&lt;/a&gt;线上 CPU 打到 100%
-        
-      
-    
-    </summary>
-    
-    
-      <category term="实践" scheme="https://www.niewenjun.com/categories/%E5%AE%9E%E8%B7%B5/"/>
-    
-    
-      <category term="CPU" scheme="https://www.niewenjun.com/tags/CPU/"/>
-    
-      <category term="故障排查" scheme="https://www.niewenjun.com/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/"/>
     
   </entry>
   
