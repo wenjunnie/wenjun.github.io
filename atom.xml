@@ -6,10 +6,37 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-06-06T17:42:19.253Z</updated>
+  <updated>2020-06-07T10:47:40.758Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MyBatis学习笔记</title>
+    <link href="https://www.niewenjun.com/2020/06/07/kuang-jia/shu-ju-ku/mybatis-xue-xi-bi-ji/"/>
+    <id>https://www.niewenjun.com/2020/06/07/kuang-jia/shu-ju-ku/mybatis-xue-xi-bi-ji/</id>
+    <published>2020-06-07T10:47:00.000Z</published>
+    <updated>2020-06-07T10:47:40.758Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;MyBatis-学习笔记&quot;&gt;&lt;a href=&quot;#MyBatis-学习笔记&quot; class=&quot;headerlink&quot; title=&quot;MyBatis 学习笔记&quot;&gt;&lt;/a&gt;MyBatis 学习笔记&lt;/h1&gt;&lt;h2 id=&quot;一、为什么要用-MyBatis-？&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="框架" scheme="https://www.niewenjun.com/categories/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+      <category term="MyBatis" scheme="https://www.niewenjun.com/tags/MyBatis/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring常见问题总结</title>
@@ -557,33 +584,6 @@
       <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
       <category term="TCP" scheme="https://www.niewenjun.com/tags/TCP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>计算机网络常见面试题</title>
-    <link href="https://www.niewenjun.com/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/"/>
-    <id>https://www.niewenjun.com/2020/05/04/408/ji-suan-ji-wang-luo/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/</id>
-    <published>2020-05-04T11:15:00.000Z</published>
-    <updated>2020-05-06T03:46:32.535Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;计算机网络常见面试题&quot;&gt;&lt;a href=&quot;#计算机网络常见面试题&quot; class=&quot;headerlink&quot; title=&quot;计算机网络常见面试题&quot;&gt;&lt;/a&gt;计算机网络常见面试题&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
-    
-    
-      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
