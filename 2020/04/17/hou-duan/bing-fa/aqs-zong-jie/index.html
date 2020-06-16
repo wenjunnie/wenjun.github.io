@@ -720,10 +720,10 @@ semaphore<span class="token punctuation">.</span><span class="token function">re
 <p><a href="https://github.com/Snailclimb/JavaGuide/issues/645" target="_blank" rel="noopener">issue645补充内容</a> ：Semaphore 与 CountDownLatch 一样，也是<strong>共享锁</strong>的一种实现。它默认构造 AQS 的 state 为 permits 。当执行任务的线程数量超出 permits ，那么多余的线程将会被放入阻塞队列 Park ，并自旋判断 state 是否大于 0 。只有当 state 大于 0 的时候，阻塞的线程才能继续执行，此时先前执行任务的线程继续执行 <code>release()</code> 方法，<code>release()</code> 方法使得 state 的变量会加 1 ，那么自旋的线程便会判断成功。如此，每次只有最多不超过 permits 数量的线程能自旋成功，便限制了执行任务线程的数量。</p>
 </blockquote>
 <p>由于篇幅问题，如果对 Semaphore 源码感兴趣的朋友可以看下这篇文章：<a href="https://juejin.im/post/5ae755366fb9a07ab508adc6" target="_blank" rel="noopener">https://juejin.im/post/5ae755366fb9a07ab508adc6</a></p>
-<h3 id="4-CountDownLatch-（倒计时器）"><a href="#4-CountDownLatch-（倒计时器）" class="headerlink" title="4 CountDownLatch （倒计时器）"></a>4 CountDownLatch （倒计时器）</h3><p>CountDownLatch 允许 count 个线程阻塞在一个地方，直至所有线程的任务都执行完毕。在 Java 并发中，countdownlatch 的概念是一个常见的面试题，所以一定要确保你很好的理解了它。</p>
+<h3 id="4-CountDownLatch-（倒计时器）"><a href="#4-CountDownLatch-（倒计时器）" class="headerlink" title="4 CountDownLatch （倒计时器）"></a>4 CountDownLatch （倒计时器）</h3><p>CountDownLatch 允许 count 个线程阻塞在一个地方，直至所有线程的任务都执行完毕。在 Java 并发中，CountDownLatch 的概念是一个常见的面试题，所以一定要确保你很好的理解了它。</p>
 <p>CountDownLatch 是共享锁的一种实现，它默认构造 AQS 的 state 值为 count 。当线程使用  <code>countDown()</code> 方法时，其实使用了 <code>tryReleaseShared()</code> 方法以 <strong>CAS</strong> 的操作来减少 state ，直至 state 为 0 就代表所有的线程都调用了 <code>countDown()</code> 方法。当调用 <code>await()</code> 方法的时候，如果state不为 0 ，就代表仍然有线程没有调用 <code>countDown()</code> 方法，那么就把已经调用过 <code>countDown()</code> 的线程都放入阻塞队列 Park ，并自旋 <strong>CAS</strong> 判断 state == 0 ，直至最后一个线程调用了 <code>countDown()</code> ，使得 state == 0，于是阻塞的线程便判断成功，全部往下执行。</p>
 <h4 id="4-1-CountDownLatch-的两种典型用法"><a href="#4-1-CountDownLatch-的两种典型用法" class="headerlink" title="4.1 CountDownLatch 的两种典型用法"></a>4.1 CountDownLatch 的两种典型用法</h4><ol>
-<li>某一线程在开始运行前等待 N 个线程执行完毕。将 <code>CountDownLatch</code> 的计数器初始化为 N ：<code>new CountDownLatch(N)</code> ，每当一个任务线程执行完毕，就将计数器减 1 <code>countdownlatch.countDown()</code> ，当计数器的值变为 0 时，在 <code>CountDownLatch</code> 上 <code>await()</code> 的线程就会被唤醒。一个典型应用场景就是启动一个服务时，主线程需要等待多个组件加载完毕，之后再继续执行。</li>
+<li>某一线程在开始运行前等待 N 个线程执行完毕。将 <code>CountDownLatch</code> 的计数器初始化为 N：<code>new CountDownLatch(N)</code> ，每当一个任务线程执行完毕，就将计数器减 1：<code>countdownlatch.countDown()</code> ，当计数器的值变为 0 时，在 <code>CountDownLatch</code> 上 <code>await()</code> 的线程就会被唤醒。一个典型应用场景就是启动一个服务时，主线程需要等待多个组件加载完毕，之后再继续执行。</li>
 <li>实现多个线程开始执行任务的最大并行性。注意是并行性，不是并发，强调的是多个线程在某一时刻同时开始执行。类似于赛跑，将多个线程放到起点，等待发令枪响，然后同时开跑。做法是初始化一个共享的 <code>CountDownLatch</code> 对象，将其计数器初始化为 1 ：<code>new CountDownLatch(1)</code> ，多个线程在开始执行任务前首先 <code>coundownlatch.await()</code> ，当主线程调用 <code>countDown()</code> 时，计数器变为 0 ，多个线程同时被唤醒。</li>
 </ol>
 <h4 id="4-2-CountDownLatch-的使用示例"><a href="#4-2-CountDownLatch-的使用示例" class="headerlink" title="4.2 CountDownLatch 的使用示例"></a>4.2 CountDownLatch 的使用示例</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CountDownLatchExample1</span> <span class="token punctuation">{</span>
@@ -830,7 +830,7 @@ semaphore<span class="token punctuation">.</span><span class="token function">re
     System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"threadnum:"</span> <span class="token operator">+</span> threadnum <span class="token operator">+</span> <span class="token string">"is finish"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>运行结果，如下：</p>
+<p>运行结果如下：</p>
 <pre class=" language-java"><code class="language-java">threadnum<span class="token operator">:</span>0is ready
 threadnum<span class="token operator">:</span>1is ready
 threadnum<span class="token operator">:</span>2is ready
@@ -852,7 +852,7 @@ threadnum<span class="token operator">:</span>8is finish
 threadnum<span class="token operator">:</span>7is finish
 threadnum<span class="token operator">:</span>6is finish
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre>
-<p>可以看到当线程数量也就是请求数量达到我们定义的 5 个的时候， <code>await</code>方法之后的方法才被执行。</p>
+<p>可以看到当线程数量也就是请求数量达到我们定义的 5 个的时候， <code>await()</code> 方法之后的方法才被执行。</p>
 <p>另外，CyclicBarrier 还提供一个更高级的构造函数 <code>CyclicBarrier(int parties, Runnable barrierAction)</code> ，用于在线程到达屏障时，优先执行 <code>barrierAction</code> ，方便处理更复杂的业务场景。示例代码如下：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CyclicBarrierExample3</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 请求的数量</span>
@@ -890,7 +890,7 @@ threadnum<span class="token operator">:</span>6is finish
     System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"threadnum:"</span> <span class="token operator">+</span> threadnum <span class="token operator">+</span> <span class="token string">"is finish"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>运行结果，如下：</p>
+<p>运行结果如下：</p>
 <pre class=" language-java"><code class="language-java">threadnum<span class="token operator">:</span>0is ready
 threadnum<span class="token operator">:</span>1is ready
 threadnum<span class="token operator">:</span>2is ready

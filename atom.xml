@@ -6,10 +6,89 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-06-07T10:47:40.758Z</updated>
+  <updated>2020-06-16T17:52:09.594Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>停更通知</title>
+    <link href="https://www.niewenjun.com/2020/06/17/ting-geng-tong-zhi/"/>
+    <id>https://www.niewenjun.com/2020/06/17/ting-geng-tong-zhi/</id>
+    <published>2020-06-16T17:46:00.000Z</published>
+    <updated>2020-06-16T17:52:09.594Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;停更通知&quot;&gt;&lt;a href=&quot;#停更通知&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="通知" scheme="https://www.niewenjun.com/tags/%E9%80%9A%E7%9F%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>团灭打家劫舍问题</title>
+    <link href="https://www.niewenjun.com/2020/06/17/suan-fa/dong-tai-gui-hua/tuan-mie-da-jia-jie-she-wen-ti/"/>
+    <id>https://www.niewenjun.com/2020/06/17/suan-fa/dong-tai-gui-hua/tuan-mie-da-jia-jie-she-wen-ti/</id>
+    <published>2020-06-16T17:37:00.000Z</published>
+    <updated>2020-06-16T17:53:50.235Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;团灭打家劫舍问题&quot;&gt;&lt;a href=&quot;#团灭打家劫舍问题&quot; class=&quot;headerlink&quot; title=&quot;团灭打家劫舍问题&quot;&gt;&lt;/a&gt;团灭打家劫舍问题&lt;/h2&gt;&lt;p&gt;有读者私下问我 LeetCode「打家劫舍」系列问题（英文版叫 House
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://www.niewenjun.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="动态规划" scheme="https://www.niewenjun.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>团灭股票买卖问题</title>
+    <link href="https://www.niewenjun.com/2020/06/17/suan-fa/dong-tai-gui-hua/tuan-mie-gu-piao-mai-mai-wen-ti/"/>
+    <id>https://www.niewenjun.com/2020/06/17/suan-fa/dong-tai-gui-hua/tuan-mie-gu-piao-mai-mai-wen-ti/</id>
+    <published>2020-06-16T16:46:00.000Z</published>
+    <updated>2020-06-16T18:01:26.893Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;团灭股票买卖问题&quot;&gt;&lt;a href=&quot;#团灭股票买卖问题&quot; class=&quot;headerlink&quot; title=&quot;团灭股票买卖问题&quot;&gt;&lt;/a&gt;团灭股票买卖问题&lt;/h2&gt;&lt;p&gt;读完本文，你不仅学会了算法套路，还可以顺便去 LeetCode
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://www.niewenjun.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="动态规划" scheme="https://www.niewenjun.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
   
   <entry>
     <title>MyBatis学习笔记</title>
@@ -154,8 +233,8 @@
   
   <entry>
     <title>约瑟夫问题</title>
-    <link href="https://www.niewenjun.com/2020/05/20/suan-fa/yue-se-fu-wen-ti/"/>
-    <id>https://www.niewenjun.com/2020/05/20/suan-fa/yue-se-fu-wen-ti/</id>
+    <link href="https://www.niewenjun.com/2020/05/20/suan-fa/suan-fa-si-wei/yue-se-fu-wen-ti/"/>
+    <id>https://www.niewenjun.com/2020/05/20/suan-fa/suan-fa-si-wei/yue-se-fu-wen-ti/</id>
     <published>2020-05-20T13:31:00.000Z</published>
     <updated>2020-05-20T13:46:38.724Z</updated>
     
@@ -181,8 +260,8 @@
   
   <entry>
     <title>蓄水池采样算法</title>
-    <link href="https://www.niewenjun.com/2020/05/19/suan-fa/xu-shui-chi-cai-yang-suan-fa/"/>
-    <id>https://www.niewenjun.com/2020/05/19/suan-fa/xu-shui-chi-cai-yang-suan-fa/</id>
+    <link href="https://www.niewenjun.com/2020/05/19/suan-fa/suan-fa-si-wei/xu-shui-chi-cai-yang-suan-fa/"/>
+    <id>https://www.niewenjun.com/2020/05/19/suan-fa/suan-fa-si-wei/xu-shui-chi-cai-yang-suan-fa/</id>
     <published>2020-05-19T13:43:00.000Z</published>
     <updated>2020-05-19T14:08:55.402Z</updated>
     
@@ -326,10 +405,10 @@
   
   <entry>
     <title>抢红包算法</title>
-    <link href="https://www.niewenjun.com/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/"/>
-    <id>https://www.niewenjun.com/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/</id>
+    <link href="https://www.niewenjun.com/2020/05/15/suan-fa/suan-fa-si-wei/qiang-hong-bao-suan-fa/"/>
+    <id>https://www.niewenjun.com/2020/05/15/suan-fa/suan-fa-si-wei/qiang-hong-bao-suan-fa/</id>
     <published>2020-05-14T16:11:00.000Z</published>
-    <updated>2020-05-14T16:26:36.679Z</updated>
+    <updated>2020-06-16T17:34:50.670Z</updated>
     
     <summary type="html">
     
@@ -346,8 +425,6 @@
     
       <category term="算法" scheme="https://www.niewenjun.com/categories/%E7%AE%97%E6%B3%95/"/>
     
-    
-      <category term="Java" scheme="https://www.niewenjun.com/tags/Java/"/>
     
       <category term="抢红包算法" scheme="https://www.niewenjun.com/tags/%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95/"/>
     
@@ -493,97 +570,6 @@
       <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
       <category term="HTTPS" scheme="https://www.niewenjun.com/tags/HTTPS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HTTP</title>
-    <link href="https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/http/"/>
-    <id>https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/http/</id>
-    <published>2020-05-06T15:07:00.000Z</published>
-    <updated>2020-05-14T16:17:47.890Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;HTTP&quot;&gt;&lt;a href=&quot;#HTTP&quot; class=&quot;headerlink&quot; title=&quot;HTTP&quot;&gt;&lt;/a&gt;HTTP&lt;/h1&gt;&lt;h2 id=&quot;一-、基础概念&quot;&gt;&lt;a href=&quot;#一-、基础概念&quot; class=&quot;headerlink&quot; title=&quot;一
-        
-      
-    
-    </summary>
-    
-    
-      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
-    
-    
-      <category term="协议" scheme="https://www.niewenjun.com/tags/%E5%8D%8F%E8%AE%AE/"/>
-    
-      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="HTTP" scheme="https://www.niewenjun.com/tags/HTTP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络层</title>
-    <link href="https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/wang-luo-ceng/"/>
-    <id>https://www.niewenjun.com/2020/05/06/408/ji-suan-ji-wang-luo/wang-luo-ceng/</id>
-    <published>2020-05-06T03:30:00.000Z</published>
-    <updated>2020-05-06T03:36:39.253Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;网络层&quot;&gt;&lt;a href=&quot;#网络层&quot; class=&quot;headerlink&quot; title=&quot;网络层&quot;&gt;&lt;/a&gt;网络层&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
-    
-    
-      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="网络层" scheme="https://www.niewenjun.com/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TCP</title>
-    <link href="https://www.niewenjun.com/2020/05/05/408/ji-suan-ji-wang-luo/tcp/"/>
-    <id>https://www.niewenjun.com/2020/05/05/408/ji-suan-ji-wang-luo/tcp/</id>
-    <published>2020-05-05T15:23:00.000Z</published>
-    <updated>2020-05-14T16:18:07.259Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;TCP&quot;&gt;&lt;a href=&quot;#TCP&quot; class=&quot;headerlink&quot; title=&quot;TCP&quot;&gt;&lt;/a&gt;TCP&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
-    
-    
-      <category term="协议" scheme="https://www.niewenjun.com/tags/%E5%8D%8F%E8%AE%AE/"/>
-    
-      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="TCP" scheme="https://www.niewenjun.com/tags/TCP/"/>
     
   </entry>
   

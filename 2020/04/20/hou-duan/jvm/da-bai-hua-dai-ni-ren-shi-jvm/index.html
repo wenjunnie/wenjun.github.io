@@ -502,7 +502,7 @@
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>如果在文中用词或者理解方面出现问题，欢迎指出。此文旨在提及和而不深究，但会尽量效率地把知识点都抛出来。</p>
 </blockquote>
-<h2 id="一、JVM-的基本介绍"><a href="#一、JVM-的基本介绍" class="headerlink" title="一、JVM 的基本介绍"></a>一、JVM 的基本介绍</h2><p>JVM 是 Java Virtual Machine 的缩写，它是一个虚构出来的计算机，一种规范。通过在实际的计算机上仿真模拟各类计算机功能实现···</p>
+<h2 id="一、JVM-的基本介绍"><a href="#一、JVM-的基本介绍" class="headerlink" title="一、JVM 的基本介绍"></a>一、JVM 的基本介绍</h2><p>JVM 是 Java Virtual Machine 的缩写，它是一个虚构出来的计算机，一种规范。通过在实际的计算机上仿真模拟各类计算机功能实现······</p>
 <p>好，其实抛开这么专业的句子不说，就知道 JVM 其实就类似于一台小电脑运行在 Windows 或者 Linux 这些操作系统环境下即可。它直接和操作系统进行交互，与硬件不直接交互，可操作系统可以帮我们完成和硬件进行交互的工作。<br><img src="https://s1.ax1x.com/2020/04/20/JQKv5t.png" alt=""></p>
 <h3 id="1-1-Java-文件是如何被运行的"><a href="#1-1-Java-文件是如何被运行的" class="headerlink" title="1.1 Java 文件是如何被运行的"></a>1.1 Java 文件是如何被运行的</h3><p>比如我们现在写了一个 HelloWorld.java 好了，那这个 HelloWorld.java 抛开所有东西不谈，那是不是就类似于一个文本文件，只是这个文本文件它写的都是英文，而且有一定的缩进而已。</p>
 <p>那我们的 <strong>JVM</strong> 是不认识文本文件的，所以它需要一个 <strong>编译</strong> ，让其成为一个它会读二进制文件的 <strong>HelloWorld.class</strong> 。</p>
@@ -591,7 +591,7 @@ MaxMetaspaceSize：限制元空间大小上限，防止占用过多物理内存�
 <p>而且当老年区执行了 Full GC 之后仍然无法进行对象保存的操作，就会产生 OOM ，这时候就是虚拟机中的堆内存不足，原因可能会是堆内存设置的大小过小，这个可以通过参数 -Xms、-Xmx 来调整。也可能是代码中创建的对象大且多，而且它们一直在被引用从而长时间垃圾收集无法收集它们。</p>
 <p><img src="https://s1.ax1x.com/2020/04/20/JQbFX9.png" alt="新生代"></p>
 <blockquote>
-<p>补充说明：关于 <code>-XX:TargetSurvivorRatio</code> 参数的问题。其实也不一定是要满足 <code>-XX:MaxTenuringThreshold</code> 才移动到老年代。可以举个例子：如对象年龄 5 的占 30% ，年龄 6 的占 36% ，年龄 7 的占 34% ，加入某个年龄段（如例子中的年龄 6 ）后，总占用超过 Survivor 空间 * TargetSurvivorRatio 的时候，从该年龄段开始及大于的年龄对象就要进入老年代（即例子中的年龄 6 对象，就是年龄 6 和年龄 7 晋升到老年代），这时候无需等到 <code>MaxTenuringThreshold</code> 中要求的15 。</p>
+<p>补充说明：关于 <code>-XX:TargetSurvivorRatio</code> 参数的问题。其实也不一定是要满足 <code>-XX:MaxTenuringThreshold</code> 才移动到老年代。可以举个例子：如对象年龄 5 的占 30% ，年龄 6 的占 36% ，年龄 7 的占 34% ，加入某个年龄段（如例子中的年龄 6 ）后，总占用超过 Survivor 空间 * TargetSurvivorRatio 的时候，从该年龄段开始及大于的年龄对象就要进入老年代（即例子中的年龄 6 对象，就是年龄 6 和年龄 7 晋升到老年代），这时候无需等到 <code>MaxTenuringThreshold</code> 中要求的 15 。</p>
 </blockquote>
 <h4 id="3-3-8-如何判断一个对象需要被干掉"><a href="#3-3-8-如何判断一个对象需要被干掉" class="headerlink" title="3.3.8 如何判断一个对象需要被干掉"></a>3.3.8 如何判断一个对象需要被干掉</h4><p><img src="https://s1.ax1x.com/2020/04/20/JQbb4K.png" alt=""></p>
 <p>图中程序计数器、虚拟机栈、本地方法栈，3 个区域随着线程的生存而生存的。内存分配和回收都是确定的。随着线程的结束内存自然就被回收了，因此不需要考虑垃圾回收的问题。而 Java 堆和方法区则不一样，各线程共享，内存的分配和回收都是动态的。因此垃圾收集器所关注的都是堆和方法这部分内存。</p>

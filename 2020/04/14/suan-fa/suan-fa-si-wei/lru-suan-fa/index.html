@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="抢红包算法, Wenjun">
+    <meta name="keywords" content="LRU算法, Wenjun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>抢红包算法 | Wenjun</title>
+    <title>LRU算法 | Wenjun</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">抢红包算法</h1>
+                    <h1 class="description center-align post-title">LRU算法</h1>
                 </div>
             </div>
         </div>
@@ -439,12 +439,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95/">
-                                <span class="chip bg-color">抢红包算法</span>
+                            <a href="/tags/LRU%E7%AE%97%E6%B3%95/">
+                                <span class="chip bg-color">LRU算法</span>
                             </a>
                         
                     </div>
@@ -468,7 +464,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-15
+                    2020-04-14
                 </div>
                 
 
@@ -477,14 +473,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    52
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    1 分
                 </div>
                 
 
@@ -499,117 +495,20 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="抢红包算法"><a href="#抢红包算法" class="headerlink" title="抢红包算法"></a>抢红包算法</h2><p><img src="https://s1.ax1x.com/2020/05/14/YDhTaQ.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD4iGR.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD4uIH.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD4Gsf.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD40Wn.png" alt=""></p>
-<blockquote>
-<p>发出一个固定金额的红包，由若干个人来抢，需要满足哪些规则？</p>
-</blockquote>
-<p><strong>1.所有人抢到金额之和等于红包金额，不能超过，也不能少于。</strong></p>
-<p><strong>2.每个人至少抢到一分钱。</strong></p>
-<p><strong>3.要保证所有人抢到金额的几率相等。</strong></p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD4IQx.png" alt=""></p>
-<blockquote>
-<p>小灰的思路是什么样呢？</p>
-</blockquote>
-<p>每次抢到的金额 = 随机区间 <strong>( 0 , 剩余金额)</strong></p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD4XYd.png" alt=""></p>
-<blockquote>
-<p>为什么这么说呢？让我们看一个栗子：</p>
-</blockquote>
-<p>假设有 10 个人，红包总额 100 元。</p>
-<p>第一个人的随机范围是<strong>（0 , 100 元)</strong>，平均可以抢到 <strong>50 元</strong>。</p>
-<p>假设第一个人随机到 50 元，那么剩余金额是 100 - 50 = 50 元。</p>
-<p>第二个人的随机范围是 <strong>（0 , 50 元）</strong>，平均可以抢到 <strong>25 元</strong>。</p>
-<p>假设第二个人随机到 25 元，那么剩余金额是 50 - 25 = 25 元。</p>
-<p>第三个人的随机范围是 <strong>（0 , 25 元）</strong>，平均可以抢到 <strong>12.5 元</strong>。</p>
-<p>以此类推，每一次随机范围越来越小。</p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD58h9.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD54Ag.png" alt=""></p>
-<h3 id="方法-1-：二倍均值法"><a href="#方法-1-：二倍均值法" class="headerlink" title="方法 1 ：二倍均值法"></a><strong>方法 1 ：二倍均值法</strong></h3><p>剩余红包金额为 M ，剩余人数为 N ，那么有如下公式：</p>
-<p>每次抢到的金额 = 随机区间 <strong>（0 , M / N * 2）</strong></p>
-<p>这个公式，保证了<strong>每次随机金额的平均值是相等的</strong>，不会因为抢红包的先后顺序而造成不公平。</p>
-<blockquote>
-<p>举个栗子：</p>
-</blockquote>
-<p>假设有 10 个人，红包总额 100 元。</p>
-<p>100/10*2 = 20 ，所以第一个人的随机范围是<strong>（0 ，20 )</strong> ，平均可以抢到 <strong>10 元</strong>。</p>
-<p>假设第一个人随机到 10 元，那么剩余金额是 100 - 10 = 90 元。</p>
-<p>90/9*2 = 20 ，所以第二个人的随机范围同样是<strong>（0 ，20 )</strong>，平均可以抢到 <strong>10 元</strong>。</p>
-<p>假设第二个人随机到 10 元，那么剩余金额是 90-10 = 80 元。</p>
-<p>80/8*2 = 20 ，所以第三个人的随机范围同样是<strong>（0 ，20 )</strong>，平均可以抢到 <strong>10 元</strong>。</p>
-<p>以此类推，每一次随机范围的均值是相等的。</p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YDIBrV.png" alt=""></p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//抢红包算法，金额参数以分为单位</span>
-<span class="token keyword">public</span> <span class="token keyword">static</span> List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> <span class="token function">divideRedPackage</span><span class="token punctuation">(</span>Integer totalAmount<span class="token punctuation">,</span> Integer totalPeopleNum<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> amountList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>Integer<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    Integer restAmount <span class="token operator">=</span> totalAmount<span class="token punctuation">;</span>
-    Integer restPeopleNum <span class="token operator">=</span> totalPeopleNum<span class="token punctuation">;</span>
-    Random random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> totalPeopleNum <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//随机范围：[1，剩余人均金额的两倍)，左闭右开，保证最小随机数为 1</span>
-        <span class="token keyword">int</span> amount <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>restAmount <span class="token operator">/</span> restPeopleNum <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        restAmount <span class="token operator">-=</span> amount<span class="token punctuation">;</span>
-        restPeopleNum <span class="token operator">--</span><span class="token punctuation">;</span>
-        amountList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    amountList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>restAmount<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> amountList<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+                <h2 id="LRU-算法"><a href="#LRU-算法" class="headerlink" title="LRU 算法"></a>LRU 算法</h2><h3 id="LinkedHashMap-实现-LRU"><a href="#LinkedHashMap-实现-LRU" class="headerlink" title="LinkedHashMap 实现 LRU"></a>LinkedHashMap 实现 LRU</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LRUCache</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">LinkedHashMap</span><span class="token operator">&lt;</span>Object<span class="token punctuation">,</span> Object<span class="token operator">></span> <span class="token punctuation">{</span>
 
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> amountList <span class="token operator">=</span> <span class="token function">divideRedPackage</span><span class="token punctuation">(</span><span class="token number">5000</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>Integer amount <span class="token operator">:</span> amountList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"抢到金额："</span> <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">divide</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">int</span> CACHE_SIZE<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">LRUCache</span><span class="token punctuation">(</span><span class="token keyword">int</span> CACHE_SIZE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>CACHE_SIZE <span class="token operator">/</span> <span class="token number">0.75</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.75f</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>CACHE_SIZE <span class="token operator">=</span> CACHE_SIZE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">boolean</span> <span class="token function">removeEldestEntry</span><span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>Object<span class="token punctuation">,</span> Object<span class="token operator">></span> eldest<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> CACHE_SIZE<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p><strong>程序输出结果如下：</strong></p>
-<p>抢到金额：2.92</p>
-<p>抢到金额：1.48</p>
-<p>抢到金额：3.05</p>
-<p>抢到金额：0.53</p>
-<p>抢到金额：0.45</p>
-<p>抢到金额：1.36</p>
-<p>抢到金额：1.02</p>
-<p>抢到金额：1.99</p>
-<p>抢到金额：1.3</p>
-<p>抢到金额：0.48</p>
-<p>抢到金额：0.83</p>
-<p>抢到金额：2.89</p>
-<p>抢到金额：0.94</p>
-<p>抢到金额：2.11</p>
-<p>抢到金额：3.13</p>
-<p>抢到金额：0.91</p>
-<p>抢到金额：2.64</p>
-<p>抢到金额：2.02</p>
-<p>抢到金额：2.88</p>
-<p>抢到金额：1.13</p>
-<p>抢到金额：2.09</p>
-<p>抢到金额：1.37</p>
-<p>抢到金额：2.41</p>
-<p>抢到金额：2.13</p>
-<p>抢到金额：1.32</p>
-<p>抢到金额：0.44</p>
-<p>抢到金额：1.62</p>
-<p>抢到金额：1.89</p>
-<p>抢到金额：2.23</p>
-<p>抢到金额：0.44</p>
-<p><img src="https://s1.ax1x.com/2020/05/14/YD7qG4.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/15/YD7LRJ.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/15/YD7jMR.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/15/YDHPiD.png" alt=""></p>
-<h3 id="方法-2-：线段切割法"><a href="#方法-2-：线段切割法" class="headerlink" title="方法 2 ：线段切割法"></a><strong>方法 2 ：线段切割法</strong></h3><p>何谓线段切割法？我们可以把红包总金额想象成一条很长的线段，而每个人抢到的金额，则是这条主线段所拆分出的若干子线段。</p>
-<p><img src="https://s1.ax1x.com/2020/05/15/YDHwYF.png" alt=""></p>
-<p>如何确定每一条子线段的长度呢？由“切割点”来决定。当 N 个人一起抢红包的时候，就需要确定 N-1 个切割点。</p>
-<p>因此，当 N 个人一起抢总金额为 M 的红包时，我们需要做 N-1 次随机运算，以此确定 N-1 个切割点。随机的范围区间是<strong>（1 , M）</strong>。</p>
-<p>当所有切割点确定以后，子线段的长度也随之确定。这样每个人来抢红包的时候，只需要顺次领取与子线段长度等价的红包金额即可。</p>
-<p>这就是<strong>线段切割法</strong>的思路。在这里需要注意以下两点：</p>
-<p><strong>1.当随机切割点出现重复，如何处理。</strong></p>
-<p><strong>2.如何尽可能降低时间复杂度和空间复杂度。</strong></p>
-<p><img src="https://s1.ax1x.com/2020/05/15/YDHsyR.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/05/15/YDH2TK.png" alt=""></p>
 
             </div>
             <hr/>
@@ -635,7 +534,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.niewenjun.com/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/">https://www.niewenjun.com/2020/05/15/suan-fa/qiang-hong-bao-suan-fa/</a>
+                    <a href="https://www.niewenjun.com/2020/04/14/suan-fa/suan-fa-si-wei/lru-suan-fa/">https://www.niewenjun.com/2020/04/14/suan-fa/suan-fa-si-wei/lru-suan-fa/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -673,12 +572,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95/">
-                                    <span class="chip bg-color">抢红包算法</span>
+                                <a href="/tags/LRU%E7%AE%97%E6%B3%95/">
+                                    <span class="chip bg-color">LRU算法</span>
                                 </a>
                             
                         </div>
@@ -850,44 +745,33 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/16/fen-bu-shi/shi-me-shi-bai-zhan-ting-jiang-jun-wen-ti/">
+                <a href="/2020/04/15/hou-duan/ji-he/java-ji-he-kuang-jia-chang-jian-mian-shi-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="什么是拜占庭将军问题？">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Java集合框架常见面试题">
                         
-                        <span class="card-title">什么是拜占庭将军问题？</span>
+                        <span class="card-title">Java集合框架常见面试题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是拜占庭将军问题？
-
-————— 第二天 —————
-
-
-
-
-
-
-
-
-
-什么是拜占庭将军问题？在很久很久以前，拜占庭是东罗马帝国的首都。那个时候罗马帝国国土辽阔，为了防御目的，因此每个军队都分隔很远，将军与将军之间只能靠信使传递消息。
-
+                            剖析面试最常见问题之 Java 集合框架说说 List ，Set ，Map 三者的区别？
+List（对付顺序的好帮手）：List 接口存储一组不唯一（可以有多个元素引用相同的对象），有序的对象。
+Set（注重独一无二的性质）： 不允许重复的
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-16
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-15
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
-                                    分布式
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                    后端
                                 </a>
                             
                             
@@ -897,12 +781,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Raft/">
-                        <span class="chip bg-color">Raft</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E6%8B%9C%E5%8D%A0%E5%BA%AD/">
-                        <span class="chip bg-color">拜占庭</span>
+                    <a href="/tags/%E9%9B%86%E5%90%88/">
+                        <span class="chip bg-color">集合</span>
                     </a>
                     
                 </div>
@@ -916,37 +800,32 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/13/she-ji-mo-shi/dan-li-mo-shi/">
+                <a href="/2020/04/14/hou-duan/ji-he/hashmap/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="单例模式">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="HashMap">
                         
-                        <span class="card-title">单例模式</span>
+                        <span class="card-title">HashMap</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            单例模式概述单例模式确保一个类只有一个实例，并提供全局访问点。
-八种写法
-饿汉式（静态常量）（可用）
-
-public class Singleton {
-
-    private final static Singleton INSTANC
+                            HashMap 简介HashMap 主要用来存放键值对，它基于哈希表的 Map 接口实现，是常用的 Java 集合之一。 
+JDK 1.8 之前 HashMap 由 数组+链表 组成的，数组是 HashMap 的主体，链表则是主要为了解决哈
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
-                                    设计模式
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                    后端
                                 </a>
                             
                             
@@ -956,8 +835,12 @@ public class Singleton {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">单例模式</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9B%86%E5%90%88/">
+                        <span class="chip bg-color">集合</span>
                     </a>
                     
                 </div>
