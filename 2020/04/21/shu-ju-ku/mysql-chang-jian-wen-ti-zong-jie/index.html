@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -504,7 +504,7 @@
 <p>我们也可以通过下面的命令查看默认的存储引擎。</p>
 <pre class=" language-sql"><code class="language-sql">mysql<span class="token operator">></span> <span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%storage_engine%'</span><span class="token punctuation">;</span></code></pre>
 <p><strong>查看表的存储引擎：</strong></p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">show</span> <span class="token keyword">table</span> <span class="token keyword">status</span> <span class="token operator">like</span> <span class="token string">"table_name"</span> <span class="token punctuation">;</span></code></pre>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">show</span> <span class="token keyword">table</span> <span class="token keyword">status</span> <span class="token operator">like</span> <span class="token string">"table_name"</span><span class="token punctuation">;</span></code></pre>
 <p><img src="https://s1.ax1x.com/2020/04/21/JG3bWQ.png" alt="查看表的存储引擎"></p>
 <h4 id="MyISAM-和-InnoDB-区别"><a href="#MyISAM-和-InnoDB-区别" class="headerlink" title="MyISAM 和 InnoDB 区别"></a>MyISAM 和 InnoDB 区别</h4><p>MyISAM 是 MySQL 的默认数据库引擎（ 5.5 版之前）。虽然性能极佳，而且提供了大量的特性，包括全文索引、压缩、空间函数等，但 MyISAM 不支持事务和行级锁，而且最大的缺陷就是崩溃后无法安全恢复。不过，5.5 版本之后，MySQL 引入了 InnoDB（事务性数据库引擎），MySQL 5.5 版本后默认的存储引擎为 InnoDB 。</p>
 <p>大多数时候我们使用的都是 InnoDB 存储引擎，但是在某些情况下使用 MyISAM 也是合适的，比如读密集的情况下（如果你不介意 MyISAM 崩溃恢复问题的话）。</p>

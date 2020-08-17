@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -570,7 +570,7 @@
 <p>就好比下单，支付，退款三个顺序你变了，你先退款，再下单，再支付，那流程就会失败，那数据不就乱了？你订单还没生成你却支付，退款了？明显走不通了，这在线上是很恐怖的事情。</p>
 <h3 id="那这种情况怎么解决呢？"><a href="#那这种情况怎么解决呢？" class="headerlink" title="那这种情况怎么解决呢？"></a>那这种情况怎么解决呢？</h3><p>我们可以找个管家帮我们管理好数据的嘛！</p>
 <p><img src="https://s1.ax1x.com/2020/04/26/J6voYF.jpg" alt="ZooKeeper 分布式锁"></p>
-<p>某个时刻，多个系统实例都去更新某个 Key 。可以基于 <strong>ZooKeeper</strong> 实现分布式锁。每个系统通过 <strong>ZooKeeper</strong> 获取分布式锁，确保同一时间，只能有一个系统实例在操作某个 Key，别人都不允许读和写。</p>
+<p>某个时刻，多个系统实例都去更新某个 Key 。可以基于 <strong>ZooKeeper</strong> 实现分布式锁。每个系统通过 <strong>ZooKeeper</strong> 获取分布式锁，确保同一时间，只能有一个系统实例在操作某个 Key ，别人都不允许读和写。</p>
 <p>你要写入缓存的数据，都是从 <strong>MySQL</strong> 里查出来的，都得写入 <strong>MySQL</strong> 中，写入 <strong>MySQL</strong> 中的时候必须保存一个时间戳，从 <strong>MySQL</strong> 查出来的时候，时间戳也查出来。</p>
 <p>每次要<strong>写之前，先判断</strong>一下当前这个 Value 的时间戳是否比缓存里的 Value 的时间戳要新。如果是的话，那么可以写，否则，就不能用旧的数据覆盖新的数据。</p>
 <h3 id="你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？"><a href="#你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？" class="headerlink" title="你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？"></a>你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？</h3><p>一般来说，如果允许缓存可以稍微的跟数据库偶尔有不一致的情况，也就是说如果你的系统<strong>不是严格要求</strong> “缓存+数据库” 必须保持一致性的话，最好不要做这个方案，即：<strong>读请求和写请求串行化</strong>，串到一个<strong>内存队列</strong>里去。</p>
@@ -588,7 +588,7 @@
 <p>举个栗子：一个缓存涉及的表的字段，在 1 分钟内就修改了 20 次，或者是 100 次，那么缓存更新 20 次、100 次；但是这个缓存在 1 分钟内只被读取了 1 次，有<strong>大量的冷数据</strong>。</p>
 <p>实际上，如果你只是删除缓存的话，那么在 1 分钟内，这个缓存不过就重新计算一次而已，开销大幅度降低。<strong>用到缓存才去算缓存。</strong></p>
 <p>其实删除缓存，而不是更新缓存，就是一个 Lazy 计算的思想，不要每次都重新做复杂的计算，不管它会不会用到，而是让它到需要被使用的时候再重新计算。</p>
-<p>像 <strong>Mybatis</strong> 、<strong>Hibernate</strong>，都有懒加载思想。查询一个部门，部门带了一个员工的 <strong>List</strong>，没有必要说每次查询部门，都里面的 1000 个员工的数据也同时查出来啊。80% 的情况，查这个部门，就只是要访问这个部门的信息就可以了。先查部门，同时要访问里面的员工，那么这个时候只有在你要访问里面的员工的时候，才会去数据库里面查询 1000 个员工。</p>
+<p>像 <strong>Mybatis</strong> 、<strong>Hibernate</strong>，都有懒加载思想。查询一个部门，部门带了一个员工的 <strong>List</strong>，没有必要说每次查询部门，这里面的 1000 个员工的数据也同时查出来啊。80% 的情况，查这个部门，就只是要访问这个部门的信息就可以了。先查部门，同时要访问里面的员工，那么这个时候只有在你要访问里面的员工的时候，才会去数据库里面查询 1000 个员工。</p>
 <h3 id="最初级的缓存不一致问题及解决方案"><a href="#最初级的缓存不一致问题及解决方案" class="headerlink" title="最初级的缓存不一致问题及解决方案"></a>最初级的缓存不一致问题及解决方案</h3><p><strong>问题：</strong>先更新数据库，再删除缓存。如果删除缓存失败了，那么会导致数据库中是新数据，缓存中是旧数据，数据就出现了不一致。</p>
 <p><img src="https://s1.ax1x.com/2020/04/26/Jcijit.png" alt="redis-junior-inconsistent"></p>
 <p><strong>解决思路：</strong>先删除缓存，再更新数据库。如果数据库更新失败了，那么数据库中是旧数据，缓存中是空的，那么数据不会不一致。因为读的时候缓存没有，所以去读了数据库中的旧数据，然后更新到缓存中。</p>
@@ -634,7 +634,7 @@
 <h3 id="Redis-和-Memcached-有啥区别，为啥选择用-Redis-作为你们的缓存中间件？"><a href="#Redis-和-Memcached-有啥区别，为啥选择用-Redis-作为你们的缓存中间件？" class="headerlink" title="Redis 和 Memcached 有啥区别，为啥选择用 Redis 作为你们的缓存中间件？"></a>Redis 和 Memcached 有啥区别，为啥选择用 Redis 作为你们的缓存中间件？</h3><p><img src="https://s1.ax1x.com/2020/04/26/Jca0Fs.jpg" alt="Redis 和 Memcached 的区别"></p>
 <ul>
 <li><strong>Redis 支持更丰富的数据类型（支持更复杂的应用场景）：</strong>Redis 不仅仅支持简单的 K/V 类型的数据，同时还提供 Hash、List、Set、ZSet 等数据结构的存储。Memcache 支持简单的数据类型，如 String 。</li>
-<li><strong>Redis 支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用,而 Memecache 把数据全部存在内存之中。</strong></li>
+<li><strong>Redis 支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用，而 Memecache 把数据全部存在内存之中。</strong></li>
 <li><strong>集群模式：</strong>Memcached 没有原生的集群模式，需要依靠客户端来实现往集群中分片写入数据，但是 Redis 目前是原生支持 Cluster 模式的。</li>
 <li><strong>Memcached 是多线程、非阻塞 IO 复用的网络模型，Redis 使用单线程的多路 IO 复用模型。</strong></li>
 </ul>

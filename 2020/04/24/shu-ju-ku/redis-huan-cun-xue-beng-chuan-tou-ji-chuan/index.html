@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -516,7 +516,7 @@
 <p> <img src="https://s1.ax1x.com/2020/04/24/JBifDx.jpg" alt=""></p>
 <h3 id="小伙子我看你的简历上写到了-Redis-，那么我们直接开门见山，直接怼常见的几个大问题，Redis-雪崩了解么？"><a href="#小伙子我看你的简历上写到了-Redis-，那么我们直接开门见山，直接怼常见的几个大问题，Redis-雪崩了解么？" class="headerlink" title="小伙子我看你的简历上写到了 Redis ，那么我们直接开门见山，直接怼常见的几个大问题，Redis 雪崩了解么？"></a>小伙子我看你的简历上写到了 Redis ，那么我们直接开门见山，直接怼常见的几个大问题，Redis 雪崩了解么？</h3><p>帅气迷人的面试官您好，我了解的，目前电商首页以及热点数据都会去做缓存 ，一般缓存都是定时任务去刷新，或者是查不到之后去更新的，定时任务刷新就有一个问题。</p>
 <p><strong>举个简单的例子：</strong>如果所有首页的 Key 失效时间都是 12 小时，中午 12 点刷新的，我零点有个秒杀活动大量用户涌入，假设当时每秒 6000 个请求，本来缓存在可以扛住每秒 5000 个请求，但是缓存当时所有的 Key 都失效了。此时 1 秒 6000 个请求全部落数据库，数据库必然扛不住，它会报一下警，真实情况可能 DBA 都没反应过来就直接挂了。此时，如果没用什么特别的方案来处理这个故障，DBA 很着急，重启数据库，但是数据库立马又被新的流量给打死了。这就是我理解的缓存雪崩。</p>
-<p><strong>我刻意看了下我做过的项目感觉再吊的都不允许这么大的 QPS 直接打 DB 去，不过没慢 SQL 加上分库，大表分表可能还还算能顶，但是跟用了 Redis 的差距还是很大。</strong></p>
+<p><strong>我刻意看了下我做过的项目感觉再吊的都不允许这么大的 QPS 直接打 DB 去，不过没慢 SQL 加上分库，大表分表可能还算能顶，但是跟用了 Redis 的差距还是很大。</strong></p>
 <p> <img src="https://s1.ax1x.com/2020/04/24/JBEixH.png" alt="缓存雪崩"></p>
 <p><strong>同一时间大面积失效，那一瞬间 Redis 跟没有一样，那这个数量级别的请求直接打到数据库几乎是灾难性的，你想想如果打挂的是一个用户服务的库，那其他依赖他的库所有的接口几乎都会报错，如果没做熔断等策略基本上就是瞬间挂一片的节奏，你怎么重启用户都会把你打挂，等你能重启的时候，用户早就睡觉去了，并且对你的产品失去了信心，什么垃圾产品。</strong></p>
 <h3 id="面试官摸了摸自己的头发，嗯还不错，那这种情况咋整？你都是怎么去应对的？"><a href="#面试官摸了摸自己的头发，嗯还不错，那这种情况咋整？你都是怎么去应对的？" class="headerlink" title="面试官摸了摸自己的头发，嗯还不错，那这种情况咋整？你都是怎么去应对的？"></a>面试官摸了摸自己的头发，嗯还不错，那这种情况咋整？你都是怎么去应对的？</h3><p>处理缓存雪崩简单，在批量往 <strong>Redis</strong> 存数据的时候，把每个 Key 的失效时间都加个随机值就好了，这样可以保证数据不会在同一时间大面积失效，我相信，Redis 这点流量还是顶得住的。</p>

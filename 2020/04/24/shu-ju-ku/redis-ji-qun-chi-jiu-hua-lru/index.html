@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -539,7 +539,7 @@
 <p><strong>Tips：两种机制全部开启的时候，Redis 在重启的时候会默认使用 AOF 去重新构建数据，因为 AOF 的数据是比 RDB 更完整的。</strong></p>
 </blockquote>
 <h3 id="那这两种机制各自优缺点是啥？"><a href="#那这两种机制各自优缺点是啥？" class="headerlink" title="那这两种机制各自优缺点是啥？"></a>那这两种机制各自优缺点是啥？</h3><p>我先说 <strong>RDB</strong> 吧。</p>
-<h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><p>他会生成多个数据文件，每个数据文件分别都代表了某一时刻 <strong>Redis</strong> 里面的数据，这种方式，有没有觉得很适合做<strong>冷备</strong>，完整的数据运维设置定时任务，定时同步到远端的服务器，比如阿里的云服务，这样一旦线上挂了，你想恢复多少分钟之前的数据，就去远端拷贝一份之前的数据就好了。</p>
+<h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><p>他会生成多个数据文件，每个数据文件都分别代表了某一时刻 <strong>Redis</strong> 里面的数据，这种方式，有没有觉得很适合做<strong>冷备</strong>，完整的数据运维设置定时任务，定时同步到远端的服务器，比如阿里的云服务，这样一旦线上挂了，你想恢复多少分钟之前的数据，就去远端拷贝一份之前的数据就好了。</p>
 <p><strong>RDB</strong> 对 <strong>Redis</strong> 的性能影响非常小，是因为在同步数据的时候他只是 <strong><code>fork</code></strong> 了一个子进程去做持久化的，而且他在数据恢复的时候速度比 <strong>AOF</strong> 来的快。</p>
 <h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><p><strong>RDB</strong> 都是快照文件，都是默认五分钟甚至更久的时间才会生成一次，这意味着你这次同步到下次同步这中间五分钟的数据都很可能全部丢失掉。<strong>AOF</strong> 则最多丢一秒的数据，<strong>数据完整性</strong>上高下立判。</p>
 <p>还有就是 <strong>RDB</strong> 在生成数据快照的时候，如果文件很大，客户端可能会暂停几毫秒甚至几秒，你公司在做秒杀的时候他刚好在这个时候 <strong>fork</strong> 了一个子进程去生成一个大快照，哦豁，出大问题。</p>

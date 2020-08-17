@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -535,9 +535,9 @@
 <li>基础层主要包含日志、缓存、连接池、事务等。</li>
 </ul>
 <p><img src="https://s1.ax1x.com/2020/06/07/t2brVI.png" alt="MyBatis 整体架构图"></p>
-<h2 id="三、MyBatis-缓存原理梳理"><a href="#三、MyBatis-缓存原理梳理" class="headerlink" title="三、MyBatis 缓存原理梳理"></a>三、MyBatis 缓存原理梳理</h2><h3 id="1、一级缓存"><a href="#1、一级缓存" class="headerlink" title="1、一级缓存"></a>1、一级缓存</h3><p><strong>一级缓存：</strong>当在一次数据库会话中，执行多次查询条件完全相同的 SQL 时，MyBatis 提供了一级缓存的方案优化，如果是相同的 SQL 语句，会优先命中一级缓存，避免直接对数据库进行查询，提高性能。每个 SqlSession 中持有了 Executor ，每个 Executor 中有一个 LocalCache 。当用户发起查询时，MyBatis 根据当前执行的语句生成 MappedStatement ，在 Local Cache 进行查询，如果缓存命中的话，直接返回结果给用户，见下图。</p>
+<h2 id="三、MyBatis-缓存原理梳理"><a href="#三、MyBatis-缓存原理梳理" class="headerlink" title="三、MyBatis 缓存原理梳理"></a>三、MyBatis 缓存原理梳理</h2><h3 id="1、一级缓存"><a href="#1、一级缓存" class="headerlink" title="1、一级缓存"></a>1、一级缓存</h3><p><strong>一级缓存：</strong>当在一次数据库会话中，执行多次查询条件完全相同的 SQL 时，MyBatis 提供了一级缓存的方案优化，如果是相同的 SQL 语句，会优先命中一级缓存，避免直接对数据库进行查询，提高性能。每个 SqlSession 中持有了 Executor ，每个 Executor 中有一个 LocalCache 。当用户发起查询时，MyBatis 根据当前执行的语句生成 MappedStatement ，在 LocalCache 进行查询，如果缓存命中的话，直接返回结果给用户，见下图。</p>
 <p><img src="https://s1.ax1x.com/2020/06/07/t2bbGT.png" alt="一级缓存"></p>
-<p>如果缓存没有命中的话，查询数据库，结果写入 Local Cache ，最后返回结果给用户，见下图。</p>
+<p>如果缓存没有命中的话，查询数据库，结果写入 LocalCache ，最后返回结果给用户，见下图。</p>
 <p><img src="https://s1.ax1x.com/2020/06/07/t2qGLj.jpg" alt="一级缓存"></p>
 <p>其中 <strong>SqlSession</strong> 提供用户和数据库交互的所有方法，隐藏了底层的细节。</p>
 <p><strong>Executor ：</strong>虽然 SqlSession 向用户提供了操作数据库的方法，但真正和数据打交道的是 Executor 。</p>

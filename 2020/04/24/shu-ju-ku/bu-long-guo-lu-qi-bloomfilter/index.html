@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -504,8 +504,8 @@
 <h3 id="Bloom-Filter-原理"><a href="#Bloom-Filter-原理" class="headerlink" title="Bloom Filter 原理"></a>Bloom Filter 原理</h3><p>布隆过滤器的原理是，当一个元素被加入集合时，通过 K 个散列函数将这个元素映射成一个位数组中的 K 个点，把它们置为 <strong>1</strong> 。检索时，我们只要看看这些点是不是都是 <strong>1</strong> 就（大约）知道集合中有没有它了：如果这些点有任何一个 <strong>0</strong> ，则被检元素<strong>一定不在</strong>；如果都是 <strong>1</strong> ，则被检元素<strong>很可能在</strong>。这就是布隆过滤器的基本思想。</p>
 <p>Bloom Filter 跟单哈希函数 Bit-Map 不同之处在于：Bloom Filter 使用了 k 个哈希函数，每个字符串跟 k 个 bit 对应。从而降低了冲突的概率。</p>
 <p> <img src="https://s1.ax1x.com/2020/04/24/JD9CLV.jpg" alt="Bloom Filter"></p>
-<p>简单的说一下就是我们先把我们数据库的数据都加载到我们的过滤器中，比如数据库的id现在有：1、2、3。</p>
-<p>那就用id：1 为例子他在上图中经过三次 hash 之后，把三次原本值 0 的地方改为 1 。</p>
+<p>简单的说一下就是我们先把我们数据库的数据都加载到我们的过滤器中，比如数据库的 id 现在有：1、2、3。</p>
+<p>那就用 id ：1 为例子他在上图中经过三次 hash 之后，把三次原本值 0 的地方改为 1 。</p>
 <p>下次我进来查询如果 id 也是 1 那我就把 1 拿去三次 hash 发现跟上面的三个位置完全一样，那就能证明过滤器中有 1 的。</p>
 <p>反之如果不一样就说明不存在了。</p>
 <p>那应用的场景在哪里呢？一般我们都会用来防止缓存穿透。</p>

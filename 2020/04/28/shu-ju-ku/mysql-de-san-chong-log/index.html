@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -498,7 +498,7 @@
                 <h2 id="MySQL-的三种-log"><a href="#MySQL-的三种-log" class="headerlink" title="MySQL 的三种 log"></a>MySQL 的三种 log</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在前一阵子，大哥问过我：”你知道 MySQL 的原子性是怎么保证的吗。“我懵逼了，MySQL 怎么保证原子性？我不会啊。</p>
 <p>谁都知道在事务里边原子性的意思：”<strong>一个事务包含多个操作，这些操作要么全部执行，要么全都不执行。</strong>“</p>
 <p>于是大哥就给我讲：”用的就是 <code>undo log</code> 啊。“</p>
-<p>我：”卧槽，又是知识盲区“</p>
+<p>我：”卧槽，又是知识盲区。“</p>
 <p>后来在网上翻了一下，MySQL 里边还有几种常见的 <code>log</code> ，分别为：</p>
 <ul>
 <li><code>bin log</code></li>
@@ -519,7 +519,7 @@
 <blockquote>
 <p><code>binlog</code> 长什么样？</p>
 </blockquote>
-<p><code>binlog</code> 我们可以简单理解为：存储着每条变更的 <code>SQL</code> 语句（当然从下面的图看来看，不止SQL，还有XID「事务Id」等等）。</p>
+<p><code>binlog</code> 我们可以简单理解为：存储着每条变更的 <code>SQL</code> 语句（当然从下面的图看来看，不止 SQL ，还有 XID「事务Id」等等）。</p>
 <p><img src="https://s1.ax1x.com/2020/04/28/J5DPZd.jpg" alt=""></p>
 <blockquote>
 <p><code>binlog</code> 一般用来做什么？</p>
@@ -561,7 +561,7 @@
 <p>实际上 MySQL 的基本存储结构是<strong>页</strong>（记录都存在页里边），所以 MySQL 是先把这条记录所在的<strong>页</strong>找到，然后把该页加载到内存中，将对应记录进行修改。</p>
 <p>现在就可能存在一个问题：<strong>如果在内存中把数据改了，还没来得及落磁盘，而此时的数据库挂了怎么办</strong>？显然这次更改就丢了。</p>
 <p><img src="https://s1.ax1x.com/2020/04/28/J5rzHH.jpg" alt=""></p>
-<p>如果每个请求都需要将数据<strong>立马</strong>落磁盘之后，那速度会很慢，MySQL 可能也顶不住。所以MySQL 是怎么做的呢？</p>
+<p>如果每个请求都需要将数据<strong>立马</strong>落磁盘之后，那速度会很慢，MySQL 可能也顶不住。所以 MySQL 是怎么做的呢？</p>
 <p>MySQL 引入了 <code>redo log</code> ，内存写完了，然后会写一份 <code>redo log</code> ，这份 <code>redo log</code> 记载着这次<strong>在某个页上做了什么修改</strong>。</p>
 <p><img src="https://s1.ax1x.com/2020/04/28/J5swP1.jpg" alt=""></p>
 <p>其实写 <code>redo log</code> 的时候，也会有 <code>buffer</code> ，是先写 <code>buffer</code> ，再真正落到磁盘中的。至于 <code>buffer</code> 什么时候落磁盘，会有配置供我们配置。</p>
@@ -584,7 +584,7 @@
 <h4 id="binlog-和-redo-log-写入的细节"><a href="#binlog-和-redo-log-写入的细节" class="headerlink" title="binlog 和 redo log 写入的细节"></a>binlog 和 redo log 写入的细节</h4><p><code>redo log</code> 是 MySQL 的 InnoDB 引擎所产生的。</p>
 <p><code>binlog</code> 无论 MySQL 用什么引擎，都会有的。</p>
 <p>InnoDB 是有事务的，事务的四大特性之一：持久性就是靠 <code>redo log</code> 来实现的（如果写入内存成功，但数据还没真正刷到磁盘，如果此时的数据库挂了，我们可以靠 <code>redo log</code> 来恢复内存的数据，这就实现了持久性）。</p>
-<p>上面也提到，在修改的数据的时候，<code>binlog</code> 会记载着变更的类容，<code>redo log</code> 也会记载着变更的内容。（只不过一个存储的是物理变化，一个存储的是逻辑变化）。那他们的写入顺序是什么样的呢？</p>
+<p>上面也提到，在修改的数据的时候，<code>binlog</code> 会记载着变更的内容，<code>redo log</code> 也会记载着变更的内容。（只不过一个存储的是物理变化，一个存储的是逻辑变化）。那他们的写入顺序是什么样的呢？</p>
 <p><code>redo log</code> <strong>事务开始</strong>的时候，就开始记录每次的变更信息，而 <code>binlog</code> 是在<strong>事务提交</strong>的时候才记录。</p>
 <p>于是新有的问题又出现了：我写其中的某一个 <code>log</code> ，失败了，那会怎么办？现在我们的前提是先写 <code>redo log</code> ，再写 <code>binlog</code> ，我们来看看：</p>
 <ul>

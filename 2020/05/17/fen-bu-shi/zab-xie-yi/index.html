@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -602,7 +602,7 @@
 </li>
 <li><p>Leader 开始广播该事务，需要注意的是所有节点的通讯都是由一个 FIFO 的队列维护的；</p>
 </li>
-<li><p>Follower 接受到事务之后，将事务写入本地磁盘，写入成功之后返回 Leader 一个 ACK ；</p>
+<li><p>Follower 接收到事务之后，将事务写入本地磁盘，写入成功之后返回 Leader 一个 ACK ；</p>
 </li>
 <li><p>Leader 收到过半的 ACK 之后，开始提交本事务，并广播事务提交信息；</p>
 </li>

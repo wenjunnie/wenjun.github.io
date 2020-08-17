@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -508,7 +508,7 @@
 <p>认真回答道：<strong>帅气迷人的面试官您好</strong>，因为传统的关系型数据库如 MySQL 已经不能适用所有的场景了，比如秒杀的库存扣减，APP 首页的访问流量高峰等等，都很容易把数据库打崩，所以引入了缓存中间件，目前市面上比较常用的缓存中间件有 <strong>Redis</strong> 和 <strong>Memcached</strong> 。不过综和考虑了他们的优缺点，最后选择了 Redis 。</p>
 <p><strong>至于更细节的对比朋友们记得查阅 Redis 和 Memcached 的区别，比如两者的优缺点对比和各自的场景，后续我有时间也会写出来。</strong></p>
 <h3 id="那小伙子，我再问你，Redis-有哪些数据结构呀？"><a href="#那小伙子，我再问你，Redis-有哪些数据结构呀？" class="headerlink" title="那小伙子，我再问你，Redis 有哪些数据结构呀？"></a>那小伙子，我再问你，Redis 有哪些数据结构呀？</h3><p>字符串 <strong><code>String</code></strong> 、字典 <strong><code>Hash</code></strong> 、列表 <strong><code>List</code></strong> 、集合 <strong><code>Set</code></strong> 、有序集合 <strong><code>SortedSet（ZSet）</code></strong>。</p>
-<p><strong>这里我相信 99% 的读者都能回答上来 Redis 的5个基本数据类型。如果回答不出来的小伙伴我们就要加油补课哟，大家知道五种类型最适合的场景更好。</strong></p>
+<p><strong>这里我相信 99% 的读者都能回答上来 Redis 的 5 个基本数据类型。如果回答不出来的小伙伴我们就要加油补课哟，大家知道五种类型最适合的场景更好。</strong></p>
 <p>但是，如果你是 Redis 中高级用户，而且你要在这次面试中突出你和其他候选人的不同，还需要加上下面几种数据结构 HyperLogLog、Geo、Pub/Sub 。</p>
 <p>如果你还想加分，那你说还玩过 Redis Module，像 BloomFilter，RedisSearch，Redis-ML，这个时候面试官得眼睛就开始发亮了，心想这个小伙子<strong>有点东西啊</strong>。</p>
 <blockquote>
@@ -517,7 +517,7 @@
 <h3 id="如果有大量的-key-需要设置同一时间过期，一般需要注意什么？"><a href="#如果有大量的-key-需要设置同一时间过期，一般需要注意什么？" class="headerlink" title="如果有大量的 key 需要设置同一时间过期，一般需要注意什么？"></a>如果有大量的 key 需要设置同一时间过期，一般需要注意什么？</h3><p>如果大量的 key 过期时间设置的过于集中，到过期的那个时间点，Redis 可能会出现短暂的卡顿现象。严重的话会出现缓存雪崩，我们一般需要在时间上加一个随机值，使得过期时间分散一些。</p>
 <p><strong>电商首页经常会使用定时任务刷新缓存，可能大量的数据失效时间都十分集中，如果失效时间一样，又刚好在失效的时间点大量用户涌入，就有可能造成缓存雪崩。</strong></p>
 <h3 id="那你使用过-Redis-分布式锁么，它是什么回事？"><a href="#那你使用过-Redis-分布式锁么，它是什么回事？" class="headerlink" title="那你使用过 Redis 分布式锁么，它是什么回事？"></a>那你使用过 Redis 分布式锁么，它是什么回事？</h3><p>先拿 <code>setnx</code> 来争抢锁，抢到之后，再用 <code>expire</code> 给锁加一个过期时间防止锁忘记了释放。</p>
-<h3 id="这时候对方会告诉你说你回答得不错，然后接着问如果在-setnx-之后执行-expire-之前进程意外-crash-或者要重启维护了，那会怎么样？"><a href="#这时候对方会告诉你说你回答得不错，然后接着问如果在-setnx-之后执行-expire-之前进程意外-crash-或者要重启维护了，那会怎么样？" class="headerlink" title="这时候对方会告诉你说你回答得不错，然后接着问如果在 setnx 之后执行 expire 之前进程意外 crash 或者要重启维护了，那会怎么样？"></a>这时候对方会告诉你说你回答得不错，然后接着问如果在 setnx 之后执行 expire 之前进程意外 crash 或者要重启维护了，那会怎么样？</h3><p>这时候你要给予惊讶的反馈：唉，是喔，这个锁就永远得不到释放了。紧接着你需要<strong>抓一抓自己得脑袋，故作思考片刻</strong>，好像接下来的结果是你主动思考出来的，然后回答：我记得 <strong><code>set</code></strong> 指令有非常复杂的参数，这个应该是可以同时把 <code>setnx</code> 和 <code>expire</code> 合成一条指令来用的！</p>
+<h3 id="这时候对方会告诉你说你回答得不错，然后接着问如果在-setnx-之后执行-expire-之前进程意外-crash-或者要重启维护了，那会怎么样？"><a href="#这时候对方会告诉你说你回答得不错，然后接着问如果在-setnx-之后执行-expire-之前进程意外-crash-或者要重启维护了，那会怎么样？" class="headerlink" title="这时候对方会告诉你说你回答得不错，然后接着问如果在 setnx 之后执行 expire 之前进程意外 crash 或者要重启维护了，那会怎么样？"></a>这时候对方会告诉你说你回答得不错，然后接着问如果在 setnx 之后执行 expire 之前进程意外 crash 或者要重启维护了，那会怎么样？</h3><p>这时候你要给予惊讶的反馈：唉，是喔，这个锁就永远得不到释放了。紧接着你需要<strong>抓一抓自己的脑袋，故作思考片刻</strong>，好像接下来的结果是你主动思考出来的，然后回答：我记得 <strong><code>set</code></strong> 指令有非常复杂的参数，这个应该是可以同时把 <code>setnx</code> 和 <code>expire</code> 合成一条指令来用的！</p>
 <h3 id="对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。"><a href="#对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。" class="headerlink" title="对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。"></a>对方这时会显露笑容，心里开始默念：嗯，这小子还不错，开始有点意思了。</h3><h3 id="假如-Redis-里面有-1-亿个-key-，其中有-10w-个-key-是以某个固定的已知的前缀开头的，如何将它们全部找出来？"><a href="#假如-Redis-里面有-1-亿个-key-，其中有-10w-个-key-是以某个固定的已知的前缀开头的，如何将它们全部找出来？" class="headerlink" title="假如 Redis 里面有 1 亿个 key ，其中有 10w 个 key 是以某个固定的已知的前缀开头的，如何将它们全部找出来？"></a>假如 Redis 里面有 1 亿个 key ，其中有 10w 个 key 是以某个固定的已知的前缀开头的，如何将它们全部找出来？</h3><p>使用 <strong><code>keys</code></strong> 指令可以扫出指定模式的 key 列表。</p>
 <h3 id="对方接着追问：如果这个-Redis-正在给线上的业务提供服务，那使用-keys-指令会有什么问题？"><a href="#对方接着追问：如果这个-Redis-正在给线上的业务提供服务，那使用-keys-指令会有什么问题？" class="headerlink" title="对方接着追问：如果这个 Redis 正在给线上的业务提供服务，那使用 keys 指令会有什么问题？"></a>对方接着追问：如果这个 Redis 正在给线上的业务提供服务，那使用 keys 指令会有什么问题？</h3><p>这个时候你要回答 Redis 关键的一个特性：Redis 是<strong>单线程</strong>的。<code>keys</code> 指令会导致线程阻塞一段时间，线上服务会停顿，直到指令执行完毕，服务才能恢复。这个时候可以使用 <strong><code>scan</code></strong> 指令，<strong><code>scan</code></strong> 指令可以无阻塞的提取出指定模式的 key 列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用 <code>keys</code> 指令长。</p>
 <blockquote>

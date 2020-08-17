@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -592,7 +592,7 @@
 <span class="token punctuation">}</span></code></pre>
 <h3 id="解锁"><a href="#解锁" class="headerlink" title="解锁"></a>解锁</h3><p>解锁的逻辑更加简单，就是一段 <strong>Lua</strong> 的拼装，把 Key 做了删除。</p>
 <p>你们发现没，我上面加锁解锁都用了 <strong>UUID</strong> ，这就是为了保证，谁加锁了谁解锁，要是你删掉了我的锁，那不乱套了嘛。</p>
-<p><strong>Lua</strong> 是原子性的，也比较简单，就是判断一下 Key 和我们参数是否相等，是的话就删除，返回成功 1 ，0 就是失败。</p>
+<p><strong>Lua</strong> 是原子性的，也比较简单，就是判断一下 Key 和我们参数是否相等，是的话就删除，1 返回成功，0 就是失败。</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
  * 解锁
  * @param id
@@ -612,7 +612,7 @@
         jedis<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>我们可以用我们写的 Redis 锁试试效果，可以看到都按照顺序去执行了</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>我们可以用我们写的 Redis 锁试试效果，可以看到都按照顺序去执行了。</p>
 <p><img src="https://s1.ax1x.com/2020/05/03/Jx2nYj.png" alt="验证"></p>
 <h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>大家是不是觉得完美了，但是上面的锁，有不少瑕疵的，我没思考很多点，你或许可以思考一下。</p>
 <p>而且，锁一般都是需要可重入的，上面的线程都是执行完了就释放了，无法再次进入了，进去也是重新加锁了，对于一个锁的设计来说肯定不是很合理的。</p>

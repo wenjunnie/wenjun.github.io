@@ -29,8 +29,8 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -477,14 +477,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    3.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    12 分
                 </div>
                 
 
@@ -519,7 +519,7 @@
 <p><strong>集中式</strong>的<strong>好处</strong>在于，元数据的读取和更新，时效性非常好，一旦元数据出现了变更，就立即更新到集中式的存储中，其它节点读取的时候就可以感知到；<strong>不好</strong>在于，所有的元数据的更新压力全部集中在一个地方，可能会导致元数据的存储有压力。</p>
 <p><strong>Gossip</strong> 的<strong>好处</strong>在于，元数据的更新比较分散，不是集中在一个地方，更新请求会陆陆续续打到所有节点上去更新，降低了压力；<strong>不好</strong>在于，元数据的更新有延时，可能导致集群中的一些操作会有一些滞后。</p>
 <ul>
-<li><p><strong>10000 端口：</strong>每个节点都有一个专门用于节点间通信的端口，就是自己提供服务的端口号+10000，比如 7001，那么用于节点间通信的就是 17001 端口。每个节点每隔一段时间都会往另外几个节点发送 <code>ping</code> 消息，同时其它几个节点接收到 <code>ping</code> 之后返回 <code>pong</code> 。</p>
+<li><p><strong>10000 端口：</strong>每个节点都有一个专门用于节点间通信的端口，就是自己提供服务的端口号 +10000 ，比如 7001，那么用于节点间通信的就是 17001 端口。每个节点每隔一段时间都会往另外几个节点发送 <code>ping</code> 消息，同时其它几个节点接收到 <code>ping</code> 之后返回 <code>pong</code> 。</p>
 </li>
 <li><p><strong>交换的信息：</strong>信息包括故障信息，节点的增加和删除，Hash Slot 信息等等。</p>
 </li>
@@ -553,12 +553,32 @@
 <h4 id="Redis-Cluster-的-Hash-Slot-算法"><a href="#Redis-Cluster-的-Hash-Slot-算法" class="headerlink" title="Redis Cluster 的 Hash Slot 算法"></a>Redis Cluster 的 Hash Slot 算法</h4><p>Redis Cluster 有固定的 <code>16384</code> 个 Hash Slot ，对每个 <code>Key</code> 计算 <code>CRC16</code> 值，然后对 <code>16384</code> 取模，可以获取 Key 对应的 Hash Slot 。</p>
 <p>Redis Cluster 中每个 Master 都会持有部分 Slot，比如有 3 个 Master ，那么可能每个 Master 持有 5000 多个 Hash Slot 。Hash Slot 让 Node 的增加和移除很简单，增加一个 Master，就将其他 Master 的 Hash Slot 移动部分过去，减少一个 Master ，就将它的 Hash Slot 移动到其他 Master 上去。移动 Hash Slot 的成本是非常低的。客户端的 API ，可以对指定的数据，让他们走同一个 Hash Slot ，通过 <code>Hash Tag</code> 来实现。</p>
 <p>任何一台机器宕机，另外两个节点，不影响的。因为 Key 找的是 Hash Slot ，不是机器。</p>
+<blockquote>
+<p>参考：<a href="https://phachon.com/redis/redis-3.html" target="_blank" rel="noopener">Redis Cluster集群模式</a></p>
+</blockquote>
 <p><img src="https://s1.ax1x.com/2020/04/29/JTeGdJ.png" alt="hash-slot"></p>
+<h4 id="Redis-Cluster-的-Hash-Slot-迁移过程"><a href="#Redis-Cluster-的-Hash-Slot-迁移过程" class="headerlink" title="Redis Cluster 的 Hash Slot 迁移过程"></a>Redis Cluster 的 Hash Slot 迁移过程</h4><ul>
+<li>客户端对目标节点发起准备导入槽数据的命令，让目标节点准备好导入槽数据。这里使用 <code>cluster setslot {slot} importing {sourceNodeId}</code> 命令。</li>
+<li>之后对源节点发起准备导出命令，让源节点准备迁出对应的槽数据。使用命令 <code>cluster setslot {slot} migrating {destinationNodeId}</code> 。</li>
+<li>此时源节点准备迁移数据了，在迁移之前把要迁移的数据获取出来。通过命令 <code>cluster getkeysinslot {slot} {count}</code> 。Count 表示迁移的 Slot 的个数。</li>
+<li>然后在源节点上执行，<code>migrate {targetIP} {targetPort} “” 0 {timeout} keys {keys}</code> 命令，把获取的键通过流水线批量迁移到目标节点。</li>
+<li>重复 3 和 4 两步不断将数据迁移到目标节点。目标节点获取迁移的数据。</li>
+<li>完成数据迁移到目标节点后，通过 <code>cluster setslot {slot} node {destinationNodeId}</code> 命令通知对应的槽被分配到目标节点，并且广播这个信息给全网的其他主节点，更新自身的槽节点对应表。</li>
+</ul>
+<p>既然有缓存服务器的上线操作，那么也有下线的操作。下线操作正好和上线操作相反，将要下线缓存节点的槽数据分配到其他的缓存主节点中。</p>
+<p>迁移的过程也与上线操作类似，不同的是下线的时候需要通知全网的其他节点忘记自己，此时通过命令 <code>cluster forget {downNodeId}</code> 通知其他的节点。</p>
+<p>当节点收到 <strong>forget</strong> 命令以后会将这个下线节点放到仅用列表中，那么之后就不用再向这个节点发送 Gossip 的 Ping 消息了。</p>
+<p>不过这个仅用列表的超时时间是 60 秒，超过了这个时间，依旧还会对这个节点发起 Ping 消息。</p>
+<p>不过可以使用 <code>redis-trib.rb del-node {host:port} {donwNodeId}</code> 命令帮助我们完成下线操作。</p>
+<p>尤其是下线的节点是主节点的情况下，会安排对应的从节点接替主节点的位置。</p>
+<blockquote>
+<p>参考：<a href="https://www.modb.pro/db/23471" target="_blank" rel="noopener">不懂Redis Cluster原理，我被同事diss了！</a>、<a href="https://redis.io/commands/cluster-setslot" target="_blank" rel="noopener">CLUSTER SETSLOT slot</a></p>
+</blockquote>
 <h4 id="为什么是-16384（2-14）个哈希槽？"><a href="#为什么是-16384（2-14）个哈希槽？" class="headerlink" title="为什么是 16384（2^14）个哈希槽？"></a>为什么是 16384（2^14）个哈希槽？</h4><blockquote>
 <p>Redis 作者给出了解答（<a href="https://github.com/antirez/redis/issues/2576" target="_blank" rel="noopener">点击查看</a>）。</p>
 </blockquote>
 <p>在 Redis 节点发送心跳包时需要把所有的槽放到这个心跳包里，以便让节点知道当前集群信息，16384 = 16k ，在发送心跳包时使用 <code>char</code> 进行 Bitmap 压缩后是 2k（ <code>2 * 8 (8 bit) * 1024 (1k) = 2K</code> ），也就是说使用 2k 的空间创建了 16k 的槽数。</p>
-<p>虽然使用 <code>CRC16</code> 算法最多可以分配 65535（2^16-1）个槽位，65535 = 65k ，压缩后就是 8k（ <code>8 * 8 (8 bit) * 1024 (1k) = 8K</code> ），也就是说需要需要 8k 的心跳包，作者认为这样做不太值得；并且一般情况下一个 Redis 集群不会有超过 1000 个 Master 节点，所以 16k 的槽位是个比较合适的选择。</p>
+<p>虽然使用 <code>CRC16</code> 算法最多可以分配 65535（2^16-1）个槽位，65535 = 65k ，压缩后就是 8k（ <code>8 * 8 (8 bit) * 1024 (1k) = 8K</code> ），也就是说需要 8k 的心跳包，作者认为这样做不太值得；并且一般情况下一个 Redis 集群不会有超过 1000 个 Master 节点，所以 16k 的槽位是个比较合适的选择。</p>
 <h3 id="Redis-Cluster-的高可用与主备切换原理"><a href="#Redis-Cluster-的高可用与主备切换原理" class="headerlink" title="Redis Cluster 的高可用与主备切换原理"></a>Redis Cluster 的高可用与主备切换原理</h3><p>Redis Cluster 的高可用的原理，几乎跟哨兵是类似的。</p>
 <h4 id="判断节点宕机"><a href="#判断节点宕机" class="headerlink" title="判断节点宕机"></a>判断节点宕机</h4><p>如果一个节点认为另外一个节点宕机，那么就是 <code>pfail</code> ，<strong>主观宕机</strong>。如果多个节点都认为另外一个节点宕机了，那么就是 <code>fail</code> ，<strong>客观宕机</strong>，跟哨兵的原理几乎一样，<code>sdown</code> ，<code>odown</code> 。</p>
 <p>在 <code>cluster-node-timeout</code> 内，某个节点一直没有返回 <code>pong</code> ，那么就被认为 <code>pfail</code> 。</p>
