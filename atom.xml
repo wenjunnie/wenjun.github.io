@@ -6,17 +6,42 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.niewenjun.com/"/>
-  <updated>2020-06-16T17:52:09.594Z</updated>
+  <updated>2020-12-07T13:46:53.561Z</updated>
   <id>https://www.niewenjun.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>秋招感悟</title>
+    <link href="https://www.niewenjun.com/2020/12/07/qiu-zhao-gan-wu/"/>
+    <id>https://www.niewenjun.com/2020/12/07/qiu-zhao-gan-wu/</id>
+    <published>2020-12-07T13:46:00.000Z</published>
+    <updated>2020-12-07T13:46:53.561Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;秋招感悟&quot;&gt;&lt;a href=&quot;#秋招感悟&quot; class=&quot;headerlink&quot; title=&quot;秋招感悟&quot;&gt;&lt;/a&gt;秋招感悟&lt;/h1&gt;&lt;p&gt;转眼间 2020
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="感悟" scheme="https://www.niewenjun.com/tags/%E6%84%9F%E6%82%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>停更通知</title>
     <link href="https://www.niewenjun.com/2020/06/17/ting-geng-tong-zhi/"/>
     <id>https://www.niewenjun.com/2020/06/17/ting-geng-tong-zhi/</id>
     <published>2020-06-16T17:46:00.000Z</published>
-    <updated>2020-06-16T17:52:09.594Z</updated>
+    <updated>2020-12-07T13:47:10.839Z</updated>
     
     <summary type="html">
     
@@ -539,37 +564,6 @@
       <category term="Linux IO" scheme="https://www.niewenjun.com/tags/Linux-IO/"/>
     
       <category term="零拷贝" scheme="https://www.niewenjun.com/tags/%E9%9B%B6%E6%8B%B7%E8%B4%9D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HTTPS</title>
-    <link href="https://www.niewenjun.com/2020/05/07/408/ji-suan-ji-wang-luo/https/"/>
-    <id>https://www.niewenjun.com/2020/05/07/408/ji-suan-ji-wang-luo/https/</id>
-    <published>2020-05-06T17:30:00.000Z</published>
-    <updated>2020-05-14T16:17:57.953Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;HTTPS&quot;&gt;&lt;a href=&quot;#HTTPS&quot; class=&quot;headerlink&quot; title=&quot;HTTPS&quot;&gt;&lt;/a&gt;HTTPS&lt;/h1&gt;&lt;p&gt;每篇文章都希望你能收获到东西，这篇将带你&lt;strong&gt;深入 HTTPS
-        
-      
-    
-    </summary>
-    
-    
-      <category term="408" scheme="https://www.niewenjun.com/categories/408/"/>
-    
-    
-      <category term="协议" scheme="https://www.niewenjun.com/tags/%E5%8D%8F%E8%AE%AE/"/>
-    
-      <category term="计算机网络" scheme="https://www.niewenjun.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="HTTPS" scheme="https://www.niewenjun.com/tags/HTTPS/"/>
     
   </entry>
   
