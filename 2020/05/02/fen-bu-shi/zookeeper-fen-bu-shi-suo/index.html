@@ -1,0 +1,1400 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ZooKeeper分布式锁, Wenjun">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>ZooKeeper分布式锁 | Wenjun</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Wenjun</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Wenjun</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wenjunnie" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wenjunnie" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ZooKeeper分布式锁</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    .toc-fixed .toc-link::before{
+        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                                <span class="chip bg-color">分布式锁</span>
+                            </a>
+                        
+                            <a href="/tags/ZooKeeper/">
+                                <span class="chip bg-color">ZooKeeper</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                分布式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-05-02
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="ZooKeeper-分布式锁"><a href="#ZooKeeper-分布式锁" class="headerlink" title="ZooKeeper 分布式锁"></a>ZooKeeper 分布式锁</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h3><p>锁我想不需要我过多的去说，大家都知道是怎么一回事了吧？</p>
+<p>在多线程环境下，由于上下文的切换，数据可能出现不一致的情况或者数据被污染，我们需要保证数据安全，所以想到了加锁。</p>
+<p>所谓的加锁机制呢，就是当一个线程访问该类的某个数据时，进行保护，其他线程不能进行访问，直到该线程读取完，其他线程才可使用。</p>
+<p>还记得我之前说过 Redis 在分布式的情况下，需要对存在并发竞争的数据进行加锁，老公们十分费解，Redis 是单线程的嘛？为啥还要加锁呢？</p>
+<p>看来老公们还是年轻啊，你说的不需要加锁的情况是这样的：</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvIL0x.png" alt=""></p>
+<p>单个服务去访问 Redis 的时候，确实因为 Redis 本身单线程的原因是不用考虑线程安全的，但是，现在有哪个公司还是单机的呀？肯定都是分布式集群了嘛。</p>
+<p>老公们你看下这样的场景是不是就有问题了：</p>
+<p>你们经常不是说秒杀嘛，拿到库存判断，那老婆告诉你分布式情况就是会出问题的。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvowuR.png" alt=""></p>
+<p>我们为了减少 DB 的压力，把库存预热到了 KV ，现在 KV 的库存是 1 。</p>
+<ol>
+<li>服务 A 去 Redis 查询到库存发现是 1 ，那说明我能抢到这个商品对不对，那我就准备减一了，但是还没减。</li>
+<li>同时服务 B 也去拿发现也是 1 ，那我也抢到了呀，那我也减。</li>
+<li>C 同理。</li>
+<li>等所有的服务都判断完了，你发现诶，怎么变成 -2 了，超卖了呀，这下完了。</li>
+</ol>
+<p>老公们是不是发现问题了，这就需要分布式锁的介入了，我会分三个章节去分别介绍分布式锁的三种实现方式<strong>（Zookeeper ，Redis ，MySQL）</strong>，说出他们的优缺点，以及一般大厂的实践场景。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><blockquote>
+<p>一个骚里骚气的面试官啥也没拿的就走了进来，你一看，这不是你老婆嘛，你正准备叫他的时候，发现他一脸严肃，死鬼还装严肃，肯定会给我放水的吧。</p>
+<p>咳咳，我们啥也不说了，开始今天的面试吧。</p>
+<p>正常线程进程同步的机制有哪些？</p>
+</blockquote>
+<ul>
+<li>互斥：互斥的机制，保证同一时间只有一个线程可以操作共享资源 <strong>synchronized</strong> ，<strong>Lock</strong> 等。</li>
+<li>临界值：让多线程串行化去访问资源。</li>
+<li>事件通知：通过事件的通知去保证大家都有序访问共享资源。</li>
+<li>信号量：多个任务同时访问，同时限制数量，比如发令枪 <strong>CDL</strong> ，<strong>Semaphore</strong> 等。</li>
+</ul>
+<blockquote>
+<p>那分布式锁你了解过有哪些么？</p>
+</blockquote>
+<p>分布式锁实现主要以 <strong>Zookeeper</strong>（以下简称 ZK ）、<strong>Redis</strong> 、<strong>MySQL</strong> 这三种为主。</p>
+<blockquote>
+<p>那先跟我聊一下 ZK 吧，你能说一下他常见的使用场景么？</p>
+</blockquote>
+<p>他主要的应用场景有以下几个：</p>
+<ul>
+<li>服务注册与订阅（共用节点）</li>
+<li>分布式通知（监听 znode ）</li>
+<li>服务命名（ znode 特性）</li>
+<li>数据订阅、发布（ watcher ）</li>
+<li>分布式锁（临时节点）</li>
+</ul>
+<blockquote>
+<p>ZK 是啥？</p>
+</blockquote>
+<p>它是个数据库，文件存储系统，并且有监听通知机制（观察者模式）。</p>
+<blockquote>
+<p>文件存储系统，他存了什么？</p>
+</blockquote>
+<p>节点。</p>
+<p>ZK 的节点类型有 <strong>4</strong> 大类：</p>
+<ul>
+<li><strong>持久化节点</strong>（ ZK 断开后节点还在）</li>
+<li><strong>持久化顺序编号目录节点</strong></li>
+<li><strong>临时目录节点</strong>（客户端断开后节点就删除了）</li>
+<li><strong>临时顺序编号目录节点</strong></li>
+</ul>
+<p>节点名称都是<strong>唯一</strong>的。</p>
+<blockquote>
+<p>节点怎么创建？</p>
+</blockquote>
+<p>我特么，这样问的么？可是我面试只看了分布式锁，我得好好想想！！！</p>
+<p>还好我之前在自己的服务器搭建了一个 ZK 的集群，我刚好跟大家回忆一波。</p>
+<pre class=" language-bash"><code class="language-bash">create /test laogong // 创建永久节点 </code></pre>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jvoq2Q.png" alt="创建永久节点"></p>
+<blockquote>
+<p>那临时节点呢？</p>
+</blockquote>
+<pre class=" language-bash"><code class="language-bash">create -e /test laogong // 创建临时节点</code></pre>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvTKPO.png" alt="创建临时节点"></p>
+<p>临时节点就创建成功了，如果我断开这次链接，这个节点自然就消失了，这是我的一个 ZK 管理工具，目录可能清晰点。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvT8sA.png" alt=""></p>
+<blockquote>
+<p>如何创建顺序节点呢？</p>
+</blockquote>
+<pre class=" language-bash"><code class="language-bash">create -s /test // 创建顺序节点</code></pre>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvTGqI.png" alt="创建顺序节点"></p>
+<blockquote>
+<p>临时顺序节点呢？</p>
+</blockquote>
+<p>我想聪明的老公都会抢答了</p>
+<pre class=" language-bash"><code class="language-bash">create -e -s /test  // 创建临时顺序节点</code></pre>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvTai8.png" alt="创建临时顺序节点"></p>
+<p>我退出后，重新连接，发现刚才创建的所有临时节点都没了。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jv7Kwq.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jv7lkV.png" alt=""></p>
+<p>开篇演示这么多呢，我就是想给大家看到的 ZK 大概的一个操作流程和数据结构，中间涉及的搭建以及其他的技能我就不说了，我们重点聊一下他在分布式锁中的实现。</p>
+<p>ZK 就是基于节点去实现各种分布式锁的。</p>
+<blockquote>
+<p>就拿开头的场景来说，ZK 应该怎么去保证分布式情况下的线程安全呢？并发竞争他是怎么控制的呢？</p>
+</blockquote>
+<p>为了模拟并发竞争这样一个情况，我写了点伪代码，大家可以先看看。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jv7y1e.png" alt=""></p>
+<p>我定义了一个库存 <code>inventory</code> 值为 1 ，还用到了一个 <strong>CountDownLatch</strong> 发令枪，等 10 个线程都就绪了一起去扣减库存。</p>
+<p>是不是就像 10 台机器一起去拿到库存，然后扣减库存了？</p>
+<p>所有机器一起去拿，发现都是 1 ，那大家都认为是自己抢到了，都做了减一的操作，但是等所有人都执行完，再去 set 值的时候，发现其实已经超卖了，我打印出来给大家看看。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jv7T1g.png" alt=""></p>
+<p>是吧，这还不是超卖一个两个的问题，超卖 7 个都有，代码里面明明判断了库存大于 0 才去减的，怎么回事开头我说明了。</p>
+<blockquote>
+<p>那怎么解决这个问题？</p>
+</blockquote>
+<p>synchronized ，Lock 也只能保证你当前机器线程安全，这样分布式访问还是有问题。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvHFBR.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvHkH1.png" alt=""></p>
+<p>上面跟大家提到的 ZK 的节点就可以解决这个问题。</p>
+<p>ZK 节点有个<strong>唯一</strong>的特性，就是我们创建过这个节点了，你再创建 ZK 是会报错的，那我们就利用一下他的唯一性去实现一下。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvHm9O.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvHlDA.png" alt=""></p>
+<blockquote>
+<p>怎么实现呢？</p>
+</blockquote>
+<p>上面不是 10 个线程嘛？</p>
+<p>我们全部去创建，创建成功的第一个返回 True 他就可以继续下面的扣减库存操作，后续的节点访问就会全部报错，扣减失败，我们把它们丢一个队列去排队。</p>
+<blockquote>
+<p>那怎么释放锁呢？</p>
+</blockquote>
+<p>删除节点咯，删了再通知其他的人过来加锁，依次类推。</p>
+<p>我们实现一下，ZK 加锁的场景。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvHfKJ.png" alt=""></p>
+<p>是不是，只有第一个线程能扣减成功，其他的都失败了。</p>
+<blockquote>
+<p>但是你发现问题没有，你加了锁了，你得释放啊，你不释放后面的报错了就不重试了。</p>
+</blockquote>
+<p>那简单，删除锁就释放掉了，Lock 在 <code>finally</code> 里面 <code>unLock()</code> ，现在我们在 <code>finally</code> 删除节点。</p>
+<blockquote>
+<p>加锁我们知道创建节点就够了，但是你得实现一个阻塞的效果呀，那咋搞？</p>
+</blockquote>
+<p>死循环，递归不断去尝试，直到成功，一个伪装的阻塞效果。</p>
+<blockquote>
+<p>怎么知道前面的老哥删除节点了嗯？</p>
+</blockquote>
+<p>监听节点的删除事件。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvHT56.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvHq2D.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvHvqA.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvbCPf.png" alt=""></p>
+<blockquote>
+<p>但是你发现你这样做的问题没？</p>
+</blockquote>
+<p>是的，会出现死锁。</p>
+<p>第一个仔加锁成功了，在执行代码的时候，机器宕机了，那节点是不是就不能删除了？</p>
+<p>你要故作沉思，自问自答，时而看看远方，时而看看面试官，假装自己什么都不知道。</p>
+<p>哦我想起来了，创建临时节点就好了，客户端连接一断开，别的就可以监听到节点的变化了。</p>
+<blockquote>
+<p>嗯还不错，那你发现还有别的问题没？</p>
+</blockquote>
+<p>好像这种监听机制也不好。</p>
+<blockquote>
+<p>怎么个不好呢？</p>
+</blockquote>
+<p>你们可以看到，监听，是所有服务都去监听一个节点的，节点的释放也会通知所有的服务器，如果是 900 个服务器呢？</p>
+<p>这对服务器是很大的一个挑战，一个释放的消息，就好像一个牧羊犬进入了羊群，大家都四散而开，随时可能干掉机器，会占用服务资源，网络带宽等等。</p>
+<p>这就是羊群效应。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JvbAMQ.gif" alt="羊群效应"></p>
+<blockquote>
+<p>那怎么解决这个问题？</p>
+</blockquote>
+<p>继续故作沉思，啊啊啊，好难，我的脑袋。。。。</p>
+<blockquote>
+<p>你 TM 别装了好不好？</p>
+</blockquote>
+<p>好的，临时顺序节点，可以顺利解决这个问题。</p>
+<p>怎么实现老公你先别往下看，先自己想想。</p>
+<p>之前说了全部监听一个节点问题很大，那我们就监听我们的前一个节点，因为是顺序的，很容易找到自己的前后。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jx3Icq.png" alt=""></p>
+<p>和之前监听一个永久节点的区别就在于，这里每个节点只监听了自己的前一个节点，释放当然也是一个个释放下去，就不会出现羊群效应了。</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/Jx8GCj.png" alt=""></p>
+<blockquote>
+<p>你说了这么多，挺不错的，你能说说 ZK 在分布式锁中实践的一些缺点么？</p>
+</blockquote>
+<p>ZK <strong>性能</strong>上可能并没有缓存服务那么高。</p>
+<p>因为每次在创建锁和释放锁的过程中，都要动态创建、销毁瞬时节点来实现锁功能。</p>
+<p>ZK 中创建和删除节点只能通过 Leader 服务器来执行，然后将数据同步到所有的 Follower 机器上。（这里涉及 ZK 集群的知识，我就不展开了，以后 ZK 章节跟老公们细聊）</p>
+<blockquote>
+<p>还有么？</p>
+</blockquote>
+<p>使用 ZooKeeper 也有可能带来<strong>并发问题</strong>，只是并不常见而已。</p>
+<p>由于网络抖动，客户端和 ZK 集群的 <strong>Session</strong> 连接断了，那么 ZK 以为客户端挂了，就会删除临时节点，这时候其他客户端就可以获取到分布式锁了。</p>
+<p>就可能产生并发问题了，这个问题不常见是因为 ZK 有<strong>重试</strong>机制，一旦 ZK 集群检测不到客户端的心跳，就会重试，Curator 客户端支持多种重试策略。</p>
+<p>多次重试之后还不行的话才会删除临时节点。</p>
+<p>Tip：所以，选择一个合适的重试策略也比较重要，要在锁的粒度和并发之间找一个平衡。</p>
+<blockquote>
+<p>有更好的实现么？</p>
+</blockquote>
+<p>基于 Redis 的分布式锁</p>
+<blockquote>
+<p>能跟我聊聊么？</p>
+</blockquote>
+<p>我看看了手上的表，老公，今天天色不早了，你全问完了，我怎么多水几篇文章呢？</p>
+<blockquote>
+<p>行，确实很晚了，那你回家去把家务干了吧？</p>
+</blockquote>
+<p>我？？？？</p>
+<p><img src="https://s1.ax1x.com/2020/05/02/JxGZoF.png" alt="么么哒"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ZK 通过临时节点，解决掉了<strong>死锁</strong>的问题，一旦客户端获取到锁之后突然挂掉（ Session 连接断开），那么这个临时节点就会自动删除掉，其他客户端自动获取锁。</p>
+<p>ZK 通过节点排队监听的机制，也实现了<strong>阻塞</strong>的原理，其实就是个递归在那无限等待最小节点释放的过程。</p>
+<p>我上面没实现锁的<strong>可重入</strong>，但是也很好实现，可以带上线程信息就可以了，或者机器信息这样的唯一标识，获取的时候判断一下。</p>
+<p>ZK 的集群也是<strong>高可用</strong>的，只要半数以上的活着，就可以对外提供服务了。</p>
+<p>这周会写完 Redis 和数据库的分布式锁的，老公们等好。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com" rel="external nofollow noreferrer">wenjun</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com/2020/05/02/fen-bu-shi/zookeeper-fen-bu-shi-suo/">https://www.niewenjun.com/2020/05/02/fen-bu-shi/zookeeper-fen-bu-shi-suo/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.niewenjun.com" target="_blank">wenjun</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                                    <span class="chip bg-color">分布式锁</span>
+                                </a>
+                            
+                                <a href="/tags/ZooKeeper/">
+                                    <span class="chip bg-color">ZooKeeper</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '8a7690644355c0050723',
+        clientSecret: '88c3f58194c8af218715bee3d1dfab6bc9b6d98f',
+        repo: 'gitalk',
+        owner: 'wenjunnie',
+        admin: "wenjunnie",
+        id: '2020-05-02T22-23-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/05/03/fen-bu-shi/redis-fen-bu-shi-suo/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Redis分布式锁">
+                        
+                        <span class="card-title">Redis分布式锁</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Redis 分布式锁前言上一章节我提到了基于 ZK 分布式锁的实现，这章节就来说一下基于 Redis 的分布式锁实现吧。
+
+ZK 实现分布式锁的传送门：ZooKeeper分布式锁
+
+在开始提到 Redis 分布式锁之前，我想跟大家聊点 Re
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                        <span class="chip bg-color">分布式锁</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/30/fen-bu-shi/raft-xie-yi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Raft协议">
+                        
+                        <span class="card-title">Raft协议</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Raft 协议前言Raft 协议是用来解决分布式系统一致性问题的协议，在很长一段时间，Paxos 被认为是解决分布式系统一致性的代名词。但是 Paxos 难于理解，更难以实现，诸如 Google 大牛们开发的分布式锁系统 Chubby 都遭
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                    <a href="/tags/Raft/">
+                        <span class="chip bg-color">Raft</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">协议</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.niewenjun.com" target="_blank"></a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "4";
+                    var startDate = "12";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wenjunnie" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1287018840@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1287018840" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1287018840" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

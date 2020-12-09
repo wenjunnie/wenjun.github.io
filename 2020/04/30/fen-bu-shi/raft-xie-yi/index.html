@@ -1,0 +1,1768 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Raft协议, Wenjun">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Raft协议 | Wenjun</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Wenjun" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Wenjun</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Wenjun</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wenjunnie" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wenjunnie" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Raft协议</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    .toc-fixed .toc-link::before{
+        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
+                            </a>
+                        
+                            <a href="/tags/Raft/">
+                                <span class="chip bg-color">Raft</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                <span class="chip bg-color">协议</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                分布式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-04-30
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    28 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Raft-协议"><a href="#Raft-协议" class="headerlink" title="Raft 协议"></a>Raft 协议</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><strong>Raft</strong> 协议是用来解决分布式系统一致性问题的协议，在很长一段时间，<strong>Paxos</strong> 被认为是解决分布式系统一致性的代名词。但是 Paxos 难于理解，更难以实现，诸如 Google 大牛们开发的分布式锁系统 <code>Chubby</code> 都遭遇了很多坑。<strong>Raft</strong> 协议设计的初衷就是容易实现，保证对于普遍的人群都可以十分舒适容易的去理解。另外，它必须能够让人形成直观的认识，这样系统的构建者才能够在现实中进行必然的扩展。</p>
+<p>当 Sentinel 集群有 Sentinel 发现 Master <strong>客观下线</strong>了，就会开始故障转移流程，故障转移流程的第一步就是在 Sentinel 集群选择一个 Leader ，让 <strong>Leader</strong> 完成故障转移流程。</p>
+<h3 id="Raft-协议选举流程"><a href="#Raft-协议选举流程" class="headerlink" title="Raft 协议选举流程"></a>Raft 协议选举流程</h3><p>描述 <strong>Raft</strong> 选举流程之前需要了解一些概念。</p>
+<h4 id="节点的状态"><a href="#节点的状态" class="headerlink" title="节点的状态"></a>节点的状态</h4><p><strong>Raft</strong> 协议描述的节点共有三种状态：<strong>Leader</strong> ，<strong>Follower</strong> ，<strong>Candidate</strong> 。在系统运行正常的时候只有 Leader 和 Follower 两种状态的节点。一个 Leader 节点，其他的节点都是 Follower 。Candidate 是系统运行不稳定时期的<strong>中间状态</strong>，当一个 Follower 对 Leader 的心跳出现异常，就会转变成 Candidate ，Candidate 会去竞选新的 Leader ，它会向其他节点发送竞选投票，如果大多数节点都投票给它，它就会替代原来的 Leader ，变成新的 Leader ，原来的 Leader 会降级成 Follower 。</p>
+<p><img src="https://s1.ax1x.com/2020/04/30/JLdTJJ.png" alt="节点的状态"></p>
+<h4 id="term"><a href="#term" class="headerlink" title="term"></a>term</h4><p>在分布式系统中，各个节点的时间同步是一个很大的难题，但是为了识别过期时间，时间信息又必不可少。<strong>Raft</strong> 协议为了解决这个问题，引入了 <strong>term</strong>（任期）的概念。<strong>Raft</strong> 协议将时间切分为一个个的 <strong>term</strong> ，可以认为是一种“逻辑时间”。</p>
+<p><img src="https://s1.ax1x.com/2020/04/30/JLwiQI.png" alt="term"></p>
+<h4 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h4><p><strong>Raft</strong> 协议在选举阶段交互的 RPC 有两类：<strong>RequestVote</strong> 和 <strong>AppendEntries</strong> 。</p>
+<ul>
+<li><strong>RequestVote</strong> 是用来向其他节点发送竞选投票。</li>
+<li><strong>AppendEntries</strong> 是当该节点得到更多的选票后，成为 Leader ，向其他节点确认消息。</li>
+</ul>
+<h4 id="选举流程"><a href="#选举流程" class="headerlink" title="选举流程"></a>选举流程</h4><p><strong>Raft</strong> 采用<strong>心跳机制</strong>触发 Leader 选举。系统启动后，全部节点初始化为 <strong>Follower</strong> ，term 为 0 。节点如果收到了 RequestVote 或者 AppendEntries ，就会保持自己的 Follower 身份。如果一段时间内没收到 AppendEntries 消息直到选举超时，说明在该节点的超时时间内还没发现 Leader ，Follower 就会转换成 <strong>Candidate</strong> ，自己开始竞选 Leader 。一旦转化为 Candidate ，该节点立即开始下面几件事情：</p>
+<ul>
+<li>增加自己的 term 。</li>
+<li>启动一个新的定时器。</li>
+<li>给自己投一票。</li>
+<li>向所有其他节点发送 RequestVote ，并等待其他节点的回复。</li>
+</ul>
+<p>如果在这过程中收到了其他节点发送的 AppendEntries ，就说明已经有 Leader 产生，自己就转换成 Follower ，选举结束。</p>
+<p>如果在计时器超时前，节点收到多数节点的同意投票，就转换成 Leader 。同时向所有其他节点发送 AppendEntries ，告知自己成为了 Leader 。</p>
+<p>每个节点在一个 term 内只能投一票，采取先到先得的策略，Candidate 前面说到已经投给了自己，Follower 会投给第一个收到 RequestVote 的节点。每个 Follower 有一个计时器，在计时器超时时仍然没有接受到来自 Leader 的心跳 RPC ，则自己转换为 Candidate ，开始请求投票，就是上面的的竞选 Leader 步骤。</p>
+<p>如果多个 Candidate 发起投票，每个 Candidate 都没拿到多数的投票（Split Vote），那么就会等到计时器超时后重新成为 Candidate ，重复前面竞选 Leader 步骤。</p>
+<p><strong>Raft</strong> 协议的定时器采取<strong>随机超时</strong>时间，这是选举 Leader 的关键。每个节点定时器的超时时间随机设置，随机选取配置时间的 1 倍到 2 倍之间。由于随机配置，所以各个 Follower 同时转成 Candidate 的时间一般不一样，在同一个 term 内，先转为 Candidate 的节点会先发起投票，从而获得多数票。多个节点同时转换为 Candidate 的可能性很小。即使几个 Candidate 同时发起投票，在该 term 内有几个节点获得一样高的票数，只是这个 term 无法选出 Leader 。由于各个节点定时器的超时时间随机生成，那么最先进入下一个 term 的节点，将更有机会成为 Leader 。连续多次发生在一个 term 内节点获得一样高票数在理论上几率很小，实际上可以认为完全不可能发生。一般 1-2 个 term 内，Leader 就会被选出来。</p>
+<h3 id="Sentinel-的选举流程"><a href="#Sentinel-的选举流程" class="headerlink" title="Sentinel 的选举流程"></a>Sentinel 的选举流程</h3><p>Sentinel 集群正常运行的时候每个节点 <strong>epoch</strong> 相同，当需要故障转移的时候会在集群中选出 Leader 执行故障转移操作。Sentinel 采用了 <strong>Raft</strong> 协议实现了 Sentinel 间选举 Leader 的算法，不过也不完全跟论文描述的步骤一致。Sentinel 集群运行过程中故障转移完成，所有 Sentinel 又会恢复平等。Leader 仅仅是故障转移操作出现的角色。</p>
+<h4 id="选举流程-1"><a href="#选举流程-1" class="headerlink" title="选举流程"></a>选举流程</h4><ul>
+<li>某个 Sentinel 认定 Master 客观下线的节点后，该 Sentinel 会先看看自己有没有投过票，如果自己已经投过票给其他 Sentinel 了，在 2 倍故障转移的超时时间内自己就不会成为 Leader ，相当于它是一个 Follower 。</li>
+<li>如果该 Sentinel 还没投过票，那么它就成为 Candidate 。</li>
+<li>和 <strong>Raft</strong> 协议描述的一样，成为 Candidate ，Sentinel 需要完成几件事情。<ul>
+<li>更新故障转移状态为 <code>start</code> 。</li>
+<li>当前 <code>epoch</code> 加 <strong>1</strong> ，相当于进入一个新 term ，<strong>在 Sentinel 中 epoch 就是 Raft 协议中的 term</strong> 。</li>
+<li>更新自己的超时时间为当前时间随机加上一段时间，随机时间为 1 s内的随机毫秒数。</li>
+<li>向其他节点发送 <code>is-master-down-by-addr</code> 命令请求投票。命令会带上自己的 <code>epoch</code> 。</li>
+<li>给自己投一票，在 Sentinel 中，投票的方式是把自己 Master 结构体里的 <code>leader</code> 和 <code>leader_epoch</code> 改成投给的 Sentinel 和它的 epoch 。</li>
+</ul>
+</li>
+<li>其他 Sentinel 会收到 Candidate 的 <code>is-master-down-by-addr</code> 命令。如果 Sentinel 当前 epoch 和 Candidate 传给他的 epoch 一样，说明他已经把自己 Master 结构体里的 <code>leader</code> 和 <code>leader_epoch</code> 改成其他 Candidate ，相当于把票投给了其他 Candidate 。投过票给别的 Sentinel 后，在当前 epoch 内自己就只能成为 Follower 。</li>
+<li>Candidate 会不断的统计自己的票数，直到他发现认同他成为 Leader 的票数超过一半而且超过它配置的quorum 。Sentinel 比 <strong>Raft</strong> 协议增加了 quorum ，这样一个 Sentinel 能否当选 Leader 还取决于它配置的 quorum 。</li>
+<li>如果在一个选举时间内，Candidate 没有获得超过一半且超过它配置的 quorum 的票数，自己的这次选举就失败了。</li>
+<li>如果在一个 epoch 内，没有一个 Candidate 获得更多的票数。那么等待超过 <strong>2</strong> 倍故障转移的超时时间后， Candidate 增加 epoch 重新投票。</li>
+<li>如果某个 Candidate 获得<strong>超过一半且超过它配置的 <code>quorum</code> 的票数</strong>，那么它就成为了 Leader 。</li>
+<li>与 <strong>Raft</strong> 协议不同，<strong>Leader 并不会把自己成为 Leader 的消息发给其他 Sentinel</strong> 。其他 Sentinel 等待 Leader 从 Slave 选出 Master 后，检测到新的 Master 正常工作后，就会去掉客观下线的标识，从而不需要进入故障转移流程。</li>
+</ul>
+<h4 id="关于-Sentinel-超时时间的说明"><a href="#关于-Sentinel-超时时间的说明" class="headerlink" title="关于 Sentinel 超时时间的说明"></a>关于 Sentinel 超时时间的说明</h4><p>Sentinel 超时机制有几个超时概念。</p>
+<ul>
+<li><strong>failover_start_time：</strong>下一选举启动的时间。默认是当前时间加上 1s 内的随机毫秒数。</li>
+<li><strong>failover_state_change_time：</strong>故障转移中状态变更的时间。</li>
+<li><strong>failover_timeout：</strong>故障转移超时时间。默认是 3 分钟。</li>
+<li><strong>election_timeout：</strong>选举超时时间，是默认选举超时时间和 <code>failover_timeout</code> 的最小值。默认是 10s 。</li>
+</ul>
+<p>Follower 成为 Candidate 后，会更新 <code>failover_start_time</code> 为当前时间加上 1s 内的随机毫秒数。更新 <code>failover_state_change_time</code> 为当前时间。</p>
+<p>Candidate 的当前时间减去 <code>failover_start_time</code> 大于 <code>election_timeout</code> ，说明 Candidate 还没获得足够的选票，此次 epoch 的选举已经超时，那么转变成 Follower 。需要等到 <code>mstime() - failover_start_time &lt; failover_timeout*2</code> 的时候才开始下一次获得成为 Candidate 的机会。</p>
+<p>如果一个 Follower 把某个 Candidate 设为自己认为的 Leader ，那么它的 <code>failover_start_time</code> 会设置为当前时间加上 1s 内的随机毫秒数。这样它就进入了上面说的需要等到 <code>mstime() - failover_start_time &lt; failover_timeout*2</code> 的时候才开始下一次获得成为 Candidate 的机会。</p>
+<p>因为每个 Sentinel 判断节点客观下线的时间不是同时开始的，一般都有先后，这样先开始的 Sentinel 就更有机会赢得更多选票，另外 <code>failover_state_change_time</code> 为 1s 内的随机毫秒数，这样也把各个节点的超时时间分散开来。本人尝试过很多次，Sentinel 间的 Leader 选举过程基本上一个 <code>epoch</code> 内就完成了。</p>
+<h3 id="Sentinel-选举流程源码解析"><a href="#Sentinel-选举流程源码解析" class="headerlink" title="Sentinel 选举流程源码解析"></a>Sentinel 选举流程源码解析</h3><p>Sentinel 的选举流程的代码基本都在 <code>sentinel.c</code> 文件中，下面结合源码对 Sentinel 的选举流程进行说明。</p>
+<h4 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h4><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* ======================== SENTINEL timer handler ==========================
+ * This is the "main" our Sentinel, being sentinel completely non blocking
+ * in design. The function is called every second.
+ * -------------------------------------------------------------------------- */</span>
+<span class="token comment" spellcheck="true">/* Perform scheduled operations for the specified Redis instance. */</span>
+
+<span class="token comment" spellcheck="true">// 对给定的实例执行定期操作</span>
+<span class="token keyword">void</span> <span class="token function">sentinelHandleRedisInstance</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>ri<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* ========== MONITORING HALF ============ */</span>
+    <span class="token comment" spellcheck="true">/* ==========     监控操作    =========*/</span>
+    <span class="token comment" spellcheck="true">/* Every kind of instance */</span>
+    <span class="token comment" spellcheck="true">/* 对所有类型实例进行处理 */</span>
+
+    <span class="token comment" spellcheck="true">// 如果有需要的话，创建连向实例的网络连接</span>
+    <span class="token function">sentinelReconnectInstance</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 根据情况，向实例发送 PING、 INFO 或者 PUBLISH 命令</span>
+    <span class="token function">sentinelSendPeriodicCommands</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* ============== ACTING HALF ============= */</span>
+    <span class="token comment" spellcheck="true">/* ==============  故障检测   ============= */</span>
+    <span class="token comment" spellcheck="true">/* We don't proceed with the acting half if we are in TILT mode.
+     * TILT happens when we find something odd with the time, like a
+     * sudden change in the clock. */</span>
+
+    <span class="token comment" spellcheck="true">// 如果 Sentinel 处于 TILT 模式，那么不执行故障检测。</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>sentinel<span class="token punctuation">.</span>tilt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 如果 TILI 模式未解除，那么不执行动作</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span>sentinel<span class="token punctuation">.</span>tilt_start_time <span class="token operator">&lt;</span> SENTINEL_TILT_PERIOD<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 时间已过，退出 TILT 模式</span>
+        sentinel<span class="token punctuation">.</span>tilt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"-tilt"</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">,</span><span class="token string">"#tilt mode exited"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/* Every kind of instance */</span>
+    <span class="token comment" spellcheck="true">// 判断 master 是否进入 SDOWN 状态</span>
+    <span class="token function">sentinelCheckSubjectivelyDown</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Masters and slaves */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ri<span class="token operator">-></span>flags <span class="token operator">&amp;</span> <span class="token punctuation">(</span>SRI_MASTER<span class="token operator">|</span>SRI_SLAVE<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* Nothing so far. */</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/* Only masters */</span>
+    <span class="token comment" spellcheck="true">/* 对主服务器进行处理 */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ri<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_MASTER<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 判断 master 是否进入 ODOWN 状态</span>
+        <span class="token function">sentinelCheckObjectivelyDown</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 如果主服务器进入了 ODOWN 状态，那么开始一次故障转移操作</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">sentinelStartFailoverIfNeeded</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true">// 强制向其他 Sentinel 发送 SENTINEL is-master-down-by-addr 命令</span>
+            <span class="token comment" spellcheck="true">// 刷新其他 Sentinel 关于主服务器的状态</span>
+            <span class="token function">sentinelAskMasterStateToOtherSentinels</span><span class="token punctuation">(</span>ri<span class="token punctuation">,</span>SENTINEL_ASK_FORCED<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 执行故障转移</span>
+        <span class="token function">sentinelFailoverStateMachine</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 此处调用 sentinelAskMasterStateToOtherSentinels ，</span>
+        <span class="token comment" spellcheck="true">// 只是为了获取其他 Sentinel 对于 master 是否存活的判断，</span>
+        <span class="token comment" spellcheck="true">// 用来下一次判断 master 是否进入 ODOWN 状态</span>
+        <span class="token function">sentinelAskMasterStateToOtherSentinels</span><span class="token punctuation">(</span>ri<span class="token punctuation">,</span>SENTINEL_NO_FLAGS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Sentinel 会每隔 <strong>100ms</strong> 执行一次 <code>sentinelHandleRedisInstance</code> 函数。流程会检查 Master 是否进入 <strong>SDOWN</strong> 状态，接着会检查 Master 是否进入 <strong>ODOWN</strong> 状态，接着会查看是否需要开始故障转移，如果开始故障转移就会向其他节点拉去投票，接下来有个故障转移的状态机，根据不同的 <code>failover_state</code> ，决定完成不同的操作，正常的时候 <code>failover_state</code> 为 <strong>SENTINEL_FAILOVER_STATE_NONE</strong> 。</p>
+<h4 id="向其他-Sentinel-获取投票或者获取对-Master-存活状态的判断结果"><a href="#向其他-Sentinel-获取投票或者获取对-Master-存活状态的判断结果" class="headerlink" title="向其他 Sentinel 获取投票或者获取对 Master 存活状态的判断结果"></a>向其他 Sentinel 获取投票或者获取对 Master 存活状态的判断结果</h4><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> SENTINEL_ASK_FORCED (1&lt;&lt;0)</span>
+<span class="token keyword">void</span> <span class="token function">sentinelAskMasterStateToOtherSentinels</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>master<span class="token punctuation">,</span> <span class="token keyword">int</span> flags<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    dictIterator <span class="token operator">*</span>di<span class="token punctuation">;</span>
+    dictEntry <span class="token operator">*</span>de<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 遍历正在监视相同 master 的所有 sentinel</span>
+    <span class="token comment" spellcheck="true">// 向它们发送 SENTINEL is-master-down-by-addr 命令</span>
+    di <span class="token operator">=</span> <span class="token function">dictGetIterator</span><span class="token punctuation">(</span>master<span class="token operator">-></span>sentinels<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>de <span class="token operator">=</span> <span class="token function">dictNext</span><span class="token punctuation">(</span>di<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sentinelRedisInstance <span class="token operator">*</span>ri <span class="token operator">=</span> <span class="token function">dictGetVal</span><span class="token punctuation">(</span>de<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 距离该 sentinel 最后一次回复 SENTINEL master-down-by-addr 命令已经过了多久</span>
+        mstime_t elapsed <span class="token operator">=</span> <span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> ri<span class="token operator">-></span>last_master_down_reply_time<span class="token punctuation">;</span>
+        <span class="token keyword">char</span> port<span class="token punctuation">[</span><span class="token number">32</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> retval<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* If the master state from other sentinel is too old, we clear it. */</span>
+        <span class="token comment" spellcheck="true">// 如果目标 Sentinel 关于主服务器的信息已经太久没更新，那么我们清除它</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>elapsed <span class="token operator">></span> SENTINEL_ASK_PERIOD<span class="token operator">*</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ri<span class="token operator">-></span>flags <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>SRI_MASTER_DOWN<span class="token punctuation">;</span>
+            <span class="token function">sdsfree</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>leader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ri<span class="token operator">-></span>leader <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">/* Only ask if master is down to other sentinels if:
+         *
+         * 只在以下情况满足时，才向其他 sentinel 询问主服务器是否已下线
+         *
+         * 1) We believe it is down, or there is a failover in progress.
+         *    本 sentinel 相信服务器已经下线，或者针对该主服务器的故障转移操作正在执行
+         * 2) Sentinel is connected.
+         *    目标 Sentinel 与本 Sentinel 已连接
+         * 3) We did not received the info within SENTINEL_ASK_PERIOD ms. 
+         *    当前 Sentinel 在 SENTINEL_ASK_PERIOD 毫秒内没有获得过目标 Sentinel 发来的信息
+         * 4) 条件 1 和条件 2 满足而条件 3 不满足，但是 flags 参数给定了 SENTINEL_ASK_FORCED 标识
+         */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>master<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_S_DOWN<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ri<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_DISCONNECTED<span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>flags <span class="token operator">&amp;</span> SENTINEL_ASK_FORCED<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+            <span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> ri<span class="token operator">-></span>last_master_down_reply_time <span class="token operator">&lt;</span> SENTINEL_ASK_PERIOD<span class="token punctuation">)</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* Ask */</span>
+        <span class="token comment" spellcheck="true">// 发送 SENTINEL is-master-down-by-addr 命令</span>
+        <span class="token function">ll2string</span><span class="token punctuation">(</span>port<span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">,</span>master<span class="token operator">-></span>addr<span class="token operator">-></span>port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        retval <span class="token operator">=</span> <span class="token function">redisAsyncCommand</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>cc<span class="token punctuation">,</span>
+                    sentinelReceiveIsMasterDownReply<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span>
+                    <span class="token string">"SENTINEL is-master-down-by-addr %s %s %llu %s"</span><span class="token punctuation">,</span>
+                    master<span class="token operator">-></span>addr<span class="token operator">-></span>ip<span class="token punctuation">,</span> port<span class="token punctuation">,</span>
+                    sentinel<span class="token punctuation">.</span>current_epoch<span class="token punctuation">,</span>
+                    <span class="token comment" spellcheck="true">// 如果本 Sentinel 已经检测到 master 进入 ODOWN </span>
+                    <span class="token comment" spellcheck="true">// 并且要开始一次故障转移，那么向其他 Sentinel 发送自己的运行 ID</span>
+                    <span class="token comment" spellcheck="true">// 让对方将给自己投一票（如果对方在这个纪元内还没有投票的话）</span>
+                    <span class="token punctuation">(</span>master<span class="token operator">-></span>failover_state <span class="token operator">></span> SENTINEL_FAILOVER_STATE_NONE<span class="token punctuation">)</span> <span class="token operator">?</span>
+                    server<span class="token punctuation">.</span>runid <span class="token punctuation">:</span> <span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>retval <span class="token operator">==</span> REDIS_OK<span class="token punctuation">)</span> ri<span class="token operator">-></span>pending_commands<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">dictReleaseIterator</span><span class="token punctuation">(</span>di<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>对于每个节点，Sentinel 都会确认节点是否 <strong>SDOWN</strong> ，对于 Master ，还需要确认 <strong>ODOWN</strong> 。<code>sentinelAskMasterStateToOtherSentinels</code> 方法会在 Master 进入 <strong>SDOWN</strong> 或者 <strong>ODOWN</strong> 调用 <code>sentinel is-master-down-by-addr</code> 命令。<strong>SDOWN</strong> 时，该命令用来获取其他 Sentinel 对于 Master 的存活状态判断结果， <strong>ODOWN</strong> 是用来像其他节点投票的。<strong>SDOWN</strong> 时，flags 是 <strong>SENTINEL_NO_FLAGS</strong> ，<strong>ODOWN</strong> 时，flags 是 <strong>SENTINEL_ASK_FORCED</strong> 。</p>
+<h4 id="检查是否开始故障转移"><a href="#检查是否开始故障转移" class="headerlink" title="检查是否开始故障转移"></a>检查是否开始故障转移</h4><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* This function checks if there are the conditions to start the failover,
+ * that is:
+ *
+ * 这个函数检查是否需要开始一次故障转移操作：
+ *
+ * 1) Master must be in ODOWN condition.
+ *    主服务器已经计入 ODOWN 状态。
+ * 2) No failover already in progress.
+ *    当前没有针对同一主服务器的故障转移操作在执行。
+ * 3) No failover already attempted recently.
+ *    最近时间内，这个主服务器没有尝试过执行故障转移
+ *    （应该是为了防止频繁执行）。
+ * 
+ * We still don't know if we'll win the election so it is possible that we
+ * start the failover but that we'll not be able to act.
+ *
+ * 虽然 Sentinel 可以发起一次故障转移，但因为故障转移操作是由领头 Sentinel 执行的，
+ * 所以发起故障转移的 Sentinel 不一定就是执行故障转移的 Sentinel 。
+ *
+ * Return non-zero if a failover was started. 
+ *
+ * 如果故障转移操作成功开始，那么函数返回非 0 值。
+ */</span>
+<span class="token keyword">int</span> <span class="token function">sentinelStartFailoverIfNeeded</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>master<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* We can't failover if the master is not in O_DOWN state. */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>master<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_O_DOWN<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Failover already in progress? */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>master<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_FAILOVER_IN_PROGRESS<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Last failover attempt started too little time ago? */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> master<span class="token operator">-></span>failover_start_time <span class="token operator">&lt;</span>
+        master<span class="token operator">-></span>failover_timeout<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>master<span class="token operator">-></span>failover_delay_logged <span class="token operator">!=</span> master<span class="token operator">-></span>failover_start_time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            time_t clock <span class="token operator">=</span> <span class="token punctuation">(</span>master<span class="token operator">-></span>failover_start_time <span class="token operator">+</span>
+                            master<span class="token operator">-></span>failover_timeout<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1000</span><span class="token punctuation">;</span>
+            <span class="token keyword">char</span> ctimebuf<span class="token punctuation">[</span><span class="token number">26</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">ctime_r</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>clock<span class="token punctuation">,</span>ctimebuf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctimebuf<span class="token punctuation">[</span><span class="token number">24</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* Remove newline. */</span>
+            master<span class="token operator">-></span>failover_delay_logged <span class="token operator">=</span> master<span class="token operator">-></span>failover_start_time<span class="token punctuation">;</span>
+            <span class="token function">redisLog</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span>
+                <span class="token string">"Next failover delay: I will not start a failover before %s"</span><span class="token punctuation">,</span>
+                ctimebuf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">sentinelStartFailover</span><span class="token punctuation">(</span>master<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>     </code></pre>
+<p><code>sentinelStartFailoverIfNeeded</code> 方法会检查 Master 是否为 <strong>ODOWN</strong> 状态。因为定时任务每次就会执行到该函数，所以还要确认故障转移状态 <code>SRI_FAILOVER_IN_PROGRESS</code> 是否已经开始。然后会看定时任务是否超时，只有以上条件都满足才能开始故障转移。关于定时任务是否超时，<code>failover_start_time</code> 默认为 0 ，它有 2 个地方会被修改，一个是开始故障转移后，一个是收到其他 Sentinel 的投票请求。<code>failover_start_time</code> 被修改的值为 <strong>mstime() + rand() % SENTINEL_MAX_DESYNC</strong> ，这就是 <strong>Raft</strong> 协议说的<strong>随机因子</strong>。</p>
+<p><strong>SENTINEL_MAX_DESYNC</strong> 是 1000 ，相当于 <code>failover_start_time</code> 是当前时间加上 1s 内的随机值，这个保证了不同 Sentinel 在超时后，下次申请 Leader 时间的随机。所以故障转移开始，像 <strong>Raft</strong> 协议描述的“ <code>启动一个新的定时器</code> ”，设置了 <code>failover_start_time</code> 。在投票的时候设置 <code>failover_start_time</code> ，那么先投票，再通过 <strong>ODOWN</strong> 和 <strong>SRI_FAILOVER_IN_PROGRESS</strong> 的节点，在检查定时任务是否超时的时候就无法通过，相当于是 <strong>Raft</strong> 协议中的 <strong>Follower</strong> ，它不会参与竞争 Leader 。</p>
+<h4 id="成为-Candidate-，开始竞选-Leader"><a href="#成为-Candidate-，开始竞选-Leader" class="headerlink" title="成为 Candidate ，开始竞选 Leader"></a>成为 Candidate ，开始竞选 Leader</h4><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* Setup the master state to start a failover. */</span>
+<span class="token comment" spellcheck="true">// 设置主服务器的状态，开始一次故障转移</span>
+<span class="token keyword">void</span> <span class="token function">sentinelStartFailover</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>master<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">redisAssert</span><span class="token punctuation">(</span>master<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_MASTER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 更新故障转移状态</span>
+    master<span class="token operator">-></span>failover_state <span class="token operator">=</span> SENTINEL_FAILOVER_STATE_WAIT_START<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 更新主服务器状态</span>
+    master<span class="token operator">-></span>flags <span class="token operator">|</span><span class="token operator">=</span> SRI_FAILOVER_IN_PROGRESS<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 更新纪元</span>
+    master<span class="token operator">-></span>failover_epoch <span class="token operator">=</span> <span class="token operator">++</span>sentinel<span class="token punctuation">.</span>current_epoch<span class="token punctuation">;</span>
+
+    <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+new-epoch"</span><span class="token punctuation">,</span>master<span class="token punctuation">,</span><span class="token string">"%llu"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span> sentinel<span class="token punctuation">.</span>current_epoch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+try-failover"</span><span class="token punctuation">,</span>master<span class="token punctuation">,</span><span class="token string">"%@"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 记录故障转移状态的变更时间</span>
+    master<span class="token operator">-></span>failover_start_time <span class="token operator">=</span> <span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">%</span>SENTINEL_MAX_DESYNC<span class="token punctuation">;</span>
+    master<span class="token operator">-></span>failover_state_change_time <span class="token operator">=</span> <span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>如果 Sentinel 通过三重检查，进入了 <code>sentinelStartFailover</code> ，相当于成为了 <strong>Candidate</strong> ，它会做以下几件事情：</p>
+<ul>
+<li>把 <code>failover_state</code> 改成 <strong>SENTINEL_FAILOVER_STATE_WAIT_START</strong> 。</li>
+<li>把 Master 的状态改成故障转移中 <strong>SRI_FAILOVER_IN_PROGRESS</strong> 。</li>
+<li>增加 Master 的 <code>current_epoch</code> ，并赋值给 <code>failover_epoch</code> 。</li>
+<li>把 <code>failover_start_time</code> 改成 <strong>mstime() + rand() % SENTINEL_MAX_DESYNC</strong> 。</li>
+<li>把 <code>failover_state_change_time</code> 改成 <code>mstime()</code> 。</li>
+</ul>
+<p><code>sentinelStartFailover</code> 完成了成为 <strong>Candidate</strong> 的前面两步，接着要回到前面的定时任务<code>sentinelHandleRedisInstance</code> 。因为 <code>sentinelStartFailoverIfNeeded</code> 返回了 <strong>1</strong> ，所以进入 <strong>if</strong> 流程，执行 <code>sentinelAskMasterStateToOtherSentinels(ri,SENTINEL_ASK_FORCED);</code> ，开始向其他 Sentinel 拉票。然后就进入 <code>sentinelFailoverStateMachine</code> 。</p>
+<h4 id="Follower-投票"><a href="#Follower-投票" class="headerlink" title="Follower 投票"></a>Follower 投票</h4><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* Vote for the sentinel with 'req_runid' or return the old vote if already
+ * voted for the specifed 'req_epoch' or one greater.
+ *
+ * 为运行 ID 为 req_runid 的 Sentinel 投上一票，有两种额外情况可能出现：
+ * 1) 如果 Sentinel 在 req_epoch 纪元已经投过票了，那么返回之前投的票。
+ * 2) 如果 Sentinel 已经为大于 req_epoch 的纪元投过票了，那么返回更大纪元的投票。
+ *
+ * If a vote is not available returns NULL, otherwise return the Sentinel
+ * runid and populate the leader_epoch with the epoch of the vote. 
+ *
+ * 如果投票暂时不可用，那么返回 NULL 。
+ * 否则返回 Sentinel 的运行 ID ，并将被投票的纪元保存到 leader_epoch 指针的值里面。
+ */</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">sentinelVoteLeader</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>master<span class="token punctuation">,</span> uint64_t req_epoch<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>req_runid<span class="token punctuation">,</span> uint64_t <span class="token operator">*</span>leader_epoch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>req_epoch <span class="token operator">></span> sentinel<span class="token punctuation">.</span>current_epoch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sentinel<span class="token punctuation">.</span>current_epoch <span class="token operator">=</span> req_epoch<span class="token punctuation">;</span>
+        <span class="token function">sentinelFlushConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+new-epoch"</span><span class="token punctuation">,</span>master<span class="token punctuation">,</span><span class="token string">"%llu"</span><span class="token punctuation">,</span>
+            <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span> sentinel<span class="token punctuation">.</span>current_epoch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>master<span class="token operator">-></span>leader_epoch <span class="token operator">&lt;</span> req_epoch <span class="token operator">&amp;&amp;</span> sentinel<span class="token punctuation">.</span>current_epoch <span class="token operator">&lt;=</span> req_epoch<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">sdsfree</span><span class="token punctuation">(</span>master<span class="token operator">-></span>leader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        master<span class="token operator">-></span>leader <span class="token operator">=</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span>req_runid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        master<span class="token operator">-></span>leader_epoch <span class="token operator">=</span> sentinel<span class="token punctuation">.</span>current_epoch<span class="token punctuation">;</span>
+        <span class="token function">sentinelFlushConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+vote-for-leader"</span><span class="token punctuation">,</span>master<span class="token punctuation">,</span><span class="token string">"%s %llu"</span><span class="token punctuation">,</span>
+            master<span class="token operator">-></span>leader<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span> master<span class="token operator">-></span>leader_epoch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">/* If we did not voted for ourselves, set the master failover start
+         * time to now, in order to force a delay before we can start a
+         * failover for the same master. */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcasecmp</span><span class="token punctuation">(</span>master<span class="token operator">-></span>leader<span class="token punctuation">,</span>server<span class="token punctuation">.</span>runid<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            master<span class="token operator">-></span>failover_start_time <span class="token operator">=</span> <span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">%</span>SENTINEL_MAX_DESYNC<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token operator">*</span>leader_epoch <span class="token operator">=</span> master<span class="token operator">-></span>leader_epoch<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> master<span class="token operator">-></span>leader <span class="token operator">?</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span>master<span class="token operator">-></span>leader<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>前面说到 <strong>Candidate</strong> 开始竞选后，会把当前 <code>epoch</code> 加1，这样就比 <strong>Follower</strong> 大 <strong>1</strong> ，Follower 收到<strong>第一个</strong> Candidate 的投票后，因为自己当前的 epoch 比 Candidate <strong>小</strong>，所以<strong>把当前的 epoch 改成第一个 Candidate 的<code>epoch</code> ，然后把自己认为的 Leader 设置成该 Candidate</strong> 。然后其他 Candidate 再发起对该 Follower 的投票时，由于这些 Candidate 的 epoch 与自己选出 Leader 的 epoch 一样，所以<strong>不会再改变</strong>自己认为的 Leader 。这样，在一个 epoch 内，Follower 就只能投出一票，给它第一个收到投票请求的 Candidate 。最后有个 <code>if (strcasecmp(master-&gt;leader,server.runid))</code> ，这个是为了设置 <code>failover_start_time</code> ，这样 Follower 在当前 epoch 内，就无法成为 Candidate 了。</p>
+<h4 id="Sentinel-执行任务的状态机"><a href="#Sentinel-执行任务的状态机" class="headerlink" title="Sentinel 执行任务的状态机"></a>Sentinel 执行任务的状态机</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">sentinelFailoverStateMachine</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>ri<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">redisAssert</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_MASTER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_FAILOVER_IN_PROGRESS<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>failover_state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> SENTINEL_FAILOVER_STATE_WAIT_START<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true">// 统计选票，查看是否成为leader</span>
+            <span class="token function">sentinelFailoverWaitStart</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> SENTINEL_FAILOVER_STATE_SELECT_SLAVE<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true">// 从slave列表中选出最佳slave</span>
+            <span class="token function">sentinelFailoverSelectSlave</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> SENTINEL_FAILOVER_STATE_SEND_SLAVEOF_NOONE<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true">// 把选出的slave设置为master</span>
+            <span class="token function">sentinelFailoverSendSlaveOfNoOne</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> SENTINEL_FAILOVER_STATE_WAIT_PROMOTION<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true">// 等待升级生效，如果升级超时，那么重新选择新主服务器</span>
+            <span class="token function">sentinelFailoverWaitPromotion</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> SENTINEL_FAILOVER_STATE_RECONF_SLAVES<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true">// 向从服务器发送 SLAVEOF 命令，让它们同步新主服务器</span>
+            <span class="token function">sentinelFailoverReconfNextSlave</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Sentinel 处理故障转移流程是采用<strong>状态处理</strong>的模式，不同状态处理不同任务，任务完成后更新状态到下一个状态。<code>sentinelFailoverStateMachine</code> 函数根据 <code>failover_state</code> 决定进入什么流程。在 <code>sentinelFailoverWaitStart</code> 函数里面，Leader 就被选出了，其他几个状态是 Leader 进行故障转移的流程。</p>
+<h4 id="确认自己是否成为-Leader"><a href="#确认自己是否成为-Leader" class="headerlink" title="确认自己是否成为 Leader"></a>确认自己是否成为 Leader</h4><pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">sentinelFailoverWaitStart</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>ri<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>leader<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> isleader<span class="token punctuation">;</span> 
+
+    <span class="token comment" spellcheck="true">/* Check if we are the leader for the failover epoch. */</span>
+    <span class="token comment" spellcheck="true">// 获取给定纪元的领头 Sentinel</span>
+    leader <span class="token operator">=</span> <span class="token function">sentinelGetLeader</span><span class="token punctuation">(</span>ri<span class="token punctuation">,</span> ri<span class="token operator">-></span>failover_epoch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 本 Sentinel 是否为领头 Sentinel ？</span>
+    isleader <span class="token operator">=</span> leader <span class="token operator">&amp;&amp;</span> <span class="token function">strcasecmp</span><span class="token punctuation">(</span>leader<span class="token punctuation">,</span>server<span class="token punctuation">.</span>runid<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">sdsfree</span><span class="token punctuation">(</span>leader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* If I'm not the leader, and it is not a forced failover via
+     * SENTINEL FAILOVER, then I can't continue with the failover. */</span>
+    <span class="token comment" spellcheck="true">// 如果本 Sentinel 不是领头，并且这次故障迁移不是一次强制故障迁移操作</span>
+    <span class="token comment" spellcheck="true">// 那么本 Sentinel 不做动作</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isleader <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_FORCE_FAILOVER<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> election_timeout <span class="token operator">=</span> SENTINEL_ELECTION_TIMEOUT<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* The election timeout is the MIN between SENTINEL_ELECTION_TIMEOUT
+         * and the configured failover timeout. */</span>
+        <span class="token comment" spellcheck="true">// 当选的时长（类似于任期）是 SENTINEL_ELECTION_TIMEOUT</span>
+        <span class="token comment" spellcheck="true">// 和 Sentinel 设置的故障迁移时长之间的较小那个值</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>election_timeout <span class="token operator">></span> ri<span class="token operator">-></span>failover_timeout<span class="token punctuation">)</span>
+            election_timeout <span class="token operator">=</span> ri<span class="token operator">-></span>failover_timeout<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* Abort the failover if I'm not the leader after some time. */</span>
+        <span class="token comment" spellcheck="true">// Sentinel 的当选时间已过，取消故障转移计划</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> ri<span class="token operator">-></span>failover_start_time <span class="token operator">></span> election_timeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"-failover-abort-not-elected"</span><span class="token punctuation">,</span>ri<span class="token punctuation">,</span><span class="token string">"%@"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 取消故障转移</span>
+            <span class="token function">sentinelAbortFailover</span><span class="token punctuation">(</span>ri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 本 Sentinel 作为领头，开始执行故障迁移操作...</span>
+    <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+elected-leader"</span><span class="token punctuation">,</span>ri<span class="token punctuation">,</span><span class="token string">"%@"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 进入选择从服务器状态</span>
+    ri<span class="token operator">-></span>failover_state <span class="token operator">=</span> SENTINEL_FAILOVER_STATE_SELECT_SLAVE<span class="token punctuation">;</span>
+    ri<span class="token operator">-></span>failover_state_change_time <span class="token operator">=</span> <span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+failover-state-select-slave"</span><span class="token punctuation">,</span>ri<span class="token punctuation">,</span><span class="token string">"%@"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>前面说到的 <code>sentinelStartFailover</code> 把 <code>failover_state</code> 设置成 <strong>SENTINEL_FAILOVER_STATE_WAIT_START</strong> ，于是进入 <code>sentinelFailoverWaitStart</code> 。</p>
+<p><code>sentinelFailoverWaitStart</code> 会先查看 Leader 是否已经选出。如果 Leader 是自己或者这是一次强制故障转移，<code>failover_state</code> 就设置为 <strong>SENTINEL_FAILOVER_STATE_SELECT_SLAVE</strong> 。强制故障转移是通过 Sentinel 的 <strong>SENTINEL FAILOVER</strong> 命令设置的，这里不做讨论。</p>
+<p>如果自己当选 Leader ，就会进入下一个任务处理状态，开始故障转移流程。如果在 <code>election_timeout</code> 内还没当选为 Leader ，那么本次 <code>epoch</code> 内，<strong>Candidate</strong> 就没有当选，需要等待 <code>failover_timeout</code> 超时，进入下一次竞选，或者本次 <code>epoch</code> 内，有 Leader 被选出，自己变会 <strong>Follower</strong> 。</p>
+<h4 id="统计投票"><a href="#统计投票" class="headerlink" title="统计投票"></a>统计投票</h4><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* Scan all the Sentinels attached to this master to check if there
+ * is a leader for the specified epoch.
+ *
+ * 扫描所有监视 master 的 Sentinels ，查看是否有 Sentinels 是这个纪元的领头。
+ *
+ * To be a leader for a given epoch, we should have the majorify of
+ * the Sentinels we know that reported the same instance as
+ * leader for the same epoch. 
+ *
+ * 要让一个 Sentinel 成为本纪元的领头，
+ * 这个 Sentinel 必须让大多数其他 Sentinel 承认它是该纪元的领头才行。
+ */</span>
+<span class="token comment" spellcheck="true">// 选举出 master 在指定 epoch 上的领头</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">sentinelGetLeader</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>master<span class="token punctuation">,</span> uint64_t epoch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    dict <span class="token operator">*</span>counters<span class="token punctuation">;</span>
+    dictIterator <span class="token operator">*</span>di<span class="token punctuation">;</span>
+    dictEntry <span class="token operator">*</span>de<span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> voters <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> voters_quorum<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>myvote<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>winner <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    uint64_t leader_epoch<span class="token punctuation">;</span>
+    uint64_t max_votes <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token function">redisAssert</span><span class="token punctuation">(</span>master<span class="token operator">-></span>flags <span class="token operator">&amp;</span> <span class="token punctuation">(</span>SRI_O_DOWN<span class="token operator">|</span>SRI_FAILOVER_IN_PROGRESS<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 统计器</span>
+    counters <span class="token operator">=</span> <span class="token function">dictCreate</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>leaderVotesDictType<span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Count other sentinels votes */</span>
+    <span class="token comment" spellcheck="true">// 统计其他 sentinel 的主观 leader 投票</span>
+    di <span class="token operator">=</span> <span class="token function">dictGetIterator</span><span class="token punctuation">(</span>master<span class="token operator">-></span>sentinels<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>de <span class="token operator">=</span> <span class="token function">dictNext</span><span class="token punctuation">(</span>di<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sentinelRedisInstance <span class="token operator">*</span>ri <span class="token operator">=</span> <span class="token function">dictGetVal</span><span class="token punctuation">(</span>de<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 为目标 Sentinel 选出的领头 Sentinel 增加一票</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ri<span class="token operator">-></span>leader <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> ri<span class="token operator">-></span>leader_epoch <span class="token operator">==</span> sentinel<span class="token punctuation">.</span>current_epoch<span class="token punctuation">)</span>
+            <span class="token function">sentinelLeaderIncr</span><span class="token punctuation">(</span>counters<span class="token punctuation">,</span>ri<span class="token operator">-></span>leader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 统计投票数量</span>
+        voters<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">dictReleaseIterator</span><span class="token punctuation">(</span>di<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Check what's the winner. For the winner to win, it needs two conditions:
+     *
+     * 选出领头 leader ，它必须满足以下两个条件：
+     *
+     * 1) Absolute majority between voters (50% + 1).
+     *    有多于一般的 Sentinel 支持
+     * 2) And anyway at least master->quorum votes. 
+     *    投票数至少要有 master->quorum 那么多
+     */</span>
+    di <span class="token operator">=</span> <span class="token function">dictGetIterator</span><span class="token punctuation">(</span>counters<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>de <span class="token operator">=</span> <span class="token function">dictNext</span><span class="token punctuation">(</span>di<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 取出票数</span>
+        uint64_t votes <span class="token operator">=</span> <span class="token function">dictGetUnsignedIntegerVal</span><span class="token punctuation">(</span>de<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 选出票数最大的人</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>votes <span class="token operator">></span> max_votes<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            max_votes <span class="token operator">=</span> votes<span class="token punctuation">;</span>
+            winner <span class="token operator">=</span> <span class="token function">dictGetKey</span><span class="token punctuation">(</span>de<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">dictReleaseIterator</span><span class="token punctuation">(</span>di<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Count this Sentinel vote:
+     * if this Sentinel did not voted yet, either vote for the most
+     * common voted sentinel, or for itself if no vote exists at all. */</span>
+    <span class="token comment" spellcheck="true">// 本 Sentinel 进行投票</span>
+    <span class="token comment" spellcheck="true">// 如果 Sentinel 之前还没有进行投票，那么有两种选择：</span>
+    <span class="token comment" spellcheck="true">// 1）如果选出了 winner （最多票数支持的 Sentinel ），那么这个 Sentinel 也投 winner 一票</span>
+    <span class="token comment" spellcheck="true">// 2）如果没有选出 winner ，那么 Sentinel 投自己一票</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>winner<span class="token punctuation">)</span>
+        myvote <span class="token operator">=</span> <span class="token function">sentinelVoteLeader</span><span class="token punctuation">(</span>master<span class="token punctuation">,</span>epoch<span class="token punctuation">,</span>winner<span class="token punctuation">,</span><span class="token operator">&amp;</span>leader_epoch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        myvote <span class="token operator">=</span> <span class="token function">sentinelVoteLeader</span><span class="token punctuation">(</span>master<span class="token punctuation">,</span>epoch<span class="token punctuation">,</span>server<span class="token punctuation">.</span>runid<span class="token punctuation">,</span><span class="token operator">&amp;</span>leader_epoch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 领头 Sentinel 已选出，并且领头的纪元和给定的纪元一样</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>myvote <span class="token operator">&amp;&amp;</span> leader_epoch <span class="token operator">==</span> epoch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">// 为领头 Sentinel 增加一票（这一票来自本 Sentinel ）</span>
+        uint64_t votes <span class="token operator">=</span> <span class="token function">sentinelLeaderIncr</span><span class="token punctuation">(</span>counters<span class="token punctuation">,</span>myvote<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 如果投票之后的票数比最大票数要大，那么更换领头 Sentinel</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>votes <span class="token operator">></span> max_votes<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            max_votes <span class="token operator">=</span> votes<span class="token punctuation">;</span>
+            winner <span class="token operator">=</span> myvote<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    voters<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* Anyway, count me as one of the voters. */</span>
+
+    <span class="token comment" spellcheck="true">// 如果支持领头的投票数量不超过半数</span>
+    <span class="token comment" spellcheck="true">// 并且支持票数不超过 master 配置指定的投票数量</span>
+    <span class="token comment" spellcheck="true">// 那么这次领头选举无效</span>
+    voters_quorum <span class="token operator">=</span> voters<span class="token operator">/</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>winner <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>max_votes <span class="token operator">&lt;</span> voters_quorum <span class="token operator">||</span> max_votes <span class="token operator">&lt;</span> master<span class="token operator">-></span>quorum<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        winner <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 返回领头 Sentinel ，或者 NULL</span>
+    winner <span class="token operator">=</span> winner <span class="token operator">?</span> <span class="token function">sdsnew</span><span class="token punctuation">(</span>winner<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token function">sdsfree</span><span class="token punctuation">(</span>myvote<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">dictRelease</span><span class="token punctuation">(</span>counters<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> winner<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p><code>sentinelGetLeader</code> 会统计所有其他 Sentinel 的投票结果，如果投票结果中有个 Sentinel 获得了<strong>超过半数且超过 Master 的 quorum</strong> ，那么 Leader 就被选出了。</p>
+<p><strong>Candidate</strong> 第一次进入 <code>sentinelGetLeader</code> 函数的时候是还没向其他 Sentinel 发起投票，winner 为 <strong>NULL</strong> ，于是就会给自己投上一票，这就是前面 <strong>Raft</strong> 协议说到的，在开始竞选前“ <code>给自己投一票</code> “，这样竞选前的 4 个步骤就全部完成了。以后再进入 <code>sentinelGetLeader</code> 就可以统计其他 Sentinel 的投票数目。当发现有个 Sentinel 的投票数据超过半数且超过 <code>quorum</code> ，就会返回该 Sentinel ，<code>sentinelFailoverWaitStart</code> 会判断该 Sentinel 是否是自己，如果是自己，那么自己就成为了 Leader ，开始进行故障转移，不是自己，那么等待竞选超时，成为 <strong>Follower</strong> 。</p>
+<h4 id="关于-Leader-通知其他-Sentinel-自己成为-Leader-的说明"><a href="#关于-Leader-通知其他-Sentinel-自己成为-Leader-的说明" class="headerlink" title="关于 Leader 通知其他 Sentinel 自己成为 Leader 的说明"></a>关于 Leader 通知其他 Sentinel 自己成为 Leader 的说明</h4><p>在 Sentinel 的实现里面，关于 Leader 发送竞选成功的消息给其他 Sentinel ，并没有专门的逻辑。某个 Sentinel 成为 Leader 后，他就默默地干起活。故障转移中 Leader 通过获取选出的 Slave 的 <strong>INFO</strong> 信息，发现其确认了 Master 身份，Leader 就会修改 <code>config_epoch</code> 为最新的 <code>epoch</code> 。</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* Process the INFO output from masters and slaves. */</span>
+<span class="token comment" spellcheck="true">// 从主服务器或者从服务器所返回的 INFO 命令的回复中分析相关信息</span>
+<span class="token keyword">void</span> <span class="token function">sentinelRefreshInstanceInfo</span><span class="token punctuation">(</span>sentinelRedisInstance <span class="token operator">*</span>ri<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>info<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token comment" spellcheck="true">/* Handle slave -> master role switch. */</span>
+    <span class="token comment" spellcheck="true">// 处理从服务器转变为主服务器的情况</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_SLAVE<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> role <span class="token operator">==</span> SRI_MASTER<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* If this is a promoted slave we can change state to the
+         * failover state machine. */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>master<span class="token operator">-></span>flags <span class="token operator">&amp;</span> SRI_FAILOVER_IN_PROGRESS<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+            <span class="token punctuation">(</span>ri<span class="token operator">-></span>master<span class="token operator">-></span>failover_state <span class="token operator">==</span>
+                SENTINEL_FAILOVER_STATE_WAIT_PROMOTION<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* Now that we are sure the slave was reconfigured as a master
+             * set the master configuration epoch to the epoch we won the
+             * election to perform this failover. This will force the other
+             * Sentinels to update their config (assuming there is not
+             * a newer one already available). */</span>
+            <span class="token comment" spellcheck="true">// 更新从服务器的主服务器（已下线）的配置纪元</span>
+            ri<span class="token operator">-></span>master<span class="token operator">-></span>config_epoch <span class="token operator">=</span> ri<span class="token operator">-></span>master<span class="token operator">-></span>failover_epoch<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 设置从服务器的主服务器（已下线）的故障转移状态，这个状态会让从服务器开始同步新的主服务器</span>
+            ri<span class="token operator">-></span>master<span class="token operator">-></span>failover_state <span class="token operator">=</span> SENTINEL_FAILOVER_STATE_RECONF_SLAVES<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 更新从服务器的主服务器（已下线）的故障转移状态变更时间</span>
+            ri<span class="token operator">-></span>master<span class="token operator">-></span>failover_state_change_time <span class="token operator">=</span> <span class="token function">mstime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 将当前 Sentinel 状态保存到配置文件里面</span>
+            <span class="token function">sentinelFlushConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 发送事件</span>
+            <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+promoted-slave"</span><span class="token punctuation">,</span>ri<span class="token punctuation">,</span><span class="token string">"%@"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+failover-state-reconf-slaves"</span><span class="token punctuation">,</span>
+                ri<span class="token operator">-></span>master<span class="token punctuation">,</span><span class="token string">"%@"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 执行脚本</span>
+            <span class="token function">sentinelCallClientReconfScript</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>master<span class="token punctuation">,</span>SENTINEL_LEADER<span class="token punctuation">,</span>
+                <span class="token string">"start"</span><span class="token punctuation">,</span>ri<span class="token operator">-></span>master<span class="token operator">-></span>addr<span class="token punctuation">,</span>ri<span class="token operator">-></span>addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">sentinelForceHelloUpdateForMaster</span><span class="token punctuation">(</span>ri<span class="token operator">-></span>master<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre>
+<p><code>config_epoch</code> 会通过 <strong>hello</strong> 频道发送给其他 Sentinel 。其他 Sentinel 发现 <code>config_epoch</code> 更新了，就会更新最新的 <code>Master</code> 地址和 <code>config_epoch</code> 。<strong>这相当于 Leader 把当选消息告知了其他 Sentinel 。</strong></p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* Process an hello message received via Pub/Sub in master or slave instance,
+ * or sent directly to this sentinel via the (fake) PUBLISH command of Sentinel.
+ *
+ * If the master name specified in the message is not known, the message is
+ * discarded. */</span>
+<span class="token keyword">void</span> <span class="token function">sentinelProcessHelloMessage</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>hello<span class="token punctuation">,</span> <span class="token keyword">int</span> hello_len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+        <span class="token comment" spellcheck="true">/* Update master info if received configuration is newer. */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>master<span class="token operator">-></span>config_epoch <span class="token operator">&lt;</span> master_config_epoch<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            master<span class="token operator">-></span>config_epoch <span class="token operator">=</span> master_config_epoch<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>master_port <span class="token operator">!=</span> master<span class="token operator">-></span>addr<span class="token operator">-></span>port <span class="token operator">||</span>
+                <span class="token function">strcmp</span><span class="token punctuation">(</span>master<span class="token operator">-></span>addr<span class="token operator">-></span>ip<span class="token punctuation">,</span> token<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                sentinelAddr <span class="token operator">*</span>old_addr<span class="token punctuation">;</span>
+
+                <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+config-update-from"</span><span class="token punctuation">,</span>si<span class="token punctuation">,</span><span class="token string">"%@"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">sentinelEvent</span><span class="token punctuation">(</span>REDIS_WARNING<span class="token punctuation">,</span><span class="token string">"+switch-master"</span><span class="token punctuation">,</span>
+                    master<span class="token punctuation">,</span><span class="token string">"%s %s %d %s %d"</span><span class="token punctuation">,</span>
+                    master<span class="token operator">-></span>name<span class="token punctuation">,</span>
+                    master<span class="token operator">-></span>addr<span class="token operator">-></span>ip<span class="token punctuation">,</span> master<span class="token operator">-></span>addr<span class="token operator">-></span>port<span class="token punctuation">,</span>
+                    token<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> master_port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                old_addr <span class="token operator">=</span> <span class="token function">dupSentinelAddr</span><span class="token punctuation">(</span>master<span class="token operator">-></span>addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">sentinelResetMasterAndChangeAddress</span><span class="token punctuation">(</span>master<span class="token punctuation">,</span> token<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> master_port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">sentinelCallClientReconfScript</span><span class="token punctuation">(</span>master<span class="token punctuation">,</span>
+                    SENTINEL_OBSERVER<span class="token punctuation">,</span><span class="token string">"start"</span><span class="token punctuation">,</span>
+                    old_addr<span class="token punctuation">,</span>master<span class="token operator">-></span>addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">releaseSentinelAddr</span><span class="token punctuation">(</span>old_addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> 
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><p><a href="https://redis.io/topics/sentinel" target="_blank" rel="noopener">https://redis.io/topics/sentinel</a></p>
+</li>
+<li><p>《In Search of an Understandable Consensus Algorithm》 Diego Ongaro and John Ousterhout Stanford University</p>
+</li>
+<li><p>《Redis设计与实现》黄健宏 机械工业出版社</p>
+</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com" rel="external nofollow noreferrer">wenjun</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.niewenjun.com/2020/04/30/fen-bu-shi/raft-xie-yi/">https://www.niewenjun.com/2020/04/30/fen-bu-shi/raft-xie-yi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.niewenjun.com" target="_blank">wenjun</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
+                                </a>
+                            
+                                <a href="/tags/Raft/">
+                                    <span class="chip bg-color">Raft</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                    <span class="chip bg-color">协议</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '8a7690644355c0050723',
+        clientSecret: '88c3f58194c8af218715bee3d1dfab6bc9b6d98f',
+        repo: 'gitalk',
+        owner: 'wenjunnie',
+        admin: "wenjunnie",
+        id: '2020-04-30T23-10-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/05/02/fen-bu-shi/zookeeper-fen-bu-shi-suo/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="ZooKeeper分布式锁">
+                        
+                        <span class="card-title">ZooKeeper分布式锁</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ZooKeeper 分布式锁前言锁我想不需要我过多的去说，大家都知道是怎么一回事了吧？
+在多线程环境下，由于上下文的切换，数据可能出现不一致的情况或者数据被污染，我们需要保证数据安全，所以想到了加锁。
+所谓的加锁机制呢，就是当一个线程访问该
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                        <span class="chip bg-color">分布式锁</span>
+                    </a>
+                    
+                    <a href="/tags/ZooKeeper/">
+                        <span class="chip bg-color">ZooKeeper</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/29/shu-ju-ku/redis-sentinel/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Redis Sentinel">
+                        
+                        <span class="card-title">Redis Sentinel</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Redis Sentinel哨兵的介绍Sentinel ，中文名是哨兵。哨兵是 Redis 集群架构中非常重要的一个组件，主要有以下功能：
+
+集群监控：负责监控 Redis Master 和 Slave 进程是否正常工作。
+消息通知：如果某
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BC%93%E5%AD%98/">
+                        <span class="chip bg-color">缓存</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.niewenjun.com" target="_blank"></a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "4";
+                    var startDate = "12";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wenjunnie" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1287018840@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1287018840" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1287018840" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
