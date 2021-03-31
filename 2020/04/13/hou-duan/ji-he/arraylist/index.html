@@ -503,7 +503,7 @@
 <p>它继承于 <strong>AbstractList</strong> ，实现了 <strong>List</strong> 、<strong>RandomAccess</strong> 、<strong>Cloneable</strong> 、<strong>java.io.Serializable</strong> 这些接口。</p>
 <p>在我们学数据结构的时候就知道了线性表的顺序存储，插入删除元素的时间复杂度为 <strong>O（n）</strong>，求表长以及增加元素，取第 i 个元素的时间复杂度为 <strong>O（1）</strong>。</p>
 <p>ArrayList 继承了AbstractList ，实现了 List 。它是一个数组队列，提供了相关的添加、删除、修改、遍历等功能。</p>
-<p>ArrayList 实现了 <strong>RandomAccess 接口</strong> ， <strong>RandomAccess</strong> 是一个标志接口，表明实现这个这个接口的 List 集合是支持<strong>快速随机访问</strong>的。在 ArrayList 中，我们可以通过元素的序号快速获取元素对象，这就是快速随机访问。</p>
+<p>ArrayList 实现了 <strong>RandomAccess 接口</strong> ， <strong>RandomAccess</strong> 是一个标志接口，表明实现这个接口的 List 集合是支持<strong>快速随机访问</strong>的。在 ArrayList 中，我们可以通过元素的序号快速获取元素对象，这就是快速随机访问。</p>
 <p>ArrayList 实现了 <strong>Cloneable 接口</strong>，即覆盖了函数 <code>clone()</code> ，<strong>能被克隆</strong>。</p>
 <p>ArrayList 实现了 <strong>java.io.Serializable 接口</strong>，这意味着 ArrayList <strong>支持序列化</strong>，<strong>能通过序列化去传输</strong>。</p>
 <p>和 Vector 不同，<strong>ArrayList 中的操作不是线程安全的</strong>！所以，建议在单线程中才使用 ArrayList ，而在多线程中可以选择 <strong>Vector</strong> 或者 <strong>CopyOnWriteArrayList（读多写少）</strong>。</p>
